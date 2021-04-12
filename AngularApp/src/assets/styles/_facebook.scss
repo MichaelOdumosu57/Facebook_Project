@@ -1,0 +1,49 @@
+
+
+
+@font-face {
+    font-family: 'SFProDisplay-Regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FontsFree-Net-SFProDisplay-Regular.ttf');
+
+}
+
+
+@font-face {
+    font-family: 'SFProText-Medium';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FontsFree-Net-SFProText-Medium.ttf');
+
+}
+
+
+
+
+.a_p_p_Login_Card {
+    border-radius: 10px;
+    background-color:white;
+
+}
+
+.a_p_p_Login_Image {
+    border-radius: 10px;
+    color:purple;
+
+}
+
+.a_p_p_Login_Card_Notifications_Count {
+    background-color: red;
+    border-radius: 50px;
+}
+
+.a_p_p_Login_Name{
+    text-align: center;
+    font-family: SFProText-Medium, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    border-radius: 10px;
+    opacity: .7;
+    padding-top:15px;
+    background-color: aqua;
+}
