@@ -671,18 +671,36 @@ let login_development:Array<zProtoComponent> = [
 
 						next:function (devObj){
 							let {index}= devObj
-							return (index+1) % 2 === 0 ? "true":"false"
+							return (index+1) % 3 === 0 ? "true":"false"
 						} ,// means deltaNode will try to place the object next to
 						cssLeft:function(devObj){
 							let {index,css}= devObj;
-							if( (index+1) % 2 === 1  ){
+							if( (index+1) % 3 === 1  ){
 									return (
 									numberParse(css.left) + numberParse(css.width) + 90
 									).toString() + "px"
 							}
+
+							else if( (index+1) % 3 === 2  ){
+								return (
+								numberParse(css.left) + ((numberParse(css.width) + 90)* 2)
+								).toString() + "px"
+							}
 							else{
 								return css.left
 							}
+						},
+						modify:(devObj)=>{
+							let {zChild,x,index,hook} = devObj
+							// let yourFNs = []  // say if you wanna modify height, top image ...
+							if(hook === "latchDirective"){
+								if(index === 1){
+									let myImg = zChild[x].extras.appLatch.display.targets[2]
+									zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/angular.png"
+									console.log(zChild[myImg].extras.extend.src)
+								}
+							}
+
 						}
 					}
 				}

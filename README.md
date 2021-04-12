@@ -10,6 +10,8 @@ It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) vers
 
 
 
+### Left off
+* website.ts, the targets are getting modified way after, we need the final targets not the inital see whats happening
 ### The zChild 
 *  its task is one to do the same thing no matter which 
     software is in the website, which OS ... whichever variables exist the zChild will be the same === sucess

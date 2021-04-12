@@ -341,20 +341,20 @@ export class LatchDirective {
 						}
 						// determine if there are duplicates
 
-							let deltaNodegroup = zChildren[extras.zSymbol].extras.appDeltaNode?.group || extras.deltaNode?.group || null
-							if(ryber[co].metadata.deltaNode.groups[deltaNodegroup]){
-								extras.deltaNode =extras.deltaNode || {
-									group:null,
-									zSymbol:null,
-									containerZSymbol:[]
-								}
-								ryber[co].metadata.latch.display.deltaNode[deltaNodegroup] ={
-									count:ryber[co].metadata.deltaNode.groups[deltaNodegroup]?.deltas.length,
-									symbols:objectCopy(
-										ryber[co].metadata.deltaNode.groups[deltaNodegroup]?.deltas
-									).reverse()[0] || []
-								}
+						let deltaNodegroup = zChildren[extras.zSymbol].extras.appDeltaNode?.group || extras.deltaNode?.group || null
+						if(ryber[co].metadata.deltaNode.groups[deltaNodegroup]){
+							extras.deltaNode =extras.deltaNode || {
+								group:null,
+								zSymbol:null,
+								containerZSymbol:[]
 							}
+							ryber[co].metadata.latch.display.deltaNode[deltaNodegroup] ={
+								count:ryber[co].metadata.deltaNode.groups[deltaNodegroup]?.deltas.length,
+								symbols:objectCopy(
+									ryber[co].metadata.deltaNode.groups[deltaNodegroup]?.deltas
+								).reverse()[0] || []
+							}
+						}
 
 						//
 
@@ -519,12 +519,13 @@ export class LatchDirective {
 							})
 
 							if(x?.type?.includes("deltaNodeContainer")){
-								
+
 								extras.deltaNode.containerZSymbol.push(extras.zSymbol)
 							}
 
 							return symbol
 						})
+
 
 						// console.log(extras.zChildren)
 						ref.detectChanges()
@@ -542,6 +543,13 @@ export class LatchDirective {
 						if(!Object.keys(zChildren).includes(extras.zSymbol)){
 							return
 						}
+
+						zChildren[extras.zSymbol].extras.appDeltaNode.options?.modify({
+							zChild:zChildren,
+							x:extras.zSymbol,
+							index:zChildren[extras.zSymbol].extras.appDeltaNode.options.index,
+							hook:"latchDirective"
+						})
 
 						extras.zChildren
 						.forEach((x:any,i)=>{

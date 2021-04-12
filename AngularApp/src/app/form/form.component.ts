@@ -598,10 +598,12 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                                 // console.log(zChild[x].css)
                                 zChild[x].extras.component.next = zChild[x].extras.appDeltaNode.options?.next?.({index}) ||zChild[x].extras.component.next
                                 zChild[x].cssDefault.left =zChild[x].extras.appDeltaNode.options?.cssLeft?.({index,css:zChild[x].cssDefault}) || zChild[x].cssDefault.left
-                                console.log(zChild[x].css)
+                                zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"templateComponent"})
+                                zChild[x].extras.appDeltaNode.options !== undefined ? zChild[x].extras.appDeltaNode.options.index= index  : null
                                 // console.log(zChild[x].extras.component)
                             })
 
+                            // for align to work, the elements that are to be on the same line must be placed together
                             finalAlign=finalAlign
                             .map((x:any,i)=>{
                                 let myX = x
@@ -617,9 +619,11 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                             .filter((x:any,i)=>{
                                 return x.length !== 0
                             })
+                            //
 
                             // trying to reform the keep so duplicated that would be
-                            // juxtaposed, get that
+                            // juxtaposed, get that the keep is x[1] so it must match
+                            // with the elements of the same index as align to match properly
                             finalKeep=finalKeep
                             .map((x:any,i)=>{
                                 let a = finalAlign
@@ -639,9 +643,9 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                                 x[1] = prevKeep?.[1] || x[1]
                                 return x
                             })
-                            console.log(finalKeep)
-                            console.log(zChild)
-                            console.log("-")
+                            // console.log(finalKeep)
+                            // console.log(zChild)
+                            // console.log("-")
                             //
 
 
