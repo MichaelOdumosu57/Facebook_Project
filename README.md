@@ -1,12 +1,17 @@
 # AngularTemplateProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
+
 
 It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9
 ## Educational
 * every other software stack on sevearl platforms the software is doing the same things
     * in web design this is not the case
     * the zChild and its framework was designed to make all browsers to the same thing
+
+## Copyright 
+```html
+<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+```
 
 
 

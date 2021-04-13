@@ -59,7 +59,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 				let formatZChild = this._formatZChildInit()
                 let latchZChild
                 let staticZKeys = this.staticZKeysGen(zChild)
-
+                
 
 
                 // drags elements for you
@@ -393,6 +393,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                     })
 
 
+
                     eventDispatcher({
                         event:'resize',
                         element:window
@@ -596,6 +597,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                                 }) -1
 
                                 // console.log(zChild[x].css)
+
                                 zChild[x].extras.component.next = zChild[x].extras.appDeltaNode.options?.next?.({index}) ||zChild[x].extras.component.next
                                 zChild[x].cssDefault.left =zChild[x].extras.appDeltaNode.options?.cssLeft?.({index,css:zChild[x].cssDefault}) || zChild[x].cssDefault.left
                                 zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"templateComponent"})
@@ -810,12 +812,10 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
                         else if(  ryber.appCO0.metadata.ryber.sectionDefault.app.width.mediaQuery !=="desktop"  ){
 
-
                             //element management
                             ryber[appTV].metadata.section.mediaQuery ="mobile"
                             this.mobileMediaQuery({finalZChildKeys, zChild, section, topLevelZChild, moving, ref, ryber, appTV,sectionType:"custom"});
                             //
-
 
                         }
                     }
@@ -855,8 +855,10 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                     let val = x[1]
                     if(env.component.form[key].includes(ii)){
                         console.log(key +" for " +appTV , val );
+                        console.log(ryber[appTV].metadata)
                     }
                 })
+
                 //
         })
         //
@@ -925,6 +927,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
             {
 
+
                 Object
                 .keys(zChild)
                 .slice(2)
@@ -935,6 +938,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                         zChild[x].css["font-size"] = zChild[x].cssDefault["font-size"];
                     }
                 });
+
 
                 ref.detectChanges();
                 //
@@ -953,7 +957,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                     ],
                     options: {
                         overlapFix: {
-                            confirm: "true",
+                            confirm: "false",
                             flag: "false"
                         }
                     },

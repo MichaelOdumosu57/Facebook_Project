@@ -498,12 +498,170 @@ let login_development:Array<zProtoComponent> = [
 				// height:70,
 			},
 			{
+				key:"email-phone-number",
+				type:"input",
+				left:750,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"facebook_login_credentials"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"login-display a_p_p_Container",
+							group:["facebook_login_credentials"],
+							css:{
+								"z-index":3
+							},
+							logic:{
+								desktop:{
+									width:1.1,
+									height:1.25,
+									top:-40,
+									left:-20,
+								},
+								mobile:{
+									width:1,
+									height:1,
+									top:0,
+									left:0,
+								}
+							}
+						}
+					]
+				},
+				value:"Email or Phone Number",
+				options:{
+					css:{
+						"font-size":"17px"
+					}
+				}
+
+			},
+			{
+				key:"password",
+				type:"input",
+				left:750,
+				top:10,
+				value:"Password",
+				next:"true",
+				latch:{
+					type:"display",
+					display:{
+						type:"part",
+						name:"facebook_login_credentials"
+					},
+				},
+				options:{
+					css:{
+						"font-size":"17px"
+					}
+				}
+
+			},
+			{
+				key:"Login-button",
+				type:"button",
+				left:750,
+				top:10,
+				width:340,
+				value:"Log In",
+				next:"true",
+				latch:{
+					type:"display",
+					display:{
+						type:"part",
+						name:"facebook_login_credentials"
+					},
+				},
+				options:{
+					css:{
+						"font-size":"20px"
+					}
+				}
+
+			},
+			{
+				key:"forgot-password",
+				type:"anchor",
+				left:750,
+				top:10,
+				width:340,
+				value:"Forgot Password?",
+				next:"true",
+				latch:{
+					type:"display",
+					display:{
+						type:"part",
+						name:"facebook_login_credentials"
+					},
+				},
+				options:{
+					css:{
+						"font-size":"14px",
+						"text-align":"center",
+						color:"blue"
+					}
+				}
+
+			},
+			{
+				key:"strikethrough",
+				type:"div",
+				left:750,
+				top:30,
+				width:340,
+				height:1,
+				next:"true",
+				latch:{
+					type:"display",
+					display:{
+						type:"part",
+						name:"facebook_login_credentials"
+					},
+				},
+				options:{
+					css:{
+						"font-size":"14px",
+						"text-align":"center",
+						"background-color":"grey",
+						"z-index":"4"
+					}
+				}
+
+			},
+			{
+				key:"create-new-account a_p_p_Create_New_Account",
+				type:"button",
+				left:800,
+				top:30,
+				width:240,
+				next:"true",
+				value:"Create New Account",
+
+				latch:{
+					type:"display",
+					display:{
+						type:"part",
+						name:"facebook_login_credentials"
+					},
+				},
+				options:{
+					css:{
+						"font-size":"20px"
+					}
+				}
+
+			},
+			{
 				"key":"login-card a_p_p_Login_Card",
 				type:"div",
 				next:"true",
 				height:205,
 				width:160,
-				top:50,
+				top:-250,
 				options:{
 					css:{
 						"z-index":2
@@ -524,7 +682,7 @@ let login_development:Array<zProtoComponent> = [
 							val:"login-overlay",
 							logic:{
 								desktop:{
-									width:1.3,
+									width:1.2,
 									height:1.5,
 									top:1,
 									left:1
@@ -537,7 +695,7 @@ let login_development:Array<zProtoComponent> = [
 								}
 							},
 							type:["deltaNodeContainer"],
-							group:["facebook_login_group","facebook_login_card"]
+							group:["facebook_login_group","facebook_login_card","facebook_login_credentials"]
 						},
 						{
 							bool:"img",
@@ -617,10 +775,42 @@ let login_development:Array<zProtoComponent> = [
 							},
 							logic:{
 								desktop:{
-									width:1,
-									height:.75,
-									top:0,
-									left:0
+									width:(devObj)=>{
+										let {delta,zChildren,css,zSymbol} = devObj
+
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+											return 42
+										}
+										return (1* css.width)
+
+									},
+									height:(devObj)=>{
+										// console.log(devObj)
+										let {delta,zChildren,css,zSymbol} = devObj
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+											return 42
+										}
+										return ( .75 * css.height)
+
+									},
+									top:(devObj)=>{
+										// console.log(devObj)
+										let {delta,zChildren,css,zSymbol} = devObj
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+											return css.top+ 50
+										}
+										return css.top
+
+									},
+									left:(devObj)=>{
+										// console.log(devObj)
+										let {delta,zChildren,css,zSymbol} = devObj
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+											return css.left +60
+										}
+										return css.left
+
+									}
 								},
 								mobile:{
 									width:()=>{
@@ -677,13 +867,13 @@ let login_development:Array<zProtoComponent> = [
 							let {index,css}= devObj;
 							if( (index+1) % 3 === 1  ){
 									return (
-									numberParse(css.left) + numberParse(css.width) + 90
+									numberParse(css.left) + numberParse(css.width) + 40
 									).toString() + "px"
 							}
 
 							else if( (index+1) % 3 === 2  ){
 								return (
-								numberParse(css.left) + ((numberParse(css.width) + 90)* 2)
+								numberParse(css.left) + ((numberParse(css.width) + 40)* 2)
 								).toString() + "px"
 							}
 							else{
@@ -694,11 +884,38 @@ let login_development:Array<zProtoComponent> = [
 							let {zChild,x,index,hook} = devObj
 							// let yourFNs = []  // say if you wanna modify height, top image ...
 							if(hook === "latchDirective"){
-								if(index === 1){
-									let myImg = zChild[x].extras.appLatch.display.targets[2]
-									zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/angular.png"
-									console.log(zChild[myImg].extras.extend.src)
+								let {targets} = zChild[x].extras.appLatch.display
+								let myImg = targets[2]
+								let myName = targets[3]
+								let myMesg  = targets[1]
+								switch (index) {
+									case undefined:
+										myImg = targets[3]
+										myName = targets[4]
+										myMesg  = targets[2]
+										zChild[myMesg].innerText.item = "5"
+										break;
+									case 0:
+										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/angular.png"
+										zChild[myName].innerText.item = "Angular"
+										zChild[myMesg].innerText.item = "3"
+										break;
+
+									case 1:
+										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/ruby_programming.png"
+										zChild[myName].innerText.item = "Ruby"
+										zChild[myMesg].innerText.item = "2"
+										break;
+									case 2:
+										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/plus.png"
+										zChild[myName].innerText.item = "Add Account"
+										zChild[myName].css.color = "blue";
+										zChild[x].css.top = (numberParse(zChild[x].css.top)+ 150).toString() + "px"
+										break;
+									default:
+										break;
 								}
+
 							}
 
 						}
@@ -707,7 +924,10 @@ let login_development:Array<zProtoComponent> = [
 			},
 
 
-		]
+		].map((x:any,i)=>{
+			x.key += " login-page"
+			return x
+		})
 	},
 ]
 

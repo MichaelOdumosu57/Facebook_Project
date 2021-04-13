@@ -559,13 +559,14 @@ export class LatchDirective {
 							if(x?.type?.includes("deltaNodeContainer")){
 								x.neededTargets =
 								x.neededTargets
-								.filter((x:any,i)=>{
-									return zChildren[x] !== undefined
+								.filter((y:any,j)=>{
+									return zChildren[y] !== undefined
 								})
 							}
 							//
 
 							this._displayDetermineDims({
+								zSymbol:extras.display.targets[i],
 								dims,
 								neededTargets:x.neededTargets,
 								zChildren,
@@ -587,8 +588,8 @@ export class LatchDirective {
     }
 
 
-	private _displayDetermineDims(devObj:{dims: string[][], neededTargets: any, zChildren: any, css: any,logic:any}) {
-		let {dims,neededTargets,zChildren,css,logic} = devObj
+	private _displayDetermineDims(devObj:{zSymbol?:string,dims: string[][], neededTargets: any, zChildren: any, css: any,logic:any}) {
+		let {zSymbol,dims,neededTargets,zChildren,css,logic} = devObj
 
 
 		let delta:any = {
@@ -641,8 +642,10 @@ export class LatchDirective {
 			else if(typeof val ==="function"){
 
 				css[key] = val({
+					zSymbol,
+					css,
 					delta,
-					zChildren
+					zChildren,
 				}).toString()+"px"
 			}
 			//

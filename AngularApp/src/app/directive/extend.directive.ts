@@ -1,4 +1,5 @@
 import {Directive, ElementRef, HostListener,Input,Renderer2,OnInit} from '@angular/core';
+import { of } from 'rxjs';
 import {objectCopy, xContain} from "../customExports"
 
 @Directive({
@@ -27,6 +28,7 @@ export class ExtendDirective implements OnInit {
                     this.extend[x.valueOf()]
                 )
             })
+
 
 
 
