@@ -534,6 +534,14 @@ export class LatchDirective {
 						ryber[co].metadata.latch.updateZChild.next({
 						})
 						//
+
+
+						zChildren[extras.zSymbol].extras.appDeltaNode.options?.modify({
+							zChild:zChildren,
+							x:extras.zSymbol,
+							index:zChildren[extras.zSymbol].extras.appDeltaNode.options.index,
+							hook:"latchDirective"
+						})
 					}),
 					//
 
@@ -544,12 +552,6 @@ export class LatchDirective {
 							return
 						}
 
-						zChildren[extras.zSymbol].extras.appDeltaNode.options?.modify({
-							zChild:zChildren,
-							x:extras.zSymbol,
-							index:zChildren[extras.zSymbol].extras.appDeltaNode.options.index,
-							hook:"latchDirective"
-						})
 
 						extras.zChildren
 						.forEach((x:any,i)=>{

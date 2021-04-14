@@ -656,6 +656,22 @@ let login_development:Array<zProtoComponent> = [
 
 			},
 			{
+				key:"business-page",
+				type:"anchor",
+				left:770,
+				top:50,
+				// width:240,
+				next:"true",
+				value:"Create a Page for a celebrity, band or business.",
+				options:{
+					css:{
+						"font-size":"14px",
+						"font-weight":"bold"
+					}
+				}
+
+			},
+			{
 				"key":"login-card a_p_p_Login_Card",
 				type:"div",
 				next:"true",
@@ -910,7 +926,10 @@ let login_development:Array<zProtoComponent> = [
 										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/plus.png"
 										zChild[myName].innerText.item = "Add Account"
 										zChild[myName].css.color = "blue";
-										zChild[x].css.top = (numberParse(zChild[x].css.top)+ 150).toString() + "px"
+										console.log("fire",zChild[x].css.top,zChild[x].extras.component.top)
+										let addingDelta = 300
+										zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
+										zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
 										break;
 									default:
 										break;
