@@ -62,6 +62,7 @@
                     },
                     "configurations": {
                         "production": {
+                            "baseHref":"/docs",
                             "fileReplacements": [
                                 {
                                     "replace": "src/app/website.ts",
