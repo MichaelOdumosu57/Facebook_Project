@@ -501,6 +501,7 @@ export class LatchDirective {
 							}
 							catch(e){}
 
+							
 							let symbol = rUD({
 								quantity:4,
 								co,
@@ -515,7 +516,7 @@ export class LatchDirective {
 									},
 									...zChidlrenExtras
 								},
-								val:"a_p_p_Display " +x.val
+								val:x.val + "  a_p_p_Display"
 							})
 
 							if(x?.type?.includes("deltaNodeContainer")){

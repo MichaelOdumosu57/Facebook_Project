@@ -397,7 +397,7 @@ let login_development:Array<zProtoComponent> = [
 						{
 							name:"login_card",
 							type:"repeat",
-							by:3
+							by:4
 						}
 					]
 				},
@@ -523,10 +523,10 @@ let login_development:Array<zProtoComponent> = [
 									left:-20,
 								},
 								mobile:{
-									width:1,
-									height:1,
-									top:0,
-									left:0,
+									width:1.05,
+									height:1.1,
+									top:-10,
+									left:-20,
 								}
 							}
 						}
@@ -657,17 +657,57 @@ let login_development:Array<zProtoComponent> = [
 			},
 			{
 				key:"business-page",
-				type:"anchor",
-				left:770,
-				top:50,
-				// width:240,
+				type:"text",
+				left:870,
+				top:90,
+				width:240,
 				next:"true",
-				value:"Create a Page for a celebrity, band or business.",
+				value:"for a celebrity, band or business.",
 				options:{
 					css:{
 						"font-size":"14px",
-						"font-weight":"bold"
+
+					},
+					judima:{
+						mobile:{
+							left:150
+						}
 					}
+				},
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"fb_create_business_page"
+					},
+					zChildren:[
+						{
+							bool:"a",
+							css:{
+								"font-weight":"bold",
+								"font-size":"14px",
+								"z-index":4
+							},
+							val:"business-page-link a_p_p_Anchor",
+							text:"Create a Page",
+							group:["fb_create_business_page"],
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.2,
+									top:0,
+									left:-100
+								},
+								mobile:{
+									width:1.2,
+									height:1.2,
+									top:0,
+									left:-100
+								}
+							},
+						}
+					],
+
 				}
 
 			},
@@ -677,7 +717,7 @@ let login_development:Array<zProtoComponent> = [
 				next:"true",
 				height:205,
 				width:160,
-				top:-250,
+				top:-320,
 				options:{
 					css:{
 						"z-index":2
@@ -698,20 +738,40 @@ let login_development:Array<zProtoComponent> = [
 							val:"login-overlay",
 							logic:{
 								desktop:{
-									width:1.2,
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+									},
 									height:1.5,
-									top:1,
-									left:1
+									top:(devObj)=>{
+										let {} = devObj
+										return 0
+									},
+									left:(devObj)=>{
+										let {} = devObj
+										return 0
+									}
 								},
 								mobile:{
-									width:3,
-									height:3,
-									top:3,
-									left:3
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+									},
+									height:1.1,
+									top:(devObj)=>{
+										let {} = devObj
+										return 0
+									},
+									left:(devObj)=>{
+										let {} = devObj
+										return 0
+									}
 								}
 							},
 							type:["deltaNodeContainer"],
-							group:["facebook_login_group","facebook_login_card","facebook_login_credentials"]
+							group:["facebook_login_group","facebook_login_card","facebook_login_credentials","fb_create_business_page"]
 						},
 						{
 							bool:"img",
@@ -927,11 +987,17 @@ let login_development:Array<zProtoComponent> = [
 										zChild[myName].innerText.item = "Add Account"
 										zChild[myName].css.color = "blue";
 										console.log("fire",zChild[x].css.top,zChild[x].extras.component.top)
-										let addingDelta = 300
+										let addingDelta = 350
 										zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
 										zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
 										break;
+
+
 									default:
+										addingDelta = 350
+										zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
+										zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
+
 										break;
 								}
 

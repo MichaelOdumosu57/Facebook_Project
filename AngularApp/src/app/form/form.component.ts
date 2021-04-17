@@ -59,7 +59,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 				let formatZChild = this._formatZChildInit()
                 let latchZChild
                 let staticZKeys = this.staticZKeysGen(zChild)
-                
+
 
 
                 // drags elements for you
@@ -1055,8 +1055,9 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                         (zChild[x].extras.judima?.mobile?.widthRatio ||mobileSection.widthRatio )
                         * numberParse(getComputedStyle(board.element).width)
                     ).toString() + "px";
-                    this.ref.detectChanges();
-                    zChild[x].css["left"] = zChild[x].extras.judima?.mobile?.left || (
+                    ref.detectChanges();
+                    zChild[x].css["left"] =  (
+                        zChild[x].extras.judima?.mobile?.left ||
                         xPosition({
                             target: numberParse(zChild[x].css["width"]),
                             contain: numberParse(getComputedStyle(board.element).width)

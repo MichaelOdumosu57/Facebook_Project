@@ -749,7 +749,7 @@ export class RyberService {
 					...options.judima
 				}
 
-                
+
 
                 symbol = rUD({
                     co,
@@ -1319,7 +1319,7 @@ export class RyberService {
                 symbol = rUD({
                     co,
                     bool: 'a',
-                    val: key.split("_").reverse()[0] + '  a_p_p_Anchor',
+                    val: key+ ' a_p_p_Anchor',
                     text: value,
                     css,
                     extras: {

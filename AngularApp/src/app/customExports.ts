@@ -52,7 +52,8 @@ export class zOptionsJudima {
         widthRatio?:Number;
         top?:Number
         stack?:Number
-        footerSpace?:Number
+        footerSpace?:Number,
+        left?:Number
     };
     desktop?:{
 
