@@ -62,8 +62,8 @@
                     },
                     "configurations": {
                         "production": {
-                            "baseHref":"/Facebook_Project/docs/",
-                            "deployUrl":"/Facebook_Project/docs/",
+                            // "baseHref":"/Facebook_Project/docs/",
+                            "deployUrl":"/Facebook_Project/",
                             "fileReplacements": [
                                 {
                                     "replace": "src/app/website.ts",
