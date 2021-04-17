@@ -62,7 +62,7 @@
                     },
                     "configurations": {
                         "production": {
-                            // "baseHref":"/Facebook_Project/docs/",
+                            "baseHref":"/Facebook_Project/",
                             "deployUrl":"/Facebook_Project/",
                             "fileReplacements": [
                                 {
@@ -74,7 +74,9 @@
                                     "with": "src/environments/environment.facebook.dev.ts"
                                 }
                             ],
-                            "assets": [],
+                            "assets": [
+                                "src/assets"
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
