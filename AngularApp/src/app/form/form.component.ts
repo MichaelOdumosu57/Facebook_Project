@@ -1197,6 +1197,9 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
             max = max
             .reduce((acc: any, x, i) => {
 
+                if(zChild[x].extras.judima.formatIgnore === "true"){
+                    return acc
+                }
                 let sum = numberParse(zChild[x].css["top"]) +
                     numberParse(zChild[x].css["height"]);
 
@@ -1205,6 +1208,8 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 }
                 return acc;
             }, ["", 0])[0];
+
+            
 
 
         if(zChild["&#8353"].extras.component.height !== undefined){

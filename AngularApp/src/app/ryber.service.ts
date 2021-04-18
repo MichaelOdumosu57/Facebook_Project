@@ -1326,7 +1326,7 @@ export class RyberService {
 						extend,
 						judima,
                         component,
-						type: "text",
+						type: "anchor",
 						appDeltaNode,
                         appLatch,
 						appNest,

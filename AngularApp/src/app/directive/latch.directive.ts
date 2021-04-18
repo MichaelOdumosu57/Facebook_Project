@@ -501,7 +501,7 @@ export class LatchDirective {
 							}
 							catch(e){}
 
-							
+
 							let symbol = rUD({
 								quantity:4,
 								co,
@@ -541,7 +541,8 @@ export class LatchDirective {
 							zChild:zChildren,
 							x:extras.zSymbol,
 							index:zChildren[extras.zSymbol].extras.appDeltaNode.options.index,
-							hook:"latchDirective"
+							hook:"latchDirective",
+							co:ryber[co]
 						})
 					}),
 					//

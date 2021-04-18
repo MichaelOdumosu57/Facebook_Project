@@ -4,375 +4,6 @@ import {objectCopy,zProtoComponent,zProtoChildren, zChildren} from '../customExp
 
 let website:any = {}
 
-
-let navigation_development:Array<zProtoComponent> = [
-	{
-		"title": "navigation",
-		"type_slug": "forms",
-		"metafields": [
-
-			{
-				"key": "Body",
-				"type": "body",
-				// "left":200,
-				stack:50,
-				navigation:{
-					"group":[
-						{
-							name:"isha",
-							type:"direct_link"
-						},
-						{
-							name:"thy",
-							type:"direct_link"
-						},
-						{
-							name:"mike",
-							type:"direct_link"
-						},
-					],
-					name:"isha"
-				},
-
-				options:{
-					css:{
-						// width:"125%"
-					},
-					judima:{
-						mobile:{
-							stack:20,
-							footerSpace:50
-						}
-					},
-					extras:{
-						appSection:{
-							confirm:"true"
-						},
-						appVanillaTilt:{
-							confirm:"true",
-							type:"body",
-							zSymbolNeeded:"true"
-						},
-					}
-				},
-
-			},
-			{
-				"key": "heading",
-				type:"heading",
-				"value":"Roomate App",
-				"split": "4",
-				left:"350",
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"roomate-heading"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							css:{
-								"background-color":"blue"
-							},
-							val:"a_p_p_Glassmorphism",
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.5,
-									top:-10,
-									left:-50
-								},
-								mobile:{
-									width:1.1,
-									height:1.1,
-									top:0,
-									left:0
-								}
-							},
-							group:["roomate-heading"],
-							extras:{
-								appVanillaTilt:{
-									type:"target",
-									group:"my-tilt-1"
-								},
-							},
-						},
-						{
-							bool:"div",
-							css:{
-								"background-color":"tan"
-							},
-							val:"a_p_p_Glassmorphism",
-							logic:{
-								desktop:{
-									width:function (devObj){
-										let {zChildren} =devObj
-										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
-
-
-									},
-									height:1.5,
-									top:-30,
-									left:function (devObj){
-										let {zChildren} =devObj
-										return numberParse(getComputedStyle( zChildren["&#8353"].element).left)
-
-
-									},
-								},
-								mobile:{
-									width:function (devObj){
-										let {zChildren} =devObj
-										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
-
-
-									},
-									height:1.1,
-									top:0,
-									left:function (devObj){
-										let {zChildren} =devObj
-										return numberParse(getComputedStyle( zChildren["&#8353"].element).left)
-
-
-									},
-								}
-							},
-							group:["roomate-heading","isha-heading","mike-heading"],
-							extras:{
-
-							},
-						},
-					],
-
-				},
-				options:{
-					css:{
-						height:"200px",
-						"font-family":"Gilgongo Doro",
-						"text-align":"center",
-					},
-					extras:{
-						// appVanillaTilt:{
-						// 	type:"part",
-						// 	group:"my-tilt-1"
-						// }
-					},
-					judima:{
-						mobile:{
-							widthRatio:.7
-						}
-					},
-				},
-
-			},
-			{
-				"key": "isha",
-				type:"text",
-				"value":"Ishita Rahman",
-				"split": "3",
-				next:"true",
-				navigation:{
-					group:"isha",
-					type:"direct_link"
-				},
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"isha-heading"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							css:{
-								"background-color":"red"
-							},
-							val:"a_p_p_Glassmorphism",
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.5,
-									top:-10,
-									left:-50
-								},
-								mobile:{
-									width:1.1,
-									height:1.1,
-									top:0,
-									left:0
-								}
-							},
-							group:["isha-heading"],
-							extras:{
-							},
-						},
-
-					],
-
-				},
-				options:{
-					css:{
-						height:"200px",
-						"font-family":"Gilgongo Doro",
-						"text-align":"left",
-					},
-					extras:{
-						appVanillaTilt:{
-							type:"part",
-							group:"isha-tilt"
-						}
-					},
-					judima:{
-						mobile:{
-							widthRatio:.7
-						}
-					}
-				},
-
-			},
-			{
-				"key": "thy",
-				type:"text",
-				"value":"Thy A. Bui",
-				// "split": "2",
-				width:200,
-				navigation:{
-					group:"thy",
-					type:"direct_link"
-				},
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"thy-heading"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							css:{
-								"background-color":"red"
-							},
-							val:"a_p_p_Glassmorphism",
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.5,
-									top:-10,
-									left:-30
-								},
-								mobile:{
-									width:1.1,
-									height:1.1,
-									top:0,
-									left:0
-								}
-							},
-							group:["thy-heading"],
-							extras:{
-								// appVanillaTilt:{
-								// 	type:"target",
-								// 	group:"thy-tilt"
-								// },
-							},
-						},
-					],
-
-				},
-				options:{
-					css:{
-						height:"200px",
-						"font-family":"Gilgongo Doro",
-						"text-align":"left",
-					},
-					judima:{
-						mobile:{
-							widthRatio:.7
-						}
-					},
-					extras:{
-						appVanillaTilt:{
-							type:"part",
-							group:"thy-tilt"
-						}
-					}
-				},
-
-			},
-			{
-				"key": "mike",
-				type:"text",
-				"value":"Michael Odumosu",
-				// "split": "2",
-				width:330,
-				navigation:{
-					group:"mike",
-					type:"direct_link"
-				},
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"mike-heading"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							css:{
-								"background-color":"red"
-							},
-							val:"a_p_p_Glassmorphism",
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.5,
-									top:-10,
-									left:-30
-								},
-								mobile:{
-									width:1.1,
-									height:1.1,
-									top:0,
-									left:0
-								}
-							},
-							group:["mike-heading"],
-							extras:{
-								// appVanillaTilt:{
-								// 	type:"target",
-								// 	group:"mike-tilt"
-								// },
-							},
-						},
-					],
-
-				},
-				options:{
-					css:{
-						height:"200px",
-						"font-family":"Gilgongo Doro",
-						"text-align":"left",
-					},
-					extras:{
-						// appVanillaTilt:{
-						// 	type:"part",
-						// 	group:"mike-tilt"
-						// }
-					},
-
-					judima:{
-						mobile:{
-							widthRatio:.7
-						}
-					},
-				},
-
-			},
-
-		]
-	},
-]
-let prefix_navigation_development = objectCopy(navigation_development)
 let login_development:Array<zProtoComponent> = [
 
 	{
@@ -384,6 +15,7 @@ let login_development:Array<zProtoComponent> = [
 				"key": "Body",
 				"type": "body",
 				stack:0,
+				height:900,
 				nest:{
 					group:[
 						{
@@ -397,7 +29,7 @@ let login_development:Array<zProtoComponent> = [
 						{
 							name:"login_card",
 							type:"repeat",
-							by:4
+							by:3
 						}
 					]
 				},
@@ -414,6 +46,9 @@ let login_development:Array<zProtoComponent> = [
 						mobile:{
 							stack:20,
 							footerSpace:50
+						},
+						desktop:{
+							footerSpace:280
 						}
 					},
 					extras:{
@@ -659,7 +294,7 @@ let login_development:Array<zProtoComponent> = [
 				key:"business-page",
 				type:"text",
 				left:870,
-				top:90,
+				top:50,
 				width:240,
 				next:"true",
 				value:"for a celebrity, band or business.",
@@ -670,7 +305,8 @@ let login_development:Array<zProtoComponent> = [
 					},
 					judima:{
 						mobile:{
-							left:150
+							left:150,
+							top:50
 						}
 					}
 				},
@@ -721,6 +357,11 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					css:{
 						"z-index":2
+					},
+					judima:{
+						mobile:{
+							widthRatio:.25
+						}
 					}
 				},
 				latch:{
@@ -827,20 +468,20 @@ let login_development:Array<zProtoComponent> = [
 								},
 								mobile:{
 									width:()=>{
-										return 16
+										return 30
 									},
 									height:()=>{
-										return 20
+										return 30
 									},
-									top:3,
-									left:3
-								}
+									top:-10,
+									left:240
+								},
 							},
 							group:["facebook_login_card"]
 						},
 						{
 							bool:"img",
-							val:"account-image a_p_p_Login_Card",
+							val:"account-image a_p_p_Login_Image",
 							css:{
 								"z-index":2
 							},
@@ -889,14 +530,42 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 								mobile:{
-									width:()=>{
-										return 16
+									width:(devObj)=>{
+										let {delta,zChildren,css,zSymbol} = devObj
+
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+											return 42
+										}
+										return (.5* css.width)
+
 									},
-									height:()=>{
-										return 20
+									height:(devObj)=>{
+										// console.log(devObj)
+										let {delta,zChildren,css,zSymbol} = devObj
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+											return 42
+										}
+										return ( .75 * css.height)
+
 									},
-									top:3,
-									left:3
+									top:(devObj)=>{
+										// console.log(devObj)
+										let {delta,zChildren,css,zSymbol} = devObj
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+											return css.top+ 50
+										}
+										return css.top
+
+									},
+									left:(devObj)=>{
+										// console.log(devObj)
+										let {delta,zChildren,css,zSymbol} = devObj
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+											return css.left +120
+										}
+										return css.left +70
+
+									}
 								}
 							},
 							group:["facebook_login_card"]
@@ -916,14 +585,10 @@ let login_development:Array<zProtoComponent> = [
 									left:0
 								},
 								mobile:{
-									width:()=>{
-										return 16
-									},
-									height:()=>{
-										return 20
-									},
-									top:3,
-									left:3
+									width:1,
+									height:.25,
+									top:155,
+									left:0
 								}
 							},
 							group:["facebook_login_card"]
@@ -957,7 +622,7 @@ let login_development:Array<zProtoComponent> = [
 							}
 						},
 						modify:(devObj)=>{
-							let {zChild,x,index,hook} = devObj
+							let {zChild,x,index,hook,co} = devObj
 							// let yourFNs = []  // say if you wanna modify height, top image ...
 							if(hook === "latchDirective"){
 								let {targets} = zChild[x].extras.appLatch.display
@@ -986,19 +651,21 @@ let login_development:Array<zProtoComponent> = [
 										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/plus.png"
 										zChild[myName].innerText.item = "Add Account"
 										zChild[myName].css.color = "blue";
-										console.log("fire",zChild[x].css.top,zChild[x].extras.component.top)
 										let addingDelta = 350
+
 										zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
-										zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
+										if(co.metadata.section.mediaQuery === "desktop"){
+											zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
+										}
 										break;
 
 
-									default:
-										addingDelta = 350
-										zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
-										zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
+									// default:
+									// 	addingDelta = 350
+									// 	zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
+									// 	zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
 
-										break;
+									// 	break;
 								}
 
 							}
@@ -1014,6 +681,173 @@ let login_development:Array<zProtoComponent> = [
 			return x
 		})
 	},
+	{
+		"title":"site-map",
+		"type_slug":"forms",
+		"metafields":[
+			{
+				key:"Body",
+				type:"body",
+				split:20,
+				gap:20,
+				navigation:{
+					name:"login"
+				},
+				options:{
+					judima:{
+						moving:{
+							point:"bottom",
+							target:'login_page',
+							coordinates:{x:0,y:0},
+							type:"custom"
+						},
+					},
+				}
+			},
+			{
+				key:"language-current",
+				type:"text",
+				value:"English (EN)",
+				split:2,
+				options:{
+					css:{
+						"font-size":"16px"
+					}
+				}
+			},
+			...[
+			{
+				key:"ES",
+				type:"anchor",
+				value:"Español"
+			},
+			{
+				key:"FR",
+				type:"anchor",
+				value:"Français (France)"
+			},
+			{
+				key:"ASIAN",
+				type:"anchor",
+				value:"中文(简体)"
+			},
+			{
+				key:"Hebrew",
+				type:"anchor",
+				value:"العربية"
+			},
+			{
+				key:"BR",
+				type:"anchor",
+				value:"Português (Brasil)"
+			},
+			{
+				key:"BR",
+				type:"anchor",
+				value:"한국어"
+			},
+			{
+				key:"IT",
+				type:"anchor",
+				value:"Italiano"
+			},
+			{
+				key:"GR",
+				type:"anchor",
+				value:"Deutsch"
+			},
+			{
+				key:"GR",//Hind
+				type:"anchor",
+				value:"हिन्दी"
+			},
+			{
+				key:"JP",
+				type:"anchor",
+				value:"日本語"
+			}
+
+			].map((x:any,i)=>{
+				x.key += " a_p_p_SiteMap_Anchor"
+				return x
+			}),
+			{
+				key:"strikethrough",
+				type:"div",
+				top:30,
+				split:20,
+				height:1,
+				next:"true",
+				options:{
+					css:{
+						"background-color":"grey",
+						"z-index":"4"
+					}
+				}
+
+			},
+			...[
+				{
+					key:"sign-up",
+					type:"anchor",
+					value:"Sign Up"
+				},
+				{
+					key:"login",
+					type:"anchor",
+					value:"Log In"
+				},
+				{
+					key:"fb-mesg",
+					type:"anchor",
+					value:"Messenger"
+				},
+				{
+					key:"watch",
+					type:"anchor",
+					value:"Watch"
+				},
+				{
+					key:"ppl",
+					type:"anchor",
+					value:"People"
+				},
+				{
+					key:"pages",
+					type:"anchor",
+					value:"Pages"
+				},
+				{
+					key:"page-categories",
+					type:"anchor",
+					value:"Page Categories"
+				},
+				{
+					key:"games",
+					type:"anchor",
+					value:"Games"
+				},
+				{
+					key:"marketplace",
+					type:"anchor",
+					value:"Marketplace"
+				},
+				{
+					key:"groups",
+					type:"anchor",
+					value:"Groups"
+				},
+				{
+					key:"Privacy",
+					type:"anchor",
+					value:"Privacy"
+				}
+			].map((x:any,i)=>{
+				x.key += " a_p_p_SiteMap_Anchor"
+				return x
+			})
+		]
+	}
 ]
 
 // attribute map

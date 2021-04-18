@@ -21,15 +21,17 @@ $font-family1 :Helvetica, Arial, sans-serif;
 
 
 .a_p_p_Login_Card {
-    border-top-left-radius: 10px;
-    border-top-right-radius:10px;
+    border-radius: 10px;
     background-color:white;
 
 }
 
+
+
 .a_p_p_Login_Image {
-    border-radius: 10px;
-    color:purple;
+    border-top-left-radius: 10px;
+    border-top-right-radius:10px;
+
 
 }
 
@@ -151,4 +153,12 @@ $font-family1 :Helvetica, Arial, sans-serif;
     font-size: 17px;
     line-height: 48px;
     padding: 0 16px;
+}
+
+.a_p_p_SiteMap_Anchor {
+    color:blue
+}
+
+.a_p_p_SiteMap_Anchor:hover{
+    text-decoration: underline;
 }
