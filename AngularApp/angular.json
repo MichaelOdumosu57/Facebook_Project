@@ -120,7 +120,7 @@
                         "browserTarget": "AngularApp:judima:play",
                         "port": 4520,
                         "liveReload": true,
-						"hmr": false
+						"hmr": true
                     },
                     "configurations": {
                         "production": {

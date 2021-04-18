@@ -32,6 +32,8 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
     foo:any= {}
     typesES:string = 'formES'
     subscriptions: Array<Subscription> = []
+    desktopSection:any
+    mobileSection:any
 
 
     ngOnInit():void {
@@ -122,7 +124,8 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 section.area =section.left + section.width
 				section.prevLeft = section.left
 
-                // --
+                // initialzation
+                let {desktopSection,mobileSection} = this
                 let keep
                 let keepCurrent
                 let keepLast
@@ -392,12 +395,23 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                         templateMyElements:this.templateMyElements
                     })
 
-
-
                     eventDispatcher({
                         event:'resize',
                         element:window
                     })
+
+                    switch (ryber[appTV].metadata.section.mediaQuery) {
+                        case "desktop":
+                            this.positionBoard({ zChild: topLevelZChild, section,mediaQuery:this.desktopSection });
+                            break;
+
+                        case "mobile":
+                            this.positionBoard({ zChild: topLevelZChild, section,mediaQuery:this.mobileSection });
+                            break;
+
+                        default:
+                            break;
+                    }
                 })
 				//
 
@@ -429,11 +443,24 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                     this.ryber[this.appTV].metadata.deltaNode.component.confirm = "true"
                     //
 
-
                     eventDispatcher({
                         event:'resize',
                         element:window
                     })
+
+                    switch (ryber[appTV].metadata.section.mediaQuery) {
+                        case "desktop":
+                            this.positionBoard({ zChild: topLevelZChild, section,mediaQuery:this.desktopSection });
+                            break;
+
+                        case "mobile":
+                            this.positionBoard({ zChild: topLevelZChild, section,mediaQuery:this.mobileSection });
+                            break;
+
+                        default:
+                            break;
+                    }
+
                 })
 				//
 
@@ -918,7 +945,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
     private desktopMediaQuery(devObj:{zChild: any, keep: any[], finalKeep: any[], finalZChildKeys: any[], finalAlign: any[], section: any, ref: ChangeDetectorRef, align: any[], topLevelZChild: any, moving: any, ryber: RyberService, appTV: any}) {
         let {zChild, keep, finalKeep, finalZChildKeys, finalAlign, section, ref, align, topLevelZChild, moving, ryber, appTV} = devObj
-        let desktopSection = {
+        let desktopSection = this.desktopSection= {
             ...ryber.appCO0.metadata.ryber.sectionDefault.desktop,
             ...zChild["&#8353"].extras.judima.desktop
         }
@@ -926,7 +953,6 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
         {
 
             {
-
 
                 Object
                 .keys(zChild)
@@ -1037,7 +1063,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
         if(sectionType === "custom"){
             board = ryber.appCO0.metadata.ryber.sectionDefault.app.custom.board
         }
-        let mobileSection =  {
+        let mobileSection = this.mobileSection =  {
             ...ryber.appCO0.metadata.ryber.sectionDefault.mobile,
             ...zChild["&#8353"].extras.judima.mobile
         }
@@ -1052,8 +1078,11 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 .forEach((x, i) => {
 
                     zChild[x].css["width"] = (
-                        (zChild[x].extras.judima?.mobile?.widthRatio ||mobileSection.widthRatio )
-                        * numberParse(getComputedStyle(board.element).width)
+                        (zChild[x].extras.judima?.mobile?.width||mobileSection.width) ||
+                        (
+                            (zChild[x].extras.judima?.mobile?.widthRatio ||mobileSection.widthRatio )
+                            * numberParse(getComputedStyle(board.element).width)
+                        )
                     ).toString() + "px";
                     ref.detectChanges();
                     zChild[x].css["left"] =  (
@@ -1209,7 +1238,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 return acc;
             }, ["", 0])[0];
 
-            
+
 
 
         if(zChild["&#8353"].extras.component.height !== undefined){

@@ -50,6 +50,7 @@ export enum zBools {
 export class zOptionsJudima {
     mobile?:{
         widthRatio?:Number;
+        width?:Number
         top?:Number
         stack?:Number
         footerSpace?:Number,
@@ -1840,10 +1841,12 @@ export function _boardDimensions(devObj?:any) {
         })
     )
 
+
     result.xPosition = 			xPosition({
         target:1262.67 - (section.left *2),
         contain: numberParse(getComputedStyle(zChild["&#8353"].element).width),
     })
+
     result.section = {...section}
 
     return result

@@ -15,7 +15,7 @@ let login_development:Array<zProtoComponent> = [
 				"key": "Body",
 				"type": "body",
 				stack:0,
-				height:900,
+				// height:900,
 				nest:{
 					group:[
 						{
@@ -48,7 +48,7 @@ let login_development:Array<zProtoComponent> = [
 							footerSpace:50
 						},
 						desktop:{
-							footerSpace:280
+							footerSpace:240
 						}
 					},
 					extras:{
@@ -158,10 +158,14 @@ let login_development:Array<zProtoComponent> = [
 									left:-20,
 								},
 								mobile:{
-									width:1.05,
+									width:(devObj)=>{
+										let {zSymbol,css,delta,zChildren} = devObj
+
+										return delta.current.max.value
+									},
 									height:1.1,
 									top:-10,
-									left:-20,
+									left:-10,
 								}
 							}
 						}
@@ -305,8 +309,9 @@ let login_development:Array<zProtoComponent> = [
 					},
 					judima:{
 						mobile:{
-							left:150,
-							top:50
+							left:140,
+							top:50,
+							width:220,
 						}
 					}
 				},
@@ -360,7 +365,7 @@ let login_development:Array<zProtoComponent> = [
 					},
 					judima:{
 						mobile:{
-							widthRatio:.25
+							width:260
 						}
 					}
 				},
@@ -400,7 +405,7 @@ let login_development:Array<zProtoComponent> = [
 										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
 									},
-									height:1.1,
+									height:1.05,
 									top:(devObj)=>{
 										let {} = devObj
 										return 0
@@ -701,6 +706,10 @@ let login_development:Array<zProtoComponent> = [
 							coordinates:{x:0,y:0},
 							type:"custom"
 						},
+						mobile:{
+							stack:20
+							// top:200,
+						}
 					},
 				}
 			},
