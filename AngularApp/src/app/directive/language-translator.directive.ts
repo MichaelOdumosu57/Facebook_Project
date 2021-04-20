@@ -216,10 +216,11 @@ import {ibmLanguages} from '../ibmLanguageLibrary'
 
                 http.post(
                     "https://facebook-language-translator.herokuapp.com",
+                    // "http://localhost:3005",
                     {
-                        text:"Translate Me",
+                        text:"My hand",
                         source:"en",
-                        target:"ar",
+                        target:"es",
                         // env:"translate"
                     },
                     {
