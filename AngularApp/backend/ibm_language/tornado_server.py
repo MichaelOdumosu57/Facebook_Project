@@ -134,6 +134,7 @@ if __name__ == "__main__":
     ])
     print("server listening on {}".format(PORT))
     server = application.listen(PORT)
+    tornado.ioloop.IOLoop.instance().start()
     #
 
     # path = sys.argv[1] if len(sys.argv) > 1 else '.'
