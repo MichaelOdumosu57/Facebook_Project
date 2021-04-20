@@ -9,13 +9,14 @@
 		appDeltaNode [deltaNode] = "ryber.appAvailble( a.extras[0][bb], 'appDeltaNode')"
         appSection [section] = "ryber.appAvailble( a.extras[0][bb], 'appSection')"
         appNavigation [navigation] = "ryber.appAvailble( a.extras[0][bb], 'appNavigation')"
+        appLanguageTranslator [languageTranslator] = "ryber.appAvailble( a.extras[0][bb], 'appLanguageTranslator')"
         #myVal
         *ngIf= "a.bool[0][bb] ==='divBoard' else boardBlock0"
         class = {{a.val[0][bb]}}
 		[ngStyle] = 'a.ngCss[0][bb]'
 		>
         </div>
-        <ng-template #boardBlock0  >
+    <ng-template #boardBlock0  >
             <img
 			#myVal
 			appNest [nest] = "ryber.appAvailble( a.extras[0][bb], 'appNest')"

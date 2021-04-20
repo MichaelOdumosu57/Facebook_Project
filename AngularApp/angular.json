@@ -132,6 +132,7 @@
                         },
 
                         "facebook": {
+                            "port": 4521,
                             "browserTarget": "AngularApp:judima:facebook"
                         }
 

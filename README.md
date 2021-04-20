@@ -16,6 +16,40 @@ It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) vers
 ### Notes
 * in zProtoChildren.delta.options, when you modify the css.top you also need to modify the component.top because stack will try to do the calculation so now it must match up, add the component.top to to the delta you have to css.top to make it work
 
+* to get lanague list
+```ts
+            http.get(
+                "https://api.us-south.language-translator.watson.cloud.ibm.com/instances/ff50cf00-8514-4ad2-91b4-54368e6ccd6d/v3/languages?version=2018-05-01",
+
+                {
+                    headers:{
+                        Authorization: env.facebook.IBM.authorization
+                    }
+                }
+            )
+            .subscribe({
+                next:(result:any)=>{
+                    console.log(result)
+                },
+                error:(result:any)=>{
+                    console.log(result)
+                }
+            })
+```
+
+#### Heroku 
+email :shieldmousetower734@gmail.com
+
+|property|value|data|
+|:------|:------:|------|
+|project name|facebook-language-translatorx||
+||||
+
+
+#### API 
+* IBM cloud language translator API
+
+
 
 ### Left off
 * website.ts, the targets are getting modified way after, we need the final targets not the inital see whats happening

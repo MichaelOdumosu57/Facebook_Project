@@ -163,6 +163,10 @@ export class AppComponent implements OnInit, OnDestroy {
                         group:{},
                         suffix:"_vT_"
                     }
+                    co.metadata.languageTranslator = {
+                        group:{},
+                        suffix:"_lT_"
+                    }
                     co.metadata.zChildrenSubject = new Subject<any>()
                     .pipe(
                         tap((val) => {

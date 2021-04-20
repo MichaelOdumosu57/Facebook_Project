@@ -311,7 +311,7 @@ let login_development:Array<zProtoComponent> = [
 						mobile:{
 							left:140,
 							top:50,
-							width:220,
+							widthRatio:.5,
 						}
 					}
 				},
@@ -711,6 +711,12 @@ let login_development:Array<zProtoComponent> = [
 							// top:200,
 						}
 					},
+					extras:{
+						appLanguageTranslator:{
+							confirm:"true",
+							type:"body"
+						}
+					}
 				}
 			},
 			{
@@ -728,7 +734,15 @@ let login_development:Array<zProtoComponent> = [
 			{
 				key:"ES",
 				type:"anchor",
-				value:"Español"
+				value:"Español",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"to-spanish",
+							type:"link"
+						}
+					}
+				}
 			},
 			{
 				key:"FR",

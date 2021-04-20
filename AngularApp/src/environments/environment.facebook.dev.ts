@@ -59,22 +59,6 @@ export const environment: any = {
         tracingOrigins:["localhost",/^\//]
     },
 
-    // paste googleMaps object here
-    googleMaps:{
-        APIKey:"your api key here",
-        scriptLoaded:{
-            flag:"false",
-            subject: new Subject<any>()
-        },
-        confirm:"true",
-
-    },
-    //
-
-    // paste webVitals object here
-    webVitals:{
-        gtag:"YOUR GTAG HERE"
-    }
     //
 
 
