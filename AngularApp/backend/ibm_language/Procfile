@@ -1,2 +1,1 @@
-heroku ps:scale web=1
-worker: python tornado_server.py
+web:      bin/python tornado_server.py 0.0.0.0:\3005
