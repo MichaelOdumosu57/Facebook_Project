@@ -68,7 +68,8 @@ def createHandler(client):
 #
 
 # configuring web server
-PORT = 3005
+PORT = 80
+# 3005
 server = ""
 ioloop = tornado.ioloop.IOLoop.current()
 restart_server = False
