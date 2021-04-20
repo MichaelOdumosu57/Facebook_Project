@@ -55,7 +55,7 @@ def createHandler(client):
                 data = tornado.escape.json_decode(self.request.body)
                 # print(data.get("tableName"))
             self.set_header("Content-Type", "text/plain")
-            result = client.execute(client,data)
+            result = client.execute(data)
             self.set_status(result["status"])
             self.write(result["message"])
             self.finish()
