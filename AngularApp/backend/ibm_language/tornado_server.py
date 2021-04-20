@@ -128,22 +128,28 @@ class WatchDogEvent(LoggingEventHandler):
 
 
 if __name__ == "__main__":
-    path = sys.argv[1] if len(sys.argv) > 1 else '.'
-    observer = Observer()
-    observer.schedule(WatchDogEvent(), path, recursive=True)
-    server = start_app()
-    observer.start()
-    try:
-        while True:
-            ioloop.call_later(
-                callback = restart_tornado,
-                delay = 1
-            )
-            ioloop.start()
-            time.sleep(2)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
+    # for heroku only
+    application = tornado.web.Application([
+        (r"/", createHandler(my_client)),
+    ])
+    # 
+
+    # path = sys.argv[1] if len(sys.argv) > 1 else '.'
+    # observer = Observer()
+    # observer.schedule(WatchDogEvent(), path, recursive=True)
+    # server = start_app()
+    # observer.start()
+    # try:
+    #     while True:
+    #         ioloop.call_later(
+    #             callback = restart_tornado,
+    #             delay = 1
+    #         )
+    #         ioloop.start()
+    #         time.sleep(2)
+    # except KeyboardInterrupt:
+    #     observer.stop()
+    # observer.join()
 
 
 
