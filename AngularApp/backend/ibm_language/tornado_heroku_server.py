@@ -68,83 +68,28 @@ def createHandler(client):
 #
 
 # configuring web server
-PORT = 3005
+PORT = os.environ["PORT"] if os.environ["PORT"] else 3005
+# 3005
 server = ""
 ioloop = tornado.ioloop.IOLoop.current()
 restart_server = False
 my_client = my_ibm_language_client()
 
-def assign_me():
-    pass
-
-def start_app(*args, **kwargs):
-    loading_error = True
-    my_ibm_language_client_code = None
-    while loading_error:
-        try:
-            reload(template)
-            my_ibm_language_client_code = template.my_ibm_language_client().execute.__code__
-            # my_client.env = template.my_ibm_language_client().env
-            loading_error = False
-        except Exception as e:
-            print("fix the error in the code you have modifed\n")
-            print(e)
-            time.sleep(1)
-    # my_ibm_language_client = tables.my_ibm_language_client
-    assign_me.__code__ = my_ibm_language_client_code
-    my_client.execute = assign_me
-    application = tornado.web.Application([
-        (r"/", createHandler(my_client)),
-    ])
-    print("server listening on {}".format(PORT))
-    server = application.listen(PORT)
-    global restart_server
-    restart_server = False
-    return server
 
 
-def restart_tornado():
-    global restart_server
-    global server
-    # print("checking for file change")
-    # print(restart_server)
-    if(restart_server):
-        print("updating the ibm_language client")
-        server.stop()
-        server = None
-        server = start_app()
-    ioloop.add_callback(ioloop.stop)
-
-
-
-
-class WatchDogEvent(LoggingEventHandler):
-    def on_modified(self, event):
-        global restart_server
-        restart_server = True
 
 
 
 
 if __name__ == "__main__":
-
-
-    path = sys.argv[1] if len(sys.argv) > 1 else '.'
-    observer = Observer()
-    observer.schedule(WatchDogEvent(), path, recursive=True)
-    server = start_app()
-    observer.start()
-    try:
-        while True:
-            ioloop.call_later(
-                callback = restart_tornado,
-                delay = 1
-            )
-            ioloop.start()
-            time.sleep(2)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
+    # for heroku only
+    application = tornado.web.Application([
+        (r"/", createHandler(my_client)),
+    ])
+    print("server listening on {}".format(PORT))
+    server = application.listen(PORT)
+    tornado.ioloop.IOLoop.instance().start()
+    #
 
 
 
