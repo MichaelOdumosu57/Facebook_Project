@@ -68,7 +68,7 @@ def createHandler(client):
 #
 
 # configuring web server
-PORT = 3005
+PORT = os.environ["PORT"] if os.environ["PORT"] else 3005
 # 3005
 server = ""
 ioloop = tornado.ioloop.IOLoop.current()
