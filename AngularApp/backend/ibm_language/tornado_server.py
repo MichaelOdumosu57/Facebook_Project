@@ -132,7 +132,9 @@ if __name__ == "__main__":
     application = tornado.web.Application([
         (r"/", createHandler(my_client)),
     ])
-    # 
+    print("server listening on {}".format(PORT))
+    server = application.listen(PORT)
+    #
 
     # path = sys.argv[1] if len(sys.argv) > 1 else '.'
     # observer = Observer()
