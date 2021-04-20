@@ -25,7 +25,6 @@ pp = pprint.PrettyPrinter(indent=4, compact=True, width=1)
 
 #  find the tables module for hot reload
 class ModuleFinder(importlib.machinery.PathFinder):
-
     def __init__(self):
         self.path_map = {"template":template.__spec__.loader}
 
