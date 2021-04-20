@@ -1,1 +1,1 @@
-worker python tornado_server.py
+worker: python tornado_server.py

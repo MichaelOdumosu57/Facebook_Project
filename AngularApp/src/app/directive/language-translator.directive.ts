@@ -215,7 +215,7 @@ import {ibmLanguages} from '../ibmLanguageLibrary'
 
 
                 http.post(
-                    "http://localhost:3005",
+                    "https://facebook-language-translator.herokuapp.com/",
                     {
                         text:"Translate Me",
                         source:"en",
