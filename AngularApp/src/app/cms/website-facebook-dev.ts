@@ -394,7 +394,7 @@ let login_development:Array<zProtoComponent> = [
 										try{
 											let a = numberParse(zChildren[zSymbol]?.css.width)
 											let b = numberParse(zChildren[delta.current.min.key].css.left)
-											console.log(b,a)
+											
 											return b - a
 										}
 										catch(e){
