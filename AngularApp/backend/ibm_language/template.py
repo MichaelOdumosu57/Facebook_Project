@@ -14,6 +14,8 @@ import datetime
 # import pytz
 import time
 pp = pprint.PrettyPrinter(indent=4, compact=True, width=1)
+import random
+
 # end
 
 
@@ -34,6 +36,7 @@ class my_ibm_language_client():
         self.uuid = uuid
         self.authenticator = authenticator
         self.language_translator = language_translator
+        self.random = random
 
 
     def execute(self, data):
@@ -43,6 +46,7 @@ class my_ibm_language_client():
         datetime = self.datetime
         time = self.time
         uuid = self.uuid
+        random = self.random
         authenticator = self.authenticator
         language_translator = self.language_translator
         name = data.get("titleName") if data.get("titleName")  else "My_Source_Model"
@@ -75,6 +79,55 @@ class my_ibm_language_client():
                     "message":'an error occured check the output from the backend'
                 }
         #
+        elif( env == "dummy"):
+            try:
+                message = json.dumps({
+                        "translations": [
+                            {
+                                "translation": random.choice([
+                                            "Mi mano",
+                                            "Alamante",
+                                            "Busco por un tavola",
+                                            "Mostra ma",
+                                            "Escucha ma por favor",
+                                            "Incio un Session"
+                                        ])
+                            }
+                        ],
+                        'word_count': 2,
+                        'character_count': 7
+                    })
+
+
+                return {
+                        "status":200,
+                        "message":message
+                }
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
+                }
+        elif( env =="list"):
+            try:
+                languages = language_translator.list_languages().get_result()
+                return {
+                    "status":200,
+                    "message":json.dumps(languages, indent=2)
+                }
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
+            }
 
         return {
             "status" :500,

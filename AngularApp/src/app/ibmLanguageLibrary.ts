@@ -109,6 +109,28 @@ ibmLanguages.list= [
         "supported_as_source": true,
         "supported_as_target": true,
         "identifiable": true
-    }
+    },
+    {
+        "language": "zh",
+        "language_name": "Simplified Chinese",
+        "native_language_name": "中文",
+        "country_code": "CN",
+        "words_separated": false,
+        "direction": "left_to_right",
+        "supported_as_source": true,
+        "supported_as_target": true,
+        "identifiable": true
+    },
+    {
+        "language": "he",
+        "language_name": "Hebrew",
+        "native_language_name": "עברית",
+        "country_code": "IL",
+        "words_separated": true,
+        "direction": "right_to_left",
+        "supported_as_source": true,
+        "supported_as_target": true,
+        "identifiable": true
+    },
 ]
 

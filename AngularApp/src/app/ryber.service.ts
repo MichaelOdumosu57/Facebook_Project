@@ -1819,7 +1819,7 @@ export class RyberService {
                     stack: 20,
                     app:{
                         width:{
-                            value:1175,
+                            value:575,
                             mediaQuery:null
                         },
                         type:"custom", //stack,custom,
@@ -1844,6 +1844,11 @@ export class RyberService {
                     navigated:"false",
                     startURL:"/login"
                 }
+            },
+            ibmLanguage:{
+                current:new BehaviorSubject({
+                    language:"en"
+                })
             },
             webRTC:{
                 init:["localVideo","dataChannelSend","camera","myVideo"]

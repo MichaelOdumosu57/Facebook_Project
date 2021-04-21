@@ -15,6 +15,7 @@ let login_development:Array<zProtoComponent> = [
 				"key": "Body",
 				"type": "body",
 				stack:0,
+				// width:900,
 				// height:900,
 				nest:{
 					group:[
@@ -58,13 +59,16 @@ let login_development:Array<zProtoComponent> = [
 							type:"body",
 							zSymbolNeeded:"true"
 						},
-						appRoommate:{
+						appLanguageTranslator:{
 							confirm:"true",
-							type:"body",
+							type:["body","part"],
 						},
 						appSection:{
 							confirm:"true"
-						}
+						},
+						// section:{
+						// 	width:900
+						// }
 					}
 				},
 
@@ -99,6 +103,12 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					css:{
 						"font-family":"SFProDisplay-Regular"
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
+						}
 					}
 				},
 				latch:{
@@ -108,7 +118,7 @@ let login_development:Array<zProtoComponent> = [
 						name:"facebook_login_group"
 					},
 				},
-				width:200,
+				width:500,
 			},
 			{
 				"key":"choose_Acct",
@@ -119,6 +129,12 @@ let login_development:Array<zProtoComponent> = [
 					css:{
 						"font-family":"SFProDisplay-Regular",
 						"font-size":"15px"
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
+						}
 					}
 				},
 				latch:{
@@ -175,6 +191,12 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					css:{
 						"font-size":"17px"
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
+						}
 					}
 				}
 
@@ -196,6 +218,12 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					css:{
 						"font-size":"17px"
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
+						}
 					}
 				}
 
@@ -218,6 +246,12 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					css:{
 						"font-size":"20px"
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
+						}
 					}
 				}
 
@@ -242,6 +276,12 @@ let login_development:Array<zProtoComponent> = [
 						"font-size":"14px",
 						"text-align":"center",
 						color:"blue"
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
+						}
 					}
 				}
 
@@ -290,6 +330,12 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					css:{
 						"font-size":"20px"
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
+						}
 					}
 				}
 
@@ -313,6 +359,12 @@ let login_development:Array<zProtoComponent> = [
 							top:50,
 							widthRatio:.5,
 						}
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
+						}
 					}
 				},
 				latch:{
@@ -334,18 +386,37 @@ let login_development:Array<zProtoComponent> = [
 							group:["fb_create_business_page"],
 							logic:{
 								desktop:{
-									width:1.2,
+									width:.45,
 									height:1.2,
 									top:0,
-									left:-100
+									left:(devObj)=>{
+										let {delta,zChildren,zSymbol} = devObj
+										try{
+											let a = numberParse(zChildren[zSymbol]?.css.width)
+											let b = numberParse(zChildren[delta.current.min.key].css.left)
+											console.log(b,a)
+											return b - a
+										}
+										catch(e){
+											let b = numberParse(zChildren[delta.current.min.key].css.left)
+											return b -200
+										}
+
+									}
 								},
 								mobile:{
 									width:1.2,
 									height:1.2,
-									top:0,
-									left:-100
+									top:-20,
+									left:40
 								}
 							},
+							extras:{
+								appLanguageTranslator:{
+									group:"translate-group-2",
+									type:"text"
+								}
+							}
 						}
 					],
 
@@ -714,7 +785,7 @@ let login_development:Array<zProtoComponent> = [
 					extras:{
 						appLanguageTranslator:{
 							confirm:"true",
-							type:"body"
+							type:["body","main"],
 						}
 					}
 				}
@@ -738,8 +809,9 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					extras:{
 						appLanguageTranslator:{
-							group:"to-spanish",
-							type:"link"
+							group:"translate-group-1",
+							type:"link",
+							language:"es"
 						}
 					}
 				}
@@ -747,47 +819,128 @@ let login_development:Array<zProtoComponent> = [
 			{
 				key:"FR",
 				type:"anchor",
-				value:"Français (France)"
+				value:"Français (France)",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							language:"fr"
+						}
+					}
+				}
 			},
 			{
-				key:"ASIAN",
+				key:"Simplified-Chinese",
 				type:"anchor",
-				value:"中文(简体)"
+				value:"中文(简体)",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							language:"zh"
+						}
+					}
+				}
 			},
 			{
 				key:"Hebrew",
 				type:"anchor",
-				value:"العربية"
+				value:"العربية",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							language: "he",
+						}
+					}
+				}
 			},
 			{
-				key:"BR",
+				key:"Portuguese",
 				type:"anchor",
-				value:"Português (Brasil)"
+				value:"Português (Brasil)",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							language: "pt",
+						}
+					}
+				}
 			},
 			{
-				key:"BR",
+				key:"Korean",
 				type:"anchor",
-				value:"한국어"
+				value:"한국어",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							"language": "ko",
+						}
+					}
+				}
 			},
 			{
-				key:"IT",
+				key:"Italian",
 				type:"anchor",
-				value:"Italiano"
+				value:"Italiano",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							"language": "it",
+						}
+					}
+				}
 			},
 			{
-				key:"GR",
+				key:"German",
 				type:"anchor",
-				value:"Deutsch"
+				value:"Deutsch",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							"language": "de"
+						}
+					}
+				}
 			},
 			{
-				key:"GR",//Hind
+				key:"Hindi",
 				type:"anchor",
-				value:"हिन्दी"
+				value:"हिन्दी",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							"language": "hi"
+						}
+					}
+				}
 			},
 			{
-				key:"JP",
+				key:"Japanese",
 				type:"anchor",
-				value:"日本語"
+				value:"日本語",
+				options:{
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-1",
+							type:"link",
+							"language": "ja"
+						}
+					}
+				}
 			}
 
 			].map((x:any,i)=>{
