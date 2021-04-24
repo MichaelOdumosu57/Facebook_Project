@@ -30,7 +30,7 @@ let login_development:Array<zProtoComponent> = [
 						{
 							name:"login_card",
 							type:"repeat",
-							by:1
+							by:3
 						}
 					]
 				},
@@ -1120,22 +1120,28 @@ let login_development:Array<zProtoComponent> = [
 								let myImg = targets[2]
 								let myName = targets[3]
 								let myMesg  = targets[1]
+								let chosenImg = targets[5]
+								let chosenName = targets[6]
 								switch (index) {
 									case undefined:
 										myImg = targets[3]
 										myName = targets[4]
 										myMesg  = targets[2]
+										chosenImg = targets[6]
+										chosenName = targets[7]
+										zChild[chosenImg].element.src = zChild[myImg].extras.extend.src
 										zChild[myMesg].innerText.item = "5"
+										zChild[chosenName].innerText.item = zChild[myName].innerText.item
 										break;
 									case 0:
-										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/angular.png"
-										zChild[myName].innerText.item = "Angular"
+										zChild[chosenImg].element.src = zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/angular.png"
+										zChild[chosenName].innerText.item = zChild[myName].innerText.item = "Angular"
 										zChild[myMesg].innerText.item = "3"
 										break;
 
 									case 1:
-										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/ruby_programming.png"
-										zChild[myName].innerText.item = "Ruby"
+										zChild[chosenImg].element.src = zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/ruby_programming.png"
+										zChild[chosenName].innerText.item = zChild[myName].innerText.item = "Ruby"
 										zChild[myMesg].innerText.item = "2"
 										break;
 									case 2:
@@ -1149,7 +1155,6 @@ let login_development:Array<zProtoComponent> = [
 											zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
 										}
 										break;
-
 
 									// default:
 									// 	addingDelta = 350

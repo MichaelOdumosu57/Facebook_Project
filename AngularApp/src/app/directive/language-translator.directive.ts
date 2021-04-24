@@ -177,8 +177,8 @@ import {ibmLanguages} from '../ibmLanguageLibrary'
 
 
                             http.post(
-                                // "https://facebook-language-translator.herokuapp.com",
-                                "http://localhost:3005",
+                                "https://facebook-language-translator.herokuapp.com",
+                                // "http://localhost:3005",
                                 {
                                     text:zChildren[y].innerText.item,
                                     source:zChildren[y].extras.appLanguageTranslator.ibmLanguage?.language || "en",

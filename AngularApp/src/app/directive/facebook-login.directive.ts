@@ -150,30 +150,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                     let chosenImg:any = Array.from(val.types["chosen-img"] || [])
                     let chosenName:any = Array.from(val.types["chosen-name"] || [])
                     let chosenOverlay = Array.from(val.types["chosenOverlay"] || [])
+                    // console.log(val.types)
 
-                    // attach the img and the name
-                    loginName
-                    .forEach((y:any,j)=>{
-                        zChildren[chosenName[j]].innerText.item  =zChildren[y].innerText.item
-                    })
-                    loginImg
-                    .forEach((y:any,j)=>{
-                        zChildren[chosenImg[j]].element.src  =zChildren[y].extras.extend.src
-                    })
-                    //
 
                     // setup the click events
+
                     ;[[...loginName,...loginImg]]
                     .forEach((y:any,j)=>{
+
                         if(y.length === 0){
                             return
                         }
                         let showChosen = fromEvent([zChildren[y[0]].element,zChildren[y[1]].element,],"click")
                         .subscribe((result:any)=>{
+                            console.log([...loginName,...loginImg,...chosenImg,...chosenName,])
                             ;[...chosen,...chosenImg,...chosenName,...chosenOverlay]
                             .forEach((z:any,k)=>{
                                 zChildren[z].css.display = zChildren[z].cssDefault.display || "block"
                             })
+                            ref.detectChanges()
                         })
                         val.subscriptions.push(showChosen)
                     })
@@ -186,6 +181,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                             .forEach((z:any,k)=>{
                                 zChildren[z].css.display = "none"
                             })
+                            ref.detectChanges()
                         })
                         val.subscriptions.push(hideChosen)
                     })
