@@ -38,7 +38,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         this.extras = this.facebookLogin
         if (this.extras?.confirm === 'true' && this.extras?.type.includes("body")  ) {
             if(env.directive?.facebookLogin?.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' facebookLogin ngOnInit fires on mount')
-            let {ryber,extras,zChildren,subscriptions} = this
+            let {ryber,extras,zChildren,subscriptions,renderer2} = this
             let {co} = extras
             let {group,suffix}  = ryber[co].metadata.facebookLogin
 
@@ -163,7 +163,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                         }
                         let showChosen = fromEvent([zChildren[y[0]].element,zChildren[y[1]].element,],"click")
                         .subscribe((result:any)=>{
-                            console.log([...loginName,...loginImg,...chosenImg,...chosenName,])
+                            renderer2.addClass(
+                                document.body,"a_p_p_BodyOverFlowHidden"
+                            )
                             ;[...chosen,...chosenImg,...chosenName,...chosenOverlay]
                             .forEach((z:any,k)=>{
                                 zChildren[z].css.display = zChildren[z].cssDefault.display || "block"
@@ -177,6 +179,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                     .forEach((y:any,j)=>{
                         let hideChosen = fromEvent(zChildren[y].element,"click")
                         .subscribe((result:any)=>{
+                            renderer2.removeClass(
+                                document.body,"a_p_p_BodyOverFlowHidden"
+                            )
                             ;[...chosen,...chosenImg,...chosenName,...chosenOverlay]
                             .forEach((z:any,k)=>{
                                 zChildren[z].css.display = "none"

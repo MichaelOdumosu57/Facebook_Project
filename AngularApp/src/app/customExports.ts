@@ -8,9 +8,12 @@ declare global {
     interface Object { fromEntries: any; numberParse :Function; xPosition:Function }
     var numberParse
     var xPosition
+    var judimaPageOffset
 }
 window.numberParse = numberParse
 window.xPosition = xPosition
+window.judimaPageOffset = judimaPageOffset
+
 
 
 
@@ -219,6 +222,14 @@ function wait(   ms   ){
     while(   end < start + ms   ) {
       end = new Date().getTime();
     }
+}
+
+export function judimaPageOffset(devObj) {
+    let supportPageOffset = window.pageXOffset !== undefined;
+    let isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+    let x = supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft;
+    let y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+    return {x,y}
 }
 
 export function flatDeep(arr, d = 1) { // polyfill for arr.flat

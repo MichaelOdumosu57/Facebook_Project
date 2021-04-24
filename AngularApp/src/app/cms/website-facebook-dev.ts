@@ -701,7 +701,7 @@ let login_development:Array<zProtoComponent> = [
 									height:2.3,
 									top:(devObj)=>{
 
-										return 80
+										return judimaPageOffset().y +  80
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -726,7 +726,7 @@ let login_development:Array<zProtoComponent> = [
 									height:2,
 									top:(devObj)=>{
 
-										return 150
+										return judimaPageOffset().y + 100
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -772,7 +772,7 @@ let login_development:Array<zProtoComponent> = [
 									},
 									top:(devObj)=>{
 
-										return 120
+										return judimaPageOffset().y +  120
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -793,10 +793,33 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 								mobile:{
-									width:1.2,
-									height:1.2,
-									top:0,
-									left:0
+									width:(devObj)=>{
+										return 160
+									},
+									height:(devObj)=>{
+										return 160
+									},
+									top:(devObj)=>{
+
+										return judimaPageOffset().y + 120
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
 								}
 							},
 							extras:{
@@ -825,7 +848,7 @@ let login_development:Array<zProtoComponent> = [
 									height:.2,
 									top:(devObj)=>{
 
-										return 290
+										return judimaPageOffset().y + 290
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -846,11 +869,11 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 								mobile:{
-									width:1.5,
-									height:2,
+									width:1,
+									height:.2,
 									top:(devObj)=>{
 
-										return 150
+										return judimaPageOffset().y + 290
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -870,6 +893,7 @@ let login_development:Array<zProtoComponent> = [
 
 									}
 								},
+
 							},
 							needed:["appLatch"],
 							group:["facebook_login_card"]
@@ -887,7 +911,7 @@ let login_development:Array<zProtoComponent> = [
 									height:.2,
 									top:(devObj)=>{
 
-										return 340
+										return judimaPageOffset().y +  340
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -908,11 +932,11 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 								mobile:{
-									width:1.5,
-									height:2,
+									width:1.3,
+									height:.2,
 									top:(devObj)=>{
 
-										return 150
+										return judimaPageOffset().y + 340
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -958,7 +982,7 @@ let login_development:Array<zProtoComponent> = [
 									height:.2,
 									top:(devObj)=>{
 
-										return 400
+										return judimaPageOffset().y + 400
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -979,11 +1003,11 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 								mobile:{
-									width:1.5,
-									height:2,
+									width:1.3,
+									height:.2,
 									top:(devObj)=>{
 
-										return 150
+										return judimaPageOffset().y + 400
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -1036,7 +1060,7 @@ let login_development:Array<zProtoComponent> = [
 									},
 									top:(devObj)=>{
 
-										return 0
+										return  judimaPageOffset().y + 0
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj
@@ -1057,11 +1081,16 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 								mobile:{
-									width:1.5,
-									height:2,
+									width:(devObj)=>{
+										let {zChildren} = devObj
+										return numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+									},
+									height:(devObj)=>{
+										return 1000
+									},
 									top:(devObj)=>{
 
-										return 150
+										return judimaPageOffset().y +0
 									},
 									left:(devObj)=>{
 										let {zChildren,zSymbol,xPosition} = devObj

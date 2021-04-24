@@ -1819,7 +1819,7 @@ export class RyberService {
                     stack: 20,
                     app:{
                         width:{
-                            value:575,
+                            value:1175,
                             mediaQuery:null
                         },
                         type:"custom", //stack,custom,

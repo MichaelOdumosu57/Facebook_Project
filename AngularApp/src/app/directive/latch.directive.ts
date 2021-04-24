@@ -579,6 +579,30 @@ export class LatchDirective {
 							});
 						})
 						ref.detectChanges()
+					}),
+					//
+
+					// on scroll reposition
+					fromEvent(window,"scroll")
+					.subscribe((result:any)=>{
+						if(!Object.keys(zChildren).includes(extras.zSymbol)){
+							return
+						}
+
+						extras.zChildren
+						.forEach((x:any,i)=>{
+
+
+							this._displayDetermineDims({
+								zSymbol:extras.display.targets[i],
+								dims,
+								neededTargets:x.neededTargets,
+								zChildren,
+								css:zChildren[extras.display.targets[i]]?.css || {},
+								logic:x.logic[ryber[co].metadata.section.mediaQuery] || x.logic["default"]
+							});
+						})
+						ref.detectChanges()
 					})
 					//
 
