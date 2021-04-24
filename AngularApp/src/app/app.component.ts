@@ -167,6 +167,10 @@ export class AppComponent implements OnInit, OnDestroy {
                         group:{},
                         suffix:"_lT_"
                     }
+                    co.metadata.facebookLogin = {
+                        group:{},
+                        suffix:"_fL_"
+                    }
                     co.metadata.zChildrenSubject = new Subject<any>()
                     .pipe(
                         tap((val) => {

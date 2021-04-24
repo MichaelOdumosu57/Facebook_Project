@@ -30,7 +30,7 @@ let login_development:Array<zProtoComponent> = [
 						{
 							name:"login_card",
 							type:"repeat",
-							by:0
+							by:1
 						}
 					]
 				},
@@ -62,6 +62,10 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							confirm:"true",
 							type:["body","part"],
+						},
+						appFacebookLogin:{
+							confirm:"true",
+							type:["body"]
 						},
 						appSection:{
 							confirm:"true"
@@ -438,6 +442,11 @@ let login_development:Array<zProtoComponent> = [
 						mobile:{
 							width:260
 						}
+					},
+					extras:{
+						appFacebookLogin:{
+							type:"head"
+						}
 					}
 				},
 				latch:{
@@ -564,7 +573,10 @@ let login_development:Array<zProtoComponent> = [
 							extras:{
 								extend:{
 									src:"./assets/media/python.jpg"
-								}
+								},
+								appFacebookLogin:{
+									type:"login-img"
+								},
 							},
 							logic:{
 								desktop:{
@@ -644,6 +656,7 @@ let login_development:Array<zProtoComponent> = [
 									}
 								}
 							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
@@ -651,6 +664,11 @@ let login_development:Array<zProtoComponent> = [
 							val:"account-name a_p_p_Login_Name",
 							css:{
 								"z-index":3
+							},
+							extras:{
+								appFacebookLogin:{
+									type:"login-name"
+								},
 							},
 							text:"Python3",
 							logic:{
@@ -667,6 +685,7 @@ let login_development:Array<zProtoComponent> = [
 									left:0
 								}
 							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
@@ -674,6 +693,7 @@ let login_development:Array<zProtoComponent> = [
 							val:"chosen-login a_p_p_ChosenLogin",
 							css:{
 								"z-index":5,
+								display:"none"
 							},
 							logic:{
 								desktop:{
@@ -727,13 +747,20 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 							},
+							extras:{
+								appFacebookLogin:{
+									type:["chosen"]
+								}
+							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
 							bool:"img",
 							val:"chosen-login-img a_p_p_ChosenLoginImg",
 							css:{
-								"z-index":5
+								"z-index":5,
+								display:"none"
 							},
 							logic:{
 								desktop:{
@@ -773,8 +800,11 @@ let login_development:Array<zProtoComponent> = [
 								}
 							},
 							extras:{
-								appFacebookLogin:{}
+								appFacebookLogin:{
+									type:"chosen-img"
+								}
 							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
@@ -782,8 +812,13 @@ let login_development:Array<zProtoComponent> = [
 							val:"chosen-name a_p_p_Login_Name",
 							css:{
 								"z-index":5,
+								display:"none"
 							},
-							text:"WindMill Code",
+							extras:{
+								appFacebookLogin:{
+									type:["chosen-name"]
+								}
+							},
 							logic:{
 								desktop:{
 									width:1,
@@ -836,6 +871,7 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
@@ -843,6 +879,7 @@ let login_development:Array<zProtoComponent> = [
 							val:"password a_p_p_Input login-page",
 							css:{
 								"z-index":5,
+								display:"none"
 							},
 							logic:{
 								desktop:{
@@ -899,8 +936,12 @@ let login_development:Array<zProtoComponent> = [
 							extras:{
 								extend:{
 									placeholder:"Password"
+								},
+								appFacebookLogin:{
+									type:["chosen"]
 								}
 							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
@@ -908,6 +949,7 @@ let login_development:Array<zProtoComponent> = [
 							val:"chosen-login-button a_p_p_Button login-page",
 							css:{
 								"z-index":5,
+								display:"none"
 							},
 							text:"Log In",
 							logic:{
@@ -963,10 +1005,11 @@ let login_development:Array<zProtoComponent> = [
 								},
 							},
 							extras:{
-								extend:{
-									placeholder:"Password"
+								appFacebookLogin:{
+									type:["chosen"]
 								}
 							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
@@ -974,7 +1017,14 @@ let login_development:Array<zProtoComponent> = [
 							val:"chosen-overlay a_p_p_ChosenOverlay",
 							css:{
 								"z-index":4,
+								display:"none"
 							},
+							extras:{
+								appFacebookLogin:{
+									type:["chosenOverlay"]
+								}
+							},
+
 							logic:{
 								desktop:{
 									width:(devObj)=>{
@@ -1032,6 +1082,7 @@ let login_development:Array<zProtoComponent> = [
 									}
 								},
 							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 					]
