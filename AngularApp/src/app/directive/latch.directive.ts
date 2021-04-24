@@ -650,6 +650,7 @@ export class LatchDirective {
 					css,
 					delta,
 					zChildren,
+					xPosition
 				}).toString()+"px"
 			}
 			//

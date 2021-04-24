@@ -1,4 +1,4 @@
-import {objectCopy,zProtoComponent,zProtoChildren, zChildren} from '../customExports'
+import {objectCopy,zProtoComponent,zProtoChildren, zChildren, xContain, xPosition} from '../customExports'
 
 
 
@@ -30,7 +30,7 @@ let login_development:Array<zProtoComponent> = [
 						{
 							name:"login_card",
 							type:"repeat",
-							by:3
+							by:0
 						}
 					]
 				},
@@ -394,7 +394,7 @@ let login_development:Array<zProtoComponent> = [
 										try{
 											let a = numberParse(zChildren[zSymbol]?.css.width)
 											let b = numberParse(zChildren[delta.current.min.key].css.left)
-											
+
 											return b - a
 										}
 										catch(e){
@@ -669,7 +669,371 @@ let login_development:Array<zProtoComponent> = [
 							},
 							group:["facebook_login_card"]
 						},
+						{
+							bool:"div",
+							val:"chosen-login a_p_p_ChosenLogin",
+							css:{
+								"z-index":5,
+							},
+							logic:{
+								desktop:{
+									width:2.3,
+									height:2.3,
+									top:(devObj)=>{
 
+										return 80
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+								mobile:{
+									width:1.5,
+									height:2,
+									top:(devObj)=>{
+
+										return 150
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+							},
+							group:["facebook_login_card"]
+						},
+						{
+							bool:"img",
+							val:"chosen-login-img a_p_p_ChosenLoginImg",
+							css:{
+								"z-index":5
+							},
+							logic:{
+								desktop:{
+									width:(devObj)=>{
+										return 160
+									},
+									height:(devObj)=>{
+										return 160
+									},
+									top:(devObj)=>{
+
+										return 120
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+								mobile:{
+									width:1.2,
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							extras:{
+								appFacebookLogin:{}
+							},
+							group:["facebook_login_card"]
+						},
+						{
+							bool:"p",
+							val:"chosen-name a_p_p_Login_Name",
+							css:{
+								"z-index":5,
+							},
+							text:"WindMill Code",
+							logic:{
+								desktop:{
+									width:1,
+									height:.2,
+									top:(devObj)=>{
+
+										return 290
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+								mobile:{
+									width:1.5,
+									height:2,
+									top:(devObj)=>{
+
+										return 150
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+							},
+							group:["facebook_login_card"]
+						},
+						{
+							bool:"i",
+							val:"password a_p_p_Input login-page",
+							css:{
+								"z-index":5,
+							},
+							logic:{
+								desktop:{
+									width:2,
+									height:.2,
+									top:(devObj)=>{
+
+										return 340
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+								mobile:{
+									width:1.5,
+									height:2,
+									top:(devObj)=>{
+
+										return 150
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+							},
+							extras:{
+								extend:{
+									placeholder:"Password"
+								}
+							},
+							group:["facebook_login_card"]
+						},
+						{
+							bool:"b",
+							val:"chosen-login-button a_p_p_Button login-page",
+							css:{
+								"z-index":5,
+							},
+							text:"Log In",
+							logic:{
+								desktop:{
+									width:2,
+									height:.2,
+									top:(devObj)=>{
+
+										return 400
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+								mobile:{
+									width:1.5,
+									height:2,
+									top:(devObj)=>{
+
+										return 150
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+							},
+							extras:{
+								extend:{
+									placeholder:"Password"
+								}
+							},
+							group:["facebook_login_card"]
+						},
+						{
+							bool:"div",
+							val:"chosen-overlay a_p_p_ChosenOverlay",
+							css:{
+								"z-index":4,
+							},
+							logic:{
+								desktop:{
+									width:(devObj)=>{
+										let {zChildren} = devObj
+										return numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+									},
+									height:(devObj)=>{
+										return 1000
+									},
+									top:(devObj)=>{
+
+										return 0
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+								mobile:{
+									width:1.5,
+									height:2,
+									top:(devObj)=>{
+
+										return 150
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+
+									}
+								},
+							},
+							group:["facebook_login_card"]
+						},
 					]
 				},
 				delta:{

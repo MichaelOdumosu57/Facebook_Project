@@ -111,7 +111,6 @@ $font-family1 :Helvetica, Arial, sans-serif;
     text-align: center;
     text-shadow: none;
     vertical-align: middle;
-    transition: 200ms cubic-bezier(.08,.52,.52,1) background-color, 200ms cubic-bezier(.08,.52,.52,1) box-shadow, 200ms cubic-bezier(.08,.52,.52,1) transform;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -162,3 +161,34 @@ $font-family1 :Helvetica, Arial, sans-serif;
 .a_p_p_SiteMap_Anchor:hover{
     text-decoration: underline;
 }
+
+.a_p_p_ChosenLogin{
+    background-color:purple;
+    opacity:.4;
+    border-radius: 6px;
+}
+
+.a_p_p_ChosenLoginImg{
+    background-color: #1c1e21;
+    direction: ltr;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    word-wrap: break-word;
+    font-family: inherit;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 50%;
+    margin: 44px -36px 0 0;
+    width: 160px;
+    height: 160px;
+}
+
+
+.a_p_p_ChosenOverlay{
+    background-color: grey;
+    opacity:.8
+}
+
+// body {
+//     overflow:hidden
+// }

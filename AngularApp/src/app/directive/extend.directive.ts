@@ -37,7 +37,7 @@ export class ExtendDirective implements OnInit {
             this.renderer.setAttribute(
                 this.el.nativeElement,
                 "size",
-                (parseInt(this.el.nativeElement.getAttribute('placeholder').length) + 5).toString()
+                (parseInt(this.el.nativeElement.getAttribute('placeholder')?.length) + 5).toString()
 
             )
         }
