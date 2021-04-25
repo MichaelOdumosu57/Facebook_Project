@@ -608,7 +608,7 @@ export function objectCopy(obj){
         //find function body
         let bstart = str.indexOf('{'), bend = str.lastIndexOf('}');
         str = str.substring(bstart+1, bend);
-
+        
         return Function(params, str);
     }
 

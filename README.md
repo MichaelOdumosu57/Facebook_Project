@@ -2,7 +2,7 @@
 
 
 
-It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9
+It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10
 ## Educational
 * every other software stack on sevearl platforms the software is doing the same things
     * in web design this is not the case
@@ -14,6 +14,10 @@ It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) vers
 ```
 
 ### Notes
+
+* you get this error, ignore, it will eventually correct itself
+![](./images/eval_Error.PNG)
+
 * in zProtoChildren.delta.options, when you modify the css.top you also need to modify the component.top because stack will try to do the calculation so now it must match up, add the component.top to to the delta you have to css.top to make it work
 
 * to get lanague list
@@ -42,7 +46,7 @@ email :shieldmousetower734@gmail.com
 
 |property|value|data|
 |:------|:------:|------|
-|project name|facebook-language-translatorx||
+|project name|facebook-language-translator||
 ||||
 
 

@@ -46,7 +46,7 @@ let login_development:Array<zProtoComponent> = [
 					judima:{
 						mobile:{
 							stack:20,
-							footerSpace:50
+							footerSpace:150
 						},
 						desktop:{
 							footerSpace:240
@@ -88,6 +88,11 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					css:{
 						"z-index":2
+					},
+					judima:{
+						mobile:{
+							top:100
+						}
 					}
 				},
 
@@ -112,6 +117,11 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						}
+					},
+					judima:{
+						mobile:{
+							widthRatio:.7
 						}
 					}
 				},
@@ -138,6 +148,11 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						}
+					},
+					judima:{
+						mobile:{
+							widthRatio:.7
 						}
 					}
 				},
@@ -181,11 +196,11 @@ let login_development:Array<zProtoComponent> = [
 									width:(devObj)=>{
 										let {zSymbol,css,delta,zChildren} = devObj
 
-										return delta.current.max.value
+										return delta.current.max.value -80
 									},
 									height:1.1,
 									top:-10,
-									left:-10,
+									left:-25,
 								}
 							}
 						}
@@ -200,6 +215,11 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						}
+					},
+					judima:{
+						mobile:{
+							widthRatio:.7
 						}
 					}
 				}
@@ -228,6 +248,11 @@ let login_development:Array<zProtoComponent> = [
 							group:"translate-group-2",
 							type:"text"
 						}
+					},
+					judima:{
+						mobile:{
+							widthRatio:.7
+						}
 					}
 				}
 
@@ -255,6 +280,11 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						}
+					},
+					judima:{
+						mobile:{
+							widthRatio:.7
 						}
 					}
 				}
@@ -286,6 +316,11 @@ let login_development:Array<zProtoComponent> = [
 							group:"translate-group-2",
 							type:"text"
 						}
+					},
+					judima:{
+						mobile:{
+							widthRatio:.7
+						}
 					}
 				}
 
@@ -311,6 +346,11 @@ let login_development:Array<zProtoComponent> = [
 						"text-align":"center",
 						"background-color":"grey",
 						"z-index":"4"
+					},
+					judima:{
+						mobile:{
+							widthRatio:.7
+						}
 					}
 				}
 
@@ -339,6 +379,11 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						}
+					},
+					judima:{
+						mobile:{
+							widthRatio:.7
 						}
 					}
 				}
@@ -459,9 +504,9 @@ let login_development:Array<zProtoComponent> = [
 						{
 							bool:"div",
 							css:{
-								"background-color":"rgb(240, 242, 245)"
+								"background":"radial-gradient(farthest-corner at 40px 40px, white 0, cyan, green 100%)",
 							},
-							val:"login-overlay",
+							val:"login-main-background",
 							logic:{
 								desktop:{
 									width:(devObj)=>{
@@ -485,7 +530,7 @@ let login_development:Array<zProtoComponent> = [
 										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
 									},
-									height:1.05,
+									height:1.15,
 									top:(devObj)=>{
 										let {} = devObj
 										return 0
@@ -493,6 +538,77 @@ let login_development:Array<zProtoComponent> = [
 									left:(devObj)=>{
 										let {} = devObj
 										return 0
+									}
+								}
+							},
+							type:["deltaNodeContainer"],
+							group:["facebook_login_group","facebook_login_card","facebook_login_credentials","fb_create_business_page"]
+						},
+						{
+							bool:"div",
+							css:{
+								"background-color":"rgb(240, 242, 245)",
+							},
+							val:"login-overlay a_p_p_Glassmorphism",
+							logic:{
+								desktop:{
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										let spacing = delta.current.delta.value+120
+										let myWidth = numberParse(getComputedStyle( zChildren["&#8353"].element).width) * .8
+										return spacing > myWidth? spacing : myWidth
+
+									},
+									height:1.3,
+									top:(devObj)=>{
+										let {} = devObj
+										return 50
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
+									}
+								},
+								mobile:{
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										let spacing = delta.current.delta.value+12
+										let myWidth = numberParse(getComputedStyle( zChildren["&#8353"].element).width) * .9
+										return spacing > myWidth? spacing : myWidth
+
+									},
+									height:1.05,
+									top:(devObj)=>{
+										let {} = devObj
+										return 50
+									},
+									left:(devObj)=>{
+										let {zChildren,zSymbol,xPosition} = devObj
+
+										try{
+											let final = xPosition({
+												target: numberParse(zChildren[zSymbol].css["width"]),
+												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
+											})
+											return final
+										}
+										catch(e){
+											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
+										}
+
+
 									}
 								}
 							},
@@ -583,7 +699,7 @@ let login_development:Array<zProtoComponent> = [
 									width:(devObj)=>{
 										let {delta,zChildren,css,zSymbol} = devObj
 
-										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
 											return 42
 										}
 										return (1* css.width)
@@ -592,7 +708,7 @@ let login_development:Array<zProtoComponent> = [
 									height:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
 											return 42
 										}
 										return ( .75 * css.height)
@@ -601,7 +717,7 @@ let login_development:Array<zProtoComponent> = [
 									top:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
 											return css.top+ 50
 										}
 										return css.top
@@ -610,7 +726,7 @@ let login_development:Array<zProtoComponent> = [
 									left:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
 											return css.left +60
 										}
 										return css.left
@@ -621,7 +737,7 @@ let login_development:Array<zProtoComponent> = [
 									width:(devObj)=>{
 										let {delta,zChildren,css,zSymbol} = devObj
 
-										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
 											return 42
 										}
 										return (.5* css.width)
@@ -630,7 +746,8 @@ let login_development:Array<zProtoComponent> = [
 									height:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+
+										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
 											return 42
 										}
 										return ( .75 * css.height)
@@ -639,7 +756,8 @@ let login_development:Array<zProtoComponent> = [
 									top:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+
+										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
 											return css.top+ 50
 										}
 										return css.top
@@ -648,7 +766,8 @@ let login_development:Array<zProtoComponent> = [
 									left:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
+
+										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
 											return css.left +120
 										}
 										return css.left +70
@@ -928,7 +1047,6 @@ let login_development:Array<zProtoComponent> = [
 										}
 
 
-
 									}
 								},
 								mobile:{
@@ -1031,6 +1149,10 @@ let login_development:Array<zProtoComponent> = [
 							extras:{
 								appFacebookLogin:{
 									type:["chosen"]
+								},
+								appLanguageTranslator:{
+									group:"translate-group-1",
+									type:"text"
 								}
 							},
 							needed:["appLatch"],
