@@ -5,7 +5,7 @@ import { deltaNode, eventDispatcher, numberParse, objectCopy,navigationType } fr
 import { catchError, delay,first,take } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Console } from 'node:console';
+import { Console, debug } from 'node:console';
 
 
 @Directive({
@@ -113,7 +113,8 @@ import { Console } from 'node:console';
                             deltaNode:{},
                             types:{},
                             suffix,
-                            count
+                            count,
+                            subscriptions:[]
                         }
 
                     }
@@ -143,19 +144,24 @@ import { Console } from 'node:console';
                     if(val.init !== "true" && val.types.target !== undefined){
                         val.init = "true"
 
-                        let part:any = val.types.part ? Array.from(val.types.part) : []
+                        let part:any =  Array.from(val.types.part || [])
                         let target:any = Array.from(val.types.target)
+
                         target
                         .forEach((y:any,j)=>{
+                            zChildren[y].element.vanillaTilt?.destroy()
                             VanillaTilt.init(zChildren[y].element,{
                                 perspective:500,
 
                                 "mouse-event-element":[...part.map((z,k)=>{
+
                                     return zChildren[z].element
                                 }),zChildren[y].element],
                                 // script modification wouldn't allow me to make change otherwise
                                 ...zChildren[y].extras.appVanillaTilt?.initOptions
                             })
+
+
 
                             // make sure all attached move along with element
                             let tiltOthers = (e:any)=>{
@@ -175,7 +181,7 @@ import { Console } from 'node:console';
                                 delay(50)
                             )
                             .subscribe(tiltOthers)
-                            val.subscriptions = [tiltChange,tiltOut]
+                            val.subscriptions.push(...[tiltChange,tiltOut])
                             subscriptions.push(
                                 ...val.subscriptions
                             )
@@ -186,6 +192,7 @@ import { Console } from 'node:console';
 
 
                     }
+
                 })
                 //
 

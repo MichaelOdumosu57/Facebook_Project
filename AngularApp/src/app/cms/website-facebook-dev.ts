@@ -198,7 +198,7 @@ let login_development:Array<zProtoComponent> = [
 									width:(devObj)=>{
 										let {zSymbol,css,delta,zChildren} = devObj
 										let myWidth = delta.current.max.value *.9
-										return 650 > myWidth ? delta.current.max.value * .97 : myWidth
+										return 650 > myWidth ? delta.current.max.value * .92 : myWidth
 									},
 									height:1.1,
 									top:-10,
@@ -480,7 +480,7 @@ let login_development:Array<zProtoComponent> = [
 
 			},
 			{
-				"key":"login-card a_p_p_Login_Card",
+				"key":"login-card a_p_p_Login_Card a_p_p_Glassmorphism",
 				type:"div",
 				next:"true",
 				height:205,
@@ -498,6 +498,13 @@ let login_development:Array<zProtoComponent> = [
 					extras:{
 						appFacebookLogin:{
 							type:"head"
+						},
+						appVanillaTilt:{
+							type:"target",
+							group:"login-tilt",
+							initOptions:{
+								perspective:100
+							}
 						}
 					}
 				},
@@ -632,6 +639,10 @@ let login_development:Array<zProtoComponent> = [
 								extend:{
 									src:"./assets/media/x-mark.png",
 								},
+								appVanillaTilt:{
+									type:"part",
+									group:"login-tilt",
+								}
 							},
 							logic:{
 								desktop:{
@@ -655,11 +666,12 @@ let login_development:Array<zProtoComponent> = [
 									left:3
 								}
 							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
 							bool:"div",
-							val:"notifications-count a_p_p_Login_Card_Notifications_Count",
+							val:"notifications-count a_p_p_Login_Card_Notifications_Count a_p_p_Glassmorphism",
 							css:{
 								"z-index":4
 							},
@@ -685,6 +697,13 @@ let login_development:Array<zProtoComponent> = [
 									left:240
 								},
 							},
+							extras:{
+								appVanillaTilt:{
+									type:"part",
+									group:"login-tilt",
+								}
+							},
+							needed:["appLatch"],
 							group:["facebook_login_card"]
 						},
 						{
@@ -700,43 +719,47 @@ let login_development:Array<zProtoComponent> = [
 								appFacebookLogin:{
 									type:"login-img"
 								},
+								appVanillaTilt:{
+									type:"part",
+									group:"login-tilt",
+								}
 							},
 							logic:{
 								desktop:{
 									width:(devObj)=>{
 										let {delta,zChildren,css,zSymbol} = devObj
 
-										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
 											return 42
 										}
-										return (1* css.width)
+										return (.8* css.width)
 
 									},
 									height:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
 											return 42
 										}
-										return ( .75 * css.height)
+										return ( .65 * css.height)
 
 									},
 									top:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
 											return css.top+ 50
 										}
-										return css.top
+										return css.top +10
 
 									},
 									left:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
-										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
 											return css.left +60
 										}
-										return css.left
+										return css.left +15
 
 									}
 								},
@@ -744,7 +767,7 @@ let login_development:Array<zProtoComponent> = [
 									width:(devObj)=>{
 										let {delta,zChildren,css,zSymbol} = devObj
 
-										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
 											return 42
 										}
 										return (.5* css.width)
@@ -754,27 +777,27 @@ let login_development:Array<zProtoComponent> = [
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
 
-										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
 											return 42
 										}
-										return ( .75 * css.height)
+										return ( .65 * css.height)
 
 									},
 									top:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
 
-										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
 											return css.top+ 50
 										}
-										return css.top
+										return css.top +10
 
 									},
 									left:(devObj)=>{
 										// console.log(devObj)
 										let {delta,zChildren,css,zSymbol} = devObj
 
-										if(zChildren[zSymbol]?.element.src === "./assets/media/plus.png" ){
+										if(zChildren[zSymbol]?.extras.extend.src === "./assets/media/plus.png" ){
 											return css.left +120
 										}
 										return css.left +70
@@ -795,6 +818,10 @@ let login_development:Array<zProtoComponent> = [
 								appFacebookLogin:{
 									type:"login-name"
 								},
+								appVanillaTilt:{
+									type:"part",
+									group:"login-tilt",
+								}
 							},
 							text:"Python3",
 							logic:{
