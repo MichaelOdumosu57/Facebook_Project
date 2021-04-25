@@ -286,7 +286,8 @@ export class RyberService {
                 symbol = rUD({
                     co,
                     bool: 'i',
-                    val: key.split("_").reverse()[0] + ' a_p_p_Input',
+                    // val: key.split("_").reverse()[0] + ' a_p_p_Input',
+                    val:key + ' a_p_p_FacebookInput',
                     css,
                     extras: {
 						extend,

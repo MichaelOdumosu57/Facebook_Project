@@ -171,6 +171,7 @@ let login_development:Array<zProtoComponent> = [
 				key:"email-phone-number",
 				type:"input",
 				left:750,
+				split:3.3,
 				latch:{
 					type:"display",
 					display:{
@@ -180,10 +181,11 @@ let login_development:Array<zProtoComponent> = [
 					zChildren:[
 						{
 							bool:"div",
-							val:"login-display a_p_p_Container",
+							val:"login-display a_p_p_Glassmorphism",
 							group:["facebook_login_credentials"],
 							css:{
-								"z-index":3
+								"z-index":3,
+								"background-color":"white",
 							},
 							logic:{
 								desktop:{
@@ -195,8 +197,8 @@ let login_development:Array<zProtoComponent> = [
 								mobile:{
 									width:(devObj)=>{
 										let {zSymbol,css,delta,zChildren} = devObj
-
-										return delta.current.max.value -80
+										let myWidth = delta.current.max.value *.9
+										return 650 > myWidth ? delta.current.max.value * .97 : myWidth
 									},
 									height:1.1,
 									top:-10,
@@ -229,6 +231,7 @@ let login_development:Array<zProtoComponent> = [
 				key:"password",
 				type:"input",
 				left:750,
+				split:3.3,
 				top:10,
 				value:"Password",
 				next:"true",
@@ -247,6 +250,10 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						},
+						extend:{
+							type:"password",
+							placeholder:"Password"
 						}
 					},
 					judima:{
@@ -1275,11 +1282,11 @@ let login_development:Array<zProtoComponent> = [
 								let chosenName = targets[6]
 								switch (index) {
 									case undefined:
-										myImg = targets[3]
-										myName = targets[4]
-										myMesg  = targets[2]
-										chosenImg = targets[6]
-										chosenName = targets[7]
+										myImg = targets[4]
+										myName = targets[5]
+										myMesg  = targets[3]
+										chosenImg = targets[7]
+										chosenName = targets[8]
 										zChild[chosenImg].element.src = zChild[myImg].extras.extend.src
 										zChild[myMesg].innerText.item = "5"
 										zChild[chosenName].innerText.item = zChild[myName].innerText.item
