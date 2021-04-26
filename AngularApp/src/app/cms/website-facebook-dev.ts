@@ -518,9 +518,8 @@ let login_development:Array<zProtoComponent> = [
 						{
 							bool:"div",
 							css:{
-								"background":"radial-gradient(farthest-corner at 40px 40px, white 0, cyan, green 100%)",
 							},
-							val:"login-main-background",
+							val:"login-main-background a_p_p_MainBackground",
 							logic:{
 								desktop:{
 									width:(devObj)=>{
@@ -843,7 +842,7 @@ let login_development:Array<zProtoComponent> = [
 						},
 						{
 							bool:"div",
-							val:"chosen-login a_p_p_ChosenLogin",
+							val:"chosen-login  a_p_p_ChosenLogin a_p_p_Glassmorphism",
 							css:{
 								"z-index":5,
 								display:"none"
@@ -1053,7 +1052,7 @@ let login_development:Array<zProtoComponent> = [
 						},
 						{
 							bool:"i",
-							val:"password a_p_p_Input login-page",
+							val:"password a_p_p_FacebookInput login-page",
 							css:{
 								"z-index":5,
 								display:"none"
@@ -1371,6 +1370,7 @@ let login_development:Array<zProtoComponent> = [
 				type:"body",
 				split:20,
 				gap:20,
+				// width:1300,
 				navigation:{
 					name:"login"
 				},
@@ -1391,6 +1391,10 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							confirm:"true",
 							type:["body","main"],
+						},
+						section:{
+							// width:1300
+							gap:20,
 						}
 					}
 				}
@@ -1399,17 +1403,66 @@ let login_development:Array<zProtoComponent> = [
 				key:"language-current",
 				type:"text",
 				value:"English (EN)",
-				split:2,
+				split:1.2,
 				options:{
 					css:{
 						"font-size":"16px"
 					}
+				},
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"footer-group"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"footer-background a_p_p_MainBackground",
+							logic:{
+								desktop:{
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+									},
+									height:1.8,
+									top:(devObj)=>{
+										let {zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).top) -20
+									},
+									left:(devObj)=>{
+										let {} = devObj
+										return 0
+									}
+								},
+								mobile:{
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+									},
+									height:1.15,
+									top:(devObj)=>{
+										let {zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).top) -40
+									},
+									left:(devObj)=>{
+										let {} = devObj
+										return 0
+									}
+								}
+							},
+							group:["footer-group"]
+						}
+					]
 				}
 			},
 			...[
 			{
 				key:"ES",
 				type:"anchor",
+				split:1.2,
 				value:"Español",
 				options:{
 					extras:{
@@ -1419,12 +1472,46 @@ let login_development:Array<zProtoComponent> = [
 							language:"es"
 						}
 					}
-				}
+				},
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 			},
 			{
 				key:"FR",
 				type:"anchor",
-				value:"Français (France)",
+				value:"Français",
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1433,12 +1520,82 @@ let login_development:Array<zProtoComponent> = [
 							language:"fr"
 						}
 					}
-				}
+				},
+				split:1.2,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 			},
 			{
 				key:"Simplified-Chinese",
 				type:"anchor",
 				value:"中文(简体)",
+				split:1.2,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1453,6 +1610,41 @@ let login_development:Array<zProtoComponent> = [
 				key:"Hebrew",
 				type:"anchor",
 				value:"العربية",
+				split:1.2,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1466,7 +1658,42 @@ let login_development:Array<zProtoComponent> = [
 			{
 				key:"Portuguese",
 				type:"anchor",
-				value:"Português (Brasil)",
+				value:"Português",
+				split:1.2,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1481,6 +1708,41 @@ let login_development:Array<zProtoComponent> = [
 				key:"Korean",
 				type:"anchor",
 				value:"한국어",
+				split:1.2,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1495,6 +1757,42 @@ let login_development:Array<zProtoComponent> = [
 				key:"Italian",
 				type:"anchor",
 				value:"Italiano",
+				split:1.2,
+				left:300,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1509,6 +1807,42 @@ let login_development:Array<zProtoComponent> = [
 				key:"German",
 				type:"anchor",
 				value:"Deutsch",
+				split:1.2,
+				left:((300 + 130)*1) + (30*2),
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1523,6 +1857,42 @@ let login_development:Array<zProtoComponent> = [
 				key:"Hindi",
 				type:"anchor",
 				value:"हिन्दी",
+				split:1.2,
+				left:300 + (130*2) + (30*4),
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1537,6 +1907,43 @@ let login_development:Array<zProtoComponent> = [
 				key:"Japanese",
 				type:"anchor",
 				value:"日本語",
+				gap:50,
+				// left:300 + (130*3) + (30*6),
+				split:1.2,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"container"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+							css:{
+								"z-index":3,
+
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:1.9,
+									top:-7.5,
+									left:-15
+								},
+								mobile:{
+									width:()=>{
+										return 100
+									},
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["container"]
+						}
+					]
+				},
 				options:{
 					extras:{
 						appLanguageTranslator:{
@@ -1544,19 +1951,31 @@ let login_development:Array<zProtoComponent> = [
 							type:"link",
 							"language": "ja"
 						}
-					}
+					},
+
 				}
 			}
 
 			].map((x:any,i)=>{
-				x.key += " a_p_p_SiteMap_Anchor"
+				// if(x.latch?.display.name){
+				// 	x.latch.display.name += "-" + i
+				// 	x.latch.zChildren[0].group[0] += "-" + i
+				// 	x.latch.zChildren[0].logic.mobile.left -= 15
+				// }
+				delete x.latch
+				x.key += " a_p_p_SiteMap_Anchor a_p_p_Glassmorphism"
+				x.options.judima = {
+					mobile:{
+						// left:40
+					}
+				}
 				return x
 			}),
 			{
 				key:"strikethrough",
 				type:"div",
 				top:30,
-				split:20,
+				split:10,
 				height:1,
 				next:"true",
 				options:{
@@ -1571,7 +1990,8 @@ let login_development:Array<zProtoComponent> = [
 				{
 					key:"sign-up",
 					type:"anchor",
-					value:"Sign Up"
+					value:"Sign Up",
+
 				},
 				{
 					key:"login",
@@ -1606,25 +2026,37 @@ let login_development:Array<zProtoComponent> = [
 				{
 					key:"games",
 					type:"anchor",
-					value:"Games"
+					value:"Games",
+					left:300
 				},
 				{
 					key:"marketplace",
 					type:"anchor",
-					value:"Marketplace"
+					value:"Marketplace",
+					gap:50
 				},
 				{
 					key:"groups",
 					type:"anchor",
-					value:"Groups"
+					value:"Groups",
+					gap:50
 				},
 				{
 					key:"Privacy",
 					type:"anchor",
-					value:"Privacy"
+					value:"Privacy",
+					gap:50,
+					latch:{
+						type:"display",
+						display:{
+							type:"part",
+							name:"footer-group"
+						}
+					}
 				}
 			].map((x:any,i)=>{
-				x.key += " a_p_p_SiteMap_Anchor"
+				x.key += " a_p_p_SiteMap_Anchor a_p_p_Glassmorphism"
+				x.split = 1.2
 				return x
 			})
 		]

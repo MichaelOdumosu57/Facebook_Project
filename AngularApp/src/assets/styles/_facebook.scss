@@ -155,17 +155,47 @@ $font-family1 :Helvetica, Arial, sans-serif;
 }
 
 .a_p_p_SiteMap_Anchor {
-    color:blue
+    color:blue;
+    text-align: center;
+    border:1px solid black;
+    padding-left:3px;
+    padding-right:3px;
+    padding-top:5px;
+    padding-bottom:5px;
+    background:radial-gradient(farthest-corner at 40px 40px, white 0, cyan);
+    // opacity: ;
+    
+
+    &:hover {
+        background: rgba(255,255,255,0.1);
+        box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.2);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 1193px){
+        text-align: left;
+        padding-left:20px;
+        padding-top:10px;
+        padding-bottom:10px;
+    }
 }
 
-.a_p_p_SiteMap_Anchor:hover{
-    text-decoration: underline;
+
+
+.a_p_p_SiteMapAnchorContainer{
+    background:radial-gradient(farthest-corner at 40px 40px, white 0, cyan);
+    border:1px solid black;
+
+    &:hover {
+        background: rgba(255,255,255,0.1);
+        box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.2);
+    }
 }
+
 
 .a_p_p_ChosenLogin{
-    background-color:purple;
-    opacity:.4;
-    border-radius: 6px;
+    background-color:white;
+
 }
 
 .a_p_p_ChosenLoginImg{
@@ -192,6 +222,14 @@ $font-family1 :Helvetica, Arial, sans-serif;
 .a_p_p_BodyOverFlowHidden {
     overflow:hidden
 }
+
+.a_p_p_MainBackground {
+    background:radial-gradient(farthest-corner at 40px 40px, white 0, cyan, green 100%)
+}
+
+
+
+
 
 $white: rgba(255,255,255,0.3);
 .a_p_p_FacebookInput {

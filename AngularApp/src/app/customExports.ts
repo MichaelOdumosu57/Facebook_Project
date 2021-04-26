@@ -164,7 +164,7 @@ export interface zProtoChildren {
     latch?:{
         options?:Array<String>;
         state?:String /*{"open","closed"};*/
-        type?:String; //display
+        type?:String; //display,dropdown
         display?:{
             type:String /*{"target","part"};*/
             name:String
@@ -608,7 +608,7 @@ export function objectCopy(obj){
         //find function body
         let bstart = str.indexOf('{'), bend = str.lastIndexOf('}');
         str = str.substring(bstart+1, bend);
-        
+
         return Function(params, str);
     }
 

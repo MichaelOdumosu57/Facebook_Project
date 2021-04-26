@@ -112,9 +112,10 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 */
 
                 let section:any =  {
-					...this.ryber.appCO0.metadata.sectionDefault,
-					...zChild["&#8353"]?.extras?.section,
+					...ryber.appCO0.metadata.ryber.sectionDefault,
+                    ...zChild["&#8353"]?.extras?.section,
 				}
+
 
                 Object.keys(section)
                 .forEach((x,i)=>{
@@ -304,8 +305,9 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                                 return acc
                             },0) ) /  ( x.length-1 )
                         let gapType = x.reduce((acc,y,j)=>{
+
                                 acc += numberParse(zChild[y].css["width"]) + (
-                                    zChild[y].extras?.component?.split === undefined || zChild[y].extras?.component?.split === 6 ? 0: section.gap
+                                    zChild[y].extras?.component?.split === undefined || zChild[y].extras?.component?.split === 6 ? 0: (zChild[y].extras?.component?.gap||section.gap)
                                 )
                                 return acc
                             },0)
@@ -325,7 +327,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                                     numberParse(   zChild[x[j-1]].css["left"]  ) +
                                     numberParse(   zChild[x[j-1]].css["width"]  ) +
                                     // section.gap
-                                    (gapType >= section.width -300 ?gaps : section.gap)
+                                    (gapType >= section.width -300 ?gaps : (zChild[y].extras?.component?.gap||section.gap))
                                 ).toString() + "px"
                             }
                             //
@@ -1124,7 +1126,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 Object.keys(zChild)
                 .forEach((x,i)=> {
                     if(zChild[x].extras?.judima?.formatIgnore === "false"){
-                        if(["p","ta","c","h1"].includes(zChild[x].bool )){
+                        if(["p","ta","c","h1","a"].includes(zChild[x].bool )){
                             zChild[x].css["height"] = null
                             zChild[x].css["display"] = "table"
                             this.ref.detectChanges()

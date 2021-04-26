@@ -150,23 +150,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                     let chosenImg:any = Array.from(val.types["chosen-img"] || [])
                     let chosenName:any = Array.from(val.types["chosen-name"] || [])
                     let chosenOverlay = Array.from(val.types["chosenOverlay"] || [])
-                    // console.log(val.types)
+                    let head = Array.from(val.types["head"] || [])
+
 
 
                     // setup the click events
-
-                    ;[[...loginName,...loginImg]]
+                    let myChosen = [...chosen,...chosenImg,...chosenName,...chosenOverlay]
+                    ;[[...loginName,...loginImg,...head]]
                     .forEach((y:any,j)=>{
 
-                        if(y.length === 0){
+                        if(y.length <= 1){
                             return
                         }
-                        let showChosen = fromEvent([zChildren[y[0]].element,zChildren[y[1]].element,],"click")
+
+                        let showChosen = fromEvent([0,1,2].map((z:any,k)=>{return zChildren[y[z]].element}),"click")
                         .subscribe((result:any)=>{
                             renderer2.addClass(
                                 document.body,"a_p_p_BodyOverFlowHidden"
                             )
-                            ;[...chosen,...chosenImg,...chosenName,...chosenOverlay]
+                            myChosen
                             .forEach((z:any,k)=>{
                                 zChildren[z].css.display = zChildren[z].cssDefault.display || "block"
                             })
@@ -182,7 +184,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                             renderer2.removeClass(
                                 document.body,"a_p_p_BodyOverFlowHidden"
                             )
-                            ;[...chosen,...chosenImg,...chosenName,...chosenOverlay]
+                            myChosen
                             .forEach((z:any,k)=>{
                                 zChildren[z].css.display = "none"
                             })

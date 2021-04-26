@@ -43,7 +43,7 @@ export class RyberService {
             let { co,mf } = devObj
             let { navigation,appSection,gsapCursor,webVitals,columnDefs,rowData,webRTC,imageURL,latch,options,nest,printGroupType, printGroup, key, type, gap, stack, value, group, count, newline, form,delta, refreshGroup, background, color, fonts, title, fontSize, italics, googleSheets, border } = mf
             let { left, top, height, width, split, next } = mf
-			let component = { left, top, height, width, split, next }
+			let component = { left, top, height, width, split, next,gap }
 
 
 
