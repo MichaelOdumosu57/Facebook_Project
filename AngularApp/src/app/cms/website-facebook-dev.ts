@@ -87,7 +87,7 @@ let login_development:Array<zProtoComponent> = [
 				top:70,
 				options:{
 					css:{
-						"z-index":2
+						// "z-index":2
 					},
 					judima:{
 						mobile:{
@@ -184,7 +184,7 @@ let login_development:Array<zProtoComponent> = [
 							val:"login-display a_p_p_Glassmorphism",
 							group:["facebook_login_credentials"],
 							css:{
-								"z-index":3,
+								"z-index":2,
 								"background-color":"white",
 							},
 							logic:{
@@ -498,7 +498,7 @@ let login_development:Array<zProtoComponent> = [
 				top:-320,
 				options:{
 					css:{
-						"z-index":2
+						"z-index":4
 					},
 					judima:{
 						mobile:{
@@ -528,6 +528,7 @@ let login_development:Array<zProtoComponent> = [
 						{
 							bool:"div",
 							css:{
+								"z-index":1
 							},
 							val:"login-main-background a_p_p_MainBackground",
 							logic:{
@@ -571,6 +572,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"div",
 							css:{
 								"background-color":"rgb(240, 242, 245)",
+								"z-index":2
 							},
 							val:"login-overlay a_p_p_Glassmorphism",
 							logic:{
@@ -642,7 +644,8 @@ let login_development:Array<zProtoComponent> = [
 							bool:"img",
 							val:"login-remove",
 							css:{
-								"z-index":3
+								"z-index":6,
+
 							},
 							extras:{
 								extend:{
@@ -719,7 +722,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"img",
 							val:"account-image a_p_p_Login_Image",
 							css:{
-								"z-index":2
+								"z-index":5
 							},
 							extras:{
 								extend:{
@@ -821,7 +824,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"p",
 							val:"account-name a_p_p_Login_Name",
 							css:{
-								"z-index":3
+								"z-index":5
 							},
 							extras:{
 								appFacebookLogin:{
@@ -2366,20 +2369,37 @@ let home_development :Array<zProtoComponent> = [
 							// left:-50,
 							width:1560,
 							split:4,
-							gap:10
+							gap:10,
+							stack:0
 						}
 					}
 				},
 				navigation:{
 					name:"home"
+				},
+				delta:{
+					group:[
+						{
+							name:"sideNav",
+							type:"repeat",
+							by:10,
+						}
+					]
+				},
+				nest:{
+					group:[
+						{
+							name:"sideNav",
+							type:"regular"
+						}
+					]
 				}
 
 			},
 			...[
 			{
-				key:"subNavigation a_p_p_subNav",
+				key:"subNavigation a_p_p_subNav a_p_p_Glassmorphism",
 				type:"div",
-				height:300,
 				split:1,
 
 				latch:{
@@ -2433,13 +2453,107 @@ let home_development :Array<zProtoComponent> = [
 							group:["homeOverlay"]
 						}
 					]
-				}
+				},
+				nest:{
+					group:"sideNav",
+					name:"A1"
+				},
 
+
+			},
+			{
+				key:"item-container a_p_p_ItemContainer ",
+				type:"div",
+				nest:{
+					group:"sideNav",
+					name:"B1",
+					under:"A1"
+				},
+				delta:{
+					group: "sideNav",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === "deltaNodeBootstrap"){
+
+							}
+						}
+					}
+				}
+			},
+			{
+				key:"item-icon a_p_p_ItemIcon",
+				type:"image",
+				nest:{
+					group:"sideNav",
+					name:"C1",
+					under:"B1"
+				},
+				delta:{
+					group: "sideNav",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === "deltaNodeBootstrap"){
+								let icons = ["find_friends_sidenav.png",
+								"timer.png",
+								"star.png",
+								"groups.png",
+								"marketplace.png",
+								"watch.png",
+								"events.png",
+								"memories.png",
+								"saved.png"
+								].map((x:string,i)=>{
+									return "sideNav/" +x
+								})
+								zChild[x].element.src = mediaPrefix({media:icons[index]})
+							}
+						}
+					}
+				}
+			},
+			{
+				key:"item-text a_p_p_ItemText",
+				type:"text",
+				nest:{
+					group:"sideNav",
+					name:"C2",
+					under:"B1"
+				},
+				options:{
+					css:{
+						"font-size":"16px"
+					}
+				},
+				value:"Python3",
+				delta:{
+					group: "sideNav",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === "deltaNodeBootstrap"){
+								let titles = ["Find Friends",
+								"timer",
+								"star",
+								"groups",
+								"marketplace",
+								"watch",
+								"events",
+								"memories",
+								"saved"
+								].map((x:string,i)=>{
+									return x.charAt(0).toUpperCase() + x.slice(1)
+								})
+								zChild[x].innerText.item = titles[index]
+							}
+						}
+					}
+				}
 			},
 			{
 				key:"subNavigation",
 				type:"div",
-				height:300,
 				split:1.9,
 
 
@@ -2447,12 +2561,15 @@ let home_development :Array<zProtoComponent> = [
 			{
 				key:"subNavigation",
 				type:"div",
-				height:300,
 				split:1,
 
 
 			}
-			].map((x:zProtoChildren,i)=>{
+			].map((x:zProtoChildren | any,i)=>{
+				if(x?.nest?.under){
+					return x
+				}
+				x.height = 700
 				x.key += " a_p_p_Glassmorphism"
 				return x
 			})

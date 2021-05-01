@@ -9,10 +9,12 @@ declare global {
     var numberParse
     var xPosition
     var judimaPageOffset
+    var mediaPrefix
 }
 window.numberParse = numberParse
 window.xPosition = xPosition
 window.judimaPageOffset = judimaPageOffset
+window.mediaPrefix = mediaPrefix
 
 
 
@@ -236,6 +238,11 @@ export function flatDeep(arr, d = 1) { // polyfill for arr.flat
     return d > 0 ? arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val), [])
                  : arr.slice();
 };
+
+export  function mediaPrefix(devObj){
+    let {media} = devObj
+    return "./assets/media/"+media
+}
 
 
 // export function asyncData<T>(data: T) {

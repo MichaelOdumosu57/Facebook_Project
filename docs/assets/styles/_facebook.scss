@@ -1,5 +1,6 @@
 
 $font-family1 :Helvetica, Arial, sans-serif;
+$font-family2 :Segoe UI Historic;
 
 
 @font-face {
@@ -164,7 +165,7 @@ $font-family1 :Helvetica, Arial, sans-serif;
     padding-bottom:5px;
     background:radial-gradient(farthest-corner at 40px 40px, white 0, cyan);
     // opacity: ;
-    
+
 
     &:hover {
         background: rgba(255,255,255,0.1);
@@ -232,47 +233,106 @@ $font-family1 :Helvetica, Arial, sans-serif;
 
 
 $white: rgba(255,255,255,0.3);
-.a_p_p_FacebookInput {
-    padding: 1em;
-    margin-bottom: 2em;
-    border: none;
-    border-left: 1px solid $white;
-    border-top: 1px solid $white;
-    border-radius: 500px;
-    backdrop-filter: blur(5px);
-    box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
-    color: black;
-    font-family: Montserrat, sans-serif;
-    font-weight: 500;
-    // transition: all 0.2s ease-in-out;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 
-    &:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.2);
+
+.a_p_p_ {
+    &NavIcon_Container {
+        background-color:rgb(228, 230, 235);
+        border-radius:50px;
+        z-index: 2;
+        // opacity:.4;
     }
 
-    &[type="email"],
-    &[type="password"] {
+    &FacebookInput {
+        padding: 1em;
+        margin-bottom: 2em;
+        border: none;
+        border-left: 1px solid $white;
+        border-top: 1px solid $white;
+        border-radius: 500px;
+        backdrop-filter: blur(5px);
+        box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
+        color: black;
+        font-family: Montserrat, sans-serif;
+        font-weight: 500;
+        // transition: all 0.2s ease-in-out;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 
-      &:focus {
-        background: rgba(255,255,255,0.1);
-        box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.2);
-      }
+        &:hover {
+          background: rgba(255,255,255,0.1);
+          box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.2);
+        }
+
+        &[type="email"],
+        &[type="password"] {
+
+          &:focus {
+            background: rgba(255,255,255,0.1);
+            box-shadow: 4px 4px 60px 8px rgba(0,0,0,0.2);
+          }
+        }
+
+        &[type="button"] {
+          margin-top: 10px;
+          width: 150px;
+          font-size: 1rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &:active {
+            background: rgba(255,255,255,0.2);
+          }
+        }
     }
 
-    &[type="button"] {
-      margin-top: 10px;
-      width: 150px;
-      font-size: 1rem;
+    &subNav{
+        display: flex;
+        flex-direction: column;
+        opacity:1;
 
-      &:hover {
-        cursor: pointer;
-      }
 
-      &:active {
-        background: rgba(255,255,255,0.2);
-      }
     }
-  }
+
+    &ItemIcon:nth-child(n){
+        border-radius: 50px;
+        margin-left: 20px;
+        // margin-top:7px;
+    }
+
+    &ItemText:nth-child(n){
+        font-size: 16px;
+        margin-left:15px;
+        font-weight: 600;
+        font-family : $font-family2
+    }
+
+    &ItemContainer{
+
+        height:50px;
+        border-radius: 50px;
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+        align-items: center;
+        width:95%;
+
+        border-radius: 30px;
+        // opacity: .5;
+        backdrop-filter: blur( 4px );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+
+        &:nth-child(n){
+            margin-top: 10px;
+        }
+
+        &:nth-child(1){
+            margin-top: 20px;
+        }
+
+    }
+}
 

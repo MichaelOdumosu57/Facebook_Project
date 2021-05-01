@@ -518,7 +518,8 @@ export class RyberService {
                 symbol = rUD({
                     co,
                     bool: 'p',
-                    val: key.split("_").reverse()[0] + '  a_p_p_Text',
+                    // val: key.split("_").reverse()[0] + '  a_p_p_Text',
+                    val:key +  '  a_p_p_Text',
                     text: value,
                     css,
                     extras: {

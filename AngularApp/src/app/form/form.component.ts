@@ -630,6 +630,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
                                 zChild[x].extras.component.next = zChild[x].extras.appDeltaNode.options?.next?.({index}) ||zChild[x].extras.component.next
                                 zChild[x].cssDefault.left =zChild[x].extras.appDeltaNode.options?.cssLeft?.({index,css:zChild[x].cssDefault}) || zChild[x].cssDefault.left
+
                                 zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"templateComponent"})
                                 zChild[x].extras.appDeltaNode.options !== undefined ? zChild[x].extras.appDeltaNode.options.index= index  : null
                                 // console.log(zChild[x].extras.component)
@@ -1272,9 +1273,22 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 		if (current !== null && currentGroup.hooks.directive.includes("prepare")) {
 			// convert needed data in to usable form
 
+
+            current?.deltas?.
+            forEach((x:any,i)=>{
+                let index = [[],...this.ryber[this.appTV].metadata.deltaNode.groups[current.group].deltas]
+                .reduce((acc,y,j)=>{
+                    if( y.includes(x)){
+                        return j
+                    }
+                    return acc
+                }) -1
+                zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"deltaNodeBootstrap"})
+            })
 			component.deltas = current?.deltas.filter((x: any, i) => {
 				return zChild[x]?.extras?.judima?.formatIgnore !== "true";
 			});
+
 			let deltasIndex = 0
 			// this is because in the directive, minus removes the directive before
 			// the component has proper chance to analyze

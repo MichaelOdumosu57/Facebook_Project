@@ -61,11 +61,15 @@ export class NestDirective {
 						//
 
 						this._nestZChildren({zChildren, groups, ryber, co});
+
 					}),
 				)
+
+
 			}
 
         }
+
     }
 
 
@@ -163,7 +167,7 @@ export class NestDirective {
 
 			});
 			//
-
+			
 			// resetting objects
 			val.targets = [];
 			val.nestNameZSymbolMap = {}
