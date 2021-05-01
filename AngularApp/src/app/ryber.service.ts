@@ -843,6 +843,7 @@ export class RyberService {
 
 
                 let css = {
+                    "z-index":4,
 					...options.css
                 }
 
@@ -1843,7 +1844,7 @@ export class RyberService {
                 full:{
                     map:{},
                     navigated:"false",
-                    startURL:"/login"
+                    startURL:"/home"
                 }
             },
             ibmLanguage:{

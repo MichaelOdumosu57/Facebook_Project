@@ -217,7 +217,10 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
-						}
+						},
+						appFacebookLogin:{
+							type:["username"]
+						},
 					},
 					judima:{
 						mobile:{
@@ -250,6 +253,9 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						},
+						appFacebookLogin:{
+							type:["password"]
 						},
 						extend:{
 							type:"password",
@@ -287,7 +293,11 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
-						}
+						},
+						appFacebookLogin:{
+							type:["loginButton"]
+						},
+
 					},
 					judima:{
 						mobile:{
@@ -1113,7 +1123,7 @@ let login_development:Array<zProtoComponent> = [
 									placeholder:"Password"
 								},
 								appFacebookLogin:{
-									type:["chosen"]
+									type:["chosenPassword"]
 								}
 							},
 							needed:["appLatch"],
@@ -1181,7 +1191,7 @@ let login_development:Array<zProtoComponent> = [
 							},
 							extras:{
 								appFacebookLogin:{
-									type:["chosen"]
+									type:["chosenLoginButton"]
 								},
 								appLanguageTranslator:{
 									group:"translate-group-1",
@@ -2063,12 +2073,400 @@ let login_development:Array<zProtoComponent> = [
 	}
 ]
 
+let home_development :Array<zProtoComponent> = [
+	{
+		title:"homeNavigation",
+		type_slug:"forms",
+		metafields:[
+			{
+				key:"Body",
+				type:"body",
+				navigation:{
+					name:"home"
+				},
+
+				options:{
+					extras:{
+						section:{
+							left:-55,
+							width:1500,
+							split:20,
+							gap:10,
+							stack:30
+						}
+					}
+				}
+			},
+			{
+				key:"facebok-logo",
+				type:"image",
+				imageURL:"facebook_circular.png",
+				height:30,
+				split:.8,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"navGroup"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"navOverlay a_p_p_Glassmorphism",
+							logic:{
+								desktop:{
+									width:(devObj)=>{
+										let {zChildren} = devObj
+										return numberParse(getComputedStyle(zChildren["&#8353"].element).width)-20
+									},
+									height:2,
+									top:(devObj)=>{
+
+										return 15
+									},
+									left:(devObj)=>{
+										return 15
+									},
+								},
+								mobile:{
+									width:1.2,
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["navGroup",...Array.from(Array(3),(x,i)=>{return "navUserIcon_"+i})]
+						}
+					]
+				}
+				// left:0
+			},
+			{
+				key:"seach-facebook",
+				type:"input",
+				height:10,
+				split:4,
+				options:{
+					css:{
+						"font-size":"16px",
+						"background":"rgb(240, 242, 245)",
+						"box-shadow":"none"
+					},
+					extras:{
+						extend:{
+							placeholder:"Search Facebook"
+						}
+					}
+				}
+			},
+			...[
+				{
+					key:"house-icon",
+					type:"image",
+					height:30,
+					split:.8,
+					gap:120,
+					imageURL:"	house.png"
+				},
+				{
+					key:"friend-icon",
+					type:"image",
+					height:30,
+					imageURL:"group.png"
+				},
+				{
+					key:"group-icon",
+					type:"image",
+					height:30,
+					imageURL:"tv-monitor.png"
+				},
+				{
+					key:"marketplace-icon",
+					type:"image",
+					height:30,
+					imageURL:"marketplace.png"
+				},
+				{
+					key:"group-icon",
+					type:"image",
+					height:30,
+
+					imageURL:"crowd.png"
+				},
+			].map((x:zProtoChildren,i)=>{
+
+				x.gap = x.gap ||80
+				x.split = x.split||.6
+
+				x.latch = {
+					type:"display",
+					display:{
+						type:"target",
+						name:"navIcon_"+i
+					},
+					zChildren:[
+						{
+							bool:"div",
+							css:{
+								background:"radial-gradient(farthest-corner at 100% 0px, cyan 0%, blue 200%)",
+								"z-index":5,
+								display:i === 0 ? "block":"none"
+							},
+							logic:{
+								desktop:{
+									width:1.2,
+									height:.15,
+									top:(devObj)=>{
+										let {zChildren,zSymbol} = devObj
+										try {
+											let navOverlay = zChildren[zSymbol]?.extras?.appLatch?.navOverlay ||
+											(()=>{
+												let navOverlay =Object.entries(zChildren).filter((x:any,i)=>{
+													return x[1].val.includes("f_o_r_m_navOverlay")
+												})[0][0]
+												zChildren[zSymbol].extras.appLatch = {
+													navOverlay
+												}
+												return navOverlay
+											})()
+
+												return numberParse(zChildren[navOverlay].css.height) +
+												numberParse(zChildren[navOverlay].css.top) -
+												numberParse(zChildren[zSymbol].css.height)
+
+										}
+
+										catch (error) {
+											return 0
+										}
+										// console.log(zSymbol,zChildren)
+
+
+
+									},
+									left:-5
+								},
+								mobile:{
+									width:1.2,
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["navIcon_"+i]
+						}
+					]
+				}
+				return x
+			}),
+			{
+				key:"profile-icon",
+				type:"image",
+				height:20,
+				split:.6,
+				left:1100,
+				imageURL:"python.jpg",
+				options:{
+					css:{
+						"border-radius":"50px",
+						"border":"10px soild black"
+					}
+				}
+			},
+			{
+				key:"profile-name",
+				type:"text",
+				height:20,
+				left:1140,
+				// split:.6,
+				options:{
+					css:{
+						"font-size":"15px",
+						"font-family":"Segoe UI Historic",
+						"font-weight":"1000"
+					}
+				},
+				value:"Python3"
+			},
+			...[
+				{
+					key:"messenger",
+					type:"image",
+					gap:50,
+					imageURL:"messenger.png"
+				},
+				{
+					key:"bell",
+					type:"image",
+					imageURL:"bell.png"
+				},
+				{
+					key:"bell",
+					type:"image",
+					imageURL:"down-arrow.png"
+				}
+			].map((x:zProtoChildren,i)=>{
+				x.key += "-icon"
+				x.gap = x.gap ||30
+				x.height = 20
+				x.split = .6
+				x.latch = {
+					type:"display",
+					display:{
+						type:"target",
+						name:"navUserIcon_"+i,
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"navIcon a_p_p_NavIcon_Container",
+							logic:{
+								desktop:{
+									width:1.4,
+									height:2.0,
+									top:-10,
+									left:-7
+								},
+								mobile:{
+									width:1.2,
+									height:1.2,
+									top:0,
+									left:0
+								}
+							},
+							group:["navUserIcon_"+i]
+						}
+					]
+				}
+
+				return x
+			})
+
+
+		]
+	},
+	{
+		title:"homeContent",
+		type_slug:"forms",
+		metafields:[
+			{
+				key:"Body",
+				type:"body",
+				options:{
+					judima:{
+						moving:{
+							point:"bottom",
+							target:'homeNavigation',
+							coordinates:{x:-70,y:0},
+							type:"custom"
+						},
+					},
+					extras:{
+						section:{
+							// left:-50,
+							width:1560,
+							split:4,
+							gap:10
+						}
+					}
+				},
+				navigation:{
+					name:"home"
+				}
+
+			},
+			...[
+			{
+				key:"subNavigation a_p_p_subNav",
+				type:"div",
+				height:300,
+				split:1,
+
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"homeOverlay"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"home-background a_p_p_MainBackground",
+							css:{
+								"z-index":2,
+							},
+							logic:{
+								desktop:{
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+									},
+									height:1.5,
+									top:(devObj)=>{
+										let {} = devObj
+										return 0
+									},
+									left:(devObj)=>{
+										let {} = devObj
+										return 0
+									}
+								},
+								mobile:{
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+									},
+									height:1.15,
+									top:(devObj)=>{
+										let {} = devObj
+										return 0
+									},
+									left:(devObj)=>{
+										let {} = devObj
+										return 0
+									}
+								}
+							},
+
+							group:["homeOverlay"]
+						}
+					]
+				}
+
+			},
+			{
+				key:"subNavigation",
+				type:"div",
+				height:300,
+				split:1.9,
+
+
+			},
+			{
+				key:"subNavigation",
+				type:"div",
+				height:300,
+				split:1,
+
+
+			}
+			].map((x:zProtoChildren,i)=>{
+				x.key += " a_p_p_Glassmorphism"
+				return x
+			})
+		]
+	}
+]
+
 // attribute map
 // "x-mark.png":Darius Dan x-icons
 
 
 let facebook_development = [
 	...login_development,
+	...home_development
 ]
 
 

@@ -59,7 +59,7 @@ export class zOptionsJudima {
         top?:Number
         stack?:Number
         footerSpace?:Number,
-        left?:Number
+        left?:Number,
     };
     desktop?:{
 
@@ -70,10 +70,10 @@ export class zOptionsJudima {
 
     // body only
     moving?:{
-        point:{"right","bottom"};
+        point:string //{"right","bottom"};
         target:String; // the title or a signature of a component
         coordinates:{x:Number;y:Number}
-        type:{"custom"}
+        type:string // ["custom"]
     }
     //
 
@@ -966,9 +966,9 @@ export function ryberUpdate(
             css = {
                 "z-index":3
             }
-            if( css["z-index"] === undefined){
-                css["z-index"] = 3
-            }
+        }
+        else if( css["z-index"] === undefined){
+            css["z-index"] = 3
         }
         //
 

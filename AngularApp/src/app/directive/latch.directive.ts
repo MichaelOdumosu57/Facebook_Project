@@ -479,7 +479,7 @@ export class LatchDirective {
 							// console.groupEnd()
 
 							this._displayDetermineDims({
-								dims, neededTargets, zChildren, css,
+								dims, neededTargets, zChildren:this.zChildren, css,
 								logic:x.logic[ryber[co].metadata.section.mediaQuery] ||  x.logic["default"]
 							});
 
@@ -538,7 +538,7 @@ export class LatchDirective {
 
 
 						zChildren[extras.zSymbol].extras.appDeltaNode.options?.modify({
-							zChild:zChildren,
+							zChild:this.zChildren,
 							x:extras.zSymbol,
 							index:zChildren[extras.zSymbol].extras.appDeltaNode.options.index,
 							hook:"latchDirective",
@@ -573,7 +573,7 @@ export class LatchDirective {
 								zSymbol:extras.display.targets[i],
 								dims,
 								neededTargets:x.neededTargets,
-								zChildren,
+								zChildren: this.zChildren ,
 								css:zChildren[extras.display.targets[i]]?.css || {},
 								logic:x.logic[ryber[co].metadata.section.mediaQuery] || x.logic["default"]
 							});
@@ -597,7 +597,7 @@ export class LatchDirective {
 								zSymbol:extras.display.targets[i],
 								dims,
 								neededTargets:x.neededTargets,
-								zChildren,
+								zChildren:this.zChildren,
 								css:zChildren[extras.display.targets[i]]?.css || {},
 								logic:x.logic[ryber[co].metadata.section.mediaQuery] || x.logic["default"]
 							});
@@ -618,6 +618,7 @@ export class LatchDirective {
 
 	private _displayDetermineDims(devObj:{zSymbol?:string,dims: string[][], neededTargets: any, zChildren: any, css: any,logic:any}) {
 		let {zSymbol,dims,neededTargets,zChildren,css,logic} = devObj
+		zChildren = this.zChildren
 
 
 		let delta:any = {

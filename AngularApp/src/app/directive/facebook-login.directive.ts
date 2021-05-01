@@ -4,10 +4,10 @@
 import { Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, ViewContainerRef, ViewRef, EmbeddedViewRef, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { RyberService } from '../ryber.service'
 import { fromEvent, from, Subscription, Subscriber, of, combineLatest } from 'rxjs';
-import { deltaNode, eventDispatcher, numberParse, objectCopy,navigationType } from '../customExports'
+import { deltaNode, eventDispatcher, numberParse, objectCopy,navigationType, zChildren } from '../customExports'
 import { catchError, delay,first,take } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 
 @Directive({
@@ -38,7 +38,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
         this.extras = this.facebookLogin
         if (this.extras?.confirm === 'true' && this.extras?.type.includes("body")  ) {
             if(env.directive?.facebookLogin?.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' facebookLogin ngOnInit fires on mount')
-            let {ryber,extras,zChildren,subscriptions,renderer2} = this
+            let {ryber,extras,zChildren,subscriptions,renderer2,logIn} = this
             let {co} = extras
             let {group,suffix}  = ryber[co].metadata.facebookLogin
 
@@ -149,13 +149,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                     let chosen =Array.from(val.types.chosen || [])
                     let chosenImg:any = Array.from(val.types["chosen-img"] || [])
                     let chosenName:any = Array.from(val.types["chosen-name"] || [])
+                    let chosenPassword:any = Array.from(val.types["chosenPassword"] || [])
                     let chosenOverlay = Array.from(val.types["chosenOverlay"] || [])
                     let head = Array.from(val.types["head"] || [])
-
+                    let loginButton = Array.from(val.types["loginButton"] || [])
+                    let chosenLoginButton = Array.from(val.types["chosenLoginButton"] || [])
+                    let username:Array<string> = Array.from(val.types["username"] || [])
+                    let password:Array<string> = Array.from(val.types["password"] || [])
 
 
                     // setup the click events
-                    let myChosen = [...chosen,...chosenImg,...chosenName,...chosenOverlay]
+                    let myChosen = [...chosen,...chosenPassword,...chosenLoginButton,...chosenImg,...chosenName,...chosenOverlay]
                     ;[[...loginName,...loginImg,...head]]
                     .forEach((y:any,j)=>{
 
@@ -192,10 +196,41 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                         })
                         val.subscriptions.push(hideChosen)
                     })
+                    //
+
+                    // login setup
+                    loginButton
+                    .forEach((y:any,j)=>{
+                        let loginEvent = fromEvent(zChildren[y].element,"click")
+                        .subscribe((result:any)=>{
+                            this.logIn({
+                                user:username,
+                                pass:password,
+                                zChildren,
+                            })
+
+                        })
+                        val.subscriptions.push(loginEvent)
+                    })
+
+                    chosenLoginButton
+                    .forEach((y:any,j)=>{
+                        let loginEvent = fromEvent(zChildren[y].element,"click")
+                        .subscribe((result:any)=>{
+
+                            this.logIn({
+                                user:chosenName,
+                                pass:chosenPassword,
+                                zChildren
+                            })
+                        })
+                        val.subscriptions.push(loginEvent)
+                    })
+                    //
 
                     subscriptions.push(...val.subscriptions)
-                    //
                 })
+
 
 
             })
@@ -219,6 +254,39 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 			delete this.subscriptions
 		}
 	}
+
+    logIn(devObj:{user:Array<string>,pass:Array<string>,zChildren:zChildren,type?:String}){
+        let {type,user,pass,zChildren} = devObj
+        let {http,ryber} = this
+
+        http.post(
+            // "https://facebook-language-translator.herokuapp.com",
+            "http://localhost:3005",
+            {
+                user:zChildren[user[0]].innerText.item || zChildren[user[0]].element.value ,
+                pass:zChildren[pass[0]].element.value,
+                env:"login"
+            },
+            {
+                responseType:"text"
+            }
+        )
+        .subscribe({
+            next:(result:any)=>{
+                if(result === "Allow user to proceed"){
+
+                    // change the path
+                    ryber.appCO0.metadata.navigation.full.navigated = "true"
+                    ryber.appCurrentNav = "/home"
+                    //
+                }
+            },
+            error:(err:HttpErrorResponse)=>{
+                console.log(err)
+            }
+        })
+
+    }
 
 }
 

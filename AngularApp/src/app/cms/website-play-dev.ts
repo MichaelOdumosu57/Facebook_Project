@@ -8302,7 +8302,7 @@ let mobileCustom_development  = [
 
 			},
             {
-                "key": "image-1",
+			"key": "image-1",
                 "type": "image",
                 "imageURL":"angular.png",
                 "height":"100",

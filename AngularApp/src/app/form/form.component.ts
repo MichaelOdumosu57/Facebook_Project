@@ -117,6 +117,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 				}
 
 
+
                 Object.keys(section)
                 .forEach((x,i)=>{
                     section[x] = +section[x]
@@ -327,7 +328,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                                     numberParse(   zChild[x[j-1]].css["left"]  ) +
                                     numberParse(   zChild[x[j-1]].css["width"]  ) +
                                     // section.gap
-                                    (gapType >= section.width -300 ?gaps : (zChild[y].extras?.component?.gap||section.gap))
+                                    (gapType >= section.width  ? gaps : (zChild[y].extras?.component?.gap||section.gap))
                                 ).toString() + "px"
                             }
                             //

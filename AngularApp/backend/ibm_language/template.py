@@ -54,6 +54,8 @@ class my_ibm_language_client():
         target = data.get("target")
         text = data.get("text")
         env = data.get("env")
+        username = data.get("user")
+        password = data.get("pass")
         #
 
 
@@ -129,6 +131,34 @@ class my_ibm_language_client():
                     'message': 'an error occured check the output from the backend'
             }
 
+        elif(env == "login"):
+            try:
+                login_dict = {
+                    "Python3":"Abc",
+                    "Angular":"Def",
+                    "Ruby":"Ghi"
+                }
+
+                if(login_dict.get(username) == password):
+                    return {
+                        'status':200,
+                        'message':'Allow user to proceed'
+                    }
+
+                return  {
+                        'status':401,
+                        'message':'There has been an issue please try again'
+                    }
+
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
+                }
         return {
             "status" :500,
             "message": "Check the backend env dictionary you did set it so the backend didnt do anything"
