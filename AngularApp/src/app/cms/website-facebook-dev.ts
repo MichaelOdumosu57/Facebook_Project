@@ -855,7 +855,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"div",
 							val:"chosen-login  a_p_p_ChosenLogin a_p_p_Glassmorphism",
 							css:{
-								"z-index":5,
+								"z-index":8,
 								display:"none"
 							},
 							logic:{
@@ -922,7 +922,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"img",
 							val:"chosen-login-img a_p_p_ChosenLoginImg",
 							css:{
-								"z-index":5,
+								"z-index":8,
 								display:"none"
 							},
 							logic:{
@@ -997,7 +997,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"p",
 							val:"chosen-name a_p_p_Login_Name",
 							css:{
-								"z-index":5,
+								"z-index":8,
 								display:"none"
 							},
 							extras:{
@@ -1065,7 +1065,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"i",
 							val:"password a_p_p_FacebookInput login-page",
 							css:{
-								"z-index":5,
+								"z-index":8,
 								display:"none"
 							},
 							logic:{
@@ -1134,7 +1134,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"b",
 							val:"chosen-login-button a_p_p_Button login-page",
 							css:{
-								"z-index":5,
+								"z-index":8,
 								display:"none"
 							},
 							text:"Log In",
@@ -1206,7 +1206,7 @@ let login_development:Array<zProtoComponent> = [
 							bool:"div",
 							val:"chosen-overlay a_p_p_ChosenOverlay",
 							css:{
-								"z-index":4,
+								"z-index":7,
 								display:"none"
 							},
 							extras:{
@@ -2401,6 +2401,11 @@ let home_development :Array<zProtoComponent> = [
 							name:"contacts",
 							type:"repeat",
 							by:6,
+						},
+						{
+							name:"onYourMind",
+							type:"repeat",
+							by:2,
 						}
 					]
 				},
@@ -2412,6 +2417,10 @@ let home_development :Array<zProtoComponent> = [
 						},
 						{
 							name:"homeMisc",
+							type:"regular"
+						},
+						{
+							name:"newsFeed",
 							type:"regular"
 						}
 					]
@@ -2496,9 +2505,6 @@ let home_development :Array<zProtoComponent> = [
 						appVanillaTilt:{
 							type:"target",
 							group:"sideNav",
-							// initOptions:{
-							// 	perspective:100
-							// }
 						}
 					}
 				},
@@ -2584,12 +2590,183 @@ let home_development :Array<zProtoComponent> = [
 					}
 				}
 			},
+			...[
 			{
 				key:"subNavigation",
 				type:"div",
 				split:1.9,
+				nest:{
+					group:"newsFeed",
+					name:"A1"
+				},
+				options:{
+					css:{
+						opacity:1
+					}
+				},
 
 			},
+			{
+				key:"newsFeedContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer",
+				type:"div",
+				options:{
+					css:{
+						"margin-left":"10px",
+						"flex-direction":"column",
+						opacity:1,
+					}
+				},
+
+				nest:{
+					group:"newsFeed",
+					name:"B1",
+					under:"A1"
+				}
+			},
+			{
+				key:"newsFeedContainer",
+				type:"div",
+				options:{
+					css:{
+						opacity:1,
+						display: "flex",
+						"flex-direction":"row",
+						"margin":"10px 0 0 10px",
+						"flex-wrap":"wrap",
+						"width":"90%"
+					}
+				},
+				nest:{
+					group:"newsFeed",
+					name:"C1",
+					under:"B1"
+				}
+			},
+			{
+				key:"newsFeedIcon  a_p_p_NewsFeedIcon",
+				type:"image",
+				imageURL:"python.jpg",
+				options:{
+					css:{
+						opacity:1,
+						margin:"10px 0 0 0"
+					}
+				},
+				nest:{
+					group:"newsFeed",
+					name:"D1",
+					under:"C1"
+				}
+			},
+			{
+				key:"newsFeedInput a_p_p_NewsFeedInput",
+				type:"input",
+				options:{
+					css:{
+						opacity:1,
+						"flex-grow":1
+					},
+					extend:{
+						placeholder:"What's on your mind?"
+					}
+				},
+				nest:{
+					group:"newsFeed",
+					name:"D2",
+					under:"C1"
+				}
+			},
+			{
+				key:"strikethrough a_p_p_NewsFeedStrikeThrough",
+				type:"div",
+				options:{
+
+				},
+				nest:{
+					group:"newsFeed",
+					name:"C2",
+					under:"B1"
+				}
+			},
+			{
+				key:"newsFeedContainer a_p_p_newsFeedItemContainer",
+				type:"div",
+				options:{
+					css:{
+						opacity:1,
+						display: "flex",
+						"flex-direction":"row",
+						"margin":"10px 0 10px 10px",
+						"flex-wrap":"wrap",
+						"width":"90%"
+					}
+				},
+				nest:{
+					group:"newsFeed",
+					name:"C3",
+					under:"B1"
+				}
+			},
+			{
+				key:"newsFeedImage a_p_p_newsFeedImage",
+				type:"image",
+				imageURL:"home/liveVideo.png",
+				options:{
+					css:{
+						"border-radius":"50px",
+						
+					}
+				},
+				delta:{
+					group:"onYourMind",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === 'deltaNodeBootstrap'){
+								let items = ["home/photoVideo.png","home/smiley.png"]
+								zChild[x].element.src = mediaPrefix({media:items[index]})
+							}
+						}
+					}
+				},
+				nest:{
+					group:"newsFeed",
+					name:"D3",
+					under:"C3"
+				}
+			},
+			{
+				key:"newsFeedText a_p_p_NewsFeedText",
+				type:"text",
+				value:"Live Video",
+				options:{
+					css:{
+						"margin-top":"10px"
+					}
+				},
+				delta:{
+					group:"onYourMind",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === 'deltaNodeBootstrap'){
+								let items = ['Photo/Video','Feeling/Activity']
+								zChild[x].innerText.item = items[index]
+							}
+						}
+					}
+				},
+				nest:{
+					group:"newsFeed",
+					name:"D4",
+					under:"C3"
+				}
+			},
+			],
+
+
+
+
 			{
 				key:"subNavigation a_p_p_HomeMisc a_p_p_HomeMiscContainer",
 				type:"div",
@@ -2611,6 +2788,7 @@ let home_development :Array<zProtoComponent> = [
 					css:{
 						"margin-left":"10px",
 						// "background-color": "white",
+						overflow:"hidden",
 						opacity:1,
 						"flex-direction":"column"
 					}
@@ -2629,7 +2807,7 @@ let home_development :Array<zProtoComponent> = [
 				options:{
 					css:{
 						opacity:1
-					}
+					},
 				},
 				nest:{
 					group:"homeMisc",
@@ -2646,6 +2824,12 @@ let home_development :Array<zProtoComponent> = [
 						"margin-left":"10px",
 						"margin-top":"10px",
 						opacity:1
+					},
+					extras:{
+						appVanillaTilt:{
+							type:"target",
+							group:"sideNav",
+						}
 					}
 				},
 				nest:{

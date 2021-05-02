@@ -244,6 +244,17 @@ $white: rgba(255,255,255,0.3);
 @mixin outline{
     border: 3px dotted red;
 }
+// debugging classes
+.outline{
+    @include outline
+}
+//
+
+@mixin strikeThrough{
+    height: 1px;
+    background-color: grey;
+    width: 95%;
+}
 
 .a_p_p_ {
     &NavIcon_Container {
@@ -252,6 +263,8 @@ $white: rgba(255,255,255,0.3);
         z-index: 2;
         // opacity:.4;
     }
+
+
 
     &FacebookInput {
         padding: 1em;
@@ -383,15 +396,20 @@ $white: rgba(255,255,255,0.3);
     }
 
     &StrikeThrough{
-        height: 1px;
-        background-color: grey;
+        @include strikeThrough;
         margin:30px 0 20px 10px !important;
-        width: 95%;
     }
 
-    &Sponsored,&yourPages,&Contacts{
+    &NewsFeed,&Sponsored,&yourPages,&Contacts{
 
         font-weight: 600 !important;
+
+        &Input{
+            text-align: left;
+            font-size:17px !important;
+            margin:5px 10px 5px 10px !important;
+            padding:10px 50px 10px 10px !important
+        }
         &SubHeading:nth-child(n){
 
             align-self: baseline;
@@ -465,6 +483,12 @@ $white: rgba(255,255,255,0.3);
                 flex-grow: 1;
 
             }
+
+            &[class*="NewsFeed"]{
+                margin:5px 0 10px 15px !important;
+                flex-grow: 1;
+
+            }
         }
 
         &Desc{
@@ -484,6 +508,11 @@ $white: rgba(255,255,255,0.3);
                 font-weight: 700;
             }
         }
+
+        &StrikeThrough{
+            @include strikeThrough;
+            margin: 5px 0 10px 0 !important;
+        }
     }
 
     &HomeMisc{
@@ -491,7 +520,7 @@ $white: rgba(255,255,255,0.3);
         &Container{
             // position:fixed;
             &::-webkit-scrollbar {
-                width: 12px;
+                width: 6px;
             }
             &::-webkit-scrollbar-track {
                 background: transparent;
@@ -501,7 +530,7 @@ $white: rgba(255,255,255,0.3);
                 background: #263040;
             }
             &::-webkit-scrollbar-thumb:window-inactive {
-                background: #181f2a;
+                background: transparent;
                 opacity:4px;
             }
             &::-webkit-scrollbar-corner {
