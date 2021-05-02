@@ -104,7 +104,7 @@ export interface zProtoChildren {
     stack?:String | Number;
     //
     options?:{
-        css?:any | CSSRuleList,
+        css?:CSSRuleList,
         judima?:zOptionsJudima,
         extras?:any |
         {

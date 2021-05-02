@@ -2383,6 +2383,11 @@ let home_development :Array<zProtoComponent> = [
 							name:"sideNav",
 							type:"repeat",
 							by:10,
+						},
+						{
+							name:"sponsored",
+							type:"repeat",
+							by:1,
 						}
 					]
 				},
@@ -2390,6 +2395,10 @@ let home_development :Array<zProtoComponent> = [
 					group:[
 						{
 							name:"sideNav",
+							type:"regular"
+						},
+						{
+							name:"homeMisc",
 							type:"regular"
 						}
 					]
@@ -2556,15 +2565,124 @@ let home_development :Array<zProtoComponent> = [
 				type:"div",
 				split:1.9,
 
-
 			},
 			{
-				key:"subNavigation",
+				key:"subNavigation a_p_p_HomeMisc",
 				type:"div",
 				split:1,
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"A1"
+				}
+			},
+			{
+				key:"sponsoredContainer a_p_p_ItemContainer a_p_p_HomeMisc",
+				type:"div",
+				options:{
+					css:{
+						"margin-left":"10px",
+						// "background-color": "white",
+						opacity:1,
+						"flex-direction":"column"
+					}
+				},
 
+				nest:{
+					group:"homeMisc",
+					name:"B1",
+					under:"A1"
+				}
+			},
+			{
+				key:"sponsoredHeading a_p_p_ItemContainerSponsoredSubHeading",
+				type:"sub-heading",
+				value:"Sponsored",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"C2",
+					under:"B1"
+				},
+			},
+			{
+				key:"sponsoredItemContainer a_p_p_ItemContainerSponsored a_p_p_ItemContainer a_p_p_HomeMisc",
+				type:"div",
+				options:{
+					css:{
+						// margin:0,
+						"margin-left":"10px",
+						"margin-top":"10px",
+						opacity:1
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"C1",
+					under:"B1"
+				},
+				delta:{
+					group:"sponsored"
+				}
+			},
+			{
+				key:"sponsoredItemImage a_p_p_ItemContainerSponsoredImage",
+				type:"image",
+				imageURL:"home/pexels-artem-beliaikin-2668308.jpg",
+				options:{
+					css:{
 
-			}
+					}
+				},
+				delta:{
+					group:"sponsored",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === "deltaNodeBootstrap"){
+								let sponsoredImages = ["home/pexels-martin-péchy-1292294.jpg"]
+								zChild[x].element.src = mediaPrefix({media:sponsoredImages[index]})
+							}
+						}
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"D2",
+					under:"C1"
+				}
+			},
+			{
+				key:"sponsoredItemText a_p_p_ItemContainerSponsoredText",
+				type:"text",
+				value:"Coca-Cola",
+
+				delta:{
+					group:"sponsored",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === "deltaNodeBootstrap"){
+								let sponsoredText = ["Pepsi"]
+								zChild[x].innerText.item = sponsoredText[index]
+							}
+						}
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"D3",
+					under:"C1"
+				}
+			},
 			].map((x:zProtoChildren | any,i)=>{
 				if(x?.nest?.under){
 					return x
