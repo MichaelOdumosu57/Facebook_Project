@@ -3,22 +3,7 @@ $font-family1 :Helvetica, Arial, sans-serif;
 $font-family2 :Segoe UI Historic;
 
 
-.wb-body::-webkit-scrollbar {
-    width: 12px;
-}
-.wb-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-.wb-body::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #263040;
-}
-.wb-body::-webkit-scrollbar-thumb:window-inactive {
-    background: #181f2a;
-}
-.wb-body::-webkit-scrollbar-corner {
-    background: transparent;
-}
+
 
 @font-face {
     font-family: 'SFProDisplay-Regular';
@@ -335,7 +320,8 @@ $white: rgba(255,255,255,0.3);
 
     &ItemContainer{
 
-        height:50px;
+        @include HomeMisc;
+        min-height:50px;
         border-radius: 50px;
         display: flex;
         flex-direction: row;
@@ -403,7 +389,7 @@ $white: rgba(255,255,255,0.3);
         width: 95%;
     }
 
-    &Sponsored,&yourPages{
+    &Sponsored,&yourPages,&Contacts{
 
         font-weight: 600 !important;
         &SubHeading:nth-child(n){
@@ -412,6 +398,10 @@ $white: rgba(255,255,255,0.3);
             margin:10px 0 0 25px;
             font-size:25px !important;
             font-family: $font-family2  !important;
+
+            &[class*="Contacts"]{
+                width:100%
+            }
         }
 
         &ItemContainer{
@@ -445,6 +435,12 @@ $white: rgba(255,255,255,0.3);
                 padding-top: 10px;
             }
 
+            &[class*="Contacts"]{
+                backdrop-filter:none;
+                box-shadow: none;
+                border: none;
+            }
+
         }
 
         &Icon:nth-child(n){
@@ -452,12 +448,23 @@ $white: rgba(255,255,255,0.3);
             width:35px;
             margin:0px 0 0px 20px;
             border-radius: 50px;
+
+
+            &[class*="Contacts"]{
+                margin:10px 0 10px 20px !important;
+            }
         }
 
         &Text{
             font-size:20px !important;
             font-family: $font-family2  !important;
             margin:0 0 0 25px !important;
+
+            &[class*="Contacts"]{
+                margin:10px 0 10px 25px !important;
+                flex-grow: 1;
+
+            }
         }
 
         &Desc{
@@ -480,6 +487,26 @@ $white: rgba(255,255,255,0.3);
     }
 
     &HomeMisc{
-        @include HomeMisc
+        @include HomeMisc;
+        &Container{
+            &::-webkit-scrollbar {
+                width: 12px;
+            }
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background: #263040;
+            }
+            &::-webkit-scrollbar-thumb:window-inactive {
+                background: #181f2a;
+                opacity:4px;
+            }
+            &::-webkit-scrollbar-corner {
+                background: transparent;
+            }
+
+        }
     }
 }

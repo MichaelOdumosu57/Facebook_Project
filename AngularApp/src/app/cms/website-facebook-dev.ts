@@ -2369,7 +2369,12 @@ let home_development :Array<zProtoComponent> = [
 							split:4,
 							gap:10,
 							stack:0
-						}
+						},
+						appVanillaTilt:{
+							confirm:"true",
+							type:"body",
+							zSymbolNeeded:"true"
+						},
 					}
 				},
 				navigation:{
@@ -2391,6 +2396,11 @@ let home_development :Array<zProtoComponent> = [
 							name:"yourPagesDesc",
 							type:"repeat",
 							by:1,
+						},
+						{
+							name:"contacts",
+							type:"repeat",
+							by:6,
 						}
 					]
 				},
@@ -2410,7 +2420,7 @@ let home_development :Array<zProtoComponent> = [
 			},
 			...[
 			{
-				key:"subNavigation a_p_p_subNav a_p_p_Glassmorphism",
+				key:"subNavigation a_p_p_subNav a_p_p_Glassmorphism a_p_p_HomeMiscContainer",
 				type:"div",
 				split:1,
 
@@ -2480,6 +2490,17 @@ let home_development :Array<zProtoComponent> = [
 					group:"sideNav",
 					name:"B1",
 					under:"A1"
+				},
+				options:{
+					extras:{
+						appVanillaTilt:{
+							type:"target",
+							group:"sideNav",
+							// initOptions:{
+							// 	perspective:100
+							// }
+						}
+					}
 				},
 				delta:{
 					group: "sideNav",
@@ -2570,7 +2591,7 @@ let home_development :Array<zProtoComponent> = [
 
 			},
 			{
-				key:"subNavigation a_p_p_HomeMisc",
+				key:"subNavigation a_p_p_HomeMisc a_p_p_HomeMiscContainer",
 				type:"div",
 				split:1,
 				options:{
@@ -2781,7 +2802,7 @@ let home_development :Array<zProtoComponent> = [
 
 				nest:{
 					group:"homeMisc",
-					name:"C5",
+					name:"D5",
 					under:"C4"
 				},
 			},
@@ -2804,8 +2825,123 @@ let home_development :Array<zProtoComponent> = [
 				},
 				nest:{
 					group:"homeMisc",
-					name:"D5",
-					under:"C5"
+					name:"E5",
+					under:"D5"
+				},
+			},
+			{
+				key:"strikethrough a_p_p_StrikeThrough",
+				type:"div",
+				value:"Coca-Cola",
+				nest:{
+					group:"homeMisc",
+					name:"B4",
+					under:"A1",
+				},
+
+			},
+			{
+				key:"ContactsContainer a_p_p_ItemContainer",
+				type:"div",
+				options:{
+					css:{
+						"margin-left":"10px",
+						opacity:1,
+						"flex-wrap":"wrap"
+
+					}
+				},
+
+				nest:{
+					group:"homeMisc",
+					name:"B5",
+					under:"A1"
+				}
+			},
+			{
+				key:"ContactsSubHeading a_p_p_ContactsSubHeading",
+				type:"sub-heading",
+				value:"Contacts",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"C5",
+					under:"B5"
+				},
+			},
+			{
+				key:"ContactsItemContainer a_p_p_ContactsItemContainer",
+				type:"div",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				delta:{
+					group:"contacts",
+				},
+				nest:{
+					group:"homeMisc",
+					name:"C6",
+					under:"B5"
+				},
+			},
+			{
+				key:"ContactsIcon a_p_p_ContactsIcon",
+				type:"image",
+				imageURL:"angular.png",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				delta:{
+					group:"contacts",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === 'deltaNodeBootstrap'){
+								let ContactsImg = ['ruby_programming.png',"scss.png","typescript.jpg","gcp.jpg","ibm_cloud.png","sql.png"]
+								zChild[x].element.src = mediaPrefix({media:ContactsImg[index]})
+							}
+						}
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"D6",
+					under:"C6"
+				},
+			},
+			{
+				key:"ContactsText a_p_p_ContactsText",
+				type:"text",
+				value:"Angular",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				delta:{
+					group:"contacts",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === 'deltaNodeBootstrap'){
+								let ContactsText = ['Ruby',"SCSS","TypeScript","GCP","IBM Cloud","SQL"]
+								zChild[x].innerText.item = ContactsText[index]
+							}
+						}
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"D7",
+					under:"C6"
 				},
 			},
 			].map((x:zProtoChildren | any,i)=>{
