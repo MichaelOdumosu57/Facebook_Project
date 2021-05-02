@@ -3,6 +3,23 @@ $font-family1 :Helvetica, Arial, sans-serif;
 $font-family2 :Segoe UI Historic;
 
 
+.wb-body::-webkit-scrollbar {
+    width: 12px;
+}
+.wb-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.wb-body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #263040;
+}
+.wb-body::-webkit-scrollbar-thumb:window-inactive {
+    background: #181f2a;
+}
+.wb-body::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
 @font-face {
     font-family: 'SFProDisplay-Regular';
     font-style: normal;
@@ -234,6 +251,14 @@ $font-family2 :Segoe UI Historic;
 
 $white: rgba(255,255,255,0.3);
 
+@mixin HomeMisc{
+    height: auto;
+    overflow:auto,
+}
+
+@mixin outline{
+    border: 3px dotted red;
+}
 
 .a_p_p_ {
     &NavIcon_Container {
@@ -371,11 +396,90 @@ $white: rgba(255,255,255,0.3);
 
     }
 
+    &StrikeThrough{
+        height: 1px;
+        background-color: grey;
+        margin:30px 0 20px 10px !important;
+        width: 95%;
+    }
 
+    &Sponsored,&yourPages{
+
+        font-weight: 600 !important;
+        &SubHeading:nth-child(n){
+
+            align-self: baseline;
+            margin:10px 0 0 25px;
+            font-size:25px !important;
+            font-family: $font-family2  !important;
+        }
+
+        &ItemContainer{
+
+            @include HomeMisc;
+            border-radius: 50px;
+            display: flex;
+            flex-direction: row;
+            align-self: center;
+            align-items: center;
+            width:95%;
+
+
+            border-radius: 30px;
+            // opacity: .5;
+            backdrop-filter: blur( 4px );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+
+            &:nth-child(n){
+                margin-top: 10px;
+            }
+
+            &:last-child{
+                margin-bottom: 20px;
+            }
+
+            &[class*="yourPages"]{
+                flex-wrap: wrap;
+                padding-top: 10px;
+            }
+
+        }
+
+        &Icon:nth-child(n){
+            height:35px;
+            width:35px;
+            margin:0px 0 0px 20px;
+            border-radius: 50px;
+        }
+
+        &Text{
+            font-size:20px !important;
+            font-family: $font-family2  !important;
+            margin:0 0 0 25px !important;
+        }
+
+        &Desc{
+
+            &Container{
+                @include HomeMisc;
+                align-self: baseline;
+                margin:10px 0 0 25px !important;
+                flex-direction: column;
+                flex-grow:3
+            }
+
+            &Text{
+                font-size: 13px !important;
+                font-family: $font-family2  !important;
+                margin: 10px !important;
+                font-weight: 700;
+            }
+        }
+    }
 
     &HomeMisc{
-        height: auto;
-        overflow:auto,
+        @include HomeMisc
     }
 }
-

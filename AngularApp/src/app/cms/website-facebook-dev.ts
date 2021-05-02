@@ -359,8 +359,6 @@ let login_development:Array<zProtoComponent> = [
 				},
 				options:{
 					css:{
-						"font-size":"14px",
-						"text-align":"center",
 						"background-color":"grey",
 						"z-index":"4"
 					},
@@ -2388,6 +2386,11 @@ let home_development :Array<zProtoComponent> = [
 							name:"sponsored",
 							type:"repeat",
 							by:1,
+						},
+						{
+							name:"yourPagesDesc",
+							type:"repeat",
+							by:1,
 						}
 					]
 				},
@@ -2683,6 +2686,128 @@ let home_development :Array<zProtoComponent> = [
 					under:"C1"
 				}
 			},
+			{
+				key:"strikethrough a_p_p_StrikeThrough",
+				type:"div",
+				value:"Coca-Cola",
+				nest:{
+					group:"homeMisc",
+					name:"B2",
+					under:"A1",
+				},
+
+			},
+			{
+				key:"yourPagesContainer a_p_p_ItemContainer a_p_p_HomeMisc",
+				type:"div",
+				options:{
+					css:{
+						"margin-left":"10px",
+						// "background-color": "white",
+						opacity:1,
+						"flex-direction":"column"
+					}
+				},
+
+				nest:{
+					group:"homeMisc",
+					name:"B3",
+					under:"A1"
+				}
+			},
+			{
+				key:"yourPagesSubHeading a_p_p_yourPagesSubHeading",
+				type:"sub-heading",
+				value:"Your Pages",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"C3",
+					under:"B3"
+				},
+			},
+			{
+				key:"yourPagesItemContainer a_p_p_yourPagesItemContainer",
+				type:"div",
+				value:"Your Pages",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"C4",
+					under:"B3"
+				},
+			},
+			{
+				key:"yourPagesIcon a_p_p_yourPagesIcon",
+				type:"image",
+				imageURL:"home/windmillcode.png",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"D1",
+					under:"C4"
+				},
+			},
+			{
+				key:"yourPagesText a_p_p_yourPagesText",
+				type:"text",
+				value:"WindMillCode",
+				options:{
+					css:{
+						opacity:1
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"D4",
+					under:"C4"
+				},
+			},
+			{
+				key:"yourPagesDescContainer a_p_p_yourPagesDescContainer",
+				type:"div",
+
+				nest:{
+					group:"homeMisc",
+					name:"C5",
+					under:"C4"
+				},
+			},
+			{
+				key:"yourPagesText a_p_p_yourPagesDescText",
+				type:"text",
+				value:"14 Notifications",
+
+				delta:{
+					group:"yourPagesDesc",
+					options:{
+						modify:(devObj)=>{
+							let {zChild,x,index,hook,co} = devObj
+							if(hook === "deltaNodeBootstrap"){
+								let yourPagesDescText = ["Create Promotion"]
+								zChild[x].innerText.item = yourPagesDescText[index]
+							}
+						}
+					}
+				},
+				nest:{
+					group:"homeMisc",
+					name:"D5",
+					under:"C5"
+				},
+			},
 			].map((x:zProtoChildren | any,i)=>{
 				if(x?.nest?.under){
 					return x
@@ -2690,7 +2815,8 @@ let home_development :Array<zProtoComponent> = [
 				x.height = 700
 				x.key += " a_p_p_Glassmorphism"
 				return x
-			})
+			}),
+
 		]
 	}
 ]

@@ -257,7 +257,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 
     logIn(devObj:{user:Array<string>,pass:Array<string>,zChildren:zChildren,type?:String}){
         let {type,user,pass,zChildren} = devObj
-        let {http,ryber} = this
+        let {http,ryber,renderer2} = this
 
         http.post(
             // "https://facebook-language-translator.herokuapp.com",
@@ -278,6 +278,12 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     // change the path
                     ryber.appCO0.metadata.navigation.full.navigated = "true"
                     ryber.appCurrentNav = "/home"
+                    //
+
+                    // unlock the website
+                    renderer2.removeClass(
+                        document.body,"a_p_p_BodyOverFlowHidden"
+                    )
                     //
                 }
             },
