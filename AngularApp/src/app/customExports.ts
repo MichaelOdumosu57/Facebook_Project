@@ -104,7 +104,7 @@ export interface zProtoChildren {
     stack?:String | Number;
     //
     options?:{
-        css?:CSSRuleList,
+        css?: any | CSSRuleList,
         judima?:zOptionsJudima,
         extras?:any |
         {
@@ -172,7 +172,7 @@ export interface zProtoChildren {
             name:String
         };
         zChildren?:Array<{
-            bool:String;
+            bool:string;
             css?:any | CSSRuleList
             val?:String
             text?:String

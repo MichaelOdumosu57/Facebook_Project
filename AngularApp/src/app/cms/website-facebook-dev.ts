@@ -2428,706 +2428,756 @@ let home_development :Array<zProtoComponent> = [
 
 			},
 			...[
-			{
-				key:"subNavigation a_p_p_subNav a_p_p_Glassmorphism a_p_p_HomeMiscContainer",
-				type:"div",
-				split:1,
+				...[
+					{
+						key:"subNavigation a_p_p_subNav a_p_p_Glassmorphism a_p_p_HomeMiscContainer",
+						type:"div",
+						split:1,
 
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"homeOverlay"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"home-background a_p_p_MainBackground",
-							css:{
-								"z-index":2,
+						latch:{
+							type:"display",
+							display:{
+								type:"target",
+								name:"homeOverlay"
 							},
-							logic:{
-								desktop:{
-									width:(devObj)=>{
-										let {css,zSymbol,delta,zChildren} = devObj
-										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+							zChildren:[
+								{
+									bool:"div",
+									val:"home-background a_p_p_MainBackground",
+									css:{
+										"z-index":2,
+									},
+									logic:{
+										desktop:{
+											width:(devObj)=>{
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
-									},
-									height:1.5,
-									top:(devObj)=>{
-										let {} = devObj
-										return 0
-									},
-									left:(devObj)=>{
-										let {} = devObj
-										return 0
-									}
-								},
-								mobile:{
-									width:(devObj)=>{
-										let {css,zSymbol,delta,zChildren} = devObj
-										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+											},
+											height:1.5,
+											top:(devObj)=>{
+												let {} = devObj
+												return 0
+											},
+											left:(devObj)=>{
+												let {} = devObj
+												return 0
+											}
+										},
+										mobile:{
+											width:(devObj)=>{
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
+											},
+											height:1.15,
+											top:(devObj)=>{
+												let {} = devObj
+												return 0
+											},
+											left:(devObj)=>{
+												let {} = devObj
+												return 0
+											}
+										}
 									},
-									height:1.15,
-									top:(devObj)=>{
-										let {} = devObj
-										return 0
-									},
-									left:(devObj)=>{
-										let {} = devObj
-										return 0
+
+									group:["homeOverlay"]
+								}
+							]
+						},
+						nest:{
+							group:"sideNav",
+							name:"A1"
+						},
+
+
+					},
+					{
+						key:"item-container a_p_p_ItemContainer ",
+						type:"div",
+						nest:{
+							group:"sideNav",
+							name:"B1",
+							under:"A1"
+						},
+						options:{
+							extras:{
+								appVanillaTilt:{
+									type:"target",
+									group:"sideNav",
+								}
+							}
+						},
+						delta:{
+							group: "sideNav",
+						}
+					},
+					{
+						key:"item-icon a_p_p_ItemIcon",
+						type:"image",
+						nest:{
+							group:"sideNav",
+							name:"C1",
+							under:"B1"
+						},
+						delta:{
+							group: "sideNav",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === "deltaNodeBootstrap"){
+										let icons = ["find_friends_sidenav.png",
+										"timer.png",
+										"star.png",
+										"groups.png",
+										"marketplace.png",
+										"watch.png",
+										"events.png",
+										"memories.png",
+										"saved.png"
+										].map((x:string,i)=>{
+											return "sideNav/" +x
+										})
+										zChild[x].element.src = mediaPrefix({media:icons[index]})
 									}
 								}
+							}
+						}
+					},
+					{
+						key:"item-text a_p_p_ItemText",
+						type:"text",
+						nest:{
+							group:"sideNav",
+							name:"C2",
+							under:"B1"
+						},
+						options:{
+							css:{
+								"font-size":"16px"
+							}
+						},
+						value:"Python3",
+						delta:{
+							group: "sideNav",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === "deltaNodeBootstrap"){
+										let titles = ["Find Friends",
+										"timer",
+										"star",
+										"groups",
+										"marketplace",
+										"watch",
+										"events",
+										"memories",
+										"saved"
+										].map((x:string,i)=>{
+											return x.charAt(0).toUpperCase() + x.slice(1)
+										})
+										zChild[x].innerText.item = titles[index]
+									}
+								}
+							}
+						}
+					},
+				],
+				...[
+					{
+						key:"subNavigation",
+						type:"div",
+						split:1.9,
+						nest:{
+							group:"newsFeed",
+							name:"A1"
+						},
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+
+					},
+					{
+						key:"newsFeedContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer",
+						type:"div",
+						options:{
+							css:{
+								"margin-left":"10px",
+								"flex-direction":"column",
+								opacity:1,
+							}
+						},
+
+						nest:{
+							group:"newsFeed",
+							name:"B1",
+							under:"A1"
+						}
+					},
+					{
+						key:"newsFeedContainer",
+						type:"div",
+						options:{
+							css:{
+								opacity:1,
+								display: "flex",
+								"flex-direction":"row",
+								"margin":"10px 0 0 10px",
+								"flex-wrap":"wrap",
+								"width":"90%"
+							}
+						},
+						nest:{
+							group:"newsFeed",
+							name:"C1",
+							under:"B1"
+						}
+					},
+					{
+						key:"newsFeedIcon  a_p_p_NewsFeedIcon",
+						type:"image",
+						imageURL:"python.jpg",
+						options:{
+							css:{
+								opacity:1,
+								margin:"10px 0 0 0"
+							}
+						},
+						nest:{
+							group:"newsFeed",
+							name:"D1",
+							under:"C1"
+						}
+					},
+					{
+						key:"newsFeedInput a_p_p_NewsFeedInput",
+						type:"input",
+						options:{
+							css:{
+								opacity:1,
+								"flex-grow":1
+							},
+							extend:{
+								placeholder:"What's on your mind?",
+								disabled:"true"
 							},
 
-							group:["homeOverlay"]
-						}
-					]
-				},
-				nest:{
-					group:"sideNav",
-					name:"A1"
-				},
+						},
+						latch:{
+							type:"display",
+							display:{
+								type:"target",
+								name:"createPost",
+							},
+							zChildren:[
+								{
+									bool:"div",
+									css:{
+										"background-color":"grey",
+										"z-index":9
+									},
+									logic:{
+										desktop:{
+											width:(devObj)=>{
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
+											},
+											height:1.5,
+											top:(devObj)=>{
+												let {} = devObj
+												return 0
+											},
+											left:(devObj)=>{
+												let {} = devObj
+												return 0
+											}
+										},
+										mobile:{
+											width:(devObj)=>{
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
-			},
-			{
-				key:"item-container a_p_p_ItemContainer ",
-				type:"div",
-				nest:{
-					group:"sideNav",
-					name:"B1",
-					under:"A1"
-				},
-				options:{
-					extras:{
-						appVanillaTilt:{
-							type:"target",
-							group:"sideNav",
+											},
+											height:1.15,
+											top:(devObj)=>{
+												let {} = devObj
+												return 0
+											},
+											left:(devObj)=>{
+												let {} = devObj
+												return 0
+											}
+										}
+									},
+									group:["createPost"]
+								}
+							]
+						},
+						nest:{
+							group:"newsFeed",
+							name:"D2",
+							under:"C1"
 						}
-					}
-				},
-				delta:{
-					group: "sideNav",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === "deltaNodeBootstrap"){
-
-							}
-						}
-					}
-				}
-			},
-			{
-				key:"item-icon a_p_p_ItemIcon",
-				type:"image",
-				nest:{
-					group:"sideNav",
-					name:"C1",
-					under:"B1"
-				},
-				delta:{
-					group: "sideNav",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === "deltaNodeBootstrap"){
-								let icons = ["find_friends_sidenav.png",
-								"timer.png",
-								"star.png",
-								"groups.png",
-								"marketplace.png",
-								"watch.png",
-								"events.png",
-								"memories.png",
-								"saved.png"
-								].map((x:string,i)=>{
-									return "sideNav/" +x
-								})
-								zChild[x].element.src = mediaPrefix({media:icons[index]})
-							}
-						}
-					}
-				}
-			},
-			{
-				key:"item-text a_p_p_ItemText",
-				type:"text",
-				nest:{
-					group:"sideNav",
-					name:"C2",
-					under:"B1"
-				},
-				options:{
-					css:{
-						"font-size":"16px"
-					}
-				},
-				value:"Python3",
-				delta:{
-					group: "sideNav",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === "deltaNodeBootstrap"){
-								let titles = ["Find Friends",
-								"timer",
-								"star",
-								"groups",
-								"marketplace",
-								"watch",
-								"events",
-								"memories",
-								"saved"
-								].map((x:string,i)=>{
-									return x.charAt(0).toUpperCase() + x.slice(1)
-								})
-								zChild[x].innerText.item = titles[index]
-							}
-						}
-					}
-				}
-			},
-			...[
-			{
-				key:"subNavigation",
-				type:"div",
-				split:1.9,
-				nest:{
-					group:"newsFeed",
-					name:"A1"
-				},
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-
-			},
-			{
-				key:"newsFeedContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer",
-				type:"div",
-				options:{
-					css:{
-						"margin-left":"10px",
-						"flex-direction":"column",
-						opacity:1,
-					}
-				},
-
-				nest:{
-					group:"newsFeed",
-					name:"B1",
-					under:"A1"
-				}
-			},
-			{
-				key:"newsFeedContainer",
-				type:"div",
-				options:{
-					css:{
-						opacity:1,
-						display: "flex",
-						"flex-direction":"row",
-						"margin":"10px 0 0 10px",
-						"flex-wrap":"wrap",
-						"width":"90%"
-					}
-				},
-				nest:{
-					group:"newsFeed",
-					name:"C1",
-					under:"B1"
-				}
-			},
-			{
-				key:"newsFeedIcon  a_p_p_NewsFeedIcon",
-				type:"image",
-				imageURL:"python.jpg",
-				options:{
-					css:{
-						opacity:1,
-						margin:"10px 0 0 0"
-					}
-				},
-				nest:{
-					group:"newsFeed",
-					name:"D1",
-					under:"C1"
-				}
-			},
-			{
-				key:"newsFeedInput a_p_p_NewsFeedInput",
-				type:"input",
-				options:{
-					css:{
-						opacity:1,
-						"flex-grow":1
 					},
-					extend:{
-						placeholder:"What's on your mind?"
-					}
-				},
-				nest:{
-					group:"newsFeed",
-					name:"D2",
-					under:"C1"
-				}
-			},
-			{
-				key:"strikethrough a_p_p_NewsFeedStrikeThrough",
-				type:"div",
-				options:{
+					{
+						key:"strikethrough a_p_p_NewsFeedStrikeThrough",
+						type:"div",
+						options:{
 
-				},
-				nest:{
-					group:"newsFeed",
-					name:"C2",
-					under:"B1"
-				}
-			},
-			{
-				key:"newsFeedContainer a_p_p_newsFeedItemContainer",
-				type:"div",
-				options:{
-					css:{
-						opacity:1,
-						display: "flex",
-						"flex-direction":"row",
-						"margin":"10px 0 10px 10px",
-						"flex-wrap":"wrap",
-						"width":"90%"
-					}
-				},
-				nest:{
-					group:"newsFeed",
-					name:"C3",
-					under:"B1"
-				}
-			},
-			{
-				key:"newsFeedImage a_p_p_newsFeedImage",
-				type:"image",
-				imageURL:"home/liveVideo.png",
-				options:{
-					css:{
-						"border-radius":"50px",
-						
-					}
-				},
-				delta:{
-					group:"onYourMind",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === 'deltaNodeBootstrap'){
-								let items = ["home/photoVideo.png","home/smiley.png"]
-								zChild[x].element.src = mediaPrefix({media:items[index]})
-							}
+						},
+						nest:{
+							group:"newsFeed",
+							name:"C2",
+							under:"B1"
 						}
-					}
-				},
-				nest:{
-					group:"newsFeed",
-					name:"D3",
-					under:"C3"
-				}
-			},
-			{
-				key:"newsFeedText a_p_p_NewsFeedText",
-				type:"text",
-				value:"Live Video",
-				options:{
-					css:{
-						"margin-top":"10px"
-					}
-				},
-				delta:{
-					group:"onYourMind",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === 'deltaNodeBootstrap'){
-								let items = ['Photo/Video','Feeling/Activity']
-								zChild[x].innerText.item = items[index]
-							}
-						}
-					}
-				},
-				nest:{
-					group:"newsFeed",
-					name:"D4",
-					under:"C3"
-				}
-			},
-			],
-
-
-
-
-			{
-				key:"subNavigation a_p_p_HomeMisc a_p_p_HomeMiscContainer",
-				type:"div",
-				split:1,
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"A1"
-				}
-			},
-			{
-				key:"sponsoredContainer a_p_p_ItemContainer a_p_p_HomeMisc",
-				type:"div",
-				options:{
-					css:{
-						"margin-left":"10px",
-						// "background-color": "white",
-						overflow:"hidden",
-						opacity:1,
-						"flex-direction":"column"
-					}
-				},
-
-				nest:{
-					group:"homeMisc",
-					name:"B1",
-					under:"A1"
-				}
-			},
-			{
-				key:"sponsoredHeading a_p_p_ItemContainerSponsoredSubHeading",
-				type:"sub-heading",
-				value:"Sponsored",
-				options:{
-					css:{
-						opacity:1
 					},
-				},
-				nest:{
-					group:"homeMisc",
-					name:"C2",
-					under:"B1"
-				},
-			},
-			{
-				key:"sponsoredItemContainer a_p_p_ItemContainerSponsored a_p_p_ItemContainer a_p_p_HomeMisc",
-				type:"div",
-				options:{
-					css:{
-						// margin:0,
-						"margin-left":"10px",
-						"margin-top":"10px",
-						opacity:1
+					{
+						key:"newsFeedContainer a_p_p_newsFeedItemContainer",
+						type:"div",
+						options:{
+							css:{
+								opacity:1,
+								display: "flex",
+								"flex-direction":"row",
+								"margin":"10px 0 10px 10px",
+								"flex-wrap":"wrap",
+								"width":"90%"
+							}
+						},
+						nest:{
+							group:"newsFeed",
+							name:"C3",
+							under:"B1"
+						}
 					},
-					extras:{
-						appVanillaTilt:{
-							type:"target",
-							group:"sideNav",
-						}
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"C1",
-					under:"B1"
-				},
-				delta:{
-					group:"sponsored"
-				}
-			},
-			{
-				key:"sponsoredItemImage a_p_p_ItemContainerSponsoredImage",
-				type:"image",
-				imageURL:"home/pexels-artem-beliaikin-2668308.jpg",
-				options:{
-					css:{
+					{
+						key:"newsFeedImage a_p_p_newsFeedImage",
+						type:"image",
+						imageURL:"home/liveVideo.png",
+						options:{
+							css:{
+								"border-radius":"50px",
 
-					}
-				},
-				delta:{
-					group:"sponsored",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === "deltaNodeBootstrap"){
-								let sponsoredImages = ["home/pexels-martin-péchy-1292294.jpg"]
-								zChild[x].element.src = mediaPrefix({media:sponsoredImages[index]})
+							},
+
+						},
+						delta:{
+							group:"onYourMind",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === 'deltaNodeBootstrap'){
+										let items = ["home/photoVideo.png","home/smiley.png"]
+										zChild[x].element.src = mediaPrefix({media:items[index]})
+									}
+								}
 							}
+						},
+						nest:{
+							group:"newsFeed",
+							name:"D3",
+							under:"C3"
 						}
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"D2",
-					under:"C1"
-				}
-			},
-			{
-				key:"sponsoredItemText a_p_p_ItemContainerSponsoredText",
-				type:"text",
-				value:"Coca-Cola",
-
-				delta:{
-					group:"sponsored",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === "deltaNodeBootstrap"){
-								let sponsoredText = ["Pepsi"]
-								zChild[x].innerText.item = sponsoredText[index]
+					},
+					{
+						key:"newsFeedText a_p_p_NewsFeedText",
+						type:"text",
+						value:"Live Video",
+						options:{
+							css:{
+								"margin-top":"10px"
 							}
-						}
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"D3",
-					under:"C1"
-				}
-			},
-			{
-				key:"strikethrough a_p_p_StrikeThrough",
-				type:"div",
-				value:"Coca-Cola",
-				nest:{
-					group:"homeMisc",
-					name:"B2",
-					under:"A1",
-				},
-
-			},
-			{
-				key:"yourPagesContainer a_p_p_ItemContainer a_p_p_HomeMisc",
-				type:"div",
-				options:{
-					css:{
-						"margin-left":"10px",
-						// "background-color": "white",
-						opacity:1,
-						"flex-direction":"column"
-					}
-				},
-
-				nest:{
-					group:"homeMisc",
-					name:"B3",
-					under:"A1"
-				}
-			},
-			{
-				key:"yourPagesSubHeading a_p_p_yourPagesSubHeading",
-				type:"sub-heading",
-				value:"Your Pages",
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"C3",
-					under:"B3"
-				},
-			},
-			{
-				key:"yourPagesItemContainer a_p_p_yourPagesItemContainer",
-				type:"div",
-				value:"Your Pages",
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"C4",
-					under:"B3"
-				},
-			},
-			{
-				key:"yourPagesIcon a_p_p_yourPagesIcon",
-				type:"image",
-				imageURL:"home/windmillcode.png",
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"D1",
-					under:"C4"
-				},
-			},
-			{
-				key:"yourPagesText a_p_p_yourPagesText",
-				type:"text",
-				value:"WindMillCode",
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"D4",
-					under:"C4"
-				},
-			},
-			{
-				key:"yourPagesDescContainer a_p_p_yourPagesDescContainer",
-				type:"div",
-
-				nest:{
-					group:"homeMisc",
-					name:"D5",
-					under:"C4"
-				},
-			},
-			{
-				key:"yourPagesText a_p_p_yourPagesDescText",
-				type:"text",
-				value:"14 Notifications",
-
-				delta:{
-					group:"yourPagesDesc",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === "deltaNodeBootstrap"){
-								let yourPagesDescText = ["Create Promotion"]
-								zChild[x].innerText.item = yourPagesDescText[index]
+						},
+						delta:{
+							group:"onYourMind",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === 'deltaNodeBootstrap'){
+										let items = ['Photo/Video','Feeling/Activity']
+										zChild[x].innerText.item = items[index]
+									}
+								}
 							}
+						},
+						nest:{
+							group:"newsFeed",
+							name:"D4",
+							under:"C3"
 						}
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"E5",
-					under:"D5"
-				},
-			},
-			{
-				key:"strikethrough a_p_p_StrikeThrough",
-				type:"div",
-				value:"Coca-Cola",
-				nest:{
-					group:"homeMisc",
-					name:"B4",
-					under:"A1",
-				},
-
-			},
-			{
-				key:"ContactsContainer a_p_p_ItemContainer",
-				type:"div",
-				options:{
-					css:{
-						"margin-left":"10px",
-						opacity:1,
-						"flex-wrap":"wrap"
-
-					}
-				},
-
-				nest:{
-					group:"homeMisc",
-					name:"B5",
-					under:"A1"
-				}
-			},
-			{
-				key:"ContactsSubHeading a_p_p_ContactsSubHeading",
-				type:"sub-heading",
-				value:"Contacts",
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"C5",
-					under:"B5"
-				},
-			},
-			{
-				key:"ContactsItemContainer a_p_p_ContactsItemContainer",
-				type:"div",
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				delta:{
-					group:"contacts",
-				},
-				nest:{
-					group:"homeMisc",
-					name:"C6",
-					under:"B5"
-				},
-			},
-			{
-				key:"ContactsIcon a_p_p_ContactsIcon",
-				type:"image",
-				imageURL:"angular.png",
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				delta:{
-					group:"contacts",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === 'deltaNodeBootstrap'){
-								let ContactsImg = ['ruby_programming.png',"scss.png","typescript.jpg","gcp.jpg","ibm_cloud.png","sql.png"]
-								zChild[x].element.src = mediaPrefix({media:ContactsImg[index]})
+					},
+				],
+				...[
+					{
+						key:"subNavigation a_p_p_HomeMisc a_p_p_HomeMiscContainer",
+						type:"div",
+						split:1,
+						options:{
+							css:{
+								opacity:1
 							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"A1"
 						}
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"D6",
-					under:"C6"
-				},
-			},
-			{
-				key:"ContactsText a_p_p_ContactsText",
-				type:"text",
-				value:"Angular",
-				options:{
-					css:{
-						opacity:1
-					}
-				},
-				delta:{
-					group:"contacts",
-					options:{
-						modify:(devObj)=>{
-							let {zChild,x,index,hook,co} = devObj
-							if(hook === 'deltaNodeBootstrap'){
-								let ContactsText = ['Ruby',"SCSS","TypeScript","GCP","IBM Cloud","SQL"]
-								zChild[x].innerText.item = ContactsText[index]
+					},
+					{
+						key:"sponsoredContainer a_p_p_ItemContainer a_p_p_HomeMisc",
+						type:"div",
+						options:{
+							css:{
+								"margin-left":"10px",
+								// "background-color": "white",
+								overflow:"hidden",
+								opacity:1,
+								"flex-direction":"column"
 							}
+						},
+
+						nest:{
+							group:"homeMisc",
+							name:"B1",
+							under:"A1"
 						}
-					}
-				},
-				nest:{
-					group:"homeMisc",
-					name:"D7",
-					under:"C6"
-				},
-			},
+					},
+					{
+						key:"sponsoredHeading a_p_p_ItemContainerSponsoredSubHeading",
+						type:"sub-heading",
+						value:"Sponsored",
+						options:{
+							css:{
+								opacity:1
+							},
+						},
+						nest:{
+							group:"homeMisc",
+							name:"C2",
+							under:"B1"
+						},
+					},
+					{
+						key:"sponsoredItemContainer a_p_p_ItemContainerSponsored a_p_p_ItemContainer a_p_p_HomeMisc",
+						type:"div",
+						options:{
+							css:{
+								// margin:0,
+								"margin-left":"10px",
+								"margin-top":"10px",
+								opacity:1
+							},
+							extras:{
+								appVanillaTilt:{
+									type:"target",
+									group:"sideNav",
+								}
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"C1",
+							under:"B1"
+						},
+						delta:{
+							group:"sponsored"
+						}
+					},
+					{
+						key:"sponsoredItemImage a_p_p_ItemContainerSponsoredImage",
+						type:"image",
+						imageURL:"home/pexels-artem-beliaikin-2668308.jpg",
+						options:{
+							css:{
+
+							}
+						},
+						delta:{
+							group:"sponsored",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === "deltaNodeBootstrap"){
+										let sponsoredImages = ["home/pexels-martin-péchy-1292294.jpg"]
+										zChild[x].element.src = mediaPrefix({media:sponsoredImages[index]})
+									}
+								}
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"D2",
+							under:"C1"
+						}
+					},
+					{
+						key:"sponsoredItemText a_p_p_ItemContainerSponsoredText",
+						type:"text",
+						value:"Coca-Cola",
+
+						delta:{
+							group:"sponsored",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === "deltaNodeBootstrap"){
+										let sponsoredText = ["Pepsi"]
+										zChild[x].innerText.item = sponsoredText[index]
+									}
+								}
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"D3",
+							under:"C1"
+						}
+					},
+					{
+						key:"strikethrough a_p_p_StrikeThrough",
+						type:"div",
+						value:"Coca-Cola",
+						nest:{
+							group:"homeMisc",
+							name:"B2",
+							under:"A1",
+						},
+
+					},
+				],
+				...[
+					{
+						key:"yourPagesContainer a_p_p_ItemContainer a_p_p_HomeMisc",
+						type:"div",
+						options:{
+							css:{
+								"margin-left":"10px",
+								// "background-color": "white",
+								opacity:1,
+								"flex-direction":"column"
+							}
+						},
+
+						nest:{
+							group:"homeMisc",
+							name:"B3",
+							under:"A1"
+						}
+					},
+					{
+						key:"yourPagesSubHeading a_p_p_yourPagesSubHeading",
+						type:"sub-heading",
+						value:"Your Pages",
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"C3",
+							under:"B3"
+						},
+					},
+					{
+						key:"yourPagesItemContainer a_p_p_yourPagesItemContainer",
+						type:"div",
+						value:"Your Pages",
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"C4",
+							under:"B3"
+						},
+					},
+					{
+						key:"yourPagesIcon a_p_p_yourPagesIcon",
+						type:"image",
+						imageURL:"home/windmillcode.png",
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"D1",
+							under:"C4"
+						},
+					},
+					{
+						key:"yourPagesText a_p_p_yourPagesText",
+						type:"text",
+						value:"WindMillCode",
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"D4",
+							under:"C4"
+						},
+					},
+					{
+						key:"yourPagesDescContainer a_p_p_yourPagesDescContainer",
+						type:"div",
+
+						nest:{
+							group:"homeMisc",
+							name:"D5",
+							under:"C4"
+						},
+					},
+					{
+						key:"yourPagesText a_p_p_yourPagesDescText",
+						type:"text",
+						value:"14 Notifications",
+
+						delta:{
+							group:"yourPagesDesc",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === "deltaNodeBootstrap"){
+										let yourPagesDescText = ["Create Promotion"]
+										zChild[x].innerText.item = yourPagesDescText[index]
+									}
+								}
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"E5",
+							under:"D5"
+						},
+					},
+					{
+						key:"strikethrough a_p_p_StrikeThrough",
+						type:"div",
+						value:"Coca-Cola",
+						nest:{
+							group:"homeMisc",
+							name:"B4",
+							under:"A1",
+						},
+
+					},
+				],
+				...[
+					{
+						key:"ContactsContainer a_p_p_ItemContainer",
+						type:"div",
+						options:{
+							css:{
+								"margin-left":"10px",
+								opacity:1,
+								"flex-wrap":"wrap"
+
+							}
+						},
+
+						nest:{
+							group:"homeMisc",
+							name:"B5",
+							under:"A1"
+						}
+					},
+					{
+						key:"ContactsSubHeading a_p_p_ContactsSubHeading",
+						type:"sub-heading",
+						value:"Contacts",
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"C5",
+							under:"B5"
+						},
+					},
+					{
+						key:"ContactsItemContainer a_p_p_ContactsItemContainer",
+						type:"div",
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+						delta:{
+							group:"contacts",
+						},
+						nest:{
+							group:"homeMisc",
+							name:"C6",
+							under:"B5"
+						},
+					},
+					{
+						key:"ContactsIcon a_p_p_ContactsIcon",
+						type:"image",
+						imageURL:"angular.png",
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+						delta:{
+							group:"contacts",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === 'deltaNodeBootstrap'){
+										let ContactsImg = ['ruby_programming.png',"scss.png","typescript.jpg","gcp.jpg","ibm_cloud.png","sql.png"]
+										zChild[x].element.src = mediaPrefix({media:ContactsImg[index]})
+									}
+								}
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"D6",
+							under:"C6"
+						},
+					},
+					{
+						key:"ContactsText a_p_p_ContactsText",
+						type:"text",
+						value:"Angular",
+						options:{
+							css:{
+								opacity:1
+							}
+						},
+						delta:{
+							group:"contacts",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === 'deltaNodeBootstrap'){
+										let ContactsText = ['Ruby',"SCSS","TypeScript","GCP","IBM Cloud","SQL"]
+										zChild[x].innerText.item = ContactsText[index]
+									}
+								}
+							}
+						},
+						nest:{
+							group:"homeMisc",
+							name:"D7",
+							under:"C6"
+						},
+					},
+				],
 			].map((x:zProtoChildren | any,i)=>{
 				if(x?.nest?.under){
 					return x

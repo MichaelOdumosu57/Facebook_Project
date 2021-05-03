@@ -116,11 +116,7 @@ input {
     padding: 0px 0px 0px 0px;
 }
 
-// modification for webrtc
-.incomingPhoto {
-    position: initial !important;
-}
-//
+
 
 
 /* input::-webkit-calendar-picker-indicator{
@@ -198,11 +194,13 @@ app-root :not([class^='ag']) {
     font-family : 'Roboto', sans-serif;
     border:0px;
     border-bottom:2px solid black;
+
+    &Invalid{
+        border: 5px solid red;
+    }
 }
 
-.a_p_p_InputInvalid{
-    border: 5px solid red;
-}
+
 
 
 .a_p_p_TextArea{

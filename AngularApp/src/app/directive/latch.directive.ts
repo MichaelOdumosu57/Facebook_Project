@@ -448,6 +448,7 @@ export class LatchDirective {
 							return true
 						})
 
+
 						extras.display.targets =  extras.zChildren
 						.map((x:any,i)=>{
 
@@ -459,24 +460,20 @@ export class LatchDirective {
 							}
 
 
-							// console.group()
+
 							let neededTargets
 							if(x?.type?.includes("deltaNodeContainer")){
 								neededTargets = x.neededTargets= extras.display.targets
 								.filter((y:any,j)=>{
-									// console.log(zChildren[y].extras.appLatch.display.name)
 									return x.originalGroup.includes(zChildren[y].extras.appLatch.display.originalName)
 								})
 							}
 							else{
 								neededTargets = x.neededTargets= extras.display.targets
 								.filter((y:any,j)=>{
-									// console.log(zChildren[y].extras.appLatch.display.name)
 									return x.group.includes(zChildren[y].extras.appLatch.display.name)
 								})
 							}
-							// console.log(x.group)
-							// console.groupEnd()
 
 							this._displayDetermineDims({
 								dims, neededTargets, zChildren:this.zChildren, css,
@@ -526,6 +523,7 @@ export class LatchDirective {
 
 							return symbol
 						})
+
 
 
 						// console.log(extras.zChildren)
@@ -626,37 +624,50 @@ export class LatchDirective {
 			horizontal:null,
 			current:null
 		}
-		dims
-		.forEach((z: any, k) => {
-			delta.current = minMaxDelta({
-				type: "identify",
-				items: neededTargets,
-				min: (item) => {
-					return {
-						key: item,
-						value: numberParse(zChildren[item].css[z[0]])
-					};
-				},
-				max: (item) => {
-					return {
-						key: item,
-						value: numberParse(zChildren[item].css[z[0]]) +
-							numberParse(zChildren[item].css[z[1]])
-					};
-				}
-			});
 
-			css[z[0]] = delta.current.min.value;
-			css[z[1]] = delta.current.max.value - delta.current.min.value;
-			delta[Object.keys(delta)[k]] = delta.current
+		// determine if there nested zChildren
+			/* nested zChildren cannot have display wrap around them since they dont have
+			 the css props required, in relation to the target zChild they belong to the app and you can only use functions  */
+		let dimsAvailble = neededTargets
+		.filter((z:any,k)=>{
+			return zChildren[z].extras.judima.topLevelZChild === "false"
 		})
+		//
+
+		if(dimsAvailble.length === 0){
+			dims
+			.forEach((z: any, k) => {
+				delta.current = minMaxDelta({
+					type: "identify",
+					items: neededTargets,
+					min: (item) => {
+						return {
+							key: item,
+							value: numberParse(zChildren[item].css[z[0]])
+						};
+					},
+					max: (item) => {
+						return {
+							key: item,
+							value: numberParse(zChildren[item].css[z[0]]) +
+								numberParse(zChildren[item].css[z[1]])
+						};
+					}
+				});
+
+				css[z[0]] = delta.current.min.value;
+				css[z[1]] = delta.current.max.value - delta.current.min.value;
+				delta[Object.keys(delta)[k]] = delta.current
+			})
+		}
+
 
 		Object.entries(logic)
 		.forEach((y:any,i)=>{
 			let key = y[0]
 			let val = y[1]
 			// console.log(key,val)
-			if(typeof val ==="number"){
+			if(typeof val ==="number" && dimsAvailble.length === 0){
 				if(["width","height"].includes(key)){
 					css[key] = (val * css[key]).toString() + "px"
 				}

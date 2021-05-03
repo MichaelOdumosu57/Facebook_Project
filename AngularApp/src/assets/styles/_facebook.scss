@@ -76,12 +76,13 @@ $font-family2 :Segoe UI Historic;
     width: 330px;
     border-radius: 6px;
     font-family: Helvetica, Arial, sans-serif;
+
+    &:focus{
+        border-color:blue !important;
+    }
 }
 
-.login-page.a_p_p_Input:focus{
-    border-color:blue !important;
-}
-// not working for some reason
+
 
 
 .a_p_p_Container {
@@ -408,7 +409,11 @@ $white: rgba(255,255,255,0.3);
             text-align: left;
             font-size:17px !important;
             margin:5px 10px 5px 10px !important;
-            padding:10px 50px 10px 10px !important
+            padding:10px 50px 10px 10px !important;
+
+            &:focus,&:hover{
+                background-color: rgba(105, 95, 95, 0.3);
+            }
         }
         &SubHeading:nth-child(n){
 
