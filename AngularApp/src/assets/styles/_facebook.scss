@@ -106,7 +106,8 @@ $font-family2 :Segoe UI Historic;
     font-family: inherit;
 }
 
-.login-page.a_p_p_Button {
+
+@mixin blue-button{
     direction: ltr;
     word-wrap: break-word;
     margin: 0;
@@ -128,6 +129,9 @@ $font-family2 :Segoe UI Historic;
     padding: 0 16px;
     width: 332px;
     font-family: Helvetica, Arial, sans-serif;
+}
+.login-page.a_p_p_Button {
+    @include blue-button;
 }
 
 .a_p_p_Anchor{
@@ -233,8 +237,6 @@ $font-family2 :Segoe UI Historic;
 
 
 
-
-
 $white: rgba(255,255,255,0.3);
 
 @mixin HomeMisc{
@@ -251,11 +253,22 @@ $white: rgba(255,255,255,0.3);
 }
 //
 
+// utility classes
+.f_a_c_e_b_o_o_k_{
+    &Transparent{
+        background:transparent
+    }
+
+
+}
+//
+
 @mixin strikeThrough{
     height: 1px;
     background-color: grey;
     width: 95%;
 }
+
 
 .a_p_p_ {
     &NavIcon_Container {
@@ -264,8 +277,6 @@ $white: rgba(255,255,255,0.3);
         z-index: 2;
         // opacity:.4;
     }
-
-
 
     &FacebookInput {
         padding: 1em;
@@ -401,10 +412,24 @@ $white: rgba(255,255,255,0.3);
         margin:30px 0 20px 10px !important;
     }
 
-    &NewsFeed,&Sponsored,&yourPages,&Contacts{
+    &CreatePost,&NewsFeed,&Sponsored,&yourPages,&Contacts{
 
         font-weight: 600 !important;
+        &Button{
+            @include blue-button;
+        }
+        &Modal{
+            z-index:13 !important;
 
+            &TextArea{
+                border:transparent;
+                padding:0 0 0 25px;
+                font-family: $font-family2;
+                &::placeholder{
+                    font-family: $font-family2;
+                }
+            }
+        }
         &Input{
             text-align: left;
             font-size:17px !important;
@@ -424,6 +449,11 @@ $white: rgba(255,255,255,0.3);
 
             &[class*="Contacts"]{
                 width:100%
+            }
+
+            &[class*="CreatePost"]{
+                margin :0 ;
+                font-size:20px !important;
             }
         }
 
@@ -486,13 +516,16 @@ $white: rgba(255,255,255,0.3);
             &[class*="Contacts"]{
                 margin:10px 0 10px 25px !important;
                 flex-grow: 1;
-
             }
 
             &[class*="NewsFeed"]{
                 margin:5px 0 10px 15px !important;
                 flex-grow: 1;
+            }
 
+            &[class*="CreatePost"]{
+                font-size:15px !important;
+                margin:0  !important;
             }
         }
 

@@ -10,11 +10,13 @@ declare global {
     var xPosition
     var judimaPageOffset
     var mediaPrefix
+    var latchUtilities:{centerX:Function}
 }
 window.numberParse = numberParse
 window.xPosition = xPosition
 window.judimaPageOffset = judimaPageOffset
 window.mediaPrefix = mediaPrefix
+window.latchUtilities = latchUtilities
 
 
 
@@ -115,8 +117,21 @@ export interface zProtoChildren {
             } | {
                 confirm:"true",
                 type:"body",
-                zSymbolNeeded:"true"
-            }
+                zSymbolNeeded:"true",
+            },
+            appVisible?:{
+                type: string[],
+                group:string,
+            } | {
+                confirm:"true",
+                type:"body",
+                zSymbolNeeded:"true",
+                // group:Array<{ //decided to prefix to show groupType instead of handle here
+                //     name:string,
+                //     type:string
+                // }>
+            },
+
         },
         extend?:any
     };
@@ -203,6 +218,13 @@ export interface zProtoChildren {
     }
 }
 
+export interface zDirectiveGroup  {
+    deltaNode:any;
+    types:any //Object<Set> only Sets are allowed as values in this object
+    suffix:string,
+    count:number
+    subscriptions:Array<Subscription>
+}
 
 export class componentObject { // not final
     quantity: any[];
@@ -226,6 +248,7 @@ function wait(   ms   ){
     }
 }
 
+// latch functions
 export function judimaPageOffset(devObj) {
     let supportPageOffset = window.pageXOffset !== undefined;
     let isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
@@ -233,6 +256,33 @@ export function judimaPageOffset(devObj) {
     let y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
     return {x,y}
 }
+
+export var latchUtilities:{centerX:Function} ={
+    centerX:(devObj?)=>{ //cant use options right now because fn is converted to string and back again through objectCopy, mabye provide metadata until then
+        devObj = devObj || {}
+        let contain =  devObj.contain || "&#8353"
+        return     (devObj)=>{
+            let {zChildren,zSymbol,xPosition,metadata} = devObj
+            let contain = metadata?.contain  || "&#8353"
+            let containPos = metadata?.containPos || .5
+            // somehow contain manages to die
+            try{
+                let final = xPosition({
+                    target: numberParse(zChildren[zSymbol].css["width"]),
+                    contain: numberParse(getComputedStyle(zChildren[contain].element).width),
+                    containPos
+                })
+                return final
+            }
+            catch(e){
+                return numberParse(getComputedStyle(zChildren[contain].element).width)/2
+            }
+        }
+    }
+
+
+}
+//
 
 export function flatDeep(arr, d = 1) { // polyfill for arr.flat
     return d > 0 ? arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val), [])
@@ -488,29 +538,15 @@ export function resize(   devObj:any   ){
 }
 
 
-export function xPosition(devObj){
+export function xPosition(devObj:{contain:number,target:number,containPos?:number,targetPos?:number}){
+    let {contain,target,containPos,targetPos} = devObj
+    containPos = containPos || .5
+    targetPos = targetPos || .5
 
-
-    if(   devObj.containPos === undefined   ){
-
-
-        devObj.containPos = .5
-
-
-    }
-
-
-    if(   devObj.targetPos === undefined   ){
-
-
-        devObj.targetPos = .5
-
-
-    }
 
     return (
-        (   devObj.contain*devObj.containPos   ) -
-        (   devObj.target*devObj.targetPos   )
+        (   contain*containPos   ) -
+        (   target* targetPos   )
     ) ;
 }
 

@@ -108,6 +108,12 @@ export class AppComponent implements OnInit, OnDestroy {
                 coArray,
                 ((devObj) => {
                     let { co } = devObj
+
+                    // dev additions
+                    if(co.quantity[1][1].signature === "homeContent"){
+                        co.quantity[0][0].ngCss[0][0]["z-index"] += 2
+                    }
+                    //
                     co.metadata.judima = {
                         desktop:{
                             stack:{
@@ -158,11 +164,15 @@ export class AppComponent implements OnInit, OnDestroy {
                         group:{},
                         suffix:"_tD_"
                     }
-                    //
+                    co.metadata.visible = {
+                        group:{},
+                        suffix:"_vI_"
+                    }
                     co.metadata.vanillaTilt = {
                         group:{},
                         suffix:"_vT_"
                     }
+                    //
                     co.metadata.languageTranslator = {
                         group:{},
                         suffix:"_lT_"

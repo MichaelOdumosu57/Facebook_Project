@@ -26,6 +26,7 @@ import { NavigationDirective } from './directive/navigation.directive';
 import { VanillaTiltDirective } from './directive/vanilla-tilt.directive';
 import { LanguageTranslatorDirective } from './directive/language-translator.directive';
 import { FacebookLoginDirective } from './directive/facebook-login.directive';
+import { VisibleDirective } from './directive/visible.directive';
 
 let providers = []
 if(env.testingAcct.confirm === "true"){
@@ -49,6 +50,7 @@ if(env.testingAcct.confirm === "true"){
     VanillaTiltDirective,
     LanguageTranslatorDirective,
     FacebookLoginDirective,
+    VisibleDirective,
     
 
   ],

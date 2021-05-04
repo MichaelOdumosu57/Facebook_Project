@@ -667,6 +667,9 @@ export class LatchDirective {
 			let key = y[0]
 			let val = y[1]
 			// console.log(key,val)
+			if(["metadata"].includes(key)){
+				return
+			}
 			if(typeof val ==="number" && dimsAvailble.length === 0){
 				if(["width","height"].includes(key)){
 					css[key] = (val * css[key]).toString() + "px"
@@ -686,7 +689,8 @@ export class LatchDirective {
 					css,
 					delta,
 					zChildren,
-					xPosition
+					xPosition,
+					metadata:logic.metadata?.[key]
 				}).toString()+"px"
 			}
 			//

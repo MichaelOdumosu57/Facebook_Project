@@ -165,7 +165,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                     // start to organize the elements into groups
                         // for latch determine which duplicate it belongs to
                     let myGroup = x[1].extras.appTemplateDirective?.group || "default"
-                    let myType =  x[1].extras.appTemplateDirective?.type || "default"
+                    let myType:Array<string> =  x[1].extras.appTemplateDirective?.type || ["default"]
                     let deltaNodeGroup =  x[1].extras?.appDeltaNode?.group || x[1].extras.appLatch?.deltaNode?.group
                     // determine if there is a duplicate and which duplicate it belongs to
                     let count = 0
@@ -194,10 +194,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                     }
 
                     // organize by type
-                    if(group[myGroup].types[myType] === undefined){
-                        group[myGroup].types[myType] = new Set()
-                    }
-                    group[myGroup].types[myType].add(x[0])
+                    myType
+                    .forEach((y:any,i)=>{
+                        if(group[myGroup].types[ y] === undefined){
+                            group[myGroup].types[y] = new Set()
+                        }
+                        group[myGroup].types[y].add(x[0])
+                    })
                     //
 
                 })

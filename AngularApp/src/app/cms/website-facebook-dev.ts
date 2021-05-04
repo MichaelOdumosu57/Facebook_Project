@@ -1,4 +1,4 @@
-import {objectCopy,zProtoComponent,zProtoChildren, zChildren, xContain, xPosition} from '../customExports'
+import {objectCopy,zProtoComponent,zProtoChildren, zChildren, xContain, xPosition,latchUtilities} from '../customExports'
 
 
 
@@ -1968,11 +1968,6 @@ let login_development:Array<zProtoComponent> = [
 			}
 
 			].map((x:any,i)=>{
-				// if(x.latch?.display.name){
-				// 	x.latch.display.name += "-" + i
-				// 	x.latch.zChildren[0].group[0] += "-" + i
-				// 	x.latch.zChildren[0].logic.mobile.left -= 15
-				// }
 				delete x.latch
 				x.key += " a_p_p_SiteMap_Anchor a_p_p_Glassmorphism"
 				x.options.judima = {
@@ -2147,6 +2142,60 @@ let home_development :Array<zProtoComponent> = [
 				type:"input",
 				height:10,
 				split:4,
+				latch:{
+					type:"display",
+					display:{
+						type:"target",
+						name:"homeOverlay"
+					},
+					zChildren:[
+						{
+							bool:"div",
+							val:"home-background a_p_p_MainBackground",
+							css:{
+								"z-index":2,
+							},
+							logic:{
+								desktop:{
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+									},
+									height:()=>{
+										return 1050
+									},
+									top:(devObj)=>{
+										let {} = devObj
+										return 0
+									},
+									left:(devObj)=>{
+										let {} = devObj
+										return 0
+									}
+								},
+								mobile:{
+									width:(devObj)=>{
+										let {css,zSymbol,delta,zChildren} = devObj
+										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+									},
+									height:1.15,
+									top:(devObj)=>{
+										let {} = devObj
+										return 0
+									},
+									left:(devObj)=>{
+										let {} = devObj
+										return 0
+									}
+								}
+							},
+
+							group:["homeOverlay"]
+						}
+					]
+				},
 				options:{
 					css:{
 						"font-size":"16px",
@@ -2375,6 +2424,11 @@ let home_development :Array<zProtoComponent> = [
 							type:"body",
 							zSymbolNeeded:"true"
 						},
+						appVisible:{
+							confirm:"true",
+							type:"body",
+							zSymbolNeeded:"true",
+						}
 					}
 				},
 				navigation:{
@@ -2385,7 +2439,7 @@ let home_development :Array<zProtoComponent> = [
 						{
 							name:"sideNav",
 							type:"repeat",
-							by:10,
+							by:9,
 						},
 						{
 							name:"sponsored",
@@ -2434,58 +2488,7 @@ let home_development :Array<zProtoComponent> = [
 						type:"div",
 						split:1,
 
-						latch:{
-							type:"display",
-							display:{
-								type:"target",
-								name:"homeOverlay"
-							},
-							zChildren:[
-								{
-									bool:"div",
-									val:"home-background a_p_p_MainBackground",
-									css:{
-										"z-index":2,
-									},
-									logic:{
-										desktop:{
-											width:(devObj)=>{
-												let {css,zSymbol,delta,zChildren} = devObj
-												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
-											},
-											height:1.5,
-											top:(devObj)=>{
-												let {} = devObj
-												return 0
-											},
-											left:(devObj)=>{
-												let {} = devObj
-												return 0
-											}
-										},
-										mobile:{
-											width:(devObj)=>{
-												let {css,zSymbol,delta,zChildren} = devObj
-												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
-
-											},
-											height:1.15,
-											top:(devObj)=>{
-												let {} = devObj
-												return 0
-											},
-											left:(devObj)=>{
-												let {} = devObj
-												return 0
-											}
-										}
-									},
-
-									group:["homeOverlay"]
-								}
-							]
-						},
 						nest:{
 							group:"sideNav",
 							name:"A1"
@@ -2662,8 +2665,17 @@ let home_development :Array<zProtoComponent> = [
 							},
 							extend:{
 								placeholder:"What's on your mind?",
-								disabled:"true"
+								// disabled:"true"
+								readonly:"true"
 							},
+							extras:{
+								appVisible:{
+									group:"createPost",
+									type:["Target"].map((x,i)=>{
+										return "click"+x
+									})
+								}
+							}
 
 						},
 						latch:{
@@ -2677,7 +2689,9 @@ let home_development :Array<zProtoComponent> = [
 									bool:"div",
 									css:{
 										"background-color":"grey",
-										"z-index":9
+										opacity:.7,
+										"z-index":11,
+										display:"none"
 									},
 									logic:{
 										desktop:{
@@ -2686,7 +2700,9 @@ let home_development :Array<zProtoComponent> = [
 												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
 											},
-											height:1.5,
+											height:()=>{
+												return 1000
+											},
 											top:(devObj)=>{
 												let {} = devObj
 												return 0
@@ -2713,7 +2729,313 @@ let home_development :Array<zProtoComponent> = [
 											}
 										}
 									},
-									group:["createPost"]
+									extras:{
+										appVisible:{
+											group:"createPost",
+											type:["Part","Target"].map((x,i)=>{
+												return "click"+x
+											})
+										}
+									},
+									group:[""]
+								},
+								{
+									bool:"div",
+									css:{
+										"background-color":"white",
+										"z-index":12,
+										display:"none"
+									},
+									val:"createPost a_p_p_Glassmorphism",
+									logic:{
+										desktop:{
+											width:(devObj)=>{
+												return 500
+											},
+											height:()=>{
+												return 500
+											},
+											top:(devObj)=>{
+												let {} = devObj
+												return 100
+											},
+											left:latchUtilities.centerX()
+										},
+										mobile:{
+											width:(devObj)=>{
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
+
+											},
+											height:1.15,
+											top:(devObj)=>{
+												let {} = devObj
+												return 0
+											},
+											left:(devObj)=>{
+												let {} = devObj
+												return 0
+											}
+										}
+									},
+									extras:{
+										appVisible:{
+											group:"createPost",
+											type:["Part"].map((x,i)=>{
+												return "click"+x
+											})
+										}
+									},
+									group:[""]
+								},
+								{
+									bool:"h3",
+									text:"Create Post",
+									val:"createPostSubHeading a_p_p_CreatePostSubHeading a_p_p_CreatePostModal",
+									css:{
+										"z-index":12,
+										display:"none"
+									},
+									logic:{
+										desktop:{
+											width:()=>{
+												return 110
+											},
+											height:()=>{
+												return 20
+											},
+											top:()=>{
+												return 120
+											},
+											left:latchUtilities.centerX()
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+									extras:{
+										appVisible:{
+											group:"createPost",
+											type:["Part"].map((x,i)=>{
+												return "click"+x
+											})
+										}
+									},
+									group:[""]
+								},
+								{
+									bool:'div',
+									val:"strikethrough a_p_p_StrikeThrough a_p_p_CreatePostModal",
+									css:{
+										"z-index":13,
+										display:"none"
+									},
+									logic:{
+										desktop:{
+											width:(devObj)=>{
+												return 450
+											},
+											height:()=>{
+												return 1
+											},
+											top:(devObj)=>{
+												let {} = devObj
+												return 130
+											},
+											left:latchUtilities.centerX(),
+											metadata:{
+												left:{
+													contain:"&#8353"
+												}
+											}
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+									extras:{
+										appVisible:{
+											group:"createPost",
+											type:["Part"].map((x,i)=>{
+												return "click"+x
+											})
+										}
+									},
+									group:[""]
+								},
+								{
+									bool:'img',
+									extras:{
+										extend:{
+											src:mediaPrefix({media:'python.jpg'})
+										},
+										appVisible:{
+											group:"createPost",
+											type:["Part"].map((x,i)=>{
+												return "click"+x
+											})
+										}
+									},
+									css:{
+										"border":"1px solid grey",
+										display:"none"
+									},
+									val:"profileIcon a_p_p_CreatePostModal a_p_p_CreatePostIcon ",
+									logic:{
+										desktop:{
+											width:()=>{
+												return 30
+											},
+											height:()=>{
+												return 30
+											},
+											top:()=>{
+												return 200
+											},
+											left:latchUtilities.centerX(),
+											metadata:{
+												left:{
+													containPos:.35
+												}
+											}
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+
+									group:[""]
+								},
+								{
+									bool:'p',
+									text:"Python3",
+									css:{
+										"font-size":"15px",
+										display:"none"
+									},
+									val:"profileName a_p_p_CreatePostModal a_p_p_CreatePostText",
+									logic:{
+										desktop:{
+											width:()=>{
+												return 30
+											},
+											height:()=>{
+												return 30
+											},
+											top:()=>{
+												return 200
+											},
+											left:latchUtilities.centerX(),
+											metadata:{
+												left:{
+													containPos:.4
+												}
+											}
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+									extras:{
+										appVisible:{
+											group:"createPost",
+											type:["Part"].map((x,i)=>{
+												return "click"+x
+											})
+										}
+									},
+									group:[""]
+								},
+								{
+									bool:"ta",
+									val:"input a_p_p_CreatePostModal a_p_p_CreatePostModalTextArea f_a_c_e_b_o_o_k_Transparent",
+									css:{
+										display:"none"
+									},
+									extras:{
+										extend:{
+											placeholder:"Whats on your Mind"
+										},
+
+										appVisible:{
+											group:"createPost",
+											type:["Part"].map((x,i)=>{
+												return "click"+x
+											})
+										}
+
+									},
+									logic:{
+										desktop:{
+											width:(devObj)=>{
+												return 500
+											},
+											height:()=>{
+												return 100
+											},
+											top:(devObj)=>{
+												let {} = devObj
+												return 250
+											},
+											left:latchUtilities.centerX()
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+									group:[""]
+								},
+								{
+									bool:"b",
+									text:"Post",
+									val:"postButton a_p_p_CreatePostButton a_p_p_CreatePostModal",
+									css:{
+										display:"none"
+									},
+									logic:{
+										desktop:{
+											width:()=>{
+												return 450
+											},
+											height:()=>{
+												return 50
+											},
+											top:()=>{
+												return 500
+											},
+											left:latchUtilities.centerX()
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+									extras:{
+										appVisible:{
+											group:"createPost",
+											type:["Part"].map((x,i)=>{
+												return "click"+x
+											})
+										}
+									},
+									group:[""]
 								}
 							]
 						},
@@ -2733,6 +3055,7 @@ let home_development :Array<zProtoComponent> = [
 							group:"newsFeed",
 							name:"C2",
 							under:"B1"
+
 						}
 					},
 					{
@@ -2761,7 +3084,6 @@ let home_development :Array<zProtoComponent> = [
 						options:{
 							css:{
 								"border-radius":"50px",
-
 							},
 
 						},
