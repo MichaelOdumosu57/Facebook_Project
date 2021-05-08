@@ -28,6 +28,11 @@ import { LanguageTranslatorDirective } from './directive/language-translator.dir
 import { FacebookLoginDirective } from './directive/facebook-login.directive';
 import { VisibleDirective } from './directive/visible.directive';
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { CarouselDirective } from './directive/carousel.directive';
+import {CarouselModule} from 'primeng/carousel';
+import {ButtonModule} from 'primeng/button';
 let providers = []
 if(env.testingAcct.confirm === "true"){
 
@@ -51,7 +56,8 @@ if(env.testingAcct.confirm === "true"){
     LanguageTranslatorDirective,
     FacebookLoginDirective,
     VisibleDirective,
-    
+    // CarouselDirective,
+
 
   ],
   imports: [
@@ -60,7 +66,10 @@ if(env.testingAcct.confirm === "true"){
     // AppRoutingModule,
     HttpClientModule,
 	MatProgressSpinnerModule,
-    AgGridModule.withComponents([FormComponent])
+    BrowserAnimationsModule,
+    AgGridModule.withComponents([FormComponent]),
+    ButtonModule,
+    CarouselModule
   ],
   providers,
   bootstrap: [AppComponent]

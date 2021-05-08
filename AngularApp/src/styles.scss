@@ -124,13 +124,13 @@ input {
 /* } */
 
 
-app-root * {
+// app-root * {
 
 
-    // transition: top 2s, left 2s, font-size 3s;
-}
+//     // transition: top 2s, left 2s, font-size 3s;
+// }
 
-app-root :not([class^='ag']) {
+app-root :not([class^='ag'],p-carousel *) {
 
     position: absolute;
     margin : 0px;
@@ -267,3 +267,5 @@ app-root :not([class^='ag']) {
 // @import "./assets/styles/component-position";
 @import "./assets/styles/glassmorphism";
 @import "./assets/styles/facebook";
+
+

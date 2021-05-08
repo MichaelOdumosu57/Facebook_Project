@@ -148,14 +148,14 @@ export class VisibleDirective {
                         //groupType === click
                             let clickTarget = Array.from(val.types['clickTarget'] || [])
                             let clickPart = Array.from(val.types['clickPart'] || [])
-                            console.log(clickTarget,clickPart)
+
                             // toggle show/hide of clickParts
                             clickTarget
                             .forEach((y:any,j)=>{
 
                                 let toggle = fromEvent(zChildren[y].element,"click")
                                 .subscribe((result:any)=>{
-                                    console.log("fire",clickPart)
+                                    
                                     clickPart
                                     .forEach((z:any,k)=>{
                                         zChildren[z].css.display = zChildren[z].css.display === "none" ? "block" : "none"

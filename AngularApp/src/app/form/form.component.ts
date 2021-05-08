@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, AfterViewInit, Inject, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, AfterViewInit, Inject, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, Renderer2, ElementRef, TemplateRef } from '@angular/core';
 import { RyberService } from '../ryber.service';
 import { fromEvent, interval, of, from, Observable, merge, Subject, BehaviorSubject, combineLatest, forkJoin,concat, Subscription } from 'rxjs';
 import { catchError, take, timeout, mapTo, debounceTime, distinctUntilChanged, debounce, first, ignoreElements, tap, delay,withLatestFrom, skipUntil, map, reduce } from 'rxjs/operators';
@@ -21,7 +21,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
 
     @ViewChildren('myVal', {read:ElementRef}) templateMyElements: any;
-
+    
     constructor(
         public ryber: RyberService,
         private ref: ChangeDetectorRef,
@@ -41,6 +41,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit(): void {
+
 
         // indicating where we are in the code
         if(env.inputHandle.options) console.groupEnd()

@@ -1338,6 +1338,46 @@ export class RyberService {
                 })
             }
 
+            else if(type === "carousel") {
+
+                let css = {
+
+                    "z-index": 4,
+					...options.css
+                }
+				extend = {
+					...extend,
+					//your props here
+					...options.extend
+				}
+				judima = {
+					...judima,
+					//your props here
+					...options.judima
+				}
+                symbol = rUD({
+                    co,
+                    bool: 'mat-carousel',
+                    val: key,
+                    text: value,
+                    css,
+                    extras: {
+						extend,
+						judima,
+                        component,
+						type,
+                        options:{
+
+                        },
+						appDeltaNode,
+                        appLatch,
+						appNest,
+                        ...options.extras
+                    }
+                })
+            }
+
+
             else {
 
                 let css = {
@@ -1845,7 +1885,7 @@ export class RyberService {
                 full:{
                     map:{},
                     navigated:"false",
-                    startURL:"/login"
+                    startURL:"/home"
                 }
             },
             ibmLanguage:{

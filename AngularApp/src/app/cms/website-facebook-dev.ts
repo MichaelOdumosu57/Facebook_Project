@@ -2428,6 +2428,11 @@ let home_development :Array<zProtoComponent> = [
 							confirm:"true",
 							type:"body",
 							zSymbolNeeded:"true",
+						},
+						appCarousel:{
+							confirm:"true",
+							type:"body",
+							zSymbolNeeded:"true",
 						}
 					}
 				},
@@ -2460,7 +2465,12 @@ let home_development :Array<zProtoComponent> = [
 							name:"onYourMind",
 							type:"repeat",
 							by:2,
-						}
+						},
+						{
+							name:"carousel1",
+							type:"repeat",
+							by:5,
+						},
 					]
 				},
 				nest:{
@@ -3132,6 +3142,96 @@ let home_development :Array<zProtoComponent> = [
 							under:"C3"
 						}
 					},
+					{
+						key:"newsFeedContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer",
+						type:"div",
+						options:{
+							css:{
+								"margin-left":"10px",
+								opacity:1,
+							}
+				},
+
+						nest:{
+							group:"newsFeed",
+							name:"B2",
+							under:"A1"
+						}
+					},
+					{
+						key:"newsFeedCarousel a_p_p_Carousel",
+						type:"carousel",
+						nest:{
+							group:"newsFeed",
+							name:"C4",
+							under:"B2"
+						},
+						options:{
+							// css:{
+							// 	"width":"100%"
+							// },
+							extras:{
+								options:{
+									header:{
+										title:"People You May Know"
+									},
+									contentClass:"a_p_p_CarouselContent",
+									dotsContainerClass:"a_p_p_CarouselDots",
+									styleClass:"a_p_p_Carousel",
+									style:{
+										"width":"100%"
+									},
+									value:[
+										{
+											src:mediaPrefix({media:'aws.png'}),
+											name:"Amazon Web Services"
+										},
+										{
+											src:mediaPrefix({media:'azure.png'}),
+											name:"Microsoft Azure"
+										},
+										{
+											src:mediaPrefix({media:'java.png'}),
+											name:"Java"
+										},
+										{
+											src:mediaPrefix({media:'ubuntu.png'}),
+											name:"Ubuntu Linux"
+										},
+										{
+											src:mediaPrefix({media:'nginx.png'}),
+											name:"Nginx Reverse Proxy"
+										},
+									],
+									numVisible:3,
+									circular:true,
+									responsiveOptions:[
+										{
+											breakpoint: '1024px',
+											numVisible: 3,
+											numScroll: 3
+										},
+										{
+											breakpoint: '768px',
+											numVisible: 2,
+											numScroll: 2
+										},
+										{
+											breakpoint: '560px',
+											numVisible: 1,
+											numScroll: 1
+										}
+									]
+								},
+								appCarousel:{
+									type:["target"],
+									group:"carousel1"
+								}
+							}
+						}
+					},
+
+
 				],
 				...[
 					{

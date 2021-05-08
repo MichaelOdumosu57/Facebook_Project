@@ -3,6 +3,11 @@ $font-family1 :Helvetica, Arial, sans-serif;
 $font-family2 :Segoe UI Historic;
 
 
+// root url is source, although file url is correct
+@import "../node_modules/primeng/resources/themes/saga-blue/theme.css";
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeicons/primeicons.css";
+
 
 
 @font-face {
@@ -575,6 +580,61 @@ $white: rgba(255,255,255,0.3);
                 background: transparent;
             }
 
+        }
+    }
+
+    &Carousel {
+        width: 100%;
+        margin-top:10px;
+
+        &AddFriendButton{
+            margin-bottom: 10px;
+            height:25px;
+            flex:1 0 25px;
+        }
+
+        &Card{
+            display:flex;
+            height:300px;
+            margin: 10px;
+            flex-direction: column;
+            align-items: center;
+            // width:30%;
+            background-color: transparent;
+            @include  glassmorphism
+        }
+
+        .p-carousel-header{
+            margin:0 20px 20px 0;
+
+        }
+
+        &Header{
+            margin: 0 0 0 20px;
+        }
+
+        &Content{
+            width:100%;
+            margin: 0 10px 0 0;
+            // @include glassmorphism
+        }
+
+        &Img{
+            flex :2 0 150px;
+            width:100%;
+            border-radius: 30px 30px 0 0;
+            height: 150px;
+        }
+
+        &ProfileName{
+            font-family: $font-family2;
+            width:90%;
+            flex-grow :1;
+            text-align: center;
+        }
+
+        &Dots{
+            background-color: red;
         }
     }
 }

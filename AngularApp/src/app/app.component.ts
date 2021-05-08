@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment as env} from 'src/environments/environment';
 import website from './website';
 
+
+
 declare global {
     interface Window { Modernizr: any;createMap:any }
     // not let or else local to this file
@@ -49,7 +51,7 @@ declare global {
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
+    templateUrl:    './app.component.html',
     // styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -180,6 +182,10 @@ export class AppComponent implements OnInit, OnDestroy {
                     co.metadata.facebookLogin = {
                         group:{},
                         suffix:"_fL_"
+                    }
+                    co.metadata.carousel = {
+                        group:{},
+                        suffix:"_cL_"
                     }
                     co.metadata.zChildrenSubject = new Subject<any>()
                     .pipe(

@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Directive({
-    selector: '[appTemplateDirective]'
+    selector: '[appTemplate]'
   })
   export class TemplateDirective {
 
@@ -157,29 +157,31 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
                     // if an element doesnt belong it doesnt belong
-                    if(x[1].extras?.appTemplateDirective === undefined){
+                    if(x[1].extras?.appTemplate === undefined){
                         return
                     }
                     //
 
                     // start to organize the elements into groups
                         // for latch determine which duplicate it belongs to
-                    let myGroup = x[1].extras.appTemplateDirective?.group || "default"
-                    let myType:Array<string> =  x[1].extras.appTemplateDirective?.type || ["default"]
+                    let myGroup = x[1].extras.appTemplate?.group || "default"
+                    let myType:Array<string> =  x[1].extras.appTemplate?.type || ["default"]
                     let deltaNodeGroup =  x[1].extras?.appDeltaNode?.group || x[1].extras.appLatch?.deltaNode?.group
                     // determine if there is a duplicate and which duplicate it belongs to
                     let count = 0
-                    ryber[co].metadata.deltaNode.groups[deltaNodeGroup]?.deltas
-                    .forEach((y:any,j)=>    {
+                    if (x[1].extras.appTemplate?.duplicateIgnore !== "true") {
+                        ryber[co].metadata.deltaNode.groups[deltaNodeGroup]?.deltas
+                        .forEach((y:any,j)=>    {
 
-                        let targetZSymbols = [x[0],x[1].extras.appLatch?.deltaNode?.zSymbol]
+                            let targetZSymbols = [x[0],x[1].extras.appLatch?.deltaNode?.zSymbol]
 
-                        let included = y.some( ai => targetZSymbols.includes(ai) );
-                        // console.log(included)
-                        if(included){
-                            count = j +1
-                        }
-                    })
+                            let included = y.some( ai => targetZSymbols.includes(ai) );
+                            // console.log(included)
+                            if(included){
+                                count = j +1
+                            }
+                        })
+                    }
                     //
                     myGroup = myGroup.split(suffix + count)[0] + suffix + count
                     if(group[myGroup]===undefined){

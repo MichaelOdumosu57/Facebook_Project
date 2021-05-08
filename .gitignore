@@ -51,3 +51,4 @@ vendor
 node_modules
 site-packages
 AngularApp/issues
+ignore

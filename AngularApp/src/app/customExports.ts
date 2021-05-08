@@ -54,7 +54,10 @@ export enum zBools {
     "a","p","code","span","strong",
     "i","ta","c","l","ul","f","div",
     "img","b","embed","video","audio",
-    "mat-spinner","ag-grid","gsap-cursor"
+    "mat-spinner","ag-grid","gsap-cursor",
+    // dev additions
+    "mat-carousel"
+
 }
 export class zOptionsJudima {
     mobile?:{
@@ -159,11 +162,12 @@ export interface zProtoChildren {
             by?: String | Number
         }>
     }  | {
-        group:String ,
-        type?:String /*{"add","remove"}*/
-        by?: String | Number,
+        group:string ,
+        type?:string /*{"add","remove"}*/
+        by?: string | Number,
         options?:any | {
-            next?: String | Function //["true","false"] // will skip to the next line or if false place next to
+            modify?:Function
+            next?: string | Function //["true","false"] // will skip to the next line or if false place next to
         }
     };
     nest?:{
