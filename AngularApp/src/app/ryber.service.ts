@@ -1885,7 +1885,7 @@ export class RyberService {
                 full:{
                     map:{},
                     navigated:"false",
-                    startURL:"/home"
+                    startURL:"/login"
                 }
             },
             ibmLanguage:{

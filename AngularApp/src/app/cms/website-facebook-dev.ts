@@ -2769,7 +2769,7 @@ let home_development :Array<zProtoComponent> = [
 												let {} = devObj
 												return 100
 											},
-											left:latchUtilities.centerX()
+											left:latchUtilities.centerX
 										},
 										mobile:{
 											width:(devObj)=>{
@@ -2817,7 +2817,7 @@ let home_development :Array<zProtoComponent> = [
 											top:()=>{
 												return 120
 											},
-											left:latchUtilities.centerX()
+											left:latchUtilities.centerX
 										},
 										mobile:{
 											width:1.2,
@@ -2855,7 +2855,7 @@ let home_development :Array<zProtoComponent> = [
 												let {} = devObj
 												return 130
 											},
-											left:latchUtilities.centerX(),
+											left:latchUtilities.centerX,
 											metadata:{
 												left:{
 													contain:"&#8353"
@@ -2908,7 +2908,7 @@ let home_development :Array<zProtoComponent> = [
 											top:()=>{
 												return 200
 											},
-											left:latchUtilities.centerX(),
+											left:latchUtilities.centerX,
 											metadata:{
 												left:{
 													containPos:.35
@@ -2944,7 +2944,7 @@ let home_development :Array<zProtoComponent> = [
 											top:()=>{
 												return 200
 											},
-											left:latchUtilities.centerX(),
+											left:latchUtilities.centerX,
 											metadata:{
 												left:{
 													containPos:.4
@@ -2999,7 +2999,7 @@ let home_development :Array<zProtoComponent> = [
 												let {} = devObj
 												return 250
 											},
-											left:latchUtilities.centerX()
+											left:latchUtilities.centerX
 										},
 										mobile:{
 											width:1.2,
@@ -3028,7 +3028,7 @@ let home_development :Array<zProtoComponent> = [
 											top:()=>{
 												return 500
 											},
-											left:latchUtilities.centerX()
+											left:latchUtilities.centerX
 										},
 										mobile:{
 											width:1.2,

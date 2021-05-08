@@ -689,7 +689,6 @@ export class LatchDirective {
 					css,
 					delta,
 					zChildren,
-					xPosition,
 					metadata:logic.metadata?.[key]
 				}).toString()+"px"
 			}

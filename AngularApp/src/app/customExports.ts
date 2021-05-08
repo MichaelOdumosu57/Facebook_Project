@@ -262,26 +262,47 @@ export function judimaPageOffset(devObj) {
 }
 
 export var latchUtilities:{centerX:Function} ={
-    centerX:(devObj?)=>{ //cant use options right now because fn is converted to string and back again through objectCopy, mabye provide metadata until then
-        devObj = devObj || {}
-        let contain =  devObj.contain || "&#8353"
-        return     (devObj)=>{
-            let {zChildren,zSymbol,xPosition,metadata} = devObj
-            let contain = metadata?.contain  || "&#8353"
-            let containPos = metadata?.containPos || .5
-            // somehow contain manages to die
-            try{
-                let final = xPosition({
-                    target: numberParse(zChildren[zSymbol].css["width"]),
-                    contain: numberParse(getComputedStyle(zChildren[contain].element).width),
-                    containPos
-                })
-                return final
-            }
-            catch(e){
-                return numberParse(getComputedStyle(zChildren[contain].element).width)/2
-            }
+    // buggy on production
+    // centerX:(devObj?)=>{ //cant use options right now because fn is converted to string and back again through objectCopy, mabye provide metadata until then
+    //     // devObj = devObj || {}
+    //     // let contain =  devObj.contain || "&#8353"
+    //     return     (devObj)=>{
+    //         let {zChildren,zSymbol,xPosition,metadata} = devObj
+    //         let contain = metadata?.contain  || "&#8353"
+    //         let containPos = metadata?.containPos || .5
+    //         // somehow contain manages to die
+    //         try{
+    //             let final = xPosition({
+    //                 target: numberParse(zChildren[zSymbol].css["width"]),
+    //                 contain: numberParse(getComputedStyle(zChildren[contain].element).width),
+    //                 containPos
+    //             })
+    //             return final
+    //         }
+    //         catch(e){
+    //             return numberParse(getComputedStyle(zChildren[contain].element).width)/2
+    //         }
+    //     }
+    // }
+    //
+    centerX:(devObj)=>{
+        let {zChildren,zSymbol,metadata} = devObj
+        let contain = metadata?.contain  || "&#8353"
+        let containPos = metadata?.containPos || .5
+        let {numberParse,xPosition} = window
+
+        try{
+            let final = xPosition({
+                target: numberParse(zChildren[zSymbol].css["width"]),
+                contain: numberParse(getComputedStyle(zChildren[contain].element).width),
+                containPos
+            })
+            return final
         }
+        catch(e){
+            return numberParse(getComputedStyle(zChildren[contain].element).width)/2
+        }
+        return 20
     }
 
 
@@ -449,15 +470,15 @@ export function eventDispatcher(   devObj:{event:string,element:HTMLElement | Wi
 export function numberParse(   dimension:any  ){
     // string or array
     if(typeof dimension === "string"){
-        dimension = parseFloat(dimension.split("p")[0])
+        return parseFloat(dimension.split("p")[0])
     }
     else{
-        dimension = dimension
+        return dimension
         .map((x:any,i)=>{
             return parseFloat(x.split("p")[0])
         })
     }
-    return dimension;
+    // return dimension;
 }
 
 export function resize(   devObj:any   ){
