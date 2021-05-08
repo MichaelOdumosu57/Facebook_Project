@@ -587,22 +587,7 @@ let login_development:Array<zProtoComponent> = [
 										let {} = devObj
 										return 50
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-									}
+									left:latchUtilities.centerX
 								},
 								mobile:{
 									width:(devObj)=>{
@@ -617,22 +602,7 @@ let login_development:Array<zProtoComponent> = [
 										let {} = devObj
 										return 50
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-									}
+									left:latchUtilities.centerX
 								}
 							},
 							type:["deltaNodeContainer"],
@@ -866,23 +836,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y +  80
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 								mobile:{
 									width:1.5,
@@ -891,23 +845,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y + 100
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 							},
 							extras:{
@@ -937,23 +875,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y +  120
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 								mobile:{
 									width:(devObj)=>{
@@ -966,23 +888,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y + 120
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								}
 							},
 							extras:{
@@ -1013,23 +919,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y + 290
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 								mobile:{
 									width:1,
@@ -1038,23 +928,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y + 290
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 
 							},
@@ -1076,22 +950,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y +  340
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-									}
+									left:latchUtilities.centerX
 								},
 								mobile:{
 									width:1.3,
@@ -1100,23 +959,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y + 340
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 							},
 							extras:{
@@ -1146,23 +989,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y + 400
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 								mobile:{
 									width:1.3,
@@ -1171,23 +998,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y + 400
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 							},
 							extras:{
@@ -1228,23 +1039,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return  judimaPageOffset().y + 0
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 								mobile:{
 									width:(devObj)=>{
@@ -1258,23 +1053,7 @@ let login_development:Array<zProtoComponent> = [
 
 										return judimaPageOffset().y +0
 									},
-									left:(devObj)=>{
-										let {zChildren,zSymbol,xPosition} = devObj
-
-										try{
-											let final = xPosition({
-												target: numberParse(zChildren[zSymbol].css["width"]),
-												contain: numberParse(getComputedStyle(zChildren["&#8353"].element).width)
-											})
-											return final
-										}
-										catch(e){
-											return numberParse(getComputedStyle(zChildren["&#8353"].element).width)/2
-										}
-
-
-
-									}
+									left:latchUtilities.centerX
 								},
 							},
 							needed:["appLatch"],
@@ -2699,7 +2478,7 @@ let home_development :Array<zProtoComponent> = [
 									bool:"div",
 									css:{
 										"background-color":"grey",
-										opacity:.7,
+										opacity:.9,
 										"z-index":11,
 										display:"none"
 									},
