@@ -1,7 +1,7 @@
 import {RyberService} from './ryber.service'
 import {defer} from 'rxjs'
 import { Observable, of, Subject, Subscription } from "rxjs";
-import { ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 declare global {
@@ -350,22 +350,29 @@ export function componentBootstrap(
         cssDefault?:Object,
         classes?:Array<string>,
         myElements?:Element[],
+        myContainers?:ViewContainerRef[] | any,
         ryber?:RyberService,
         symbol?:String | Symbol,
         zProps?: any,
     }
 ){
 
-	let {ryber,appTV,zProps} = devObj
+	let {ryber,appTV,zProps,myElements,myContainers} = devObj
+
+    myContainers = myContainers
+    .map((x:any,i)=>{
+        return [x.element.nativeElement,x]
+    })
+    // console.log(myContainers)
+    // if(   zProps === undefined   ){
 
 
-    if(   zProps === undefined   ){
+    //     zProps = {}
 
 
-        zProps = {}
+    // }
 
-
-    }
+    zProps =  zProps || {}
 
 
     devObj.classes = ryber[appTV].quantity[1].map((x,i) => {
@@ -390,13 +397,20 @@ export function componentBootstrap(
 					}
 					let utf8Symbol = String.fromCharCode(+w.split("&#")[1])
 
-
+                    let element =  w === "&#8352"?
+                    document.querySelector('[class=' + appTV + '],[id^="root"]') as HTMLElement:
+                    document.querySelector(`.${appTV} .${utf8Symbol}`)
+                    let templateRef =  myContainers
+                    .filter((xx:any,ii)=>{
+                        return element.className === xx[0].className
+                    })
+                    // apparently the component doesnt need a templateRef
+                    // if(templateRef.length !== 1){
+                    //     console.log(templateRef,element)
+                    // }
+                    //
 					zChild[w] ={
-						element:(
-							w === "&#8352"?
-							document.querySelector('[class=' + appTV + '],[id^="root"]') as HTMLElement:
-							document.querySelector(`.${appTV} .${utf8Symbol}`)
-						),
+						element,
 						css:y.ngCss[k][h],
 						cssDefault:y.ngCssDefault[k][h],
 						bool:y.bool[k][h],
@@ -405,7 +419,7 @@ export function componentBootstrap(
 						extras:zProps.extras === 'true' ? y.extras[k][h] : null,
 						val:zProps.val === 'true' ? y.val[k][h] : null,
 						quantity:zProps.quantity === 'true' ? y.quantity[k][h] : null,
-
+                        templateRef:zProps.templateRef === 'true' ? templateRef[0]?.[1] : null,
 					}
                     zProps.symbol === "true" ? zChild[w].symbol = w : null
 				})

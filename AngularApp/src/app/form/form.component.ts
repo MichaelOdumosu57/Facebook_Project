@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, AfterViewInit, Inject, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, Renderer2, ElementRef, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren,ViewContainerRef, AfterViewInit, Inject, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, QueryList, Renderer2, ElementRef, TemplateRef } from '@angular/core';
 import { RyberService } from '../ryber.service';
 import { fromEvent, interval, of, from, Observable, merge, Subject, BehaviorSubject, combineLatest, forkJoin,concat, Subscription } from 'rxjs';
 import { catchError, take, timeout, mapTo, debounceTime, distinctUntilChanged, debounce, first, ignoreElements, tap, delay,withLatestFrom, skipUntil, map, reduce } from 'rxjs/operators';
@@ -20,8 +20,13 @@ import { environment as env } from '../../environments/environment'
 export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
 
+    // deprecated ViewContainer contains ElementRef
     @ViewChildren('myVal', {read:ElementRef}) templateMyElements: any;
-    
+    //
+    @ViewChildren('myVal', {read:ViewContainerRef}) templateMyContainers: any | QueryList<ViewContainerRef>;
+
+
+
     constructor(
         public ryber: RyberService,
         private ref: ChangeDetectorRef,
@@ -43,11 +48,14 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
 
 
+
         // indicating where we are in the code
         if(env.inputHandle.options) console.groupEnd()
         let {ryber,appTV,ref,templateMyElements,subscriptions} = this
         if(env.component.form.lifecycleHooks) {console.log( appTV+ ' ngAfterViewInit fires on mount')}
 		//
+
+
 
         // FPM for each component
         ryber['formCO']
@@ -1404,15 +1412,19 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
     }
 
     private zChildInit(devObj?): any {
+
+
         return componentBootstrap({
             appTV: this.appTV,
             myElements: this.templateMyElements._results,
+            myContainers:this.templateMyContainers._results,
             ryber: this.ryber,
             zProps: {
                 extras: 'true',
                 val:'true',
                 quantity:'true',
-                // symbol:'true'
+                templateRef:'true'
+                
             }
         });
     }

@@ -134,7 +134,6 @@ export class CarouselDirective {
 
                     })
                     //
-
                     this.zChildren = zChildren
                     this.group = group
                     this.ref = ref
@@ -143,25 +142,10 @@ export class CarouselDirective {
                         let key = x[0]
                         let val = x[1]
 
-                        let target = Array.from(val.types['target'] || [])
+                        let target:any = Array.from(val.types['target'] || [])
                         let card = Array.from(val.types['card'] || [])
 
-                        // get the cards inside the target
-                        target
-                        .forEach((x:any,i)=>{
-
-                            card
-                            .forEach((y:any,j)=>{
-
-                                renderer2
-                                .appendChild(
-                                    zChildren[x].element,
-                                    zChildren[y].element
-                                )
-                            })
-
-                        })
-                        //
+                        
                     })
 
                 })

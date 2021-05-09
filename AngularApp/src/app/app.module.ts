@@ -30,7 +30,7 @@ import { VisibleDirective } from './directive/visible.directive';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { CarouselDirective } from './directive/carousel.directive';
+import { CarouselDirective } from './directive/carousel.directive';
 import {CarouselModule} from 'primeng/carousel';
 import {ButtonModule} from 'primeng/button';
 let providers = []
@@ -56,7 +56,7 @@ if(env.testingAcct.confirm === "true"){
     LanguageTranslatorDirective,
     FacebookLoginDirective,
     VisibleDirective,
-    // CarouselDirective,
+    CarouselDirective,
 
 
   ],
