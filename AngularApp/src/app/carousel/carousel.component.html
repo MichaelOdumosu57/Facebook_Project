@@ -1,0 +1,35 @@
+<p-carousel
+
+
+[value]="options.value"
+[numVisible]="options.numVisible"
+[circular]="options.circular"
+[responsiveOptions]="options.responsiveOptions"
+[orientation]="options.orientation"
+[autoplayInterval]="options.autoplayInterval"
+[contentClass]="options.contentClass"
+[ngStyle]="options.style"
+[styleClass] ="options.styleClass"
+
+
+>
+    <ng-template
+    pTemplate ="header"
+    *ngIf="options.header"
+
+    >
+        <span class ="a_p_p_CarouselHeader">{{options.header.title}}</span>
+    </ng-template>
+    <ng-template  let-profile pTemplate="item">
+        <div class ="a_p_p_CarouselCard">
+            <img src= {{profile.src}}
+            width=100
+            class = "a_p_p_CarouselImg"
+            />
+            <h3 class ="a_p_p_CarouselProfileName">
+            {{profile.name}}
+            </h3>
+            <button pButton pRipple label="Add Friend" icon="pi pi-plus" class ="a_p_p_CarouselAddFriendButton"></button>
+        </div>
+    </ng-template>
+</p-carousel>

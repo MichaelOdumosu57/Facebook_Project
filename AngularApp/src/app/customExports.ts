@@ -363,7 +363,6 @@ export function componentBootstrap(
     .map((x:any,i)=>{
         return [x.element.nativeElement,x]
     })
-    // console.log(myContainers)
     // if(   zProps === undefined   ){
 
 
@@ -400,13 +399,13 @@ export function componentBootstrap(
                     let element =  w === "&#8352"?
                     document.querySelector('[class=' + appTV + '],[id^="root"]') as HTMLElement:
                     document.querySelector(`.${appTV} .${utf8Symbol}`)
-                    let templateRef =  myContainers
+                    let viewContainerRef =  myContainers
                     .filter((xx:any,ii)=>{
                         return element.className === xx[0].className
                     })
                     // apparently the component doesnt need a templateRef
                     // if(templateRef.length !== 1){
-                    //     console.log(templateRef,element)
+                        // console.log(templateRef,element)
                     // }
                     //
 					zChild[w] ={
@@ -419,7 +418,7 @@ export function componentBootstrap(
 						extras:zProps.extras === 'true' ? y.extras[k][h] : null,
 						val:zProps.val === 'true' ? y.val[k][h] : null,
 						quantity:zProps.quantity === 'true' ? y.quantity[k][h] : null,
-                        templateRef:zProps.templateRef === 'true' ? templateRef[0]?.[1] : null,
+                        viewContainerRef:zProps.viewContainerRef === 'true' ? viewContainerRef[0]?.[1] : null,
 					}
                     zProps.symbol === "true" ? zChild[w].symbol = w : null
 				})

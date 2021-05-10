@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, ViewContainerRef, ViewRef, EmbeddedViewRef, ViewChildren, ChangeDetectorRef } from '@angular/core';
+import { ComponentFactoryResolver,Injector,Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, ViewContainerRef, ViewRef, EmbeddedViewRef, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { RyberService } from '../ryber.service'
 import { fromEvent, from, Subscription, Subscriber, of, combineLatest } from 'rxjs';
 import { deltaNode, eventDispatcher, numberParse, objectCopy, navigationType } from '../customExports'
@@ -24,7 +24,9 @@ export class CarouselDirective {
         private el: ElementRef,
         private http: HttpClient,
         private renderer2: Renderer2,
-        private ryber: RyberService
+        private ryber: RyberService,
+        private injector: Injector,
+        private cfr: ComponentFactoryResolver,
     ) { }
 
 
@@ -35,7 +37,7 @@ export class CarouselDirective {
 
         if (this.extras?.confirm === 'true' && this.extras?.type.includes("body")) {
             if (env.directive?.carousel?.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol + ' carousel ngOnInit fires on mount')
-            let { ryber, extras, zChildren, subscriptions,renderer2 } = this
+            let { ryber, extras, zChildren, subscriptions,renderer2,injector,cfr } = this
             let { co } = extras
             let { group, suffix } = ryber[co].metadata.carousel
 
@@ -77,6 +79,8 @@ export class CarouselDirective {
                     // })
                     group = {}
                     //
+
+
 
                     Object.entries(zChildren)
                     .slice(2)
@@ -145,7 +149,47 @@ export class CarouselDirective {
                         let target:any = Array.from(val.types['target'] || [])
                         let card = Array.from(val.types['card'] || [])
 
-                        
+
+                        target
+                        .forEach((y:any,j)=>{
+
+
+
+                            // lazy load the carousel
+                            if(zChildren[y].extras.appCarousel.loaded !== "true" && zChildren[y].extras.options.lazyLoad !== "true"){
+                                zChildren[y].extras.appCarousel.loaded = "true"
+                                from(import('../carousel/carousel.component'))
+                                .pipe(delay(3000))
+                                .subscribe((result:any)=>{
+                                    let {CarouselComponent} = result
+                                    let carouselFactory = cfr.resolveComponentFactory(CarouselComponent)
+
+                                    let answer  = (zChildren[y].viewContainerRef as ViewContainerRef).createComponent(carouselFactory,undefined,injector)
+                                    let instance:any = answer.instance
+                                    let el:any = answer.location
+                                    instance.options = zChildren[y].extras.options
+                                    renderer2.addClass(
+                                        el.nativeElement,
+                                        instance.options.component.class
+                                    )
+                                    renderer2.appendChild(
+                                        zChildren[y].element,
+                                        el.nativeElement
+                                    )
+                                    ref.detectChanges()
+                                })
+                            }
+                            //
+
+
+
+
+                            //     zChildren[y].viewContainerRef.clear()
+
+                        })
+
+                        //
+
                     })
 
                 })

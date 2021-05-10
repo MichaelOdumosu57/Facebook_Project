@@ -33,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselDirective } from './directive/carousel.directive';
 import {CarouselModule} from 'primeng/carousel';
 import {ButtonModule} from 'primeng/button';
+import { CarouselComponent } from './carousel/carousel.component';
 let providers = []
 if(env.testingAcct.confirm === "true"){
 
@@ -57,6 +58,7 @@ if(env.testingAcct.confirm === "true"){
     FacebookLoginDirective,
     VisibleDirective,
     CarouselDirective,
+    CarouselComponent,
 
 
   ],

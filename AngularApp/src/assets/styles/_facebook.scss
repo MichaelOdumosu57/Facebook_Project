@@ -272,7 +272,9 @@ $white: rgba(255,255,255,0.3);
     height: 1px;
     background-color: grey;
     width: 95%;
+
 }
+
 
 
 .a_p_p_ {
@@ -587,6 +589,17 @@ $white: rgba(255,255,255,0.3);
         width: 100%;
         margin-top:10px;
 
+
+        &Component{
+
+
+                width:100%;
+                height: auto !important;
+                position:static !important;
+                // height:300px
+            
+
+        }
         &AddFriendButton{
             margin-bottom: 10px;
             height:25px;
@@ -633,8 +646,6 @@ $white: rgba(255,255,255,0.3);
             text-align: center;
         }
 
-        &Dots{
-            background-color: red;
-        }
+
     }
 }

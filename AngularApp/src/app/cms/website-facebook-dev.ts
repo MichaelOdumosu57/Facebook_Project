@@ -2923,42 +2923,36 @@ let home_development :Array<zProtoComponent> = [
 					},
 					{
 						key:"newsFeedContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer",
-						type:"div",
+						type:"carousel",
+						nest:{
+							group:"newsFeed",
+							// name:"C4",
+							// under:"B2"
+							name:"B2",
+							under:"A1"
+						},
 						options:{
 							css:{
 								"margin-left":"10px",
 								opacity:1,
-							}
-				},
-
-						nest:{
-							group:"newsFeed",
-							name:"B2",
-							under:"A1"
-						}
-					},
-					{
-						key:"newsFeedCarousel a_p_p_Carousel",
-						type:"carousel",
-						nest:{
-							group:"newsFeed",
-							name:"C4",
-							under:"B2"
-						},
-						options:{
-							// css:{
-							// 	"width":"100%"
-							// },
+								height:"auto",
+								"flex-direction":"column"
+							},
 							extras:{
 								options:{
+									lazyLoad:"false",
 									header:{
 										title:"People You May Know"
 									},
 									contentClass:"a_p_p_CarouselContent",
 									dotsContainerClass:"a_p_p_CarouselDots",
 									styleClass:"a_p_p_Carousel",
+									component:{
+										class:"a_p_p_CarouselComponent"
+									},
 									style:{
-										"width":"100%"
+										width:"100%",
+										position:"static"
 									},
 									value:[
 										{
