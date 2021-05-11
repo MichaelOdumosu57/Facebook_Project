@@ -56,9 +56,6 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 		//
 
 
-
-
-
         // FPM for each component
         ryber['formCO']
         .forEach((xx,ii)=>{ // just becuase massive refactoring will take place so lets be gentle and use xx ii instead of x i

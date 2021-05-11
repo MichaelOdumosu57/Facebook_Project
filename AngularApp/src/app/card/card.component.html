@@ -1,0 +1,21 @@
+<p-card
+[header]="options.header"
+[subheader]="options.subheader"
+[ngStyle]="options.style"
+[styleClass]="'p-card-shadow ' + options.styleClass">
+    <ng-template pTemplate="header">
+        <img alt="Card" [src]="options.src">
+    </ng-template>
+    <p>{{options.cardText}}</p>
+    <ng-template pTemplate="footer">
+
+            <p-button
+            *ngFor='let button of options.buttons'
+            [label]="button.label"
+            [icon]="button.icon"
+            [styleClass]="button.styleClass"
+            [style]="button.style"></p-button>
+
+
+    </ng-template>
+</p-card>

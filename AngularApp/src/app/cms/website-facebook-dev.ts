@@ -2378,7 +2378,7 @@ let home_development :Array<zProtoComponent> = [
 				],
 				...[
 					{
-						key:"subNavigation",
+						key:"subNavigation a_p_p_HomeMisc a_p_p_HomeMiscContainer",
 						type:"div",
 						split:1.9,
 						nest:{
@@ -2926,8 +2926,6 @@ let home_development :Array<zProtoComponent> = [
 						type:"carousel",
 						nest:{
 							group:"newsFeed",
-							// name:"C4",
-							// under:"B2"
 							name:"B2",
 							under:"A1"
 						},
@@ -2948,7 +2946,7 @@ let home_development :Array<zProtoComponent> = [
 									dotsContainerClass:"a_p_p_CarouselDots",
 									styleClass:"a_p_p_Carousel",
 									component:{
-										class:"a_p_p_CarouselComponent"
+										class:"a_p_p_Component"
 									},
 									style:{
 										width:"100%",
@@ -3003,6 +3001,46 @@ let home_development :Array<zProtoComponent> = [
 							}
 						}
 					},
+					{
+						key:"newsFeedPostsContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer ",
+						type:"post",
+						nest:{
+							group:"newsFeed",
+							name:"B3",
+							under:"A1"
+						},
+						options:{
+							css:{
+								"margin-left":"10px",
+								height:"auto",
+								"flex-direction":"column",
+								opacity:1
+							},
+							extras:{
+								options:{
+									lazyLoad:"false",
+									style:{
+										width:"95%",
+										position:"static"
+									},
+									styleClass:"a_p_p_Carousel",
+									header:"Post 1",
+									cardText:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!",
+									component:{
+										class:"a_p_p_Component"
+									},
+									buttons:[
+										{
+											label:"Save",
+											icon:"pi pi-check",
+											styleClass:"p-button-secondary",
+										}
+									]
+								}
+							}
+						}
+					},
+
 
 
 				],

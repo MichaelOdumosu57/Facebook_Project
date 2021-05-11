@@ -422,23 +422,42 @@
 		<ng-template #elseBlock28  >
             <div
             #myVal
-            *ngIf= "a.bool[1][bb] ==='mat-carousel'"
+            *ngIf= "a.bool[1][bb] ==='mat-carousel' else elseblock29"
             class = {{a.val[1][bb]}}
             [ngStyle] ='a.ngCss[1][bb]'
             appExtend [extend] = "ryber.appAvailble( a.extras[1][bb], 'extend')"
             appLatch [latch] = "ryber.appAvailble( a.extras[1][bb], 'appLatch')"
             >
                 <app-carousel
-                *ngIf="a.extras[1][bb].options.lazyLoad === 'true'"
-                class ={{a.extras[1][bb].options.component.class}}  
-                [ngStyle] ="a.extras[1][bb].options.component.style"
+                *ngIf="a.extras[1][bb].options.lazyLoad === 'false'"
+                class ={{a.extras[1][bb].options?.component?.class}}
+                [ngStyle] ="a.extras[1][bb].options?.component?.style"
                 [options] ="a.extras[1][bb].options"
                 ></app-carousel>
+            </div>
+		</ng-template>
+		<ng-template #elseBlock29
+        [ngIf]= "a.bool[1][bb] =='primeng-card'"
+        >
+            <div
+            #myVal
+
+            class = {{a.val[1][bb]}}
+            [ngStyle] ='a.ngCss[1][bb]'
+            appExtend [extend] = "ryber.appAvailble( a.extras[1][bb], 'extend')"
+            appLatch [latch] = "ryber.appAvailble( a.extras[1][bb], 'appLatch')"
+            >
+                <app-card
+                *ngIf="a.extras[1][bb].options.lazyLoad === 'false'"
+                class ={{a.extras[1][bb].options?.component?.class}}
+                [ngStyle] ="a.extras[1][bb].options?.component?.style"
+                [options] ="a.extras[1][bb].options"
+                ></app-card>
             </div>
 		</ng-template>
     </ng-container>
 
 
-    </ng-container>
+</ng-container>
 
 

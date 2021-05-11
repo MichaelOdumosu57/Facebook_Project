@@ -156,7 +156,7 @@ export class CarouselDirective {
 
 
                             // lazy load the carousel
-                            if(zChildren[y].extras.appCarousel.loaded !== "true" && zChildren[y].extras.options.lazyLoad !== "true"){
+                            if(zChildren[y].extras.appCarousel.loaded !== "true" && zChildren[y].extras.options.lazyLoad === "true"){
                                 zChildren[y].extras.appCarousel.loaded = "true"
                                 from(import('../carousel/carousel.component'))
                                 .pipe(delay(3000))

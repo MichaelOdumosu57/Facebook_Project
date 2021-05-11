@@ -78,7 +78,5 @@ email :shieldmousetower734@gmail.com
 
 
 ### Left off
-* website.ts, the targets are getting modified way after, we need the final targets not the inital see whats happening
-
-
-
+* Prime NG posts
+card component

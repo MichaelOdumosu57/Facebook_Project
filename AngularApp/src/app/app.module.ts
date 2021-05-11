@@ -34,6 +34,10 @@ import { CarouselDirective } from './directive/carousel.directive';
 import {CarouselModule} from 'primeng/carousel';
 import {ButtonModule} from 'primeng/button';
 import { CarouselComponent } from './carousel/carousel.component';
+import {CardModule} from 'primeng/card';
+import { CardComponent } from './card/card.component';
+
+
 let providers = []
 if(env.testingAcct.confirm === "true"){
 
@@ -59,6 +63,7 @@ if(env.testingAcct.confirm === "true"){
     VisibleDirective,
     CarouselDirective,
     CarouselComponent,
+    CardComponent,
 
 
   ],
@@ -71,7 +76,8 @@ if(env.testingAcct.confirm === "true"){
     BrowserAnimationsModule,
     AgGridModule.withComponents([FormComponent]),
     ButtonModule,
-    CarouselModule
+    CarouselModule,
+    CardModule
   ],
   providers,
   bootstrap: [AppComponent]

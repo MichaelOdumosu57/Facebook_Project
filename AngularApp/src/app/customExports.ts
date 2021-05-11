@@ -56,7 +56,8 @@ export enum zBools {
     "img","b","embed","video","audio",
     "mat-spinner","ag-grid","gsap-cursor",
     // dev additions
-    "mat-carousel"
+    "mat-carousel",
+    "primeng-card"
 
 }
 export class zOptionsJudima {
@@ -370,6 +371,8 @@ export function componentBootstrap(
 
 
     // }
+
+
 
     zProps =  zProps || {}
 
@@ -1090,7 +1093,7 @@ export function ryberUpdate(
             }
             subCO.signature = signature
         //
-        // console.log(bool,index)
+
         // console.log(subCO)
         return  symbol
 	}
