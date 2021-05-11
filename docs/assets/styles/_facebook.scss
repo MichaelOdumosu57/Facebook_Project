@@ -565,6 +565,26 @@ $white: rgba(255,255,255,0.3);
         @include HomeMisc;
         &Container{
             // position:fixed;
+            scrollbar-color: transparent;
+            // &::-webkit-,&::-moz-,&::-o-{
+            //     &scrollbar {
+            //         width: 6px;
+            //     }
+            //     &scrollbar-track {
+            //         background: transparent;
+            //     }
+            //     &scrollbar-thumb {
+            //         border-radius: 10px;
+            //         background: #263040;
+            //     }
+            //     &scrollbar-thumb:window-inactive {
+            //         background-color: transparent;
+            //         opacity:4px;
+            //     }
+            //     &scrollbar-corner {
+            //         background: transparent;
+            //     }
+            // }
             &::-webkit-scrollbar {
                 width: 6px;
             }
@@ -576,12 +596,13 @@ $white: rgba(255,255,255,0.3);
                 background: #263040;
             }
             &::-webkit-scrollbar-thumb:window-inactive {
-                background: transparent;
+                background-color: transparent;
                 opacity:4px;
             }
             &::-webkit-scrollbar-corner {
                 background: transparent;
             }
+
 
         }
     }

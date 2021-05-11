@@ -49,7 +49,7 @@ class my_ibm_language_client():
                         "pexels-public-domain-pictures-87818.jpg",
                         "pexels-skitterphoto-615350.jpg"
                     ]))
-                } for i in list(range(10))
+                } for i in list(range(100))
             ],
             "track":0
         }
@@ -207,6 +207,24 @@ class my_ibm_language_client():
                 return {
                     "status":200,
                     "message":json.dumps(posts.get("items"))
+                }
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
+
+            }
+
+        elif(env =="resetPostsTrack"):
+            try:
+                posts["track"] = 0
+                return {
+                    "status":200,
+                    "message":"OK"
                 }
             except BaseException as e:
                 print('my custom error\n')

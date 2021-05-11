@@ -1289,7 +1289,13 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                     }
                     return acc
                 }) -1
-                zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"deltaNodeBootstrap"})
+                
+                zChild[x].extras.appDeltaNode.options?.modify({
+                    zChild,
+                    x,
+                    index,
+                    hook:"deltaNodeBootstrap"
+                })
             })
 			component.deltas = current?.deltas.filter((x: any, i) => {
 				return zChild[x]?.extras?.judima?.formatIgnore !== "true";
@@ -1329,6 +1335,8 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 				})
 			);
 			//
+
+
 
 		}
 

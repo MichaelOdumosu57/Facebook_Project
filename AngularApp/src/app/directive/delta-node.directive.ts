@@ -1,9 +1,9 @@
 
 import { Directive, ElementRef, HostListener, Input, Renderer2, ViewChildren } from '@angular/core';
 import { RyberService } from '../ryber.service'
-import { fromEvent, from, Subscription, Subscriber, of, combineLatest,timer, Subject } from 'rxjs';
+import { fromEvent, from, Subscription, Subscriber, of, combineLatest,timer, Subject,BehaviorSubject } from 'rxjs';
 import { navigationType,ryberUpdateFactory, eventDispatcher, numberParse, objectCopy,flatDeep, componentConsole } from '../customExports'
-import { catchError, delay,first,repeat,map } from 'rxjs/operators'
+import { catchError, delay,first,repeat,map,skip } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { VanillaFrameworkOverrides } from 'ag-grid-community';
 import { HttpClient } from '@angular/common/http';
@@ -41,7 +41,7 @@ export class DeltaNodeDirective {
 				if(env.directive.deltaNode.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' deltaNode ngOnInit fires on mount')
 
 
-				let {ryber,extras,subscriptions,http} = this
+				let {ryber,extras,subscriptions,http,ref} = this
 				let rUD = ryberUpdateFactory({ryber})
 				let {co} = this.extras
 				let {groups} = this.groups =  ryber[co].metadata.deltaNode
@@ -434,7 +434,7 @@ export class DeltaNodeDirective {
 
 												repeatedDeltas.push(
 													rUD({
-														quantity:3,
+														quantity:2,
 														symbol:y[1].symbol,
 														co,
 														bool:y[1].bool,
@@ -466,7 +466,8 @@ export class DeltaNodeDirective {
 							// used when making API requests
 								// cdn-increment, when an action happens, make an additional request for x items
 								// cdn-total, when an actions happens requests and replace all content despite more or less than last content
-							else if(val.type ==="cdn-increment"){
+							else if(val.type ==="cdn"){
+								val.deltas = []
 								val.targets = val.targets
 								.map((y:any,j)=>{
 									// logic for add concept
@@ -474,7 +475,8 @@ export class DeltaNodeDirective {
 
 										val.add .push ({
 											target:y,
-											fn:y[1].extras.appDeltaNode.fn
+											fn:y[1].extras.appDeltaNode.options.fn,
+											result:new BehaviorSubject(1)
 										})
 									}
 									//
@@ -482,7 +484,7 @@ export class DeltaNodeDirective {
 								})
 								.filter((y:any,j)=>{
 
-									return [undefined].includes(y[1]?.extras?.appDeltaNode?.type)
+									return [undefined,"increment"].includes(y[1]?.extras?.appDeltaNode?.type)
 								})
 
 								// do an action to make elements come on the dom
@@ -491,16 +493,80 @@ export class DeltaNodeDirective {
 									let action = y.fn({
 										zChild:y.target,
 										fromEvent,http,
-										env
+										env,
+										returnData:y.result
 									})
+									let myResult = y.result
+									.pipe(skip(1))
+									.subscribe((result:any)=>{
+										let repeatedDeltas = []
+										y.result = result
+										y.result.message
+										.forEach((z:any,k)=>{
 
-									val.subscriptions.push(action)
+											val.targets = val.targets
+											.map((w:any,h)=>{
+
+												//logic for increment
+												if(w[1]?.extras?.appDeltaNode?.type === "increment"){
+													w[1].extras.appDeltaNode.increment = {
+														counter: +w[1].innerText?.item.split("")[0]
+													}
+												}
+												//
+
+												// pre mods
+												let css = objectCopy(w[1].css)
+												let text = (()=>{
+													if(w[1]?.extras?.appDeltaNode?.type === "increment"){
+														let mySplit = w[1].innerText?.item.split("")
+
+														return (++w[1].extras.appDeltaNode.increment.counter)+mySplit[1]
+													}
+													return w[1].innerText?.item
+												})()
+												let  extras = objectCopy(w[1].extras)
+												extras.appDeltaNode.options = extras.appDeltaNode.options || {}
+												extras.appDeltaNode.options.metadata = z
+												if(extras.appDeltaNode?.options?.target?.confirm === "true"){
+													extras.appDeltaNode.options.target.zSymbol = w[0]
+												}
+												//
+
+												// add the elements to the dom
+
+												repeatedDeltas.push(
+													rUD({
+														quantity:2,
+														symbol:w[1].symbol,
+														co,
+														bool:w[1].bool,
+														css:objectCopy(css),
+														cssDefault:objectCopy(w[1].cssDefault),
+														text,
+														extras:objectCopy(extras),
+														val:w[1].val
+													})
+												)
+
+												//
+
+												return w
+											})
+
+										})
+										this.ref.detectChanges()
+										deltaNode.current = {
+											deltas:repeatedDeltas,
+											group:key
+										}
+										val.deltas.push(repeatedDeltas)
+										val.hooks.directive  ="add prepare"
+										ryber[co].metadata.deltaNode.updateZChild.next()
+									})
+									subscriptions.push(...[action,myResult])
 								})
 								//
-								console.log(val)
-							}
-
-							else if(val.type ==="cdn-total"){
 
 							}
 							//

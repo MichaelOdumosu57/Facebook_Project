@@ -284,6 +284,18 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                         document.body,"a_p_p_BodyOverFlowHidden"
                     )
                     //
+
+                    // reset the posts as necessary
+                    http.post(
+                        env.facebook.url,
+                        {
+                            env :"resetPostsTrack"
+                        }
+                    )
+                    .subscribe((result:any)=>{
+                    
+                    })
+                    //
                 }
             },
             error:(err:HttpErrorResponse)=>{

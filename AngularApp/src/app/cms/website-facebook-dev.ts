@@ -2253,7 +2253,7 @@ let home_development :Array<zProtoComponent> = [
 						},
 						{
 							name:"posts",
-							type:"cdn-increment",
+							type:"cdn",
 						},
 					]
 				},
@@ -2393,31 +2393,38 @@ let home_development :Array<zProtoComponent> = [
 						delta:{
 							group:"posts",
 							type:"add",
-							fn:(devObj)=>{
-								let {zChild,fromEvent,http,env} = devObj
-								return fromEvent(zChild[1].element,"scroll")
-								.subscribe((result:any)=>{
-									let {element}= zChild[1]
-									if(Math.ceil(element.scrollHeight - element.scrollTop) === element.clientHeight){
-										// user has scrolled to bottom of page
-										http.post(
-											env.facebook.url,
-											{
-												env:"somePosts",
-												times:3
-											}
-										)
-										.subscribe({
-											next:(result:any)=>{
-												console.log(result)
-											},
-											error:(err:any)=>{
-												console.log(err)
-											}
-										})
-										//
-									}
-								})
+							options:{
+								fn:(devObj)=>{
+									let {zChild,fromEvent,http,env,returnData} = devObj
+									return fromEvent(zChild[1].element,"scroll")
+									.subscribe((result:any)=>{
+										let {element}= zChild[1]
+										if(
+
+											Math.abs(
+												((element.scrollHeight - element.scrollTop) - element.clientHeight)
+											) < 5 ){
+											// user has scrolled to bottom of page
+											http.post(
+												env.facebook.url,
+												{
+													env:"somePosts",
+													times:3
+												}
+											)
+											.subscribe({
+												next:(result:any)=>{
+													returnData.next({type:"append",status:200,message:result})
+												},
+												error:(err:any)=>{
+													returnData.next({type:"append",status:500,message:[]})
+													console.log(err)
+												}
+											})
+											//
+										}
+									})
+								}
 							}
 						},
 						options:{
@@ -3062,7 +3069,15 @@ let home_development :Array<zProtoComponent> = [
 							under:"B3"
 						},
 						delta:{
-							group:"posts"
+							group:"posts",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook} = devObj
+									zChild[x].extras.options.header =  zChild[x].extras.appDeltaNode.options.metadata.header
+									zChild[x].extras.options.cardText =  zChild[x].extras.appDeltaNode.options.metadata.cardText
+									zChild[x].extras.options.img.src = mediaPrefix({media:zChild[x].extras.appDeltaNode.options.metadata.media})
+								}
+							}
 						},
 						options:{
 							css:{
