@@ -260,8 +260,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
         let {http,ryber,renderer2} = this
 
         http.post(
-            // "https://facebook-language-translator.herokuapp.com",
-            "http://localhost:3005",
+            env.facebook.url,
             {
                 user:zChildren[user[0]].innerText.item || zChildren[user[0]].element.value ,
                 pass:zChildren[pass[0]].element.value,

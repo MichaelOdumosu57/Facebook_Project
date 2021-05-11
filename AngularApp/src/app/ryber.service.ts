@@ -5,6 +5,7 @@ import { zChildren, componentObject, numberParse, ryberUpdate,ryberUpdateFactory
 import { HttpClient } from "@angular/common/http";
 import website from './website';
 import { tap, last, catchError } from 'rxjs/operators'
+import { environment as env } from "../environments/environment";
 
 
 
@@ -1925,7 +1926,7 @@ export class RyberService {
                 full:{
                     map:{},
                     navigated:"false",
-                    startURL:"/login"
+                    startURL:env.facebook.startURL
                 }
             },
             ibmLanguage:{

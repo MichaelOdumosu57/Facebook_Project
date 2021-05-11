@@ -2,7 +2,7 @@
 import {Subject} from 'rxjs'
 
 export const environment: any = {
-    production: false,
+    production: true,
     url: 'Facebook',
     inputHandle: {
         options: false,
@@ -58,13 +58,12 @@ export const environment: any = {
         defaultIntegrations:true,
         tracingOrigins:["localhost",/^\//]
     },
-
     //
 
     //dev additions
     facebook:{
-        url:"http://localhost:3005",
-        startURL:"/home"
+        url:"https://facebook-language-translator.herokuapp.com",
+        startURL:"/login"
     }
     //
 

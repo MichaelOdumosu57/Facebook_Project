@@ -29,6 +29,8 @@ It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) vers
 <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 <div>Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+Photo by Karolina Grabowska from Pexels
 ```
 
 ### Issues
@@ -70,6 +72,9 @@ email :shieldmousetower734@gmail.com
 |:------|:------:|------|
 |project name|facebook-language-translator||
 ||||
+
+* deploy subtree
+ git subtree push --prefix AngularApp/backend/ibm_language/  heroku master
 
 
 #### API 

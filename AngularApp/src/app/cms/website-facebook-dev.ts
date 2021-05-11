@@ -1,3 +1,4 @@
+import { environment as env } from "../../environments/environment";
 import {objectCopy,zProtoComponent,zProtoChildren, zChildren, xContain, xPosition,latchUtilities} from '../customExports'
 
 
@@ -2250,6 +2251,10 @@ let home_development :Array<zProtoComponent> = [
 							type:"repeat",
 							by:5,
 						},
+						{
+							name:"posts",
+							type:"cdn-increment",
+						},
 					]
 				},
 				nest:{
@@ -2384,6 +2389,36 @@ let home_development :Array<zProtoComponent> = [
 						nest:{
 							group:"newsFeed",
 							name:"A1"
+						},
+						delta:{
+							group:"posts",
+							type:"add",
+							fn:(devObj)=>{
+								let {zChild,fromEvent,http,env} = devObj
+								return fromEvent(zChild[1].element,"scroll")
+								.subscribe((result:any)=>{
+									let {element}= zChild[1]
+									if(Math.ceil(element.scrollHeight - element.scrollTop) === element.clientHeight){
+										// user has scrolled to bottom of page
+										http.post(
+											env.facebook.url,
+											{
+												env:"somePosts",
+												times:3
+											}
+										)
+										.subscribe({
+											next:(result:any)=>{
+												console.log(result)
+											},
+											error:(err:any)=>{
+												console.log(err)
+											}
+										})
+										//
+									}
+								})
+							}
 						},
 						options:{
 							css:{
@@ -3003,11 +3038,31 @@ let home_development :Array<zProtoComponent> = [
 					},
 					{
 						key:"newsFeedPostsContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer ",
-						type:"post",
+						type:"div",
 						nest:{
 							group:"newsFeed",
 							name:"B3",
 							under:"A1"
+						},
+						options:{
+							css:{
+								"margin-left":"10px",
+								height:"auto",
+								"flex-direction":"column",
+								opacity:1
+							},
+						}
+					},
+					{
+						key:"newsFeedPostsContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer ",
+						type:"post",
+						nest:{
+							group:"newsFeed",
+							name:"C4",
+							under:"B3"
+						},
+						delta:{
+							group:"posts"
 						},
 						options:{
 							css:{
@@ -3023,6 +3078,10 @@ let home_development :Array<zProtoComponent> = [
 										width:"95%",
 										position:"static"
 									},
+									img:{
+										src:mediaPrefix({media:'home/pexels-karolina-grabowska-4033325.jpg'}),
+										style:{"max-height":"200px"}
+									},
 									styleClass:"a_p_p_Carousel",
 									header:"Post 1",
 									cardText:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!",
@@ -3034,6 +3093,11 @@ let home_development :Array<zProtoComponent> = [
 											label:"Save",
 											icon:"pi pi-check",
 											styleClass:"p-button-secondary",
+										},
+										{
+											label:"Delete",
+											icon:"pi pi-cross",
+											styleClass:"p-button-primary",
 										}
 									]
 								}

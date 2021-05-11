@@ -15,6 +15,7 @@ import datetime
 import time
 pp = pprint.PrettyPrinter(indent=4, compact=True, width=1)
 import random
+import lorem
 
 # end
 
@@ -37,6 +38,21 @@ class my_ibm_language_client():
         self.authenticator = authenticator
         self.language_translator = language_translator
         self.random = random
+        self.lorem  = lorem
+        self.posts ={
+            "items":[
+                {
+                    "header":random.choice(["Python3","Angular","Ruby"]),
+                    "cardText":lorem.sentence(),
+                    "media":"home/{}".format(random.choice([
+                        "pexels-karolina-grabowska-4033325.jpg",
+                        "pexels-public-domain-pictures-87818.jpg",
+                        "pexels-skitterphoto-615350.jpg"
+                    ]))
+                } for i in list(range(10))
+            ],
+            "track":0
+        }
 
 
     def execute(self, data):
@@ -49,6 +65,8 @@ class my_ibm_language_client():
         random = self.random
         authenticator = self.authenticator
         language_translator = self.language_translator
+        lorem = self.lorem
+        posts = self.posts
         name = data.get("titleName") if data.get("titleName")  else "My_Source_Model"
         source = data.get("source")
         target = data.get("target")
@@ -56,6 +74,7 @@ class my_ibm_language_client():
         env = data.get("env")
         username = data.get("user")
         password = data.get("pass")
+        times = data.get("times")
         #
 
 
@@ -159,10 +178,53 @@ class my_ibm_language_client():
                     'status':500,
                     'message': 'an error occured check the output from the backend'
                 }
+
+        elif(env =="somePosts"):
+            try:
+                current = posts.get("track")
+                span = current+times
+                result = posts.get("items")[current:span]
+                posts["track"] = span
+                print(posts["track"]
+                )
+                return {
+                    "status":200,
+                    "message":json.dumps(result)
+                }
+
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
+                }
+
+        elif(env =="allPosts"):
+            try:
+                return {
+                    "status":200,
+                    "message":json.dumps(posts.get("items"))
+                }
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
+
+            }
+
+
         return {
             "status" :500,
             "message": "Check the backend env dictionary you did set it so the backend didnt do anything"
         }
+
 
 
 

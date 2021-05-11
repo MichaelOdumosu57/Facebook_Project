@@ -4,7 +4,7 @@
 [ngStyle]="options.style"
 [styleClass]="'p-card-shadow ' + options.styleClass">
     <ng-template pTemplate="header">
-        <img alt="Card" [src]="options.src">
+        <img alt="Card" [src]="options.img.src" [ngStyle]="options.img.style">
     </ng-template>
     <p>{{options.cardText}}</p>
     <ng-template pTemplate="footer">

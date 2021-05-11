@@ -6,6 +6,7 @@ import { navigationType,ryberUpdateFactory, eventDispatcher, numberParse, object
 import { catchError, delay,first,repeat,map } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { VanillaFrameworkOverrides } from 'ag-grid-community';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -25,7 +26,8 @@ export class DeltaNodeDirective {
 
 	constructor(
 		private renderer2: Renderer2,
-		private ryber: RyberService
+		private ryber: RyberService,
+		private http:HttpClient
 	) { }
 
 
@@ -39,7 +41,7 @@ export class DeltaNodeDirective {
 				if(env.directive.deltaNode.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' deltaNode ngOnInit fires on mount')
 
 
-				let {ryber,extras,subscriptions} = this
+				let {ryber,extras,subscriptions,http} = this
 				let rUD = ryberUpdateFactory({ryber})
 				let {co} = this.extras
 				let {groups} = this.groups =  ryber[co].metadata.deltaNode
@@ -117,7 +119,7 @@ export class DeltaNodeDirective {
 								},
 								add:[],
 								remove:[],
-
+								subscriptions:[]
 							}
 							if(x.type === "repeat"){
 								// should be initalized once
@@ -138,6 +140,7 @@ export class DeltaNodeDirective {
 								}
 								//
 							}
+
 						})
 						//
 
@@ -390,6 +393,7 @@ export class DeltaNodeDirective {
 
 							//
 							else if(val.type ==="repeat"){
+
 								val.deltas =[]
 								ryber[co].metadata.ngAfterViewInitFinished
 								.pipe(
@@ -459,6 +463,47 @@ export class DeltaNodeDirective {
 
 							}
 
+							// used when making API requests
+								// cdn-increment, when an action happens, make an additional request for x items
+								// cdn-total, when an actions happens requests and replace all content despite more or less than last content
+							else if(val.type ==="cdn-increment"){
+								val.targets = val.targets
+								.map((y:any,j)=>{
+									// logic for add concept
+									if(y[1]?.extras?.appDeltaNode?.type === "add"){
+
+										val.add .push ({
+											target:y,
+											fn:y[1].extras.appDeltaNode.fn
+										})
+									}
+									//
+									return y
+								})
+								.filter((y:any,j)=>{
+
+									return [undefined].includes(y[1]?.extras?.appDeltaNode?.type)
+								})
+
+								// do an action to make elements come on the dom
+								val.add
+								.forEach((y:any,j)=>{
+									let action = y.fn({
+										zChild:y.target,
+										fromEvent,http,
+										env
+									})
+
+									val.subscriptions.push(action)
+								})
+								//
+								console.log(val)
+							}
+
+							else if(val.type ==="cdn-total"){
+
+							}
+							//
 						})
 						//
 
