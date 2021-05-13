@@ -1869,7 +1869,11 @@ let home_development :Array<zProtoComponent> = [
 							split:20,
 							gap:10,
 							stack:30
-						}
+						},
+						appFacebookLogin:{
+							confirm:"true",
+							type:["body"]
+						},
 					}
 				}
 			},
@@ -2100,6 +2104,11 @@ let home_development :Array<zProtoComponent> = [
 					css:{
 						"border-radius":"50px",
 						"border":"10px soild black"
+					},
+					extras:{
+						appFacebookLogin:{
+							type:"avatarImg"
+						}
 					}
 				}
 			},
@@ -2114,6 +2123,11 @@ let home_development :Array<zProtoComponent> = [
 						"font-size":"15px",
 						"font-family":"Segoe UI Historic",
 						"font-weight":"1000"
+					},
+					extras:{
+						appFacebookLogin:{
+							type:"avatarName"
+						}
 					}
 				},
 				value:"Python3"
@@ -2213,7 +2227,11 @@ let home_development :Array<zProtoComponent> = [
 							confirm:"true",
 							type:"body",
 							zSymbolNeeded:"true",
-						}
+						},
+						appFacebookLogin:{
+							confirm:"true",
+							type:["body"]
+						},
 					}
 				},
 				navigation:{
@@ -2303,7 +2321,7 @@ let home_development :Array<zProtoComponent> = [
 								appVanillaTilt:{
 									type:"target",
 									group:"sideNav",
-								}
+								},
 							}
 						},
 						delta:{
@@ -2336,8 +2354,16 @@ let home_development :Array<zProtoComponent> = [
 										].map((x:string,i)=>{
 											return "sideNav/" +x
 										})
+										delete zChild[x].extras.appFacebookLogin
 										zChild[x].element.src = mediaPrefix({media:icons[index]})
 									}
+								}
+							}
+						},
+						options:{
+							extras:{
+								appFacebookLogin:{
+									type:"avatarImg"
 								}
 							}
 						}
@@ -2353,6 +2379,11 @@ let home_development :Array<zProtoComponent> = [
 						options:{
 							css:{
 								"font-size":"16px"
+							},
+							extras:{
+								appFacebookLogin:{
+									type:"avatarName"
+								}
 							}
 						},
 						value:"Python3",
@@ -2374,6 +2405,7 @@ let home_development :Array<zProtoComponent> = [
 										].map((x:string,i)=>{
 											return x.charAt(0).toUpperCase() + x.slice(1)
 										})
+										delete zChild[x].extras.appFacebookLogin
 										zChild[x].innerText.item = titles[index]
 									}
 								}
@@ -2478,6 +2510,11 @@ let home_development :Array<zProtoComponent> = [
 							css:{
 								opacity:1,
 								margin:"10px 0 0 0"
+							},
+							extras:{
+								appFacebookLogin:{
+									type:"avatarImg"
+								}
 							}
 						},
 						nest:{
@@ -2711,6 +2748,9 @@ let home_development :Array<zProtoComponent> = [
 											type:["Part"].map((x,i)=>{
 												return "click"+x
 											})
+										},
+										appFacebookLogin:{
+											type:"avatarImg"
 										}
 									},
 									css:{
@@ -2785,6 +2825,9 @@ let home_development :Array<zProtoComponent> = [
 											type:["Part"].map((x,i)=>{
 												return "click"+x
 											})
+										},
+										appFacebookLogin:{
+											type:"avatarName"
 										}
 									},
 									group:[""]
@@ -2980,7 +3023,7 @@ let home_development :Array<zProtoComponent> = [
 							},
 							extras:{
 								options:{
-									lazyLoad:"false",
+									lazyLoad:env.production ? "true":"false",
 									header:{
 										title:"People You May Know"
 									},

@@ -49,7 +49,7 @@ class my_ibm_language_client():
                         "pexels-public-domain-pictures-87818.jpg",
                         "pexels-skitterphoto-615350.jpg"
                     ]))
-                } for i in list(range(100))
+                } for i in list(range(10))
             ],
             "track":0
         }
@@ -158,15 +158,29 @@ class my_ibm_language_client():
                     "Ruby":"Ghi"
                 }
 
+                avatar_dict = {
+                    "Python3":"python.jpg",
+                    "Angular":"angular.png",
+                    "Ruby":"ruby_programming.png"
+                }
+
                 if(login_dict.get(username) == password):
                     return {
                         'status':200,
-                        'message':'Allow user to proceed'
+                        'message':json.dumps(
+                            {
+                                'message':'allow user to proceed',
+                                'avatar':avatar_dict.get(username)
+                            }
+                        ),
+
                     }
 
                 return  {
                         'status':401,
-                        'message':'There has been an issue please try again'
+                        'message':json.dumps({
+                            'message':'There has been an issue please try again'
+                        })
                     }
 
             except BaseException as e:

@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, Vie
 import { RyberService } from '../ryber.service'
 import { fromEvent, from, Subscription, Subscriber, of, combineLatest } from 'rxjs';
 import { deltaNode, eventDispatcher, numberParse, objectCopy,navigationType, zChildren } from '../customExports'
-import { catchError, delay,first,take } from 'rxjs/operators'
+import { catchError, delay,first,take,skip } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
@@ -156,7 +156,28 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     let chosenLoginButton = Array.from(val.types["chosenLoginButton"] || [])
                     let username:Array<string> = Array.from(val.types["username"] || [])
                     let password:Array<string> = Array.from(val.types["password"] || [])
+                    let avatarName = Array.from(val.types['avatarName'] || [])
+                    let avatarImg = Array.from(val.types['avatarImg'] || [])
 
+                    // update the avator place holders on all pages when the user is logged in
+
+                    let avatarUpdate = ryber.appCO0.metadata.facebookLogin.current
+                    // .pipe(skip(1))
+                    .subscribe((result:any)=>{
+                        console.log(result,avatarName,avatarImg)
+
+                        avatarName
+                        .forEach((y:any,j)=>{
+                            zChildren[y].innerText.item = result.user
+                        })
+
+                        avatarImg
+                        .forEach((y:any,j)=>{
+                            zChildren[y].element.src = zChildren[y].extras.extend.src = mediaPrefix({media:result.avatar})
+                        })
+                    })
+                    val.subscriptions.push(avatarUpdate)
+                    //
 
                     // setup the click events
                     let myChosen = [...chosen,...chosenPassword,...chosenLoginButton,...chosenImg,...chosenName,...chosenOverlay]
@@ -207,6 +228,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                                 user:username,
                                 pass:password,
                                 zChildren,
+
                             })
 
                         })
@@ -259,25 +281,37 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
         let {type,user,pass,zChildren} = devObj
         let {http,ryber,renderer2} = this
 
+        let myUser = zChildren[user[0]].innerText.item || zChildren[user[0]].element.value
+        let myPass = zChildren[pass[0]].element.value
         http.post(
             env.facebook.url,
             {
-                user:zChildren[user[0]].innerText.item || zChildren[user[0]].element.value ,
-                pass:zChildren[pass[0]].element.value,
+                user:myUser,
+                pass:myPass,
                 env:"login"
             },
             {
-                responseType:"text"
+                // responseType:"text"
             }
         )
         .subscribe({
             next:(result:any)=>{
-                if(result === "Allow user to proceed"){
+
+
+                if(result.message === "allow user to proceed"){
+
+                    // send the avatar metadata to the appropriate subject
+                    ryber.appCO0.metadata.facebookLogin.current.next({
+                        user:myUser,
+                        avatar:result.avatar
+                    })
+                    //
 
                     // change the path
                     ryber.appCO0.metadata.navigation.full.navigated = "true"
                     ryber.appCurrentNav = "/home"
                     //
+
 
                     // unlock the website
                     renderer2.removeClass(
@@ -293,7 +327,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                         }
                     )
                     .subscribe((result:any)=>{
-                    
+
                     })
                     //
                 }

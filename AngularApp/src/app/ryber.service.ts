@@ -1934,6 +1934,12 @@ export class RyberService {
                     language:"en"
                 })
             },
+            facebookLogin:{
+                current:new BehaviorSubject({
+                    user:"Python3",
+                    avatar:"python.jpg"
+                })
+            },
             webRTC:{
                 init:["localVideo","dataChannelSend","camera","myVideo"]
             },

@@ -28,6 +28,7 @@ $font-family2 :Segoe UI Historic;
 }
 
 
+
 .a_p_p_Login_Card {
     border-radius: 10px;
     background-color:white;
@@ -111,7 +112,10 @@ $font-family2 :Segoe UI Historic;
     font-family: inherit;
 }
 
-
+@mixin icon {
+    height: 35px;
+    width: 35px;
+}
 @mixin blue-button{
     direction: ltr;
     word-wrap: break-word;
@@ -338,6 +342,7 @@ $white: rgba(255,255,255,0.3);
     }
 
     &ItemIcon:nth-child(n){
+        @include icon;
         border-radius: 50px;
         margin-left: 20px;
         // margin-top:7px;

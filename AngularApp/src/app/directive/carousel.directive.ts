@@ -154,11 +154,10 @@ export class CarouselDirective {
                         .forEach((y:any,j)=>{
 
 
-
                             // lazy load the carousel
                             if(zChildren[y].extras.appCarousel.loaded !== "true" && zChildren[y].extras.options.lazyLoad === "true"){
                                 zChildren[y].extras.appCarousel.loaded = "true"
-                                from(import('../carousel/carousel.component'))
+                                let lazyLoadComponentSub = from(import('../carousel/carousel.component'))
                                 .pipe(delay(3000))
                                 .subscribe((result:any)=>{
                                     let {CarouselComponent} = result
@@ -178,16 +177,14 @@ export class CarouselDirective {
                                     )
                                     ref.detectChanges()
                                 })
+                                val.subscriptions.push(lazyLoadComponentSub)
                             }
                             //
-
-
-
 
                             //     zChildren[y].viewContainerRef.clear()
 
                         })
-
+                        subscriptions.push(...val.subscriptions)
                         //
 
                     })
