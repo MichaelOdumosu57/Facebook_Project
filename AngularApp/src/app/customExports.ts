@@ -293,20 +293,22 @@ export var latchUtilities:{centerX:Function} ={
         let {zChildren,zSymbol,metadata} = devObj
         let contain = metadata?.contain  || "&#8353"
         let containPos = metadata?.containPos || .5
+        let targetPos = metadata?.targetPos || .5
         let {numberParse,xPosition} = window
 
         try{
             let final = xPosition({
                 target: numberParse(zChildren[zSymbol].css["width"]),
                 contain: numberParse(getComputedStyle(zChildren[contain].element).width),
-                containPos
+                containPos,
+                targetPos
             })
             return final
         }
         catch(e){
             return numberParse(getComputedStyle(zChildren[contain].element).width)/2
         }
-        return 20
+
     }
 
 

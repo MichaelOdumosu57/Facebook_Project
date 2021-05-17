@@ -101,15 +101,49 @@ export class DeltaNodeDirective {
 										})
 									})
 								}
+
+								else if(val.type === "cdn"){
+									// remove the subscribers from the dead element
+									val.subscriptions
+									.forEach((y:any,j)=>{
+										y.unsubscribe()
+									})
+									val.subscriptions = []
+									//
+
+									// recreate the conditions in judima init
+									;["add","remove"]
+									.forEach((y:any,j)=>{
+										val[y]
+										.forEach((z:any,k)=>{
+											console.log(val,z)
+											let action = z.fn({
+												zChildren,
+												zSymbol:z.eventWrapper.zSymbol,
+												fromEvent,http,env,
+												returnData:z.eventWrapper.returnData
+											})
+											let myResult = z.eventWrapper.returnData
+											.pipe(skip(1))
+											.subscribe(z.eventWrapper.deltaNodeNormalizer)
+											val.subscriptions.push(...[action,myResult])
+										})
+									})
+									//
+								}
 							})
 							//
+
 							return
+
 						}
 						//
 
 						// gathering all the deltaGroups in the component
 						this.extras.group
 						.forEach((x:any,i)=>{
+
+
 							groups[x.name] = {
 								type:x.type,
 								targets:[],
@@ -487,18 +521,19 @@ export class DeltaNodeDirective {
 									return [undefined,"increment"].includes(y[1]?.extras?.appDeltaNode?.type)
 								})
 
+								//
+
 								// do an action to make elements come on the dom
 								val.add
 								.forEach((y:any,j)=>{
 									let action = y.fn({
-										zChild:y.target,
+										zChildren,
+										zSymbol:y.target[0],
 										fromEvent,http,
 										env,
 										returnData:y.result
 									})
-									let myResult = y.result
-									.pipe(skip(1))
-									.subscribe((result:any)=>{
+									let deltaNodeNormalizer = (result:any)=>{
 										let repeatedDeltas = []
 										y.result = result
 										y.result.message
@@ -563,10 +598,23 @@ export class DeltaNodeDirective {
 										val.deltas.push(repeatedDeltas)
 										val.hooks.directive  ="add prepare"
 										ryber[co].metadata.deltaNode.updateZChild.next()
-									})
-									subscriptions.push(...[action,myResult])
+									}
+									let myResult = y.result
+									.pipe(skip(1))
+									.subscribe(deltaNodeNormalizer)
+									y.eventWrapper = {
+										zSymbol:y.target[0],
+										index: subscriptions.length,
+										returnData:y.result,
+										deltaNodeNormalizer
+									}
+									val.subscriptions.push(...[action,myResult])
 								})
 								//
+
+
+
+
 
 							}
 							//

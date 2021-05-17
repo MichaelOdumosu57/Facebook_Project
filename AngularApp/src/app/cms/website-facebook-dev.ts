@@ -1858,7 +1858,21 @@ let home_development :Array<zProtoComponent> = [
 				key:"Body",
 				type:"body",
 				navigation:{
-					name:"home"
+					name:"home",
+					group:[
+						{
+							name:"home",
+							type:"direct_link"
+						},
+						{
+							name:"friends",
+							type:"direct_link"
+						},
+						{
+							name:"marketplace",
+							type:"direct_link"
+						}
+					]
 				},
 
 				options:{
@@ -2039,7 +2053,7 @@ let home_development :Array<zProtoComponent> = [
 					type:"image",
 					height:30,
 					split:.8,
-					// gap:120,
+					gap:150,
 					imageURL:"	house.png"
 				},
 				{
@@ -2060,11 +2074,17 @@ let home_development :Array<zProtoComponent> = [
 
 				x.gap = x.gap ||80
 				x.split = x.split||.6
+				x.navigation = {
+					type:"direct_link",
+					group:["home","friends","marketplace"][i]
+				}
 				x.options = x.options || {
 					extras:{
 						appVisible:{
 							type:["sectionDesktop"]
-						}
+						},
+
+
 					},
 					judima:{
 						mobile:{
@@ -2115,9 +2135,6 @@ let home_development :Array<zProtoComponent> = [
 											return 0
 										}
 										// console.log(zSymbol,zChildren)
-
-
-
 									},
 									left:-5
 								},
@@ -2481,6 +2498,10 @@ let home_development :Array<zProtoComponent> = [
 									type:"target",
 									group:"sideNav",
 								},
+							},
+							css:{
+								"margin-left":"10px",
+								"width":"92%"
 							}
 						},
 						delta:{
@@ -2500,6 +2521,7 @@ let home_development :Array<zProtoComponent> = [
 							options:{
 								modify:(devObj)=>{
 									let {zChild,x,index,hook,co} = devObj
+
 									if(hook === "deltaNodeBootstrap"){
 										let icons = ["find_friends_sidenav.png",
 										"timer.png",
@@ -2515,7 +2537,7 @@ let home_development :Array<zProtoComponent> = [
 										})
 										delete zChild[x].extras.appFacebookLogin
 
-										zChild[x].element.src = mediaPrefix({media:icons[index]})
+										zChild[x].element.src = zChild[x].extras.extend.src = mediaPrefix({media:icons[index]})
 									}
 								}
 							}
@@ -2597,10 +2619,10 @@ let home_development :Array<zProtoComponent> = [
 							type:"add",
 							options:{
 								fn:(devObj)=>{
-									let {zChild,fromEvent,http,env,returnData} = devObj
-									return fromEvent(zChild[1].element,"scroll")
+									let {zChildren,zSymbol,fromEvent,http,env,returnData} = devObj
+									return fromEvent(zChildren[zSymbol].element,"scroll")
 									.subscribe((result:any)=>{
-										let {element}= zChild[1]
+										let {element}= zChildren[zSymbol]
 										if(
 
 											Math.abs(
@@ -2756,10 +2778,12 @@ let home_development :Array<zProtoComponent> = [
 												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
 											},
-											height:1.15,
+											height:()=>{
+												return 1000
+											},
 											top:(devObj)=>{
 												let {} = devObj
-												return 0
+												return 0 + judimaPageOffset().y
 											},
 											left:(devObj)=>{
 												let {} = devObj
@@ -2801,19 +2825,16 @@ let home_development :Array<zProtoComponent> = [
 										},
 										mobile:{
 											width:(devObj)=>{
-												let {css,zSymbol,delta,zChildren} = devObj
-												return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
-
+												return 500
 											},
-											height:1.15,
+											height:()=>{
+												return 400
+											},
 											top:(devObj)=>{
 												let {} = devObj
-												return 0
+												return 50 + judimaPageOffset().y
 											},
-											left:(devObj)=>{
-												let {} = devObj
-												return 0
-											}
+											left:latchUtilities.centerX
 										}
 									},
 									extras:{
@@ -2848,10 +2869,16 @@ let home_development :Array<zProtoComponent> = [
 											left:latchUtilities.centerX
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:()=>{
+												return 110
+											},
+											height:()=>{
+												return 20
+											},
+											top:()=>{
+												return 70 +judimaPageOffset().y
+											},
+											left:latchUtilities.centerX
 										}
 									},
 									extras:{
@@ -2891,10 +2918,16 @@ let home_development :Array<zProtoComponent> = [
 											}
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:(devObj)=>{
+												return 450
+											},
+											height:()=>{
+												return 1
+											},
+											top:(devObj)=>{
+												return 80 + judimaPageOffset().y
+											},
+											left:latchUtilities.centerX,
 										}
 									},
 									extras:{
@@ -2942,15 +2975,26 @@ let home_development :Array<zProtoComponent> = [
 											left:latchUtilities.centerX,
 											metadata:{
 												left:{
-													containPos:.35
+													targetPos:8
 												}
 											}
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:()=>{
+												return 30
+											},
+											height:()=>{
+												return 30
+											},
+											top:()=>{
+												return 150 + judimaPageOffset().y
+											},
+											left:latchUtilities.centerX,
+											metadata:{
+												left:{
+													targetPos:8
+												}
+											}
 										}
 									},
 
@@ -2978,15 +3022,26 @@ let home_development :Array<zProtoComponent> = [
 											left:latchUtilities.centerX,
 											metadata:{
 												left:{
-													containPos:.4
+													targetPos:6
 												}
 											}
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:()=>{
+												return 30
+											},
+											height:()=>{
+												return 30
+											},
+											top:()=>{
+												return 150 +judimaPageOffset().y
+											},
+											left:latchUtilities.centerX,
+											metadata:{
+												left:{
+													targetPos:6
+												}
+											}
 										}
 									},
 									extras:{
@@ -3036,10 +3091,17 @@ let home_development :Array<zProtoComponent> = [
 											left:latchUtilities.centerX
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:(devObj)=>{
+												return 500
+											},
+											height:()=>{
+												return 100
+											},
+											top:(devObj)=>{
+												let {} = devObj
+												return 200 + judimaPageOffset().y
+											},
+											left:latchUtilities.centerX
 										}
 									},
 									group:[""]
@@ -3065,10 +3127,16 @@ let home_development :Array<zProtoComponent> = [
 											left:latchUtilities.centerX
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:()=>{
+												return 450
+											},
+											height:()=>{
+												return 50
+											},
+											top:()=>{
+												return 350 +judimaPageOffset().y
+											},
+											left:latchUtilities.centerX
 										}
 									},
 									extras:{
@@ -3138,7 +3206,7 @@ let home_development :Array<zProtoComponent> = [
 									let {zChild,x,index,hook,co} = devObj
 									if(hook === 'deltaNodeBootstrap'){
 										let items = ["home/photoVideo.png","home/smiley.png"]
-										zChild[x].element.src = mediaPrefix({media:items[index]})
+										zChild[x].element.src = zChild[x].extras.extend.src = mediaPrefix({media:items[index]})
 									}
 								}
 							}
@@ -3431,7 +3499,7 @@ let home_development :Array<zProtoComponent> = [
 									let {zChild,x,index,hook,co} = devObj
 									if(hook === "deltaNodeBootstrap"){
 										let sponsoredImages = ["home/pexels-martin-péchy-1292294.jpg"]
-										zChild[x].element.src = mediaPrefix({media:sponsoredImages[index]})
+										zChild[x].element.src = zChild[x].extras.extend.src = mediaPrefix({media:sponsoredImages[index]})
 									}
 								}
 							}
@@ -3668,7 +3736,7 @@ let home_development :Array<zProtoComponent> = [
 									let {zChild,x,index,hook,co} = devObj
 									if(hook === 'deltaNodeBootstrap'){
 										let ContactsImg = ['ruby_programming.png',"scss.png","typescript.jpg","gcp.jpg","ibm_cloud.png","sql.png"]
-										zChild[x].element.src = mediaPrefix({media:ContactsImg[index]})
+										zChild[x].element.src = zChild[x].extras.extend.src= mediaPrefix({media:ContactsImg[index]})
 									}
 								}
 							}
@@ -3720,22 +3788,25 @@ let home_development :Array<zProtoComponent> = [
 	}
 ]
 
+
+let friendsNavigation = objectCopy(home_development[0])
+friendsNavigation.title = "friendsNavigation"
+friendsNavigation.metafields[0].navigation.name = "friends"
+
+let friendsDevelopment: Array<zProtoComponent>= [
+	friendsNavigation
+]
 // attribute map
 // "x-mark.png":Darius Dan x-icons
 
 
 let facebook_development = [
 	...login_development,
-	...home_development
+	...home_development,
+	...friendsDevelopment
 ]
 
 
-
-
-
 website.convertCMS = facebook_development
-
-
-
 
 export default website

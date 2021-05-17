@@ -1269,7 +1269,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
             zChild["&#8353"].css["height"] = (
                 numberParse(zChild[max].css["top"]) +
                 numberParse(zChild[max].css["height"]) +
-                mediaQuery.footerSpace -
+                (mediaQuery?.footerSpace || 0) -
                 numberParse(zChild["&#8353"].css["top"])
             ).toString() + "px";
         }

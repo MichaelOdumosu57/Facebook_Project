@@ -875,6 +875,7 @@ export class RyberService {
 						appDeltaNode,
                         appNest,
                         appLatch,
+                        appNavigation,
                         ...options.extras
                     }
                 })
