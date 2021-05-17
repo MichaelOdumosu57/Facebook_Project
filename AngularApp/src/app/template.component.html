@@ -10,8 +10,10 @@
         appSection [section] = "ryber.appAvailble( a.extras[0][bb], 'appSection')"
         appNavigation [navigation] = "ryber.appAvailble( a.extras[0][bb], 'appNavigation')"
         appVisible [visible] = "ryber.appAvailble( a.extras[0][bb], 'appVisible')"
+
         appLanguageTranslator [languageTranslator] = "ryber.appAvailble( a.extras[0][bb], 'appLanguageTranslator')"
         appFacebookLogin [facebookLogin] = "ryber.appAvailble( a.extras[0][bb], 'appFacebookLogin')"
+        appHomeMenu [homeMenu] = "ryber.appAvailble( a.extras[0][bb], 'appHomeMenu')"
         appCarousel [carousel] = "ryber.appAvailble( a.extras[0][bb], 'appCarousel')"
         #myVal
         *ngIf= "a.bool[0][bb] ==='divBoard' else boardBlock0"
@@ -192,20 +194,20 @@
         </strong>
         </ng-template>
         <ng-template #elseBlock12  >
-			<input
+                <input
 
-			appDeltaNode [deltaNode] = "ryber.appAvailble( a.extras[1][bb], 'appDeltaNode')"
-            appLatch [latch] = "ryber.appAvailble( a.extras[1][bb], 'appLatch')"
-            appNest [nest] = "ryber.appAvailble( a.extras[1][bb], 'appNest')"
-            appExtend [extend] = "ryber.appAvailble( a.extras[1][bb], 'extend')"
-            appInputHandle [inputHandle] = "ryber.appAvailble( a.extras[1][bb], 'appInputHandle')"
-            appMoneyClick [moneyClick] = "ryber.appAvailble( a.extras[1][bb], 'appMoneyClick')"
-            appFocusFont [focusFont] = "ryber.appAvailble( a.extras[1][bb], 'appFocusFont')"
-            appDateClick [dateClick] = "ryber.appAvailble( a.extras[1][bb], 'appDateClick')"
-            #myVal
-            *ngIf= "a.bool[1][bb] ==='i' else elseBlock13" class = {{a.val[1][bb]}}
-            [ngStyle] = 'a.ngCss[1][bb]'
-            >
+                appDeltaNode [deltaNode] = "ryber.appAvailble( a.extras[1][bb], 'appDeltaNode')"
+                appLatch [latch] = "ryber.appAvailble( a.extras[1][bb], 'appLatch')"
+                appNest [nest] = "ryber.appAvailble( a.extras[1][bb], 'appNest')"
+                appExtend [extend] = "ryber.appAvailble( a.extras[1][bb], 'extend')"
+                appInputHandle [inputHandle] = "ryber.appAvailble( a.extras[1][bb], 'appInputHandle')"
+                appMoneyClick [moneyClick] = "ryber.appAvailble( a.extras[1][bb], 'appMoneyClick')"
+                appFocusFont [focusFont] = "ryber.appAvailble( a.extras[1][bb], 'appFocusFont')"
+                appDateClick [dateClick] = "ryber.appAvailble( a.extras[1][bb], 'appDateClick')"
+                #myVal
+                *ngIf= "a.bool[1][bb] ==='i' else elseBlock13" class = {{a.val[1][bb]}}
+                [ngStyle] = 'a.ngCss[1][bb]'
+                >
         </ng-template>
         <ng-template #elseBlock13  >
 			<textarea
@@ -422,7 +424,7 @@
 		<ng-template #elseBlock28  >
             <div
             #myVal
-            *ngIf= "a.bool[1][bb] ==='mat-carousel' else elseblock29"
+            *ngIf= "a.bool[1][bb] ==='primeng-carousel' else elseblock29"
             class = {{a.val[1][bb]}}
             [ngStyle] ='a.ngCss[1][bb]'
             appExtend [extend] = "ryber.appAvailble( a.extras[1][bb], 'extend')"
@@ -436,25 +438,30 @@
                 ></app-carousel>
             </div>
 		</ng-template>
+
 		<ng-template #elseBlock29
-        [ngIf]= "a.bool[1][bb] =='primeng-card'"
+        [ngIf]="a.bool[1][bb] ==='app-components'" [ngIfElse]="elseBlock30"
         >
             <div
             #myVal
-
+            *ngIf="a.bool[1][bb] ==='app-components'"
             class = {{a.val[1][bb]}}
             [ngStyle] ='a.ngCss[1][bb]'
             appExtend [extend] = "ryber.appAvailble( a.extras[1][bb], 'extend')"
             appLatch [latch] = "ryber.appAvailble( a.extras[1][bb], 'appLatch')"
             >
-                <app-card
-                *ngIf="a.extras[1][bb].options.lazyLoad === 'false'"
+                <app-components
+                *ngIf="a.extras[1][bb].options?.lazyLoad === 'false'"
                 class ={{a.extras[1][bb].options?.component?.class}}
                 [ngStyle] ="a.extras[1][bb].options?.component?.style"
                 [options] ="a.extras[1][bb].options"
-                ></app-card>
+                ></app-components>
             </div>
 		</ng-template>
+
+
+
+
     </ng-container>
 
 

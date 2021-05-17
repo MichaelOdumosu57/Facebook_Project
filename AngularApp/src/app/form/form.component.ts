@@ -1047,7 +1047,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                         appTV
                     }
                 });
-                ryber[appTV].metadata.board = _boardDimensions({ zChild,section});
+            ryber[appTV].metadata.board = _boardDimensions({ zChild,section});
                 ryber[appTV].metadata.board.diff = newSection?.diff;
                 ryber[appTV].metadata.board.point = newSection?.point;
 
@@ -1099,7 +1099,9 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                         zChild[x].extras.judima?.mobile?.left ||
                         xPosition({
                             target: numberParse(zChild[x].css["width"]),
-                            contain: numberParse(getComputedStyle(board.element).width)
+                            contain: numberParse(getComputedStyle(board.element).width),
+                            targetPos:zChild[x].extras.judima?.mobile?.containPos || .5,
+                            containPos:zChild[x].extras.judima?.mobile?.containPos || .5
                         })
                     ).toString() + "px";
                 });
@@ -1132,6 +1134,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
                 //responsive height
                 Object.keys(zChild)
+                .slice(2)
                 .forEach((x,i)=> {
                     if(zChild[x].extras?.judima?.formatIgnore === "false"){
                         if(["p","ta","c","h1","a"].includes(zChild[x].bool )){
@@ -1140,6 +1143,13 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                             this.ref.detectChanges()
                             zChild[x].css["height"] =  (zChild[x].element.getBoundingClientRect().height).toString() + "px"
                         }
+
+                        if(zChild[x].extras.judima.mobile?.height !== undefined){
+
+                            zChild[x].css["height"] =  zChild[x].extras.judima.mobile.height.toString() + "px"
+                            ref.detectChanges()
+                        }
+
                     }
                 })
                 //
@@ -1289,7 +1299,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                     }
                     return acc
                 }) -1
-                
+
                 zChild[x].extras.appDeltaNode.options?.modify({
                     zChild,
                     x,

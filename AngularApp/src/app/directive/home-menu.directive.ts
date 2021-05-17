@@ -1,19 +1,20 @@
 import { Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, ViewContainerRef, ViewRef, EmbeddedViewRef, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { RyberService } from '../ryber.service'
 import { fromEvent, from, Subscription, Subscriber, of, combineLatest } from 'rxjs';
-import { deltaNode, eventDispatcher, numberParse, objectCopy,navigationType } from '../customExports'
-import { catchError, delay,first,take } from 'rxjs/operators'
+import { deltaNode, eventDispatcher, numberParse, objectCopy, navigationType } from '../customExports'
+import { catchError, delay, distinctUntilKeyChanged, first, take } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
+
 @Directive({
-    selector: '[appTemplate]'
+    selector: '[appHomeMenu]'
 })
-export class TemplateDirective {
+export class HomeMenuDirective {
 
 
-    @Input() templateDirective: any;
+    @Input() homeMenu: any;
     extras: any;
     zChildren: any;
     subscriptions:Array<Subscription> = []
@@ -28,76 +29,17 @@ export class TemplateDirective {
     ) { }
 
 
-    @HostListener('click') onClick() {
 
-
-        if (this.extras?.confirm === 'true') {
-
-            let {http,subscriptions,group,zChildren,ref} = this
-            //communicate with the python backend
-
-            let data:any = {
-                titleName:zChildren[group.modelName[0]].element.value,
-                env:"extract_model",
-                storageBuckets:group.storageBuckets.map((x:any,i)=>{
-                    return zChildren[x].element.value
-                })
-            }
-            zChildren[group.result[0]].element.innerText = "Submitting..."
-
-            let postRequest =http.post(
-                "http://localhost:3005",
-                data,
-                {
-                    responseType: 'text',
-                }
-            )
-            .subscribe({
-
-
-                error: (error) => {
-
-                    zChildren[group.result[0]].element.innerText =error
-                    ref.detectChanges()
-                    postRequest.unsubscribe()
-                    eventDispatcher({
-                        event: 'resize',
-                        element: window
-                    })
-                },
-                next: (result: any) => {
-
-                    if(result.includes("an error occured")){
-                        zChildren[group.result[0]].element.innerText =result
-                    }
-                    else{
-                        zChildren[group.result[0]].element.innerText ="Result: "+result
-                    }
-
-                    postRequest.unsubscribe()
-                    eventDispatcher({
-                        event: 'resize',
-                        element: window
-                    })
-                }
-
-            })
-            subscriptions.push(postRequest)
-            //
-
-        }
-
-    }
 
 
     ngOnInit() {
-        this.extras = this.templateDirective
+        this.extras = this.homeMenu
 
         if (this.extras?.confirm === 'true' && this.extras?.type.includes("body")  ) {
-            if(env.directive?.templateDirective?.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' templateDirective ngOnInit fires on mount')
+            if(env.directive?.homeMenu?.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' homeMenu ngOnInit fires on mount')
             let {ryber,extras,zChildren,subscriptions} = this
             let {co} = extras
-            let {group,suffix}  = ryber[co].metadata.templateDirective
+            let {group,suffix}  = ryber[co].metadata.homeMenu
 
             // detects navigation
 			let action:any = navigationType({
@@ -114,22 +56,10 @@ export class TemplateDirective {
 			})
             //
 
-            // optional script loading
-            let {scripts} =this.ryber.appCO0.metadata
-            scripts =  scripts .filter((x:any,i)=>{
-                return x.name === "vanillaTilt"
-            })
-            let loadedScripts = Array.from(
-                scripts.filter((x:any,i)=>{
-                    return x.loaded !== "true"
-                }),
-                (x:any,i)=>{return fromEvent(x.element,"load")}
-            )
-            //
+
 
             let mainSubscription =combineLatest([
                 ryber[co].metadata.zChildrenSubject,
-                ...loadedScripts
             ])
             .subscribe((result:any) => {
                 zChildren = ryber[co].metadata.zChildren
@@ -157,19 +87,19 @@ export class TemplateDirective {
 
 
                     // if an element doesnt belong it doesnt belong
-                    if(x[1].extras?.appTemplate === undefined){
+                    if(x[1].extras?.appHomeMenu === undefined){
                         return
                     }
                     //
 
                     // start to organize the elements into groups
                         // for latch determine which duplicate it belongs to
-                    let myGroup = x[1].extras.appTemplate?.group || "default"
-                    let myType:Array<string> =  x[1].extras.appTemplate?.type || ["default"]
+                    let myGroup = x[1].extras.appHomeMenu?.group || "default"
+                    let myType:Array<string> =  x[1].extras.appHomeMenu?.type || ["default"]
                     let deltaNodeGroup =  x[1].extras?.appDeltaNode?.group || x[1].extras.appLatch?.deltaNode?.group
                     // determine if there is a duplicate and which duplicate it belongs to
                     let count = 0
-                    if (x[1].extras.appTemplate?.duplicateIgnore !== "true") {
+                    if (x[1].extras.appHomeMenu?.duplicateIgnore !== "true") {
                         ryber[co].metadata.deltaNode.groups[deltaNodeGroup]?.deltas
                         .forEach((y:any,j)=>    {
 
@@ -211,10 +141,68 @@ export class TemplateDirective {
                 this.zChildren = zChildren
                 this.group = group
                 this.ref = ref
-                console.log(group)
+
+                ryber[co].metadata.ngAfterViewInitFinished
+                .pipe(first())
+                .subscribe(()=>{
+                    Object.entries(group)
+                    .forEach((x:any,i)=>{
+                        let key = x[0]
+                        let val = x[1]
+
+                        let target = Array.from(val.types['target'] || [])
+                        let optionText = Array.from(val.types['optionText'] || [])
+                        let optionImg = Array.from(val.types['optionImg'] || [])
+                        console.log(optionImg)
+                        target
+                        .forEach((y:any,j)=>{
+                            let optionsReceiver = ryber.appCO0.metadata.homeMenu.current
+                            .pipe(
+                                // delay(1000),
+                                // distinctUntilKeyChanged("text"),
+                                // distinctUntilKeyChanged("src")
+                            )
+                            .subscribe((result:any)=>{
+                                console.log(result)
+                            })
+                            val.subscriptions.push(optionsReceiver)
+
+
+
+                        })
+
+                        // if(optionImg.length >= 10){
+
+                        //     optionImg
+                        //     .forEach((y:any,j)=>{
+
+                        //         ryber.appCO0.metadata.homeMenu.current.next({
+                        //             group:key,
+                        //             src:zChildren[y].element.src,
+
+                        //         })
+                        //     })
+
+                        //     optionText
+                        //     .forEach((y:any,j)=>{
+                        //         ryber.appCO0.metadata.homeMenu.current.next({
+                        //             group:key,
+                        //             text:zChildren[y].innerText.item,
+                        //             y
+                        //         })
+                        //     })
+
+                        // }
+                        subscriptions.push(...val.subscriptions)
+                    })
+                })
+
 
             })
             subscriptions.push(mainSubscription)
+
+
+
 
         }
     }
@@ -222,7 +210,7 @@ export class TemplateDirective {
 
 	ngOnDestroy() {
 		if (this.extras?.confirm === 'true') {
-            if(env.directive?.templateDirective?.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' templateDirective ngOnDestroy fires on dismount')
+            if(env.directive?.homeMenu?.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' homeMenu ngOnDestroy fires on dismount')
 			this.subscriptions
 			.forEach((x: any, i) => {
 				try{

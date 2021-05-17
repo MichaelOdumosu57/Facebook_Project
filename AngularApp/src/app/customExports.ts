@@ -68,6 +68,9 @@ export class zOptionsJudima {
         stack?:Number
         footerSpace?:Number,
         left?:Number,
+        targetPos?:number, //0-1
+        containPos?:number, //0-1
+        height?:number,
     };
     desktop?:{
 
@@ -404,11 +407,11 @@ export function componentBootstrap(
                     document.querySelector(`.${appTV} .${utf8Symbol}`)
                     let viewContainerRef =  myContainers
                     .filter((xx:any,ii)=>{
-                        return element.className === xx[0].className
+                        return element?.className === xx[0]?.className
                     })
                     // apparently the component doesnt need a templateRef
-                    // if(templateRef.length !== 1){
-                        // console.log(templateRef,element)
+                    // if(viewContainerRef.length !== 1){
+                    //     console.log(viewContainerRef,element)
                     // }
                     //
 					zChild[w] ={

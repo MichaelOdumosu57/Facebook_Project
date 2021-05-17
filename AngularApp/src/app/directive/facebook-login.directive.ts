@@ -162,9 +162,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     // update the avator place holders on all pages when the user is logged in
 
                     let avatarUpdate = ryber.appCO0.metadata.facebookLogin.current
-                    // .pipe(skip(1))
                     .subscribe((result:any)=>{
-                        console.log(result,avatarName,avatarImg)
 
                         avatarName
                         .forEach((y:any,j)=>{

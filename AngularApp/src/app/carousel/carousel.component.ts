@@ -7,8 +7,7 @@ import { Component, OnInit,Input,ElementRef } from '@angular/core';
 })
 export class CarouselComponent implements OnInit {
 
-    a:any;
-    bb:any
+
     @Input() options:any
     constructor(
         public el:ElementRef

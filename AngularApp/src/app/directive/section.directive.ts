@@ -46,6 +46,11 @@ export class SectionDirective {
                 else{
                     ryber.appCO0.metadata.ryber.sectionDefault.app.width.mediaQuery = "mobile"
                 }
+                ryber.appCO0.metadata.ryber.sectionDefault.app.width.mediaQuerySubject.next(
+                    {
+                        media:ryber.appCO0.metadata.ryber.sectionDefault.app.width.mediaQuery
+                    }
+                )
             })
             subscriptions.push(...[getZChildren,mediaQueryChange])
         }

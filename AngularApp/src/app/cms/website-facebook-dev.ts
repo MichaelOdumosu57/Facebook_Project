@@ -1864,8 +1864,8 @@ let home_development :Array<zProtoComponent> = [
 				options:{
 					extras:{
 						section:{
-							left:-55,
-							width:1500,
+							// left:-55,
+							// width:1500,
 							split:20,
 							gap:10,
 							stack:30
@@ -1874,6 +1874,18 @@ let home_development :Array<zProtoComponent> = [
 							confirm:"true",
 							type:["body"]
 						},
+						appSection:{
+							confirm:"true"
+						},
+						appVisible:{
+							confirm:"true",
+							type:["body"]
+						},
+						appHomeMenu:{
+							confirm:"true",
+							type:["body"]
+						},
+
 					}
 				}
 			},
@@ -1882,7 +1894,17 @@ let home_development :Array<zProtoComponent> = [
 				type:"image",
 				imageURL:"facebook_circular.png",
 				height:30,
-				split:.8,
+				split:.6,
+				options:{
+					judima:{
+						mobile:{
+							widthRatio:.1,
+							// height:300
+							containPos:.1,
+							top:50
+						}
+					}
+				},
 				latch:{
 					type:"display",
 					display:{
@@ -1915,6 +1937,11 @@ let home_development :Array<zProtoComponent> = [
 									left:0
 								}
 							},
+							extras:{
+								appVisible:{
+									type:["sectionDesktop"]
+								}
+							},
 							group:["navGroup",...Array.from(Array(3),(x,i)=>{return "navUserIcon_"+i})]
 						}
 					]
@@ -1925,7 +1952,8 @@ let home_development :Array<zProtoComponent> = [
 				key:"seach-facebook",
 				type:"input",
 				height:10,
-				split:4,
+				split:3,
+				gap:30,
 				latch:{
 					type:"display",
 					display:{
@@ -1964,7 +1992,9 @@ let home_development :Array<zProtoComponent> = [
 										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
 									},
-									height:1.15,
+									height:(devObj)=>{
+										return 2900
+									},
 									top:(devObj)=>{
 										let {} = devObj
 										return 0
@@ -1989,8 +2019,18 @@ let home_development :Array<zProtoComponent> = [
 					extras:{
 						extend:{
 							placeholder:"Search Facebook"
+						},
+						appVisible:{
+							type:["sectionDesktop"]
+						}
+					},
+					judima:{
+						mobile:{
+							height:0,
+							top:0,
 						}
 					}
+
 				}
 			},
 			...[
@@ -1999,7 +2039,7 @@ let home_development :Array<zProtoComponent> = [
 					type:"image",
 					height:30,
 					split:.8,
-					gap:120,
+					// gap:120,
 					imageURL:"	house.png"
 				},
 				{
@@ -2008,30 +2048,31 @@ let home_development :Array<zProtoComponent> = [
 					height:30,
 					imageURL:"group.png"
 				},
-				{
-					key:"group-icon",
-					type:"image",
-					height:30,
-					imageURL:"tv-monitor.png"
-				},
+
 				{
 					key:"marketplace-icon",
 					type:"image",
 					height:30,
 					imageURL:"marketplace.png"
 				},
-				{
-					key:"group-icon",
-					type:"image",
-					height:30,
 
-					imageURL:"crowd.png"
-				},
 			].map((x:zProtoChildren,i)=>{
 
 				x.gap = x.gap ||80
 				x.split = x.split||.6
-
+				x.options = x.options || {
+					extras:{
+						appVisible:{
+							type:["sectionDesktop"]
+						}
+					},
+					judima:{
+						mobile:{
+							height:0,
+							top:0,
+						}
+					}
+				}
 				x.latch = {
 					type:"display",
 					display:{
@@ -2087,6 +2128,11 @@ let home_development :Array<zProtoComponent> = [
 									left:0
 								}
 							},
+							extras:{
+								appVisible:{
+									type:["sectionDesktop"]
+								}
+							},
 							group:["navIcon_"+i]
 						}
 					]
@@ -2098,7 +2144,8 @@ let home_development :Array<zProtoComponent> = [
 				type:"image",
 				height:20,
 				split:.6,
-				left:1100,
+				// left:1100,
+				gap:150,
 				imageURL:"python.jpg",
 				options:{
 					css:{
@@ -2109,6 +2156,12 @@ let home_development :Array<zProtoComponent> = [
 						appFacebookLogin:{
 							type:"avatarImg"
 						}
+					},
+					judima:{
+						mobile:{
+							height:0,
+							top:0,
+						}
 					}
 				}
 			},
@@ -2116,7 +2169,8 @@ let home_development :Array<zProtoComponent> = [
 				key:"profile-name",
 				type:"text",
 				height:20,
-				left:1140,
+				gap:5,
+				// left:1140,
 				// split:.6,
 				options:{
 					css:{
@@ -2127,6 +2181,15 @@ let home_development :Array<zProtoComponent> = [
 					extras:{
 						appFacebookLogin:{
 							type:"avatarName"
+						},
+						appVisible:{
+							type:["sectionDesktop"]
+						}
+					},
+					judima:{
+						mobile:{
+							height:0,
+							top:0,
 						}
 					}
 				},
@@ -2151,7 +2214,7 @@ let home_development :Array<zProtoComponent> = [
 				}
 			].map((x:zProtoChildren,i)=>{
 				x.key += "-icon"
-				x.gap = x.gap ||30
+				x.gap = x.gap ||20
 				x.height = 20
 				x.split = .6
 				x.latch = {
@@ -2167,9 +2230,9 @@ let home_development :Array<zProtoComponent> = [
 							logic:{
 								desktop:{
 									width:1.4,
-									height:2.0,
-									top:-10,
-									left:-7
+									height:1.5,
+									top:-5,
+									left:-5
 								},
 								mobile:{
 									width:1.2,
@@ -2182,9 +2245,90 @@ let home_development :Array<zProtoComponent> = [
 						}
 					]
 				}
+				x.options = {
+					extras:{
+						appVisible:{
+							type:["sectionDesktop"]
+						}
+					},
+					judima:{
+						mobile:{
+							height:0,
+							top:0,
+						}
+					}
+				}
 
 				return x
-			})
+			}),
+			{
+				key:"menu-dropdown",
+				type:"components",
+				height:0,
+				options:{
+					judima:{
+						mobile:{
+							top:10,
+							widthRatio:.9,
+							height:270
+						}
+					},
+					extras:{
+						options:{
+							type:"primeng-dropdown",
+							lazyLoad:"false",
+							styleClass:"",
+							style:{
+								width:"100%",
+							},
+							disabled:true,
+							items:{
+								container:{
+									style:{
+										"border-radius":"50px",
+										width:"30em",
+									}
+								}
+							},
+							options:[
+								{
+									name:"Your Profile",
+
+								},
+								{
+									name:"Find Friends",
+
+								},
+								{
+									name:"Marketplace" ,
+								},
+							],
+							component:{
+								style:{
+									width:"100%",
+									// position:"static"
+								}
+							},
+							panel:{
+								style:{
+									"border-radius":"50px",
+									// height:"300px",
+									"background":"transparent"
+								},
+
+							}
+						},
+						appHomeMenu:{
+							type:["target"],
+							group:"homeMenu"
+						},
+						appVisible:{
+							type:["sectionMobile"],
+							group:"homeMenu"
+						}
+					}
+				}
+			}
 
 
 		]
@@ -2201,14 +2345,14 @@ let home_development :Array<zProtoComponent> = [
 						moving:{
 							point:"bottom",
 							target:'homeNavigation',
-							coordinates:{x:-70,y:0},
+							coordinates:{x:0,y:0},
 							type:"custom"
 						},
 					},
 					extras:{
 						section:{
 							// left:-50,
-							width:1560,
+							// width:1560,
 							split:4,
 							gap:10,
 							stack:0
@@ -2229,6 +2373,10 @@ let home_development :Array<zProtoComponent> = [
 							zSymbolNeeded:"true",
 						},
 						appFacebookLogin:{
+							confirm:"true",
+							type:["body"]
+						},
+						appHomeMenu:{
 							confirm:"true",
 							type:["body"]
 						},
@@ -2262,7 +2410,7 @@ let home_development :Array<zProtoComponent> = [
 						{
 							name:"onYourMind",
 							type:"repeat",
-							by:2,
+							by:1,
 						},
 						{
 							name:"carousel1",
@@ -2299,8 +2447,19 @@ let home_development :Array<zProtoComponent> = [
 						key:"subNavigation a_p_p_subNav a_p_p_Glassmorphism a_p_p_HomeMiscContainer",
 						type:"div",
 						split:1,
-
-
+						options:{
+							extras:{
+								appVisible:{
+									type:["sectionDesktop"]
+								}
+							},
+							judima:{
+								mobile:{
+									height:0,
+									top:0
+								}
+							}
+						},
 						nest:{
 							group:"sideNav",
 							name:"A1"
@@ -2355,6 +2514,7 @@ let home_development :Array<zProtoComponent> = [
 											return "sideNav/" +x
 										})
 										delete zChild[x].extras.appFacebookLogin
+
 										zChild[x].element.src = mediaPrefix({media:icons[index]})
 									}
 								}
@@ -2364,6 +2524,11 @@ let home_development :Array<zProtoComponent> = [
 							extras:{
 								appFacebookLogin:{
 									type:"avatarImg"
+								},
+								appHomeMenu : {
+									group:"homeMenu",
+									type:["optionImg"],
+									duplicateIgnore:"true"
 								}
 							}
 						}
@@ -2383,6 +2548,11 @@ let home_development :Array<zProtoComponent> = [
 							extras:{
 								appFacebookLogin:{
 									type:"avatarName"
+								},
+								appHomeMenu : {
+									group:"homeMenu",
+									type:["optionText"],
+									duplicateIgnore:"true"
 								}
 							}
 						},
@@ -3105,7 +3275,7 @@ let home_development :Array<zProtoComponent> = [
 					},
 					{
 						key:"newsFeedPostsContainer a_p_p_ItemContainer a_p_p_NewsFeedItemContainer ",
-						type:"post",
+						type:"components",
 						nest:{
 							group:"newsFeed",
 							name:"C4",
@@ -3131,6 +3301,7 @@ let home_development :Array<zProtoComponent> = [
 							},
 							extras:{
 								options:{
+									type:"primeng-card",
 									lazyLoad:"false",
 									style:{
 										width:"95%",
@@ -3174,6 +3345,9 @@ let home_development :Array<zProtoComponent> = [
 						options:{
 							css:{
 								opacity:1
+							},
+							judima:{
+								mobile:{}
 							}
 						},
 						nest:{

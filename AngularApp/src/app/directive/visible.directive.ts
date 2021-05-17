@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, Vie
 import { RyberService } from '../ryber.service'
 import { fromEvent, from, Subscription, Subscriber, of, combineLatest } from 'rxjs';
 import { deltaNode, eventDispatcher, numberParse, objectCopy, navigationType,zDirectiveGroup } from '../customExports'
-import { catchError, delay, first, take } from 'rxjs/operators'
+import { catchError, delay, distinctUntilChanged, distinctUntilKeyChanged, first, take,skip } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -155,7 +155,7 @@ export class VisibleDirective {
 
                                 let toggle = fromEvent(zChildren[y].element,"click")
                                 .subscribe((result:any)=>{
-                                    
+
                                     clickPart
                                     .forEach((z:any,k)=>{
                                         zChildren[z].css.display = zChildren[z].css.display === "none" ? "block" : "none"
@@ -167,6 +167,114 @@ export class VisibleDirective {
                             //
 
                         //
+
+                        // groupType == section
+                            let sectionDesktop = Array.from(val.types['sectionDesktop'] || [])
+                            let sectionMobile =  Array.from(val.types['sectionMobile'] || [])
+
+                            // give all a display object
+                            ;[...sectionMobile,...sectionDesktop]
+                            .forEach((y:any,j)=>{
+                                zChildren[y].extras.appVisible.display = {
+                                    desktop:{},
+                                    mobile:{}
+                                }
+                            })
+
+                            // show on desktop
+                            sectionDesktop
+                            .forEach((y:any,j)=>{
+
+                                // do something when navigation happens
+                                zChildren[y].extras.appVisible.display.desktop = {
+                                    on:zChildren[y].css.display || "block",
+                                    off:"none",
+                                    onSet:"false",
+                                    offSet:"false"
+                                }
+
+                                //
+                                let mediaQueryEvent = ryber.appCO0.metadata.ryber.sectionDefault.app.width.mediaQuerySubject
+                                .pipe(delay(10),skip(1),distinctUntilKeyChanged("media"))
+                                .subscribe((result:any)=>{
+                                    if(result.media === "desktop"){
+
+
+                                        zChildren[y].css.display =zChildren[y].extras.appVisible.display.desktop.on || "block"
+                                        zChildren[y].extras.appVisible.display.desktop.onSet = "true"
+
+                                    }
+                                    else{
+
+
+                                        if(zChildren[y].extras.appVisible.display.desktop.onSet === "true"){
+                                            zChildren[y].extras.appVisible.display.desktop.on = zChildren[y].css.display
+                                            zChildren[y].css.display = zChildren[y].extras.appVisible.display.desktop.off
+                                        }
+                                        else {
+                                            zChildren[y].css.display = zChildren[y].extras.appVisible.display.desktop.off
+                                        }
+                                        // zChildren[y].css.display =
+                                        // zChildren[y].extras.appVisible.display.desktop.offSet === "true" ?
+                                        // zChildren[y].extras.appVisible.display.desktop.off : "none"
+
+                                        zChildren[y].extras.appVisible.display.desktop.offSet = "true"
+                                    }
+                                    ref.detectChanges()
+                                })
+
+                                val.subscriptions.push(mediaQueryEvent)
+
+                            })
+                            //
+
+                            // show on mobile
+                            sectionMobile
+                            .forEach((y:any,j)=>{
+
+                                //
+                                zChildren[y].extras.appVisible.display.mobile ={
+                                    on:zChildren[y].css.display || "block",
+                                    off:"none",
+                                    onSet:"false",
+                                    offSet:"false"
+                                }
+                                //
+                                let mediaQueryEvent = ryber.appCO0.metadata.ryber.sectionDefault.app.width.mediaQuerySubject
+                                .pipe(skip(1),distinctUntilKeyChanged("media"))
+                                .subscribe((result:any)=>{
+                                    if(result.media === "mobile"){
+
+
+                                        zChildren[y].css.display =zChildren[y].extras.appVisible.display.desktop.on || "block"
+                                        zChildren[y].extras.appVisible.display.mobile.onSet = "true"
+
+                                    }
+                                    else{
+
+
+                                        if(zChildren[y].extras.appVisible.display.mobile.onSet === "true"){
+                                            zChildren[y].extras.appVisible.display.mobile.on = zChildren[y].css.display
+                                            zChildren[y].css.display = zChildren[y].extras.appVisible.display.mobile.off
+                                        }
+                                        else {
+                                            zChildren[y].css.display = zChildren[y].extras.appVisible.display.mobile.off
+                                        }
+                                        // zChildren[y].css.display =
+                                        // zChildren[y].extras.appVisible.display.desktop.offSet === "true" ?
+                                        // zChildren[y].extras.appVisible.display.desktop.off : "none"
+
+                                        zChildren[y].extras.appVisible.display.mobile.offSet = "true"
+                                    }
+                                    ref.detectChanges()
+                                })
+                                val.subscriptions.push(mediaQueryEvent)
+
+                            })
+                            //
+
+                        //
+
 
                         subscriptions.push(...val.subscriptions)
 

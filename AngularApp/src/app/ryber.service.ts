@@ -1136,81 +1136,7 @@ export class RyberService {
                 })
             }
 
-            else if (type === "dropdown") {
 
-
-
-				form?.required === undefined ? null : ((a) => { a.required = form?.required })(extend)
-				//  might have to deal with this logic on bootstrap end developer should feel free to make required as their own arg as well as form
-                let css = {
-                    "font-size": "24px",
-                    "z-index": 5,
-                    display: "table",
-                    "text-align": "center",
-                    'background-color': background,
-                    color,
-                    "font-family": fonts,
-					"font-weight": italics,
-					...options.css
-				}
-				extend = {
-					...extend,
-					//your props here
-					...options.extend
-				}
-				judima = {
-					...judima,
-					//your props here
-					...options.judima
-				}
-				appLatch = {
-					...appLatch,
-					select:{
-						value
-					},
-                    confirm:"true",
-					type:"dropdown"
-				},
-				appNest = {
-					...appNest,
-					options:{
-						positionStatic :appLatch.type === "dropdown" ? "false" :"true",
-						ignore:"true"
-					},
-				}
-				if(appNest?.group !==  undefined   ){
-					appLatch.suffix = 0
-					appLatch.trueNestUnder = appNest.under
-					if(appDeltaNode?.group !== undefined){
-						appDeltaNode.options = {
-							target:{
-								confirm:"true"
-							}
-						}
-					}
-				}
-
-                symbol = rUD({
-                    co,
-                    bool: 'a',
-                    val: key.split("_").reverse()[0] + ' a_p_p_DropDownMiddle',
-                    css,
-                    text: value,
-                    extras: {
-						judima,
-                        extend,
-                        appLatch,
-						appDeltaNode,
-                        appNest,
-                        component,
-                        type,
-                        ...options.extras
-                    },
-
-                })
-
-
-            }
 
             else if (type === "count") {
 
@@ -1339,44 +1265,7 @@ export class RyberService {
                 })
             }
 
-            else if(type === "post") {
 
-                let css = {
-
-                    "z-index": 4,
-					...options.css
-                }
-				extend = {
-					...extend,
-					//your props here
-					...options.extend
-				}
-				judima = {
-					...judima,
-					//your props here
-					...options.judima
-				}
-                symbol = rUD({
-                    co,
-                    bool: 'primeng-card',
-                    val: key + " a_p_p_Post",
-                    text: value,
-                    css,
-                    extras: {
-						extend,
-						judima,
-                        component,
-						type,
-                        options:{
-
-                        },
-						appDeltaNode,
-                        appLatch,
-						appNest,
-                        ...options.extras
-                    }
-                })
-            }
 
             else if(type === "carousel") {
 
@@ -1397,7 +1286,46 @@ export class RyberService {
                 }
                 symbol = rUD({
                     co,
-                    bool: 'mat-carousel',
+                    bool: 'primeng-carousel',
+                    val: key,
+                    text: value,
+                    css,
+                    extras: {
+                        extend,
+                        judima,
+                        component,
+                        type,
+                        options:{
+
+                        },
+                        appDeltaNode,
+                        appLatch,
+                        appNest,
+                        ...options.extras
+                    }
+                })
+            }
+
+            else if(type === "components") {
+
+                let css = {
+
+                    "z-index": 4,
+                    ...options.css
+                }
+                extend = {
+                    ...extend,
+                    //your props here
+                    ...options.extend
+                }
+                judima = {
+                    ...judima,
+                    //your props here
+                    ...options.judima
+                }
+                symbol = rUD({
+                    co,
+                    bool: 'app-components',
                     val: key,
                     text: value,
                     css,
@@ -1904,7 +1832,8 @@ export class RyberService {
                     app:{
                         width:{
                             value:1175,
-                            mediaQuery:null
+                            mediaQuery:null,
+                            mediaQuerySubject:new BehaviorSubject(null)
                         },
                         type:"custom", //stack,custom,
                         custom:{
@@ -1929,6 +1858,7 @@ export class RyberService {
                     startURL:env.facebook.startURL
                 }
             },
+            // dev addtions
             ibmLanguage:{
                 current:new BehaviorSubject({
                     language:"en"
@@ -1940,6 +1870,12 @@ export class RyberService {
                     avatar:"python.jpg"
                 })
             },
+            homeMenu:{
+                current:new BehaviorSubject({})
+            },
+            //
+
+            // deprecated removal soon
             webRTC:{
                 init:["localVideo","dataChannelSend","camera","myVideo"]
             },
@@ -1963,6 +1899,7 @@ export class RyberService {
             clickDoneArray: [],
             destroyComplete: new ReplaySubject<any>(1),
             updateSheet: new ReplaySubject<any>(1),
+            //
             scripts:[]
         },
         quantity: []

@@ -130,7 +130,7 @@ input {
 //     // transition: top 2s, left 2s, font-size 3s;
 // }
 
-app-root :not([class^='ag'],p-carousel *,p-card *   ) {
+app-root :not([class^='ag'],p-carousel *,p-card *,p-dropdown *   ) {
 
     position: absolute;
     margin : 0px;

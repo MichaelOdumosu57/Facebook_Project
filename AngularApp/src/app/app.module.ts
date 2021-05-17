@@ -35,7 +35,10 @@ import {CarouselModule} from 'primeng/carousel';
 import {ButtonModule} from 'primeng/button';
 import { CarouselComponent } from './carousel/carousel.component';
 import {CardModule} from 'primeng/card';
-import { CardComponent } from './card/card.component';
+import {DropdownModule} from 'primeng/dropdown';
+import { ComponentsComponent } from './components/components.component';
+import { HomeMenuDirective } from './directive/home-menu.directive';
+
 
 
 let providers = []
@@ -63,7 +66,8 @@ if(env.testingAcct.confirm === "true"){
     VisibleDirective,
     CarouselDirective,
     CarouselComponent,
-    CardComponent,
+    ComponentsComponent,
+    // HomeMenuDirective,
 
 
   ],
@@ -77,7 +81,8 @@ if(env.testingAcct.confirm === "true"){
     AgGridModule.withComponents([FormComponent]),
     ButtonModule,
     CarouselModule,
-    CardModule
+    CardModule,
+    DropdownModule
   ],
   providers,
   bootstrap: [AppComponent]

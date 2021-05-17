@@ -2,7 +2,7 @@
 
 
 
-It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10
+It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0
 ## Educational
 * every other software stack on sevearl platforms the software is doing the same things
     * in web design this is not the case

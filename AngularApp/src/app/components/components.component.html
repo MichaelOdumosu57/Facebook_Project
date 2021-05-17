@@ -1,0 +1,85 @@
+
+    <p-carousel
+
+    *ngIf="options.type === 'primeng-carousel'"
+    [value]="options.value"
+    [numVisible]="options.numVisible"
+    [circular]="options.circular"
+    [responsiveOptions]="options.responsiveOptions"
+    [orientation]="options.orientation"
+    [autoplayInterval]="options.autoplayInterval"
+    [contentClass]="options.contentClass"
+    [ngStyle]="options.style"
+    [styleClass] ="options.styleClass"
+
+
+    >
+        <ng-template
+        pTemplate ="header"
+        *ngIf="options.header"
+
+        >
+            <span class ="a_p_p_CarouselHeader">{{options.header.title}}</span>
+        </ng-template>
+        <ng-template  let-profile pTemplate="item">
+            <div class ="a_p_p_CarouselCard">
+                <img src= {{profile.src}}
+                width=100
+                class = "a_p_p_CarouselImg"
+                />
+                <h3 class ="a_p_p_CarouselProfileName">
+                {{profile.name}}
+                </h3>
+                <button pButton pRipple label="Add Friend" icon="pi pi-plus" class ="a_p_p_CarouselAddFriendButton"></button>
+            </div>
+        </ng-template>
+    </p-carousel>
+
+    <p-card
+    *ngIf="options.type === 'primeng-card'"
+    [header]="options.header"
+    [subheader]="options.subheader"
+    [ngStyle]="options.style"
+    [styleClass]="'p-card-shadow ' + options.styleClass">
+        <ng-template pTemplate="header">
+            <img alt="Card" [src]="options.img.src" [ngStyle]="options.img.style">
+        </ng-template>
+        <p>{{options.cardText}}</p>
+        <ng-template pTemplate="footer">
+
+                <p-button
+                *ngFor='let button of options.buttons'
+                [label]="button.label"
+                [icon]="button.icon"
+                [styleClass]="button.styleClass"
+                [style]="button.style"></p-button>
+
+
+        </ng-template>
+    </p-card>
+
+    <p-dropdown
+    *ngIf="options.type === 'primeng-dropdown'"
+    [options]="options.options"
+    [optionLabel]="options.optionLabel"
+    [showClear]="options.showClear"
+    [placeholder]="options.placeHolder"
+    [ngStyle]="options.style"
+    [styleClass]="options.styleClass"
+    [ngStyle]="options.style"
+    [panelStyle]="options.panel?.style"
+    [panelStyleClass]="options.panel?.class"
+    >
+        <ng-template pTemplate="selectedItem">
+        </ng-template>
+        <ng-template let-items pTemplate="item">
+            <div
+            [class]="items  ?.container?.class || options?.items?.container?.class"
+            [ngStyle]="items?.container?.style || options?.items?.container?.style"
+            >
+                <h2>{{items.name}}</h2>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
+

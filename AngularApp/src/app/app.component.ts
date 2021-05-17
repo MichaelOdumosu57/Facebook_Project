@@ -174,7 +174,7 @@ export class AppComponent implements OnInit, OnDestroy {
                         group:{},
                         suffix:"_vT_"
                     }
-                    //
+                    // dev additions
                     co.metadata.languageTranslator = {
                         group:{},
                         suffix:"_lT_"
@@ -187,6 +187,12 @@ export class AppComponent implements OnInit, OnDestroy {
                         group:{},
                         suffix:"_cL_"
                     }
+                    co.metadata.homeMenu = {
+                        group:{},
+                        suffix:"_hM_"
+                    }
+
+                    //
                     co.metadata.zChildrenSubject = new Subject<any>()
                     .pipe(
                         tap((val) => {
