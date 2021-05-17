@@ -64,7 +64,7 @@ export const environment: any = {
     //dev additions
     facebook:{
         url:"http://localhost:3005",
-        startURL:"/home"
+        startURL:"/friends"
     }
     //
 

@@ -2081,10 +2081,11 @@ let home_development :Array<zProtoComponent> = [
 				x.options = x.options || {
 					extras:{
 						appVisible:{
-							type:["sectionDesktop"]
+							type:["sectionDesktop"],
+							options:{
+								url:["home","friends","marketplace"][i]
+							}
 						},
-
-
 					},
 					judima:{
 						mobile:{
@@ -2147,7 +2148,10 @@ let home_development :Array<zProtoComponent> = [
 							},
 							extras:{
 								appVisible:{
-									type:["sectionDesktop"]
+									type:["navigateSectionDesktop"],
+									options:{
+										url:["home","friends","marketplace"][i]
+									}
 								}
 							},
 							group:["navIcon_"+i]

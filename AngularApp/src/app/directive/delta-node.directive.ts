@@ -116,7 +116,6 @@ export class DeltaNodeDirective {
 									.forEach((y:any,j)=>{
 										val[y]
 										.forEach((z:any,k)=>{
-											console.log(val,z)
 											let action = z.fn({
 												zChildren,
 												zSymbol:z.eventWrapper.zSymbol,
