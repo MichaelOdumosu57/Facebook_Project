@@ -115,6 +115,9 @@ export class AppComponent implements OnInit, OnDestroy {
                     if(co.quantity[1][1].signature === "homeContent"){
                         co.quantity[0][0].ngCss[0][0]["z-index"] += 2
                     }
+                    else if(co.quantity[1][1].signature === "findFriends"){
+                        co.quantity[0][0].ngCss[0][0]["z-index"] += 2
+                    }
                     //
                     co.metadata.judima = {
                         desktop:{

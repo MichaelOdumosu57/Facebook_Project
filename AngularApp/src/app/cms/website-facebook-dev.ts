@@ -3798,7 +3798,194 @@ friendsNavigation.title = "friendsNavigation"
 friendsNavigation.metafields[0].navigation.name = "friends"
 
 let friendsDevelopment: Array<zProtoComponent>= [
-	friendsNavigation
+	friendsNavigation,
+	{
+		title:"findFriends",
+		type_slug:"forms",
+		metafields:[
+			{
+				key:"body",
+				type:"body",
+				// left:-50,
+				navigation:{
+					name:"friends"
+				},
+				nest:{
+					group:[
+						{
+							name:"suggestions",
+							type:"regular"
+						}
+					]
+				},
+				delta:{
+					group:[
+						{
+							name:"try",
+							type:"repeat",
+							by:10
+						}
+					]
+				},
+				options:{
+					judima:{
+						moving:{
+							point:"bottom",
+							target:'friendsNavigation',
+							coordinates:{x:-10,y:0},
+							type:"custom"
+						},
+					},
+					extras:{
+						section:{
+							width:1450,
+							stack:-10
+						}
+					}
+				}
+
+			},
+			...[
+				...[
+					{
+						key:"suggestions a_p_p_FriendsContainer",
+						type:"div",
+						split:2.7,
+
+						nest:{
+							group:"suggestions",
+							name:"A1"
+						}
+					},
+					{
+						key:"title a_p_p_FriendsTitle",
+						type:"title",
+						value:"Friends",
+						nest:{
+							group:"suggestions",
+							name:"B1",
+							under:"A1"
+						}
+					},
+					{
+						key:"title a_p_p_FriendsSubTitle",
+						type:"sub-heading",
+						value:"Friend Requests",
+						nest:{
+							group:"suggestions",
+							name:"B2",
+							under:"A1"
+						}
+					},
+					{
+						key:"New-Requests",
+						type:"text",
+						value:"No new Requests",
+						options:{
+							css:{
+								"align-self":"center",
+								"font-size":"12px"
+							}
+						},
+						nest:{
+							group:"suggestions",
+							name:"B3",
+							under:"A1"
+						}
+					},
+					{
+						key:"strikethrough a_p_p_StrikeThrough",
+						type:"div",
+						options:{
+							css:{
+								height:"5px"
+							}
+						},
+						nest:{
+							group:"suggestions",
+							name:"B4",
+							under:"A1"
+						},
+					},
+					{
+						key:"knowPeople a_p_p_FriendsContainer a_p_p_Glassmorphism",
+						type:"div",
+						nest:{
+							group:"suggestions",
+							name:"B5",
+							under:"A1"
+						},
+					},
+					{
+						key:"title a_p_p_FriendsSubTitle",
+						type:"sub-heading",
+						value:"People You May Know",
+						options:{
+							css:{
+								"font-size":"16px"
+							}
+						},
+						nest:{
+							group:"suggestions",
+							name:"C1",
+							under:"B5"
+						},
+
+					},
+					{
+						key:"profileCard",
+						type:"components",
+						nest:{
+							group:"suggestions",
+							name:"C2",
+							under:"B5"
+						},
+						delta:{
+							group:"try"
+						},
+						options:{
+							extras:{
+								options:{
+									type:"profileCard",
+									pic:{
+										styles:{},
+										src:"",
+										class:""
+									},
+									name:{
+										text:"HTML5"
+									}
+								}
+							}
+						}
+
+					}
+				],
+				...[
+					{
+						key:"profileView a_p_p_FriendsContainer",
+						type:"div",
+						split:6,
+						gap:5,
+						options:{
+							judima:{
+								// formatIgnore:"true"
+							},
+
+						}
+					}
+				],
+			].map((x:zProtoChildren | any,i)=>{
+
+				if(x?.nest?.under){
+					return x
+				}
+				x.height = 700
+				x.key += " a_p_p_Glassmorphism"
+				return x
+			}),
+		]
+	}
 ]
 // attribute map
 // "x-mark.png":Darius Dan x-icons

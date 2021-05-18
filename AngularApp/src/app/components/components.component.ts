@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'app-components',
@@ -8,11 +8,11 @@ import { Component, OnInit, Input, ElementRef, } from '@angular/core';
 export class ComponentsComponent implements OnInit {
 
     @Input() options:any
-
     constructor(
     ) { }
 
     ngOnInit(): void {
+
         let styleDefaults =  {position:"static"}
         if(this.options.style === undefined){
             this.options.style = styleDefaults
@@ -21,5 +21,17 @@ export class ComponentsComponent implements OnInit {
             Object.assign(this.options.style,styleDefaults)
         }
     }
+
+
+    profileCard ={
+        defaultPic:(devObj)=>{
+            let {options} = this
+            console.log(options)
+            options.pic.src = options?.alt || mediaPrefix({
+                media:'friends/' + ['user.png','uae.png'][Math.round(Math.random())]
+            })
+        }
+    }
+
 
 }

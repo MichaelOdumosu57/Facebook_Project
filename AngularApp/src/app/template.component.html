@@ -451,7 +451,7 @@
             appLatch [latch] = "ryber.appAvailble( a.extras[1][bb], 'appLatch')"
             >
                 <app-components
-                *ngIf="a.extras[1][bb].options?.lazyLoad === 'false'"
+                *ngIf="a.extras[1][bb].options?.lazyLoad !== 'true'"
                 class ={{a.extras[1][bb].options?.component?.class}}
                 [ngStyle] ="a.extras[1][bb].options?.component?.style"
                 [options] ="a.extras[1][bb].options"

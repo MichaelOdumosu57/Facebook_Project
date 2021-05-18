@@ -120,9 +120,11 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
             */
 
             let section:any =  {
+
                 ...ryber.appCO0.metadata.ryber.sectionDefault,
                 ...zChild["&#8353"]?.extras?.section,
             }
+
 
             Object.keys(section)
             .forEach((x,i)=>{

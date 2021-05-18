@@ -215,7 +215,7 @@ export class RyberService {
                 let css = {
                     "z-index": 4,
                     display: "table",
-                    "font-size": fontSize !== undefined ? fontSize + "px" : "54px",
+                    // "font-size": fontSize !== undefined ? fontSize + "px" : "54px",
                     "font-weight": italics,
                     'background-color': background,
                     color,
@@ -240,7 +240,7 @@ export class RyberService {
                     co,
                     bool: 'h1',
                     text: value,
-                    val: key.split("_").reverse()[0] + ' a_p_p_Heading',
+                    val: key + ' a_p_p_Heading',
                     css,
                     extras: {
                         component,
@@ -496,7 +496,7 @@ export class RyberService {
 
 
                 let css = {
-                    "font-size": fontSize !== undefined ? fontSize + "px" : "30px",
+                    // "font-size": fontSize !== undefined ? fontSize + "px" : "30px",
                     "z-index": 4,
                     'background-color': background,
                     color,
@@ -691,7 +691,7 @@ export class RyberService {
                     color,
                     "font-weight": italics,
                     "font-family": fonts,
-                    "font-size":"30px",
+                    // "font-size":"30px",
 					"text-align": mf["text-align"],
 					...options.css
                 }
@@ -1327,7 +1327,7 @@ export class RyberService {
                 symbol = rUD({
                     co,
                     bool: 'app-components',
-                    val: key,
+                    val: key + " a_p_p_Components",
                     text: value,
                     css,
                     extras: {
@@ -1351,7 +1351,7 @@ export class RyberService {
             else {
 
                 let css = {
-                    "font-size": "30px",
+                    // "font-size": "30px",
                     "z-index": 4,
                     'background-color': background,
                     color,

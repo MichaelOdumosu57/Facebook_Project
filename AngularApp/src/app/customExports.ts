@@ -182,9 +182,9 @@ export interface zProtoChildren {
             },*/
         }>
     } | {
-        group:String;
-        name:String;
-        under?: String;
+        group:string;
+        name:string;
+        under?: string;
     };
     latch?:{
         options?:Array<String>;

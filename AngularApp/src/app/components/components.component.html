@@ -82,4 +82,36 @@
         </ng-template>
     </p-dropdown>
 
+    <div
+    *ngIf="options.type === 'profileCard'"
+    [class]="(options.class || '') + ' a_p_p_ProfileCard'"
+    >
+        <img
+        alt=""
+        (error)="profileCard.defaultPic({})"
+        [src]="options.pic?.src"
+        [class]="options.pic?.class || 'a_p_p_ProfileCardPic'"
+        >
+        <p
+        [class]="options.pic?.class || 'a_p_p_ProfileCardName'"
+        >
+            {{options?.name?.text}}
+        </p>
+        <p-button
+        [label]="options.addButton?.label"
+        [icon]="options.addButton?.icon"
+        [styleClass]="options.addButton?.styleClass || 'a_p_p_ProfileCardAdd'"
+        [style]="options.addButton?.style">
+        Add Friend
+        </p-button>
+        <p-button
+        [label]="options.removeButton?.label"
+        [icon]="options.removeButton?.icon"
+        [styleClass]="'p-button-secondary '+ (options.removeButton?.styleClass || 'a_p_p_ProfileCardRemove')"
+        [style]="options.removeButton?.style">
+        Remove
+        </p-button>
+
+    </div>
+
 

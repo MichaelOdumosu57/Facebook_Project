@@ -26,7 +26,27 @@ $font-family2 :Segoe UI Historic;
     src: url('../fonts/FontsFree-Net-SFProText-Medium.ttf');
 
 }
+*{
+    scrollbar-color: transparent;
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #263040;
+    }
+    &::-webkit-scrollbar-thumb:window-inactive {
+        background-color: transparent;
+        opacity:4px;
+    }
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
 
+}
 
 
 .a_p_p_Login_Card {
@@ -282,6 +302,63 @@ $white: rgba(255,255,255,0.3);
 
 
 .a_p_p_ {
+
+    // component styles
+    &ProfileCard{
+        border-radius: 20px;
+        @include glassmorphism;
+        padding: 8px 8px 20px 8px;
+        display:flex;
+        flex-wrap: wrap;
+        margin: 0 0 10px 0;
+        &Pic{
+            height:50px;
+            width:50px;
+            border-radius: 50px;
+            border: 1px solid black;
+        }
+
+        &Name{
+            font-family: $font-family2;
+            font-weight: 700;
+            margin: 0 0 0 20px;
+            align-self: center;
+        }
+
+        &Add{
+            margin:10px 10px 0 0;
+        }
+
+        &Remove{
+            margin:10px 0 0 0;
+            background-color: grey;
+        }
+    }
+    //
+    &Friends{
+        &Title{
+            color:black;
+            text-align: left;
+            margin: 0 0 20px 0 !important;
+        }
+
+        &SubTitle{
+            font: 700 24px $font-family2;
+            margin: 0 0 10px 0 !important;
+            color:black;
+        }
+
+        &Container{
+            padding: 20px;
+            opacity:1;
+
+            &:nth-child(2){ //for the oddest reason
+                display: flex;
+                flex-direction: column;
+
+            }
+        }
+    }
     &NavIcon_Container {
         background-color:rgb(228, 230, 235);
         border-radius:50px;
