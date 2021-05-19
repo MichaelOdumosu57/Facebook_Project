@@ -3815,6 +3815,10 @@ let friendsDevelopment: Array<zProtoComponent>= [
 						{
 							name:"suggestions",
 							type:"regular"
+						},
+						{
+							name:"profilePane",
+							type:"regular"
 						}
 					]
 				},
@@ -3896,11 +3900,7 @@ let friendsDevelopment: Array<zProtoComponent>= [
 					{
 						key:"strikethrough a_p_p_StrikeThrough",
 						type:"div",
-						options:{
-							css:{
-								height:"5px"
-							}
-						},
+
 						nest:{
 							group:"suggestions",
 							name:"B4",
@@ -3967,12 +3967,56 @@ let friendsDevelopment: Array<zProtoComponent>= [
 						type:"div",
 						split:6,
 						gap:5,
+						nest:{
+							group:"profilePane",
+							name:"A1",
+						},
 						options:{
-							judima:{
-								// formatIgnore:"true"
+							css:{
+								"justify-content":"center",
+								"align-items":"center"
+							}
+						}
+
+
+					},
+					{
+						key:"profileView",
+						type:"image",
+						nest:{
+							group:"profilePane",
+							name:"B1",
+							under:"A1"
+						},
+						options:{
+							css:{
+								height:"100px",
+								width:"100px",
+							},
+							extras:{
+								extend:{
+									src:mediaPrefix({media:"friends/people.png"})
+								}
+							}
+						}
+
+					},
+					{
+						key:"profileView a_p_p_FriendsText",
+						type:"text",
+						value:"Select people's names to preview their profile.",
+						nest:{
+							group:"profilePane",
+							name:"B2",
+							under:"A1"
+						},
+						options:{
+							css:{
+								"font-weight":1000
 							},
 
 						}
+
 					}
 				],
 			].map((x:zProtoChildren | any,i)=>{

@@ -26,7 +26,6 @@ export class ComponentsComponent implements OnInit {
     profileCard ={
         defaultPic:(devObj)=>{
             let {options} = this
-            console.log(options)
             options.pic.src = options?.alt || mediaPrefix({
                 media:'friends/' + ['user.png','uae.png'][Math.round(Math.random())]
             })

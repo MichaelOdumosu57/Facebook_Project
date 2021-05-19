@@ -311,6 +311,8 @@ $white: rgba(255,255,255,0.3);
         display:flex;
         flex-wrap: wrap;
         margin: 0 0 10px 0;
+
+
         &Pic{
             height:50px;
             width:50px;
@@ -323,6 +325,10 @@ $white: rgba(255,255,255,0.3);
             font-weight: 700;
             margin: 0 0 0 20px;
             align-self: center;
+
+            @media (max-width: 1193px){
+                flex-grow: 1;
+            }
         }
 
         &Add{
@@ -342,6 +348,11 @@ $white: rgba(255,255,255,0.3);
             margin: 0 0 20px 0 !important;
         }
 
+        &Text{
+            font-family: $font-family2;
+
+
+        }
         &SubTitle{
             font: 700 24px $font-family2;
             margin: 0 0 10px 0 !important;
@@ -352,11 +363,13 @@ $white: rgba(255,255,255,0.3);
             padding: 20px;
             opacity:1;
 
-            &:nth-child(2){ //for the oddest reason
+            &:nth-child(n){ //for the oddest reason
                 display: flex;
                 flex-direction: column;
 
             }
+
+
         }
     }
     &NavIcon_Container {
