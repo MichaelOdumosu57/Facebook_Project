@@ -158,10 +158,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
                                     return zChildren[z].element
                                 }),zChildren[y].element],
                                 // script modification wouldn't allow me to make change otherwise
-                                ...zChildren[y].extras.appVanillaTilt?.initOptions
+                                ...zChildren[y].extras.appVanillaTilt?.options
+
                             })
-
-
 
                             // make sure all attached move along with element
                             let tiltOthers = (e:any)=>{

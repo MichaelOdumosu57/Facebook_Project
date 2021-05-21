@@ -322,6 +322,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                         env.facebook.url,
                         {
                             env :"resetPostsTrack"
+                        },
+                        {
+                            responseType:"text"
                         }
                     )
                     .subscribe((result:any)=>{

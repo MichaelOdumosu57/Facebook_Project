@@ -112,12 +112,10 @@ export class AppComponent implements OnInit, OnDestroy {
                     let { co } = devObj
 
                     // dev additions
-                    if(co.quantity[1][1].signature === "homeContent"){
+                    if(["homeContent","myMarket","findFriends"].includes(co.quantity[1][1].signature)){
                         co.quantity[0][0].ngCss[0][0]["z-index"] += 2
                     }
-                    else if(co.quantity[1][1].signature === "findFriends"){
-                        co.quantity[0][0].ngCss[0][0]["z-index"] += 2
-                    }
+
                     //
                     co.metadata.judima = {
                         desktop:{
@@ -177,6 +175,12 @@ export class AppComponent implements OnInit, OnDestroy {
                         group:{},
                         suffix:"_vT_"
                     }
+                    co.metadata.components = {
+                        group:{},
+                        suffix:"_vT_"
+                    }
+
+
                     // dev additions
                     co.metadata.languageTranslator = {
                         group:{},

@@ -158,10 +158,11 @@ export interface zProtoChildren {
     };
     delta?:{
         group: Array<{
-            name:String,
+            name: String,
             type: String /*{ //enum
                 "add_remove_button",
-                "repeat"
+                "repeat",
+                "cdn"
             }*/,
             by?: String | Number
         }>
@@ -189,7 +190,7 @@ export interface zProtoChildren {
     latch?:{
         options?:Array<String>;
         state?:String /*{"open","closed"};*/
-        type?:String; //display,dropdown
+        type?:String; //display
         display?:{
             type:String /*{"target","part"};*/
             name:String
@@ -291,6 +292,7 @@ export var latchUtilities:{centerX:Function} ={
     //
     centerX:(devObj)=>{
         let {zChildren,zSymbol,metadata} = devObj
+        
         let contain = metadata?.contain  || "&#8353"
         let containPos = metadata?.containPos || .5
         let targetPos = metadata?.targetPos || .5

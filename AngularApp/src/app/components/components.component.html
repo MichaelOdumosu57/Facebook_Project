@@ -35,6 +35,14 @@
         </ng-template>
     </p-carousel>
 
+    <p-button
+    *ngIf="options.type === 'primeng-button'"
+    [label]="options.label"
+    [icon]="options.icon"
+    [styleClass]="options.styleClass"
+    [ngStyle]="options.style"></p-button>
+
+
     <p-card
     *ngIf="options.type === 'primeng-card'"
     [header]="options.header"
@@ -82,22 +90,41 @@
         </ng-template>
     </p-dropdown>
 
+
     <div
     *ngIf="options.type === 'profileCard'"
     [class]="(options.class || '') + ' a_p_p_ProfileCard'"
+    [ngStyle]="options.style"
     >
-        <img
-        alt=""
-        (error)="profileCard.defaultPic({})"
-        [src]="options.pic?.src"
-        [class]="options.pic?.class || 'a_p_p_ProfileCardPic'"
-        >
+
+            <img
+            *ngIf="['img',undefined].includes(options.pic?.type)"
+            alt=""
+            (error)="profileCard.defaultPic({})"
+            [src]="options.pic?.src"
+            [class]="options.pic?.class || 'a_p_p_ProfileCardPic'"
+            >
+            <div
+            *ngIf="options.pic?.type === 'icon'"
+            [class]="options.pic?.container?.class || 'a_p_p_ProfileCardPic'"
+            [ngStyle]="options.pic?.container?.style"
+            >
+                <i
+                [class]="options.pic?.class"
+                >
+                </i>
+            </div>
+
+
+
         <p
-        [class]="options.pic?.class || 'a_p_p_ProfileCardName'"
+        [class]="options.name?.class || 'a_p_p_ProfileCardName'"
+        [ngStyle]="options.name?.style"
         >
             {{options?.name?.text}}
         </p>
         <p-button
+        *ngIf="options.addButton?.hide !=='true'"
         [label]="options.addButton?.label"
         [icon]="options.addButton?.icon"
         [styleClass]="options.addButton?.styleClass || 'a_p_p_ProfileCardAdd'"
@@ -105,6 +132,7 @@
         Add Friend
         </p-button>
         <p-button
+        *ngIf="options.removeButton?.hide !=='true'"
         [label]="options.removeButton?.label"
         [icon]="options.removeButton?.icon"
         [styleClass]="'p-button-secondary '+ (options.removeButton?.styleClass || 'a_p_p_ProfileCardRemove')"

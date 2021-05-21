@@ -60,6 +60,7 @@ export class DeltaNodeDirective {
 						this.templateMyElements = ryber[co].metadata.templateMyElements
 						this.ref =ryber[co].metadata.ref
 
+						console.log(zChildren)
 						// restore deltaNode from false destroy like navigation
 						let action:any = navigationType({
 							type:["full"],

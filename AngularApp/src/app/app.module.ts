@@ -38,6 +38,7 @@ import {CardModule} from 'primeng/card';
 import {DropdownModule} from 'primeng/dropdown';
 import { ComponentsComponent } from './components/components.component';
 import { HomeMenuDirective } from './directive/home-menu.directive';
+import { ComponentsDirective } from './directive/components.directive';
 
 
 
@@ -67,11 +68,13 @@ if(env.testingAcct.confirm === "true"){
     CarouselDirective,
     CarouselComponent,
     ComponentsComponent,
+    ComponentsDirective,
     // HomeMenuDirective,
 
 
   ],
   imports: [
+
     HammerModule,
     BrowserModule,
     // AppRoutingModule,

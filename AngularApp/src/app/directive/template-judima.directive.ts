@@ -213,6 +213,36 @@ export class TemplateDirective {
                 this.ref = ref
                 console.log(group)
 
+                // assign roles to the part to exprees the feature
+                // Object.entries(group)
+                // .forEach((x:any,i)=>{
+                //     let key = x[0]
+                //     let val = x[1]
+
+                //     let target:any = Array.from(val.types['target'] || [])
+                //     let part = Array.from(val.types['part'] || [])
+
+
+                //     target
+                //     .forEach((y:any,j)=>{
+                //         // take some action
+
+                //         //
+                //     })
+
+
+                //     part
+                //     .forEach((y:any,j)=>{
+                //         // take some action
+                //         val.subscriptions.push(of[])
+                //         //
+                //     })
+                //     subscriptions.push(...val.subscriptions)
+                //     //
+
+                // })
+                //
+
             })
             subscriptions.push(mainSubscription)
 

@@ -511,7 +511,7 @@ let login_development:Array<zProtoComponent> = [
 						appVanillaTilt:{
 							type:"target",
 							group:"login-tilt",
-							initOptions:{
+							options:{
 								perspective:100
 							}
 						}
@@ -965,7 +965,8 @@ let login_development:Array<zProtoComponent> = [
 							},
 							extras:{
 								extend:{
-									placeholder:"Password"
+									placeholder:"Password",
+									type:"password"
 								},
 								appFacebookLogin:{
 									type:["chosenPassword"]
@@ -2433,11 +2434,7 @@ let home_development :Array<zProtoComponent> = [
 							type:"repeat",
 							by:1,
 						},
-						{
-							name:"carousel1",
-							type:"repeat",
-							by:5,
-						},
+
 						{
 							name:"posts",
 							type:"cdn",
@@ -3844,7 +3841,12 @@ let friendsDevelopment: Array<zProtoComponent>= [
 						section:{
 							width:1450,
 							stack:-10
-						}
+						},
+						appComponents:{
+							confirm:"true",
+							type:"body",
+							zSymbolNeeded:"true",
+						},
 					}
 				}
 
@@ -3941,11 +3943,20 @@ let friendsDevelopment: Array<zProtoComponent>= [
 							under:"B5"
 						},
 						delta:{
-							group:"try"
+							group:"try",
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co} = devObj
+									if(hook === 'deltaNodeBootstrap'){
+										zChild[x].extras.appComponents.loaded = "false"
+									}
+								}
+							}
 						},
 						options:{
 							extras:{
 								options:{
+									lazyLoad:env.production ? "true":"false",
 									type:"profileCard",
 									pic:{
 										styles:{},
@@ -3954,7 +3965,15 @@ let friendsDevelopment: Array<zProtoComponent>= [
 									},
 									name:{
 										text:"HTML5"
+									},
+									component:{
+										lazyLoadDelay:5000
 									}
+								},
+								appComponents:{
+									type:["lazyLoad"],
+									group:"profileCard",
+									duplicateIgnore:"true",
 								}
 							}
 						}
@@ -4031,6 +4050,233 @@ let friendsDevelopment: Array<zProtoComponent>= [
 		]
 	}
 ]
+
+let marketNav = objectCopy(home_development[0])
+marketNav.title = "marketNav"
+marketNav.metafields[0].navigation.name = "marketplace"
+let marketDev: Array<zProtoComponent> = [
+	marketNav,
+	{
+		title:"myMarket",
+		type_slug:"forms",
+		metafields:[
+			{
+				key:"body",
+				type:"body",
+				navigation:{
+					name:"marketplace"
+				},
+				delta:{
+					group:[
+						{
+							name:"marketCard",
+							type:"repeat",
+							by:"5"
+						}
+					]
+				},
+				options:{
+					judima:{
+						moving:{
+							point:"bottom",
+							target:'marketNav',
+							coordinates:{x:-10,y:0},
+							type:"custom"
+						},
+					},
+					extras:{
+						section:{
+							width:1450,
+							stack:-10
+						},
+						appComponents:{
+							confirm:"true",
+							type:"body",
+							zSymbolNeeded:"true",
+						},
+						appVanillaTilt:{
+							confirm:"true",
+							type:"body",
+							zSymbolNeeded:"true"
+						},
+					}
+				}
+			},
+			...[
+				...[
+					{
+						key:"panel a_p_p_Glassmorphism",
+						type:"div",
+						split:2.7,
+						height:700,
+						latch:{
+							type:"display",
+							display:{
+								type:"target",
+								name:"panel"
+							},
+							zChildren:[
+								{
+									bool:"h1",
+									val:"title a_p_p_MarketTitle",
+									text:"Marketplace",
+									logic:{
+										desktop:{
+											width:1,
+											height:()=>{
+												return 30
+											},
+											top:20,
+											left:80,
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+									group:["panel"]
+								},
+								{
+									bool:"i",
+									val:"input a_p_p_MarketInput",
+									logic:{
+										desktop:{
+											width:.9,
+											height:()=>{
+												return 30
+											},
+											top:100,
+											left:20,
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+									extras:{
+										extend:{
+											placeholder:"What do you want to buy?"
+										}
+									},
+									group:["panel"]
+								},
+								...Array.from(Array(4),(x,i)=>{
+									return {
+										bool:"app-components",
+										val:"card a_p_p_MarketCard",
+										logic:{
+											desktop:{
+												width:.9,
+												height:()=>{
+													return 90
+												},
+												top:150 + (100*i),
+												left:20,
+											},
+											mobile:{
+												width:1.2,
+												height:1.2,
+												top:0,
+												left:0
+											}
+										},
+										extras:{
+											options:{
+												type:"profileCard",
+												class:"a_p_p_MarketCardContainer",
+												pic:{
+													type:"icon",
+													class:"pi pi-spin pi-" +
+													[
+														"search",
+														"microsoft",
+														"bell",
+														"inbox"
+													][i] +
+													" a_p_p_MarketCardIcon",
+													container:{
+														style:{
+															display:"flex",
+															"justify-content":"center",
+															"align-items":"center"
+														}
+													}
+												},
+												component:{
+													style:{
+														width:"100%"
+													}
+												},
+												name:{
+													text:[
+														"Browse All",
+														"Live Shopping",
+														"Notifications",
+														"Inbox",
+													][i],
+													class:"a_p_p_MarketCardName a_p_p_ProfileCardName"
+												},
+												addButton:{
+													hide:"true"
+												},
+												removeButton:{
+													hide:"true"
+												}
+											},
+											appVanillaTilt:{
+												type:"target",
+												group:"marketCard",
+												options:{
+													perspective:100
+												}
+											}
+										},
+										group:["panel"]
+									}
+								}),
+								{
+									bool:"app-components",
+									val:"card a_p_p_MarketCard",
+									logic:{
+										desktop:{
+											width:.5,
+											height:()=>{
+												return 65
+											},
+											top:600,
+											left:80,
+										},
+										mobile:{
+											width:1.2,
+											height:1.2,
+											top:0,
+											left:0
+										}
+									},
+									extras:{
+										options:{
+											type:"primeng-button",
+											label:"Create New Listing",
+											icon:"pi pi-spin pi-star"
+										},
+									},
+									group:["panel"]
+								}
+
+
+							]
+						}
+					},
+
+				]
+			]
+		]
+	}
+]
 // attribute map
 // "x-mark.png":Darius Dan x-icons
 
@@ -4038,7 +4284,8 @@ let friendsDevelopment: Array<zProtoComponent>= [
 let facebook_development = [
 	...login_development,
 	...home_development,
-	...friendsDevelopment
+	...friendsDevelopment,
+	...marketDev
 ]
 
 
