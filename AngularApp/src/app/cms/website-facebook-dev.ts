@@ -3955,7 +3955,7 @@ let friendsDevelopment: Array<zProtoComponent>= [
 						options:{
 							extras:{
 								options:{
-									lazyLoad:env.production ? "true":"false",
+									lazyLoad:env.production ? "false":"false",
 									type:"profileCard",
 									pic:{
 										styles:{},
@@ -4128,10 +4128,12 @@ let marketDev: Array<zProtoComponent> = [
 											left:80,
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:.7,
+											height:()=>{
+												return 30
+											},
+											top:20,
+											left:80,
 										}
 									},
 									group:["panel"]
@@ -4149,10 +4151,12 @@ let marketDev: Array<zProtoComponent> = [
 											left:20,
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:.9,
+											height:()=>{
+												return 30
+											},
+											top:100,
+											left:20,
 										}
 									},
 									extras:{
@@ -4176,10 +4180,12 @@ let marketDev: Array<zProtoComponent> = [
 												left:20,
 											},
 											mobile:{
-												width:1.2,
-												height:1.2,
-												top:0,
-												left:0
+												width:.9,
+												height:()=>{
+													return 90
+												},
+												top:150 + (100*i),
+												left:20,
 											}
 										},
 										extras:{
@@ -4254,10 +4260,12 @@ let marketDev: Array<zProtoComponent> = [
 											left:80,
 										},
 										mobile:{
-											width:1.2,
-											height:1.2,
-											top:0,
-											left:0
+											width:.5,
+											height:()=>{
+												return 65
+											},
+											top:600,
+											left:280,
 										}
 									},
 									extras:{
@@ -4304,7 +4312,7 @@ let marketDev: Array<zProtoComponent> = [
 											zChild[x].extras.component.top = 50
 										}
 										zChild[x].extras.options.header = zChild[x].extras.appDeltaNode.options.metadata.header
-										zChild[x].extras.options.subheader =  zChild[x].extras.appDeltaNode.options.metadata.subheader
+										zChild[x].extras.options.subheader.text =  zChild[x].extras.appDeltaNode.options.metadata.subheader
 										zChild[x].extras.options.cardText =  zChild[x].extras.appDeltaNode.options.metadata.cardText
 										zChild[x].extras.options.img.src = mediaPrefix({media:zChild[x].extras.appDeltaNode.options.metadata.media})
 									}
@@ -4383,12 +4391,21 @@ let marketDev: Array<zProtoComponent> = [
 								options:{
 									type:"primeng-card",
 									buttons:[],
+									styleClass:"a_p_p_MarketItemCard",
 									img:{
 										src:mediaPrefix({media:'market/pexels-burak-k-704555.jpg'}),
 										class:"a_p_p_MarketItemCardImg"
 									},
 									header:"$30",
-									subheader:"Reach out to me for more details in good condition"
+									subheader:{
+										text:"Reach out to me for more details in good condition",
+										// class:"a_p_p_MarketItemCardSubHeader"
+									}
+								}
+							},
+							judima:{
+								mobile:{
+									widthRatio:.5
 								}
 							}
 						}

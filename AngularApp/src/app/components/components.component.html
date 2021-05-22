@@ -46,7 +46,7 @@
     <p-card
     *ngIf="options.type === 'primeng-card'"
     [header]="options.header"
-    [subheader]="options.subheader"
+    [subheader]="options.subheader?.text || options.subheader"
     [ngStyle]="options.style"
     [styleClass]="'p-card-shadow ' + options.styleClass">
         <ng-template pTemplate="header">
@@ -55,6 +55,11 @@
             [ngStyle]="options.img.style"
             [class]="options.img.class"
             >
+        </ng-template>
+        <ng-template pTemplate="subtitle"
+        [class]="options.subheader?.class"
+        >
+
         </ng-template>
         <p
         [ngStyle]="options.cardText?.style"
