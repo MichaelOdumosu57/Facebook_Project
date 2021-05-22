@@ -4311,29 +4311,32 @@ let marketDev: Array<zProtoComponent> = [
 
 								},
 								fn:(devObj)=>{
-									let {zChildren,zSymbol,fromEvent,http,env,returnData} = devObj
+									let {zChildren,zSymbol,fromEvent,http,env,returnData,navAction} = devObj
 
-									let request = http.post(
-										env.facebook.url,
-										{
-											env:"someListings",
-											times:2
-										}
-									)
-									.subscribe({
-										next:(result:any)=>{
-											result.forEach((x:any,i)=>{
-												returnData.next({type:"append",status:200,message:[x]})
-											})
-											request.unsubscribe()
+									if(navAction.full !== "return"){
+										let request = http.post(
+											env.facebook.url,
+											{
+												env:"someListings",
+												times:2
+											}
+										)
+										.subscribe({
+											next:(result:any)=>{
+												result.forEach((x:any,i)=>{
+													returnData.next({type:"append",status:200,message:[x]})
+												})
+												request.unsubscribe()
 
-										},
-										error:(err:any)=>{
-											returnData.next({type:"append",status:500,message:[]})
-											console.log(err)
-											request.unsubscribe()
-										}
-									})
+											},
+											error:(err:any)=>{
+												returnData.next({type:"append",status:500,message:[]})
+												console.log(err)
+												request.unsubscribe()
+											}
+										})
+									}
+
 									return fromEvent(window,"scroll")
 									.subscribe((result:any)=>{
 

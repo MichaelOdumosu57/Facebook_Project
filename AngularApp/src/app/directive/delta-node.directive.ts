@@ -60,9 +60,9 @@ export class DeltaNodeDirective {
 						this.templateMyElements = ryber[co].metadata.templateMyElements
 						this.ref =ryber[co].metadata.ref
 
-						console.log(zChildren)
+						
 						// restore deltaNode from false destroy like navigation
-						let action:any = navigationType({
+						let navAction:any = navigationType({
 							type:["full"],
 							fn:()=>{
 								if(
@@ -74,7 +74,7 @@ export class DeltaNodeDirective {
 							},
 							ryber
 						})
-						if(action.full === "return"){
+						if(navAction.full === "return"){
 							// restore from 'ngFalseDestroy'
 							let save = ryber[co].metadata.deltaNode.falseDestroy.shift()
 
@@ -107,7 +107,6 @@ export class DeltaNodeDirective {
 									// remove the subscribers from the dead element
 									val.subscriptions
 									.forEach((y:any,j)=>{
-										console.log(y)
 										y.unsubscribe()
 									})
 									val.subscriptions = []
@@ -122,7 +121,8 @@ export class DeltaNodeDirective {
 												zChildren,
 												zSymbol:z.eventWrapper.zSymbol,
 												fromEvent,http,env,
-												returnData:z.eventWrapper.returnData
+												returnData:z.eventWrapper.returnData,
+												navAction
 											})
 											let myResult = z.eventWrapper.returnData
 											.pipe(skip(1))
@@ -537,7 +537,8 @@ export class DeltaNodeDirective {
 											zSymbol:y.target[0],
 											fromEvent,http,
 											env,
-											returnData:y.result
+											returnData:y.result,
+											navAction
 										})
 									})
 
@@ -619,7 +620,7 @@ export class DeltaNodeDirective {
 										returnData:y.result,
 										deltaNodeNormalizer
 									}
-									val.subscriptions.push(...[action,myResult])
+									val.subscriptions.push(...[...action,myResult])
 								})
 								//
 

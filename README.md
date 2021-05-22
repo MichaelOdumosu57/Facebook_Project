@@ -93,3 +93,8 @@ email :shieldmousetower734@gmail.com
 * marketplace
 * lazyLoad navigation issues, f
 
+
+### Tests 
+
+#### Marketplace
+* test that on navigation the cdn calls only occur if the component has never been initalized
