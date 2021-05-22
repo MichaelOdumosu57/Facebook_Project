@@ -21,7 +21,7 @@ export const environment: any = {
             zChildView:-1,
 			zChild:[7],
 			topLevelZChild:[-1],
-            drag:[-1],
+            drag:[7],
         },
         app: {
             lifecycleHooks:false

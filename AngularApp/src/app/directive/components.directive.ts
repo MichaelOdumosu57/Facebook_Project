@@ -159,12 +159,14 @@ export class ComponentsDirective {
 
                                 // setup the lazyLoad observable
                                 let lazyLoadComponentSub = from(import('../components/components.component'))
-                                .pipe(delay(zChildren[y].extras.options?.component?.lazyLoadDelay || 3000))
+                                .pipe(delay(zChildren[y].extras.options?.component?.lazyLoadDelay || 2000))
                                 .subscribe((result:any)=>{
                                     let {ComponentsComponent} = result
+
                                     // configure the component
                                     let componentsFactory = cfr.resolveComponentFactory(ComponentsComponent)
 
+                                    
                                     let answer  = (zChildren[y].viewContainerRef as ViewContainerRef).createComponent(componentsFactory,undefined,injector)
                                     let instance:any = answer.instance
                                     let el:any = answer.location

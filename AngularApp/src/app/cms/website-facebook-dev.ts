@@ -1,7 +1,6 @@
+import { pipe } from "rxjs";
 import { environment as env } from "../../environments/environment";
 import {objectCopy,zProtoComponent,zProtoChildren, zChildren, xContain, xPosition,latchUtilities} from '../customExports'
-
-
 
 let website:any = {}
 
@@ -2617,7 +2616,7 @@ let home_development :Array<zProtoComponent> = [
 						},
 						delta:{
 							group:"posts",
-							type:"add",
+							type:["add"],
 							options:{
 								fn:(devObj)=>{
 									let {zChildren,zSymbol,fromEvent,http,env,returnData} = devObj
@@ -4070,8 +4069,7 @@ let marketDev: Array<zProtoComponent> = [
 					group:[
 						{
 							name:"marketCard",
-							type:"repeat",
-							by:"5"
+							type:"cdn",
 						}
 					]
 				},
@@ -4105,7 +4103,7 @@ let marketDev: Array<zProtoComponent> = [
 			...[
 				...[
 					{
-						key:"panel a_p_p_Glassmorphism",
+						key:"panel a_p_p_Glassmorphism a_p_p_MarketPane",
 						type:"div",
 						split:2.7,
 						height:700,
@@ -4122,7 +4120,7 @@ let marketDev: Array<zProtoComponent> = [
 									text:"Marketplace",
 									logic:{
 										desktop:{
-											width:1,
+											width:.7,
 											height:()=>{
 												return 30
 											},
@@ -4186,6 +4184,7 @@ let marketDev: Array<zProtoComponent> = [
 										},
 										extras:{
 											options:{
+												// lazyLoad:"true",
 												type:"profileCard",
 												class:"a_p_p_MarketCardContainer",
 												pic:{
@@ -4196,8 +4195,7 @@ let marketDev: Array<zProtoComponent> = [
 														"microsoft",
 														"bell",
 														"inbox"
-													][i] +
-													" a_p_p_MarketCardIcon",
+													][i] ,
 													container:{
 														style:{
 															display:"flex",
@@ -4233,6 +4231,11 @@ let marketDev: Array<zProtoComponent> = [
 												options:{
 													perspective:100
 												}
+											},
+											appComponents:{
+												type:["lazyLoad"],
+												group:"marketCard",
+												duplicateIgnore:"true",
 											}
 										},
 										group:["panel"]
@@ -4266,12 +4269,127 @@ let marketDev: Array<zProtoComponent> = [
 									},
 									group:["panel"]
 								}
-
-
 							]
+							.map((x:any,i)=>{
+								x.val += " a_p_p_MarketPane"
+								return x
+							})
 						}
 					},
 
+				],
+				...[
+
+					{
+						key:"card a_p_p_MarketItemCard",
+						type:"components",
+						height:380,
+						split:2,
+						delta:{
+							group:"marketCard",
+							type:["add","target"],
+							by:1,
+							options:{
+								modify:(devObj)=>{
+									let {zChild,x,index,hook,co,groupIndex} = devObj
+
+									if(hook === "templateComponent"){
+										zChild[x].extras.component.next = (index+1) % 3 === 0 ? "true":"false"
+										let myCss = zChild[x].cssDefault
+										zChild[x].cssDefault.left =
+										(
+											numberParse(myCss.left) + ((numberParse(myCss.width) + 40) * ((index+1) % 3 ))
+											).toString() + "px"
+										if(index > 1){
+											zChild[x].extras.component.top = 50
+										}
+										zChild[x].extras.options.header = zChild[x].extras.appDeltaNode.options.metadata.header
+										zChild[x].extras.options.subheader =  zChild[x].extras.appDeltaNode.options.metadata.subheader
+										zChild[x].extras.options.cardText =  zChild[x].extras.appDeltaNode.options.metadata.cardText
+										zChild[x].extras.options.img.src = mediaPrefix({media:zChild[x].extras.appDeltaNode.options.metadata.media})
+									}
+
+								},
+								fn:(devObj)=>{
+									let {zChildren,zSymbol,fromEvent,http,env,returnData} = devObj
+
+									let request = http.post(
+										env.facebook.url,
+										{
+											env:"someListings",
+											times:2
+										}
+									)
+									.subscribe({
+										next:(result:any)=>{
+											result.forEach((x:any,i)=>{
+												returnData.next({type:"append",status:200,message:[x]})
+											})
+											request.unsubscribe()
+
+										},
+										error:(err:any)=>{
+											returnData.next({type:"append",status:500,message:[]})
+											console.log(err)
+											request.unsubscribe()
+										}
+									})
+									return fromEvent(window,"scroll")
+									.subscribe((result:any)=>{
+
+
+										let element = document.documentElement
+										if(
+
+											Math.abs(
+												((element.scrollHeight - element.scrollTop) - element.clientHeight)
+											) < 5 ){
+												// return
+											// user has scrolled to bottom of page
+											let request = http.post(
+												env.facebook.url,
+												{
+													env:"someListings",
+													times:3
+												}
+											)
+											.subscribe({
+												next:(result:any)=>{
+													result.forEach((x:any,i)=>{
+														returnData.next({type:"append",status:200,message:[x]})
+													})
+													request.unsubscribe()
+
+												},
+												error:(err:any)=>{
+													returnData.next({type:"append",status:500,message:[]})
+													console.log(err)
+													request.unsubscribe()
+												}
+											})
+
+											//
+										}
+									})
+								}
+							}
+
+						},
+						options:{
+							extras:{
+								options:{
+									type:"primeng-card",
+									buttons:[],
+									img:{
+										src:mediaPrefix({media:'market/pexels-burak-k-704555.jpg'}),
+										class:"a_p_p_MarketItemCardImg"
+									},
+									header:"$30",
+									subheader:"Reach out to me for more details in good condition"
+								}
+							}
+						}
+					}
 				]
 			]
 		]

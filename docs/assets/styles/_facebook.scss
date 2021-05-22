@@ -346,6 +346,18 @@ $white: rgba(255,255,255,0.3);
 
     &Market{
 
+        &Item{
+            &Card{
+                @include glassmorphism;
+
+                &Img{
+                    height:200px
+                }
+            }
+        }
+        &Pane{
+            // position:fixed !important;
+        }
         &Title{
             color:black;
             font-family: $font-family2;
@@ -362,6 +374,7 @@ $white: rgba(255,255,255,0.3);
             box-sizing: border-box;
         }
 
+
         &Card{
 
             &Container{
@@ -371,7 +384,7 @@ $white: rgba(255,255,255,0.3);
                 flex-grow: 1;
             }
             &Icon{
-                
+
             }
         }
     }

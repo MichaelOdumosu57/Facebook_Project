@@ -10,12 +10,14 @@ declare global {
     var xPosition
     var judimaPageOffset
     var mediaPrefix
+    var getDocHeight
     var latchUtilities:{centerX:Function}
 }
 window.numberParse = numberParse
 window.xPosition = xPosition
 window.judimaPageOffset = judimaPageOffset
 window.mediaPrefix = mediaPrefix
+window.getDocHeight = getDocHeight
 window.latchUtilities = latchUtilities
 
 
@@ -292,7 +294,7 @@ export var latchUtilities:{centerX:Function} ={
     //
     centerX:(devObj)=>{
         let {zChildren,zSymbol,metadata} = devObj
-        
+
         let contain = metadata?.contain  || "&#8353"
         let containPos = metadata?.containPos || .5
         let targetPos = metadata?.targetPos || .5
@@ -317,6 +319,15 @@ export var latchUtilities:{centerX:Function} ={
 }
 //
 
+
+export function getDocHeight() {
+    var D = document;
+    return Math.max(
+        D.body.scrollHeight, D.documentElement.scrollHeight,
+        D.body.offsetHeight, D.documentElement.offsetHeight,
+        D.body.clientHeight, D.documentElement.clientHeight
+    );
+}
 export function flatDeep(arr, d = 1) { // polyfill for arr.flat
     return d > 0 ? arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val), [])
                  : arr.slice();
@@ -2010,6 +2021,7 @@ let inspectKeep = (devObj)=>{
 let logicKeep = (devObj) =>{
 
 	let {hook,zSymbolsMap,component,finalKeep,zChild} = devObj
+    
 	component.keep.groups
 	.forEach((x:any,i)=>{
 

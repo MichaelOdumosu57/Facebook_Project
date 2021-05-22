@@ -53,6 +53,28 @@ class my_ibm_language_client():
             ],
             "track":0
         }
+        self.listings = {
+            "items":[
+                {
+                    "header":"${}".format(random.choice(range(200))),
+                    "subheader":lorem.sentence(),
+                    "media":"market/{}".format(random.choice([
+                        "pexels-anastasia-zhenina-4040365.jpg"
+                        ,"pexels-burak-k-704555.jpg"
+                        ,"pexels-cottonbro-4551309.jpg"
+                        ,"pexels-cottonbro-4551310.jpg"
+                        ,"pexels-céline-7115127.jpg"
+                        ,"pexels-john-petalcurin-4317157.jpg"
+                        ,"pexels-karen-laårk-boshoff-6679462.jpg"
+                        ,"pexels-kindel-media-7667728.jpg"
+                        ,"pexels-maria-tyutina-246327.jpg"
+                        ,"pexels-ovan-62689.jpg"
+                        ,"pexels-tatiana-syrikova-3932930.jpg"
+                    ]))
+                } for i in list(range(20000))
+            ],
+            "track":0
+        }
 
 
     def execute(self, data):
@@ -67,6 +89,7 @@ class my_ibm_language_client():
         language_translator = self.language_translator
         lorem = self.lorem
         posts = self.posts
+        listings = self.listings
         name = data.get("titleName") if data.get("titleName")  else "My_Source_Model"
         source = data.get("source")
         target = data.get("target")
@@ -236,6 +259,7 @@ class my_ibm_language_client():
         elif(env =="resetPostsTrack"):
             try:
                 posts["track"] = 0
+                listings["track"] = 0
                 return {
                     "status":200,
                     "message":"OK"
@@ -250,6 +274,29 @@ class my_ibm_language_client():
                     'message': 'an error occured check the output from the backend'
 
             }
+
+        elif(env =="someListings"):
+            try:
+                current = listings.get("track")
+                span = current+times
+                result = listings.get("items")[current:span]
+                listings["track"] = span
+                print(listings["track"]
+                )
+                return {
+                    "status":200,
+                    "message":json.dumps(result)
+                }
+
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
+                }
 
 
         return {

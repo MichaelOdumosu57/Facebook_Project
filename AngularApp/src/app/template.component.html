@@ -453,9 +453,9 @@
             >
                 <app-components
                 *ngIf="a.extras[1][bb].options?.lazyLoad !== 'true'"
+                [options] ="a.extras[1][bb].options"
                 class ={{a.extras[1][bb].options?.component?.class}}
                 [ngStyle] ="a.extras[1][bb].options?.component?.style"
-                [options] ="a.extras[1][bb].options"
                 ></app-components>
             </div>
 		</ng-template>

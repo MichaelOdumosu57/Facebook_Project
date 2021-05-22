@@ -50,9 +50,16 @@
     [ngStyle]="options.style"
     [styleClass]="'p-card-shadow ' + options.styleClass">
         <ng-template pTemplate="header">
-            <img alt="Card" [src]="options.img.src" [ngStyle]="options.img.style">
+            <img alt="Card"
+            [src]="options.img.src"
+            [ngStyle]="options.img.style"
+            [class]="options.img.class"
+            >
         </ng-template>
-        <p>{{options.cardText}}</p>
+        <p
+        [ngStyle]="options.cardText?.style"
+        [class]="options.cardText?.class"
+        >{{options.cardText}}</p>
         <ng-template pTemplate="footer">
 
                 <p-button

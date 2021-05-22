@@ -36,6 +36,8 @@ It is currrently at   [Angular CLI](https://github.com/angular/angular-cli) vers
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 Photo by Karolina Grabowska from Pexels
+Photo by OVAN from Pexels
+
 ```
 
 ### Issues
@@ -88,5 +90,6 @@ email :shieldmousetower734@gmail.com
 
 
 ### Left off
-* Prime NG posts
-card component
+* marketplace
+* lazyLoad navigation issues, f
+

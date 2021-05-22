@@ -439,6 +439,12 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 topLevelZChild = this._topLevelZChildInit()
                 latchZChild = this.ryber[this.appTV].metadata.latch.zChild = this._latchZChildInit()
 
+                // drags elements for you
+                if(env.component.form?.drag?.includes( ii)){
+                    this.toPlace(zChild)
+                }
+                //
+
                 // console.log(zChild)
                 this.directivesSendData({
                     directivesZChild:zChild,
@@ -552,6 +558,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
 
                         // deterimine new spacing
+
                             component.keep = {groups:[{items:[],index:[],oneExists:"false"}]}
                             // inspect the keep
                             inspectKeep({
@@ -582,6 +589,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
                             })
 
+
                             component.keep.groups.reverse()
                             .forEach((x:any,i)=>{
                                 // update the finalKeep and zChildKeys
@@ -603,6 +611,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                                 //
 
                             })
+
                             //
 
                         //
@@ -639,7 +648,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                             zChild[x].extras.component.next = zChild[x].extras.appDeltaNode.options?.next?.({index}) ||zChild[x].extras.component.next
                             zChild[x].cssDefault.left =zChild[x].extras.appDeltaNode.options?.cssLeft?.({index,css:zChild[x].cssDefault}) || zChild[x].cssDefault.left
 
-                            zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"templateComponent"})
+                            zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"templateComponent",groupIndex:i})
                             zChild[x].extras.appDeltaNode.options !== undefined ? zChild[x].extras.appDeltaNode.options.index= index  : null
                             // console.log(zChild[x].extras.component)
                         })
@@ -1306,6 +1315,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                     zChild,
                     x,
                     index,
+                    groupIndex:i,
                     hook:"deltaNodeBootstrap"
                 })
             })

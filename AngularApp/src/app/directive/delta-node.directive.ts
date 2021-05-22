@@ -107,6 +107,7 @@ export class DeltaNodeDirective {
 									// remove the subscribers from the dead element
 									val.subscriptions
 									.forEach((y:any,j)=>{
+										console.log(y)
 										y.unsubscribe()
 									})
 									val.subscriptions = []
@@ -505,12 +506,13 @@ export class DeltaNodeDirective {
 								val.targets = val.targets
 								.map((y:any,j)=>{
 									// logic for add concept
-									if(y[1]?.extras?.appDeltaNode?.type === "add"){
+									if(y[1]?.extras?.appDeltaNode?.type?.includes("add")){
 
 										val.add .push ({
 											target:y,
 											fn:y[1].extras.appDeltaNode.options.fn,
-											result:new BehaviorSubject(1)
+											result:new BehaviorSubject(1),
+											by:y[1].extras.appDeltaNode.by
 										})
 									}
 									//
@@ -518,7 +520,9 @@ export class DeltaNodeDirective {
 								})
 								.filter((y:any,j)=>{
 
-									return [undefined,"increment"].includes(y[1]?.extras?.appDeltaNode?.type)
+									let result = [null,"increment","target"].filter((z,k)=> (y[1]?.extras?.appDeltaNode?.type || [null]).includes(z))
+
+									return result.length > 0
 								})
 
 								//
@@ -526,24 +530,30 @@ export class DeltaNodeDirective {
 								// do an action to make elements come on the dom
 								val.add
 								.forEach((y:any,j)=>{
-									let action = y.fn({
-										zChildren,
-										zSymbol:y.target[0],
-										fromEvent,http,
-										env,
-										returnData:y.result
+									let action = Array(y.by).fill(null)
+									.map((z:any,k)=>{
+										return  y.fn({
+											zChildren,
+											zSymbol:y.target[0],
+											fromEvent,http,
+											env,
+											returnData:y.result
+										})
 									})
+
 									let deltaNodeNormalizer = (result:any)=>{
 										let repeatedDeltas = []
 										y.result = result
+
 										y.result.message
 										.forEach((z:any,k)=>{
+
 
 											val.targets = val.targets
 											.map((w:any,h)=>{
 
 												//logic for increment
-												if(w[1]?.extras?.appDeltaNode?.type === "increment"){
+												if(w[1]?.extras?.appDeltaNode?.type?.includes( "increment")){
 													w[1].extras.appDeltaNode.increment = {
 														counter: +w[1].innerText?.item.split("")[0]
 													}
@@ -553,7 +563,7 @@ export class DeltaNodeDirective {
 												// pre mods
 												let css = objectCopy(w[1].css)
 												let text = (()=>{
-													if(w[1]?.extras?.appDeltaNode?.type === "increment"){
+													if(w[1]?.extras?.appDeltaNode?.type?.includes( "increment") ){
 														let mySplit = w[1].innerText?.item.split("")
 
 														return (++w[1].extras.appDeltaNode.increment.counter)+mySplit[1]
@@ -595,6 +605,7 @@ export class DeltaNodeDirective {
 											deltas:repeatedDeltas,
 											group:key
 										}
+
 										val.deltas.push(repeatedDeltas)
 										val.hooks.directive  ="add prepare"
 										ryber[co].metadata.deltaNode.updateZChild.next()
@@ -694,4 +705,3 @@ export class DeltaNodeDirective {
 		}
 	}
 }
-
