@@ -19,9 +19,9 @@ export const environment: any = {
             panelView:-1, //should be a number use a positive number to view it
             lifecycleHooks: false,
             zChildView:-1,
-			zChild:[-1],
+			zChild:[0],
 			topLevelZChild:[-1],
-            drag:[7],
+            drag:[-1],
         },
         app: {
             lifecycleHooks:false
@@ -64,7 +64,7 @@ export const environment: any = {
     //dev additions
     facebook:{
         url:"http://localhost:3005",
-        startURL:"/marketplace"
+        startURL:"/friends"
     }
     //
 

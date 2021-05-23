@@ -894,6 +894,9 @@ let login_development:Array<zProtoComponent> = [
 							extras:{
 								appFacebookLogin:{
 									type:"chosen-img"
+								},
+								extend:{
+									src:""
 								}
 							},
 							needed:["appLatch"],
@@ -1066,31 +1069,30 @@ let login_development:Array<zProtoComponent> = [
 					group:"login_card",
 					options:{
 
-						next:function (devObj){
-							let {index}= devObj
-							return (index+1) % 3 === 0 ? "true":"false"
-						} ,// means deltaNode will try to place the object next to
-						cssLeft:function(devObj){
-							let {index,css}= devObj;
-							if( (index+1) % 3 === 1  ){
-									return (
-									numberParse(css.left) + numberParse(css.width) + 40
-									).toString() + "px"
-							}
 
-							else if( (index+1) % 3 === 2  ){
-								return (
-								numberParse(css.left) + ((numberParse(css.width) + 40)* 2)
-								).toString() + "px"
-							}
-							else{
-								return css.left
-							}
-						},
 						modify:(devObj)=>{
 							let {zChild,x,index,hook,co} = devObj
-							// let yourFNs = []  // say if you wanna modify height, top image ...
-							if(hook === "latchDirective"){
+
+
+							if("templateComponent" === hook){
+								zChild[x].extras.appLatch.display.init = "false"
+								zChild[x].extras.component.next = (index+1) % 3 === 0 ? "true":"false"
+								let myCss = zChild[x].cssDefault
+								zChild[x].cssDefault.left =(
+								numberParse(myCss.left) + ((numberParse(myCss.width) + 40)* ((index+1) % 3 ))
+								).toString() + "px"
+								if(index === 2){
+									let addingDelta = 350
+									zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
+									if(co.metadata.section.mediaQuery === "desktop"){
+										zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
+									}
+								}
+
+							}
+							if(["latchDirective"].includes(hook)){
+
+
 								let {targets} = zChild[x].extras.appLatch.display
 								let myImg = targets[2]
 								let myName = targets[3]
@@ -1104,18 +1106,26 @@ let login_development:Array<zProtoComponent> = [
 										myMesg  = targets[3]
 										chosenImg = targets[7]
 										chosenName = targets[8]
-										zChild[chosenImg].element.src = zChild[myImg].extras.extend.src
+										zChild[chosenImg].extras.extend.src  =zChild[chosenImg].element.src = zChild[myImg].extras.extend.src
+
 										zChild[myMesg].innerText.item = "5"
 										zChild[chosenName].innerText.item = zChild[myName].innerText.item
 										break;
 									case 0:
-										zChild[chosenImg].element.src = zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/angular.png"
+
+										[chosenImg,myImg]
+										.forEach((y:any,j)=>{
+											zChild[y].element.src = zChild[y].extras.extend.src = mediaPrefix({media:'angular.png'})
+										})
 										zChild[chosenName].innerText.item = zChild[myName].innerText.item = "Angular"
 										zChild[myMesg].innerText.item = "3"
 										break;
 
 									case 1:
-										zChild[chosenImg].element.src = zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/ruby_programming.png"
+										[chosenImg,myImg]
+										.forEach((y:any,j)=>{
+											zChild[y].element.src = zChild[y].extras.extend.src = mediaPrefix({media:'ruby_programming.png'})
+										})
 										zChild[chosenName].innerText.item = zChild[myName].innerText.item = "Ruby"
 										zChild[myMesg].innerText.item = "2"
 										break;
@@ -1123,20 +1133,17 @@ let login_development:Array<zProtoComponent> = [
 										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/plus.png"
 										zChild[myName].innerText.item = "Add Account"
 										zChild[myName].css.color = "blue";
-										let addingDelta = 350
 
-										zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
-										if(co.metadata.section.mediaQuery === "desktop"){
-											zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
+										if("templateComponent" === hook){
+											let addingDelta = 350
+											zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
+											if(co.metadata.section.mediaQuery === "desktop"){
+												zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
+											}
 										}
 										break;
 
-									// default:
-									// 	addingDelta = 350
-									// 	zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
-									// 	zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
 
-									// 	break;
 								}
 
 							}
@@ -1871,6 +1878,10 @@ let home_development :Array<zProtoComponent> = [
 						{
 							name:"marketplace",
 							type:"direct_link"
+						},
+						{
+							name:"login",
+							type:"direct_link"
 						}
 					]
 				},
@@ -1988,8 +1999,37 @@ let home_development :Array<zProtoComponent> = [
 										return numberParse(getComputedStyle( zChildren["&#8353"].element).width)
 
 									},
-									height:()=>{
-										return 1050
+									height:(devObj)=>{
+										let {minMaxDelta} = devObj
+										try{
+											let cards = Array.from(document.querySelectorAll("div.a_p_p_Components.a_p_p_MarketItemCard.f_o_r_m_card "))
+											let delta = minMaxDelta({
+												type:"identify",
+												items:cards,
+												min:(item)=>{
+													return {
+														key:item,
+														value:
+														(numberParse(item.style.top) +
+														numberParse( item.style.height) )
+													}
+												},
+												max:(item)=>{
+													return {
+														key:item,
+														value:
+														(numberParse(item.style.top) +
+														numberParse( item.style.height) )
+													}
+												}
+											})
+											return delta.max.value > 1050 ?  delta.max.value  +100 : 1050
+										}
+										catch(e){
+											return 1050
+										}
+
+
 									},
 									top:(devObj)=>{
 										let {} = devObj
@@ -2007,7 +2047,35 @@ let home_development :Array<zProtoComponent> = [
 
 									},
 									height:(devObj)=>{
-										return 2900
+										let {minMaxDelta} = devObj
+										try{
+											let cards = Array.from(document.querySelectorAll("div.a_p_p_Components.a_p_p_MarketItemCard.f_o_r_m_card "))
+											let delta = minMaxDelta({
+												type:"identify",
+												items:cards,
+												min:(item)=>{
+													return {
+														key:item,
+														value:
+														(numberParse(item.style.top) +
+														numberParse( item.style.height) )
+													}
+												},
+												max:(item)=>{
+													return {
+														key:item,
+														value:
+														(numberParse(item.style.top) +
+														numberParse( item.style.height) )
+													}
+												}
+											})
+											return delta.max.value > 2900 ?  delta.max.value  +100 : 2900
+										}
+										catch(e){
+											return 2900
+										}
+
 									},
 									top:(devObj)=>{
 										let {} = devObj
@@ -2262,6 +2330,13 @@ let home_development :Array<zProtoComponent> = [
 									left:0
 								}
 							},
+							extras:{
+								appNavigation: {
+									type:"direct_link",
+									group:"login",
+									zSymbolNeeded:"true"
+								}
+							},
 							group:["navUserIcon_"+i]
 						}
 					]
@@ -2277,6 +2352,12 @@ let home_development :Array<zProtoComponent> = [
 							height:0,
 							top:0,
 						}
+					}
+				}
+				if(i === 2){
+					x.navigation = {
+						type:"direct_link",
+						group:"login"
 					}
 				}
 
@@ -2299,6 +2380,7 @@ let home_development :Array<zProtoComponent> = [
 							type:"primeng-dropdown",
 							lazyLoad:"false",
 							styleClass:"",
+							placeHolder:"Menu",
 							style:{
 								width:"100%",
 							},
@@ -2308,20 +2390,38 @@ let home_development :Array<zProtoComponent> = [
 									style:{
 										"border-radius":"50px",
 										width:"30em",
+									},
+									onChange:(devObj)=>{
+										let{ryber,option} = devObj
+										// change the path
+										ryber.appCO0.metadata.navigation.full.navigated = "true"
+										ryber.appCurrentNav = option.navigation
+										//
+									}
+								},
+								text:{
+									style:{
+										margin:"10px 0"
 									}
 								}
 							},
 							options:[
 								{
-									name:"Your Profile",
+									name:"Home",
+									navigation:"/home"
 
 								},
 								{
 									name:"Find Friends",
-
+									navigation:"/friends"
 								},
 								{
 									name:"Marketplace" ,
+									navigation:"/marketplace"
+								},
+								{
+									name:"Log Out" ,
+									navigation:"/login"
 								},
 							],
 							component:{
@@ -4235,7 +4335,7 @@ let marketDev: Array<zProtoComponent> = [
 												type:"target",
 												group:"marketCard",
 												options:{
-													perspective:100
+													perspective:300
 												}
 											},
 											appComponents:{
@@ -4350,12 +4450,12 @@ let marketDev: Array<zProtoComponent> = [
 
 
 										let element = document.documentElement
-										if(
 
+										if(
 											Math.abs(
 												((element.scrollHeight - element.scrollTop) - element.clientHeight)
-											) < 5 ){
-												// return
+											) < 5
+										){
 											// user has scrolled to bottom of page
 											let request = http.post(
 												env.facebook.url,
@@ -4378,7 +4478,6 @@ let marketDev: Array<zProtoComponent> = [
 													request.unsubscribe()
 												}
 											})
-
 											//
 										}
 									})

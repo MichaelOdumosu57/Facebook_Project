@@ -74,6 +74,8 @@ export class NavigationDirective {
                                 "click"
                             )
                             .subscribe((result:any)=>{
+
+                                
                                 // change the path
                                 ryber.appCO0.metadata.navigation.full.navigated = "true"
                                 ryber.appCurrentNav = "/"+zChildren[y].extras.appNavigation.group

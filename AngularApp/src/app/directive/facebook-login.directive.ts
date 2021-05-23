@@ -222,11 +222,12 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     .forEach((y:any,j)=>{
                         let loginEvent = fromEvent(zChildren[y].element,"click")
                         .subscribe((result:any)=>{
+
                             this.logIn({
                                 user:username,
                                 pass:password,
                                 zChildren,
-
+                                myChosen
                             })
 
                         })
@@ -237,11 +238,12 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     .forEach((y:any,j)=>{
                         let loginEvent = fromEvent(zChildren[y].element,"click")
                         .subscribe((result:any)=>{
-
+                            console.log(chosenPassword)
                             this.logIn({
                                 user:chosenName,
                                 pass:chosenPassword,
-                                zChildren
+                                zChildren,
+                                myChosen
                             })
                         })
                         val.subscriptions.push(loginEvent)
@@ -275,8 +277,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 		}
 	}
 
-    logIn(devObj:{user:Array<string>,pass:Array<string>,zChildren:zChildren,type?:String}){
-        let {type,user,pass,zChildren} = devObj
+    logIn(devObj:{user:Array<string>,pass:Array<string>,zChildren:zChildren,type?:String,myChosen:Array<string>}){
+        let {type,user,pass,zChildren,myChosen} = devObj
         let {http,ryber,renderer2} = this
 
         let myUser = zChildren[user[0]].innerText.item || zChildren[user[0]].element.value
@@ -315,13 +317,17 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     renderer2.removeClass(
                         document.body,"a_p_p_BodyOverFlowHidden"
                     )
+                    myChosen
+                    .forEach((z:any,k)=>{
+                        zChildren[z].css.display = "none"
+                    })
                     //
 
-                    // reset the posts as necessary
+                    // reset the posts and listings as necessary
                     http.post(
                         env.facebook.url,
                         {
-                            env :"resetPostsTrack"
+                            env :"resetTracks"
                         },
                         {
                             responseType:"text"

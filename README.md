@@ -98,3 +98,12 @@ email :shieldmousetower734@gmail.com
 
 #### Marketplace
 * test that on navigation the cdn calls only occur if the component has never been initalized
+
+
+#### Navigation
+* test that on navigation duplicates with latch fire properly, and the regression does affect regular latches
+
+
+#### Navigation Duplication Latch
+* make sure that, there is only 1 latch set the intended set for the target element
+and functions as normal

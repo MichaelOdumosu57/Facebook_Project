@@ -56,11 +56,11 @@
             [class]="options.img.class"
             >
         </ng-template>
-        <ng-template pTemplate="subtitle"
+        <!-- <ng-template pTemplate="subtitle"
         [class]="options.subheader?.class"
         >
 
-        </ng-template>
+        </ng-template> -->
         <p
         [ngStyle]="options.cardText?.style"
         [class]="options.cardText?.class"
@@ -89,6 +89,7 @@
     [ngStyle]="options.style"
     [panelStyle]="options.panel?.style"
     [panelStyleClass]="options.panel?.class"
+    (onChange)="dropDown.onChange($event)"
     >
         <ng-template pTemplate="selectedItem">
         </ng-template>
@@ -96,8 +97,11 @@
             <div
             [class]="items  ?.container?.class || options?.items?.container?.class"
             [ngStyle]="items?.container?.style || options?.items?.container?.style"
+
             >
-                <h2>{{items.name}}</h2>
+                <h2
+                [ngStyle]="items?.text?.style || options?.items?.text?.style"
+                >{{items.name}}</h2>
             </div>
         </ng-template>
     </p-dropdown>

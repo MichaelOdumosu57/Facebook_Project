@@ -256,7 +256,7 @@ class my_ibm_language_client():
 
             }
 
-        elif(env =="resetPostsTrack"):
+        elif(env =="resetTracks"):
             try:
                 posts["track"] = 0
                 listings["track"] = 0

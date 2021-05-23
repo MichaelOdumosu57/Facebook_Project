@@ -644,11 +644,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                             }) -1
 
                             // console.log(zChild[x].css)
-
-                            zChild[x].extras.component.next = zChild[x].extras.appDeltaNode.options?.next?.({index}) ||zChild[x].extras.component.next
-                            zChild[x].cssDefault.left =zChild[x].extras.appDeltaNode.options?.cssLeft?.({index,css:zChild[x].cssDefault}) || zChild[x].cssDefault.left
-
-                            zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"templateComponent",groupIndex:i})
+                            zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"templateComponent",groupIndex:i,co:ryber[appTV]})
                             zChild[x].extras.appDeltaNode.options !== undefined ? zChild[x].extras.appDeltaNode.options.index= index  : null
                             // console.log(zChild[x].extras.component)
                         })

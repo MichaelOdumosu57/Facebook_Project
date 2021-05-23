@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { RyberService } from '../ryber.service';
 
 @Component({
     selector: 'app-components',
@@ -9,6 +10,7 @@ export class ComponentsComponent implements OnInit {
 
     @Input() options:any
     constructor(
+        public ryber: RyberService,
     ) { }
 
     ngOnInit(): void {
@@ -37,6 +39,20 @@ export class ComponentsComponent implements OnInit {
                         media:'friends/' + ['user.png','uae.png'][Math.round(Math.random())]
                     })
                 }
+            }
+        }
+    }
+
+    dropDown = {
+        onChange:(event)=>{
+            let {ryber,options}= this
+            let childFn = options.options
+            .filter((x:any,i)=>{
+                return x.name ===  event.value.name
+            })[0].onChange || options.items.container.onChange
+
+            if(childFn){
+                childFn({ryber,option:event.value})
             }
         }
     }
