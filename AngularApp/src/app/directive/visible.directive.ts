@@ -41,7 +41,7 @@ export class VisibleDirective {
             let { group, suffix } = ryber[co].metadata.visible
 
             // detects navigation
-            let action: any = navigationType({
+            let navAction: any = navigationType({
                 type: ["full"],
                 fn: () => {
                     if (
@@ -60,8 +60,12 @@ export class VisibleDirective {
             let mainSubscription =
                 ryber[co].metadata.zChildrenSubject
                 .subscribe((result: any) => {
+
+
+
                     zChildren = ryber[co].metadata.zChildren
                     let ref = result.ref || this.ref
+
 
 
                     // feature element organization
@@ -79,6 +83,10 @@ export class VisibleDirective {
 
                     group = {}
                     //
+
+                    // if(navAction.full === "return"){
+                    //     return
+                    // }
 
                     Object.entries(zChildren)
                         .slice(2)
@@ -188,10 +196,8 @@ export class VisibleDirective {
 
                                 // do something when navigation happens
                                 zChildren[y].extras.appVisible.display.desktop = {
-                                    on:zChildren[y].css.display || "block",
+                                    on:"block",
                                     off:"none",
-                                    onSet:"false",
-                                    offSet:"false"
                                 }
 
                                 //
@@ -199,27 +205,10 @@ export class VisibleDirective {
                                 .pipe(delay(10),skip(1),distinctUntilKeyChanged("media"))
                                 .subscribe((result:any)=>{
                                     if(result.media === "desktop"){
-
-
-                                        zChildren[y].css.display =zChildren[y].extras.appVisible.display.desktop.on || "block"
-                                        zChildren[y].extras.appVisible.display.desktop.onSet = "true"
-
+                                        zChildren[y].css.display =zChildren[y].extras.appVisible.display.desktop.on
                                     }
-                                    else{
-
-
-                                        if(zChildren[y].extras.appVisible.display.desktop.onSet === "true"){
-                                            zChildren[y].extras.appVisible.display.desktop.on = zChildren[y].css.display
-                                            zChildren[y].css.display = zChildren[y].extras.appVisible.display.desktop.off
-                                        }
-                                        else {
-                                            zChildren[y].css.display = zChildren[y].extras.appVisible.display.desktop.off
-                                        }
-                                        // zChildren[y].css.display =
-                                        // zChildren[y].extras.appVisible.display.desktop.offSet === "true" ?
-                                        // zChildren[y].extras.appVisible.display.desktop.off : "none"
-
-                                        zChildren[y].extras.appVisible.display.desktop.offSet = "true"
+                                    else {
+                                        zChildren[y].css.display =zChildren[y].extras.appVisible.display.desktop.off
                                     }
                                     ref.detectChanges()
                                 })
@@ -235,37 +224,18 @@ export class VisibleDirective {
 
                                 //
                                 zChildren[y].extras.appVisible.display.mobile ={
-                                    on:zChildren[y].css.display || "block",
+                                    on: "block",
                                     off:"none",
-                                    onSet:"false",
-                                    offSet:"false"
                                 }
                                 //
                                 let mediaQueryEvent = ryber.appCO0.metadata.ryber.sectionDefault.app.width.mediaQuerySubject
                                 .pipe(skip(1),distinctUntilKeyChanged("media"))
                                 .subscribe((result:any)=>{
                                     if(result.media === "mobile"){
-
-
-                                        zChildren[y].css.display =zChildren[y].extras.appVisible.display.desktop.on || "block"
-                                        zChildren[y].extras.appVisible.display.mobile.onSet = "true"
-
+                                        zChildren[y].css.display =zChildren[y].extras.appVisible.display.mobile.on
                                     }
-                                    else{
-
-
-                                        if(zChildren[y].extras.appVisible.display.mobile.onSet === "true"){
-                                            zChildren[y].extras.appVisible.display.mobile.on = zChildren[y].css.display
-                                            zChildren[y].css.display = zChildren[y].extras.appVisible.display.mobile.off
-                                        }
-                                        else {
-                                            zChildren[y].css.display = zChildren[y].extras.appVisible.display.mobile.off
-                                        }
-                                        // zChildren[y].css.display =
-                                        // zChildren[y].extras.appVisible.display.desktop.offSet === "true" ?
-                                        // zChildren[y].extras.appVisible.display.desktop.off : "none"
-
-                                        zChildren[y].extras.appVisible.display.mobile.offSet = "true"
+                                    else {
+                                        zChildren[y].css.display =zChildren[y].extras.appVisible.display.mobile.off
                                     }
                                     ref.detectChanges()
                                 })

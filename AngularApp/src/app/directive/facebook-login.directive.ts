@@ -238,7 +238,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     .forEach((y:any,j)=>{
                         let loginEvent = fromEvent(zChildren[y].element,"click")
                         .subscribe((result:any)=>{
-                            console.log(chosenPassword)
                             this.logIn({
                                 user:chosenName,
                                 pass:chosenPassword,

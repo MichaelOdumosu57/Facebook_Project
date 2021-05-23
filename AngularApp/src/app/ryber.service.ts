@@ -730,8 +730,7 @@ export class RyberService {
 
                 let css = {
                     width: '325px',
-                    "font-size": "48px",
-                    top: "0px",
+                    // top: "0px",
                     // height: "75px",
                     // left: '400px',
                     "z-index": 4,
@@ -769,15 +768,8 @@ export class RyberService {
 						appDeltaNode,
                         appNest,
                         appLatch,
-                        appWebRTC:{
-                            confirm:this.appCO0.metadata.webRTC.init.includes(webRTC?.item)  ? "true" : webRTC?.item !== undefined ? "pickup":"false",
-                            co,
-                            webRTC
-                        },
-                        appPrintFiles: {
-                            printGroup,
-                            type: 'signOut'
-						},
+                        appNavigation,
+
 						appGsapCursor:{
                             ...appGsapCursor,
 							type:"button"

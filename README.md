@@ -107,3 +107,6 @@ email :shieldmousetower734@gmail.com
 #### Navigation Duplication Latch
 * make sure that, there is only 1 latch set the intended set for the target element
 and functions as normal
+
+#### Section Navigation
+* test that as you navigate and toggle mediaQueries no bugs occur

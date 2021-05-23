@@ -157,11 +157,15 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
             if(action.full === "return"){
                 keep = ryber[appTV].metadata.judima.desktop.stack.keep
                 align = ryber[appTV].metadata.judima.desktop.xContain.align
+                .filter((x:any,i)=>{
+                    return x.length !== 0
+                })
             }
 
 
             // initalize the component
             else{
+
                 ryber[appTV].metadata.judima.init = "true"
                 //grabbing the values how the browser renders them
                 ryber[appTV].metadata.order = ryber[appTV].metadata.order
@@ -361,8 +365,12 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 })
                 ref.detectChanges()
                 //
+
+                ryber[appTV].metadata.judima.desktop.stack.keep      = keep
+                ryber[appTV].metadata.judima.desktop.xContain.align  = align
             }
             //
+
 
             //more init
             let cmsZKeys = ryber[appTV.valueOf()].metadata.order
@@ -644,6 +652,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                             }) -1
 
                             // console.log(zChild[x].css)
+                            zChild[x].extras?.appLatch?.display ? zChild[x].extras.appLatch.display.init  = "false":null
                             zChild[x].extras.appDeltaNode.options?.modify({zChild,x,index,hook:"templateComponent",groupIndex:i,co:ryber[appTV]})
                             zChild[x].extras.appDeltaNode.options !== undefined ? zChild[x].extras.appDeltaNode.options.index= index  : null
                             // console.log(zChild[x].extras.component)
@@ -943,8 +952,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
 
                 return x[0]
             })
-
-        ryber[appTV].metadata.order = order
+            ryber[appTV].metadata.order = order
         }
         catch(e){}
         //
@@ -1143,7 +1151,10 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                 Object.keys(zChild)
                 .slice(2)
                 .forEach((x,i)=> {
-                    if(zChild[x].extras?.judima?.formatIgnore === "false"){
+                    if(
+                        zChild[x].extras?.judima?.formatIgnore === "false"
+                        && zChild[x].css["display"] !== "none"
+                    ){
                         if(["p","ta","c","h1","a"].includes(zChild[x].bool )){
                             zChild[x].css["height"] = null
                             zChild[x].css["display"] = "table"
@@ -1199,6 +1210,7 @@ export class FormComponent implements OnInit  , AfterViewInit, OnDestroy {
                     heightInclude: [null, 'f', 't']
                 });
                 ref.detectChanges();
+
 
 
 

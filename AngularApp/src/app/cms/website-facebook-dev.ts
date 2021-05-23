@@ -1075,7 +1075,6 @@ let login_development:Array<zProtoComponent> = [
 
 
 							if("templateComponent" === hook){
-								zChild[x].extras.appLatch.display.init = "false"
 								zChild[x].extras.component.next = (index+1) % 3 === 0 ? "true":"false"
 								let myCss = zChild[x].cssDefault
 								zChild[x].cssDefault.left =(
@@ -1890,7 +1889,7 @@ let home_development :Array<zProtoComponent> = [
 					extras:{
 						section:{
 							// left:-55,
-							// width:1500,
+							width:1300,
 							split:20,
 							gap:10,
 							stack:30
@@ -2121,7 +2120,7 @@ let home_development :Array<zProtoComponent> = [
 					type:"image",
 					height:30,
 					split:.8,
-					gap:150,
+					gap:120,
 					imageURL:"	house.png"
 				},
 				{
@@ -2295,11 +2294,6 @@ let home_development :Array<zProtoComponent> = [
 					key:"bell",
 					type:"image",
 					imageURL:"bell.png"
-				},
-				{
-					key:"bell",
-					type:"image",
-					imageURL:"down-arrow.png"
 				}
 			].map((x:zProtoChildren,i)=>{
 				x.key += "-icon"
@@ -2354,15 +2348,38 @@ let home_development :Array<zProtoComponent> = [
 						}
 					}
 				}
-				if(i === 2){
-					x.navigation = {
-						type:"direct_link",
-						group:"login"
-					}
-				}
+
 
 				return x
 			}),
+			{
+				key:"logOut a_p_p_NavButton ",
+				type:"button",
+				value:"Log Out",
+				// top:17,
+				height:25,
+				split:2,
+				navigation : {
+					type:"direct_link",
+					group:"login"
+				},
+				options : {
+					extras:{
+						appVisible:{
+							type:["sectionDesktop"]
+						}
+					},
+					judima:{
+						mobile:{
+							height:0,
+							top:0,
+						}
+					},
+					css:{
+						"font-size":"16px"
+					}
+				}
+			},
 			{
 				key:"menu-dropdown",
 				type:"components",

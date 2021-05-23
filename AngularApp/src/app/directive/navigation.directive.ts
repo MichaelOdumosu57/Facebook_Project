@@ -66,7 +66,6 @@ export class NavigationDirective {
 
                     // click on the link to navigate
                     if(val.type ==="direct_link"){
-
                         val.targets
                         .forEach((y:any,j)=>{
                             let anchorEvent = fromEvent(
@@ -75,7 +74,7 @@ export class NavigationDirective {
                             )
                             .subscribe((result:any)=>{
 
-                                
+
                                 // change the path
                                 ryber.appCO0.metadata.navigation.full.navigated = "true"
                                 ryber.appCurrentNav = "/"+zChildren[y].extras.appNavigation.group
