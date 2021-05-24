@@ -45,19 +45,31 @@ def createHandler(client):
     class MainHandler(tornado.web.RequestHandler):
 
         def set_default_headers(self):
-            self.set_header("Access-Control-Allow-Origin", "*")
+            self.set_header("Access-Control-Allow-Origin", "http://localhost:4521")
             self.set_header("Access-Control-Allow-Headers", "*")
+            self.set_header("Access-Control-Allow-Credentials","true")
+            self.set_header("Allow-Origin-With-Credentials","true")
             self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
+
 
         def post(self):
             data = ""
             if self.request.headers['Content-Type'] == 'application/json':
                 data = tornado.escape.json_decode(self.request.body)
-                # print(data.get("tableName"))
+            elif self.request.headers['Content-Type'] == 'text/plain':
+                data = json.loads(self.request.body)
+            data["refresh_token"] = self.get_cookie('refresh_token')
+            data["refresh_user"] = self.get_cookie('refresh_user')
             self.set_header("Content-Type", "text/plain")
             result = client.execute(client,data)
-            print(result)
+
             try:
+                refresh_token = result.get('refresh_token')
+                if(refresh_token):
+                    self.set_cookie("refresh_token",refresh_token,httponly=True)
+                    self.set_cookie("refresh_user",result.get("refresh_user"),httponly=True)
+                    # self.set_secure_cookie
                 if(result.get("message") == 'Login Failed'):
                     result["message"] = json.dumps(
                         {"message":"There has been an issue please try again"}

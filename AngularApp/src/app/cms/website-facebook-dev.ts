@@ -200,7 +200,7 @@ let login_development:Array<zProtoComponent> = [
 									},
 									height:1.1,
 									top:-10,
-									left:-25,
+									left:-15,
 								}
 							}
 						}
@@ -392,6 +392,9 @@ let login_development:Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						},
+						appFacebookLogin:{
+							type:["checkLogin"]
 						}
 					},
 					judima:{
@@ -2909,7 +2912,7 @@ let home_development :Array<zProtoComponent> = [
 						}
 					},
 					{
-						key:"newsFeedInput a_p_p_NewsFeedInput",
+						key:"newsFeedInput a_p_p_NewsFeedInput createPost",
 						type:"input",
 						options:{
 							css:{
@@ -3018,7 +3021,9 @@ let home_development :Array<zProtoComponent> = [
 										},
 										mobile:{
 											width:(devObj)=>{
-												return 500
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width) * .9
+
 											},
 											height:()=>{
 												return 400
@@ -3112,7 +3117,9 @@ let home_development :Array<zProtoComponent> = [
 										},
 										mobile:{
 											width:(devObj)=>{
-												return 450
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width) * .7
+
 											},
 											height:()=>{
 												return 1
@@ -3153,7 +3160,7 @@ let home_development :Array<zProtoComponent> = [
 										"border":"1px solid grey",
 										display:"none"
 									},
-									val:"profileIcon a_p_p_CreatePostModal a_p_p_CreatePostIcon ",
+									val:"profileIcon a_p_p_CreatePostModal a_p_p_CreatePostIcon targetIcon",
 									logic:{
 										desktop:{
 											width:()=>{
@@ -3185,7 +3192,8 @@ let home_development :Array<zProtoComponent> = [
 											left:latchUtilities.centerX,
 											metadata:{
 												left:{
-													targetPos:8
+													// targetPos:5.5
+													containPos:.15
 												}
 											}
 										}
@@ -3221,7 +3229,7 @@ let home_development :Array<zProtoComponent> = [
 										},
 										mobile:{
 											width:()=>{
-												return 30
+												return 54.6
 											},
 											height:()=>{
 												return 30
@@ -3229,11 +3237,17 @@ let home_development :Array<zProtoComponent> = [
 											top:()=>{
 												return 150 +judimaPageOffset().y
 											},
-											left:latchUtilities.centerX,
-											metadata:{
-												left:{
-													targetPos:6
+											left:(devObj)=>{
+												let {zChildren} = devObj
+												try{
+													let icon = document.querySelector(".targetIcon")
+													return numberParse(getComputedStyle(icon).left)+80
 												}
+												catch(e){
+													return numberParse(getComputedStyle( zChildren["&#8353"].element).width) * .1
+												}
+
+
 											}
 										}
 									},
@@ -3285,7 +3299,9 @@ let home_development :Array<zProtoComponent> = [
 										},
 										mobile:{
 											width:(devObj)=>{
-												return 500
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width) * .75
+
 											},
 											height:()=>{
 												return 100
@@ -3320,8 +3336,10 @@ let home_development :Array<zProtoComponent> = [
 											left:latchUtilities.centerX
 										},
 										mobile:{
-											width:()=>{
-												return 450
+											width:(devObj)=>{
+												let {css,zSymbol,delta,zChildren} = devObj
+												return numberParse(getComputedStyle( zChildren["&#8353"].element).width) * .7
+
 											},
 											height:()=>{
 												return 50
@@ -3364,7 +3382,7 @@ let home_development :Array<zProtoComponent> = [
 						}
 					},
 					{
-						key:"newsFeedContainer a_p_p_newsFeedItemContainer",
+						key:"newsFeedContainer media a_p_p_newsFeedItemContainer",
 						type:"div",
 						options:{
 							css:{
@@ -3414,11 +3432,7 @@ let home_development :Array<zProtoComponent> = [
 						key:"newsFeedText a_p_p_NewsFeedText",
 						type:"text",
 						value:"Live Video",
-						options:{
-							css:{
-								"margin-top":"10px"
-							}
-						},
+
 						delta:{
 							group:"onYourMind",
 							options:{
@@ -4453,12 +4467,15 @@ let marketDev: Array<zProtoComponent> = [
 											left:80,
 										},
 										mobile:{
-											width:.5,
+											width:()=>{
+												return 190
+											},
 											height:()=>{
 												return 65
 											},
 											top:600,
-											left:280,
+											left:latchUtilities.centerX,
+
 										}
 									},
 									extras:{

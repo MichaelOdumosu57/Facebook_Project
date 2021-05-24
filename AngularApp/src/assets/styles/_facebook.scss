@@ -610,6 +610,12 @@ $white: rgba(255,255,255,0.3);
             &:focus,&:hover{
                 background-color: rgba(105, 95, 95, 0.3);
             }
+
+            &, .createPost{
+                @media  (max-width: 472px) {
+                    width:100%
+                }
+            }
         }
         &SubHeading:nth-child(n){
 
@@ -651,6 +657,28 @@ $white: rgba(255,255,255,0.3);
                 margin-top: 10px;
             }
 
+
+            &,.media{
+
+                & p {
+                    margin-top:10px
+                }
+                @media (max-width: 472px)  {
+                    flex-wrap:wrap-reverse !important;
+
+                    & img{
+                        margin:10px 15px 10px 0 !important;
+                    }
+
+                    & p{
+                        flex-grow:0 !important;
+                        margin:20px 140px 0px 0 !important;
+                    }
+                }
+
+
+
+            }
             &:last-child{
                 margin-bottom: 20px;
             }

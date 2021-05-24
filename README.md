@@ -116,4 +116,4 @@ and functions as normal
 
 #### Authorization
 * If the user fails several times, log them out
-* if the user is logged in send them to the homepage
+* if the user is logged in send them to the 

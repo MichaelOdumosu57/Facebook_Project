@@ -119,7 +119,8 @@ class my_ibm_language_client():
                 }
             try:
                 mySecret = self.my_login_dict.get(user).get("secret")
-                jwt.decode(token, key=mySecret, algorithms=["HS256"])
+                payload = jwt.decode(token, key=mySecret, algorithms=["HS256"])
+                print(payload)
                 print("Authorized")
                 func(token,user)
             except jwt.InvalidTokenError as e:
@@ -247,17 +248,19 @@ class my_ibm_language_client():
                     'message': 'an error occured check the output from the backend'
             }
 
-        elif(env == "login"):
-            try:
 
-                target_dict = my_login_dict.get(username)
-                if(target_dict.get("pass") == password):
-                    # target_dict.update({"login",True})
+        elif( env == "refresh_page"):
+            try:
+                refresh_user= data.get("refresh_user")
+                refresh_token= data.get("refresh_token")
+                @self.token_required
+                def refresh_page(token,user):
+                    target_dict = my_login_dict.get(user)
                     target_dict["login"] = True
                     target_dict["tries"] = 3
-                    token= jwt.encode(
+                    access_token= jwt.encode(
                         payload={
-                            "expiration":str(datetime.utcnow() + timedelta(seconds=120))
+                            "expiration":str(datetime.utcnow() + timedelta(seconds=120)),
                         },
                         key=target_dict.get("secret"),
                         algorithm="HS256"
@@ -267,11 +270,57 @@ class my_ibm_language_client():
                         'message':json.dumps(
                             {
                                 'message':'allow user to proceed',
+                                'user':user,
                                 'avatar':target_dict.get("avatar"),
-                                'token':token
+                                'token':access_token
                             }
                         ),
+                    }
+                return refresh_page(refresh_token,refresh_user)
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
 
+                }
+
+
+        elif(env == "login"):
+            try:
+
+                target_dict = my_login_dict.get(username)
+                if(target_dict.get("pass") == password):
+                    target_dict["login"] = True
+                    target_dict["tries"] = 3
+                    access_token= jwt.encode(
+                        payload={
+                            "expiration":str(datetime.utcnow() + timedelta(seconds=120)),
+                        },
+                        key=target_dict.get("secret"),
+                        algorithm="HS256"
+                    )
+                    refresh_token= jwt.encode(
+                        payload={
+                            "expiration":str(datetime.utcnow() + timedelta(minutes=120))
+                        },
+                        key=target_dict.get("secret"),
+                        algorithm="HS256"
+                    )
+                    return {
+                        'status':200,
+                        'refresh_token':refresh_token,
+                        'refresh_user':username,
+                        'message':json.dumps(
+                            {
+                                'message':'allow user to proceed',
+                                'avatar':target_dict.get("avatar"),
+                                'token':access_token
+                            }
+                        ),
                     }
 
                 return  {

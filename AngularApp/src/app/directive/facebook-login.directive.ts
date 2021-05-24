@@ -38,7 +38,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
         this.extras = this.facebookLogin
         if (this.extras?.confirm === 'true' && this.extras?.type.includes("body")  ) {
             if(env.directive?.facebookLogin?.lifecycleHooks) console.log(this.extras.co + " " + this.extras.zSymbol+ ' facebookLogin ngOnInit fires on mount')
-            let {ryber,extras,zChildren,subscriptions,renderer2,logIn} = this
+            let {ryber,extras,zChildren,subscriptions,renderer2,logIn,http} = this
             let {co} = extras
             let {group,suffix}  = ryber[co].metadata.facebookLogin
 
@@ -158,6 +158,78 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     let password:Array<string> = Array.from(val.types["password"] || [])
                     let avatarName = Array.from(val.types['avatarName'] || [])
                     let avatarImg = Array.from(val.types['avatarImg'] || [])
+                    let checkLogin = Array.from(val.types['checkLogin'] || [])
+
+                    // check to see if the user is logged in
+
+                    checkLogin
+                    .forEach((y:any,z)=>{
+                        if(zChildren[y].extras.appFacebookLogin.loginCheck !== "true"){
+                            zChildren[y].extras.appFacebookLogin.loginCheck = "true"
+                            let myCheck = http.post(
+                                env.facebook.url,
+                                JSON.stringify({
+                                    env:"refresh_page"
+                                }),
+                                {
+                                    withCredentials:true,
+                                    headers:{
+                                        "Content-Type":"text/plain"
+                                    }
+                                }
+                            )
+                            .subscribe({
+                                next:(result:any)=>{
+                                    console.log(result)
+                                    if(result.message === "allow user to proceed"){
+
+
+                                        // send the avatar metadata to the appropriate subject
+                                        ryber.appCO0.metadata.facebookLogin.current.next({
+                                            user:result.user,
+                                            avatar:result.avatar
+                                        })
+                                        //
+
+                                        // place the token and credentials in memory
+                                        ryber.appCO0.metadata.facebookLogin.credentials = {
+                                            token:result.token,
+                                            user:result.user
+                                        }
+                                        //
+
+                                        // change the path
+                                        ryber.appCO0.metadata.navigation.full.navigated = "true"
+                                        ryber.appCurrentNav = "/home"
+                                        //
+
+                                        // reset the posts and listings as necessary
+                                        http.post(
+                                            env.facebook.url,
+                                            {
+                                                env :"resetTracks"
+                                            },
+                                            {
+                                                responseType:"text"
+                                            }
+                                        )
+                                        .subscribe((result:any)=>{
+
+                                        })
+                                        //
+                                    }
+                                },
+                                error:(error:HttpErrorResponse)=>{
+                                    console.log(error)
+                                }
+                            })
+
+                        }
+
+                    })
+
+
+                    //
 
                     // update the avator place holders on all pages when the user is logged in
 
@@ -282,73 +354,79 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 
         let myUser = zChildren[user[0]].innerText.item || zChildren[user[0]].element.value
         let myPass = zChildren[pass[0]].element.value
-        http.post(
-            env.facebook.url,
-            {
-                user:myUser,
-                pass:myPass,
-                env:"login"
-            },
-            {
-                // responseType:"text"
-            }
-        )
-        .subscribe({
-            next:(result:any)=>{
 
-
-                if(result.message === "allow user to proceed"){
-
-                    // send the avatar metadata to the appropriate subject
-                    ryber.appCO0.metadata.facebookLogin.current.next({
-                        user:myUser,
-                        avatar:result.avatar
-                    })
-                    //
-
-                    // place the token and credentials in memory
-                    ryber.appCO0.metadata.facebookLogin.credentials = {
-                        token:result.token,
-                        user:myUser
+            http.post(
+                env.facebook.url,
+                JSON.stringify({
+                    user:myUser,
+                    pass:myPass,
+                    env:"login"
+                }),
+                {
+                    withCredentials:true,
+                    headers:{
+                        "Content-Type":"text/plain"
                     }
-                    //
-
-                    // change the path
-                    ryber.appCO0.metadata.navigation.full.navigated = "true"
-                    ryber.appCurrentNav = "/home"
-                    //
-
-
-                    // unlock the website
-                    renderer2.removeClass(
-                        document.body,"a_p_p_BodyOverFlowHidden"
-                    )
-                    myChosen
-                    .forEach((z:any,k)=>{
-                        zChildren[z].css.display = "none"
-                    })
-                    //
-
-                    // reset the posts and listings as necessary
-                    http.post(
-                        env.facebook.url,
-                        {
-                            env :"resetTracks"
-                        },
-                        {
-                            responseType:"text"
-                        }
-                    )
-                    .subscribe((result:any)=>{
-
-                    })
-                    //
                 }
-            },
-            error:(err:HttpErrorResponse)=>{
-                console.log(err)
-            }
-        })
+            )
+            .subscribe({
+                next:(result:any)=>{
+
+
+                    if(result.message === "allow user to proceed"){
+
+                        // send the avatar metadata to the appropriate subject
+                        ryber.appCO0.metadata.facebookLogin.current.next({
+                            user:myUser,
+                            avatar:result.avatar
+                        })
+                        //
+
+                        // place the token and credentials in memory
+                        ryber.appCO0.metadata.facebookLogin.credentials = {
+                            token:result.token,
+                            user:myUser
+                        }
+                        //
+
+                        // change the path
+                        ryber.appCO0.metadata.navigation.full.navigated = "true"
+                        ryber.appCurrentNav = "/home"
+                        //
+
+
+                        // unlock the website
+                        renderer2.removeClass(
+                            document.body,"a_p_p_BodyOverFlowHidden"
+                        )
+                        myChosen
+                        .forEach((z:any,k)=>{
+                            zChildren[z].css.display = "none"
+                        })
+                        //
+
+                        // reset the posts and listings as necessary
+                        http.post(
+                            env.facebook.url,
+                            {
+                                env :"resetTracks"
+                            },
+                            {
+                                responseType:"text"
+                            }
+                        )
+                        .subscribe((result:any)=>{
+
+                        })
+                        //
+                    }
+                },
+                error:(err:HttpErrorResponse)=>{
+                    console.log(err)
+                }
+            })
+
+
 
     }
 

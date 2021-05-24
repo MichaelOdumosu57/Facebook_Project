@@ -53,13 +53,26 @@ def createHandler(client):
             data = ""
             if self.request.headers['Content-Type'] == 'application/json':
                 data = tornado.escape.json_decode(self.request.body)
+            elif self.request.headers['Content-Type'] == 'text/plain':
+                data = json.loads(self.request.body)
+            data["refresh_token"] = self.get_cookie('refresh_token')
+            data["refresh_user"] = self.get_cookie('refresh_user')
             self.set_header("Content-Type", "text/plain")
-            result = client.execute(data)
-            if(result.get("message") == 'Login Failed'):
-                result["message"] = json.dumps(
-                    {"message":"There has been an issue please try again"}
-                )
-                self.set_header("WWW-Authenticate", 'Basic realm=:"Authentication Failed"')
+            result = client.execute(client,data)
+
+            try:
+                refresh_token = result.get('refresh_token')
+                if(refresh_token):
+                    self.set_cookie("refresh_token",refresh_token,httponly=True)
+                    self.set_cookie("refresh_user",result.get("refresh_user"),httponly=True)
+                    # self.set_secure_cookie
+                if(result.get("message") == 'Login Failed'):
+                    result["message"] = json.dumps(
+                        {"message":"There has been an issue please try again"}
+                    )
+                    self.set_header("WWW-Authenticate", 'Basic realm=:"Authentication Failed"')
+            except:
+                None
             self.set_status(result["status"])
             self.write(result["message"])
             self.finish()
