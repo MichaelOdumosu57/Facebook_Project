@@ -65,9 +65,11 @@ def createHandler(client):
             try:
                 refresh_token = result.get('refresh_token')
                 if(refresh_token):
-                    self.set_secure_cookie("refresh_token",refresh_token,httponly=True,secure=True)
-                    self.set_secure_cookie("refresh_user",result.get("refresh_user"),httponly=True,secure=True)
-                    # self.set_secure_cookie
+                    self.set_cookie("refresh_token",refresh_token,httponly=True)
+                    self.set_cookie("refresh_user",result.get("refresh_user"),httponly=True)
+                    # self.set_secure_cookie("refresh_token",refresh_token,httponly=True,secure=True)
+                    # self.set_secure_cookie("refresh_user",result.get("refresh_user"),httponly=True,secure=True)
+
                 if(result.get("message") == 'Login Failed'):
                     result["message"] = json.dumps(
                         {"message":"There has been an issue please try again"}
