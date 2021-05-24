@@ -64,6 +64,7 @@ def createHandler(client):
 
             try:
                 refresh_token = result.get('refresh_token')
+                print(result)
                 if(refresh_token):
                     self.set_cookie("refresh_token",refresh_token,httponly=True)
                     self.set_cookie("refresh_user",result.get("refresh_user"),httponly=True)
