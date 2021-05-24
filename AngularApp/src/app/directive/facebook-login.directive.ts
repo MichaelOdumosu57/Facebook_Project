@@ -306,6 +306,13 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     })
                     //
 
+                    // place the token and credentials in memory
+                    ryber.appCO0.metadata.facebookLogin.credentials = {
+                        token:result.token,
+                        user:myUser
+                    }
+                    //
+
                     // change the path
                     ryber.appCO0.metadata.navigation.full.navigated = "true"
                     ryber.appCurrentNav = "/home"

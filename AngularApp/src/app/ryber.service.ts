@@ -1853,9 +1853,10 @@ export class RyberService {
             },
             // dev addtions
             ibmLanguage:{
-                current:new BehaviorSubject({
-                    language:"en"
-                })
+                current:new ReplaySubject(1)
+                // {
+                //     language:"en"
+                // }
             },
             facebookLogin:{
                 current:new BehaviorSubject({

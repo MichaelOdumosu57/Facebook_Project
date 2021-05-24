@@ -344,6 +344,13 @@ $white: rgba(255,255,255,0.3);
     }
     //
 
+    &Login{
+        &SubTitle{
+            font-family:SFProDisplay-Regular;
+            font-size: 32px;
+        }
+    }
+
     &Market{
 
         &Item{

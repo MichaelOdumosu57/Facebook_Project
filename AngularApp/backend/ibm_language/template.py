@@ -16,7 +16,9 @@ import time
 pp = pprint.PrettyPrinter(indent=4, compact=True, width=1)
 import random
 import lorem
-
+import jwt
+from datetime import datetime,timedelta
+from functools import wraps
 # end
 
 
@@ -33,12 +35,15 @@ class my_ibm_language_client():
 
     def __init__(self):
         self.datetime = datetime
+        self.timedelta = timedelta
         self.time = time
         self.uuid = uuid
         self.authenticator = authenticator
         self.language_translator = language_translator
         self.random = random
         self.lorem  = lorem
+        self.jwt = jwt
+        self.wraps = wraps
         self.posts ={
             "items":[
                 {
@@ -75,12 +80,79 @@ class my_ibm_language_client():
             ],
             "track":0
         }
+        self.auth ={
+            'secret_key':os.urandom(12)
+        }
+        self.my_login_dict = {
+            "Python3":{
+                "pass":"Abc",
+                "avatar":"python.jpg"
+            },
+
+            "Angular":{
+                "pass":"Def",
+                "avatar":"angular.png"
+            },
+
+            "Ruby":  {
+                "pass":"Ghi",
+                "avatar":"ruby_programming.png"
+            },
+
+        }
+
+        { self.my_login_dict[x].update({"login":False,"secret":os.urandom(12),"tries":3}) for x in self.my_login_dict}
+        self.auth_enum = {
+            "Error":"Log In Again",
+            "Authorized":"Authorized",
+            "Invalid":"Please try again"
+        }
+    def token_required(self,func):
+        def inner(token,user):
+            if not token:
+                return 'Token is missing!'
+            target_dict = self.my_login_dict.get(user)
+            if( target_dict.get("tries") <= 0):
+                return {
+                    "status":401,
+                    "message":self.auth_enum["Error"]
+                }
+            try:
+                mySecret = self.my_login_dict.get(user).get("secret")
+                jwt.decode(token, key=mySecret, algorithms=["HS256"])
+                print("Authorized")
+                func(token,user)
+            except jwt.InvalidTokenError as e:
+                print(e)
+                print('Invalid')
+                self.my_login_dict.get(user)["tries"] -=1
+                if(self.my_login_dict.get(user)["tries"] <= 0):
+                    return {
+                        "status":401,
+                        "message":self.auth_enum["Error"]
+                    }
+                return {
+                    "status":403,
+                    "message":self.auth_enum["Invalid"]
+                }
+            except BaseException as e:
+                print(e)
+                print('Error')
+                return {
+                    "status":401,
+                    "message":self.auth_enum["Error"]
+                }
+            return func(token,user)
+        return inner
+
+
 
 
     def execute(self, data):
 
         #setup
-
+        jwt = self.jwt
+        timedelta = self.timedelta
         datetime = self.datetime
         time = self.time
         uuid = self.uuid
@@ -98,8 +170,9 @@ class my_ibm_language_client():
         username = data.get("user")
         password = data.get("pass")
         times = data.get("times")
+        token = data.get("token")
+        my_login_dict = self.my_login_dict
         #
-
 
         # translate
         if( env == "translate"):
@@ -125,6 +198,7 @@ class my_ibm_language_client():
         #
         elif( env == "dummy"):
             try:
+                self.token_required(data)
                 message = json.dumps({
                         "translations": [
                             {
@@ -175,25 +249,26 @@ class my_ibm_language_client():
 
         elif(env == "login"):
             try:
-                login_dict = {
-                    "Python3":"Abc",
-                    "Angular":"Def",
-                    "Ruby":"Ghi"
-                }
 
-                avatar_dict = {
-                    "Python3":"python.jpg",
-                    "Angular":"angular.png",
-                    "Ruby":"ruby_programming.png"
-                }
-
-                if(login_dict.get(username) == password):
+                target_dict = my_login_dict.get(username)
+                if(target_dict.get("pass") == password):
+                    # target_dict.update({"login",True})
+                    target_dict["login"] = True
+                    target_dict["tries"] = 3
+                    token= jwt.encode(
+                        payload={
+                            "expiration":str(datetime.utcnow() + timedelta(seconds=120))
+                        },
+                        key=target_dict.get("secret"),
+                        algorithm="HS256"
+                    )
                     return {
                         'status':200,
                         'message':json.dumps(
                             {
                                 'message':'allow user to proceed',
-                                'avatar':avatar_dict.get(username)
+                                'avatar':target_dict.get("avatar"),
+                                'token':token
                             }
                         ),
 
@@ -201,9 +276,7 @@ class my_ibm_language_client():
 
                 return  {
                         'status':401,
-                        'message':json.dumps({
-                            'message':'There has been an issue please try again'
-                        })
+                        'message':'Login Failed'
                     }
 
             except BaseException as e:
@@ -218,16 +291,20 @@ class my_ibm_language_client():
 
         elif(env =="somePosts"):
             try:
-                current = posts.get("track")
-                span = current+times
-                result = posts.get("items")[current:span]
-                posts["track"] = span
-                print(posts["track"]
-                )
-                return {
-                    "status":200,
-                    "message":json.dumps(result)
-                }
+                @self.token_required
+                def somePosts(token,user):
+                    current = posts.get("track")
+                    span = current+times
+                    result = posts.get("items")[current:span]
+                    posts["track"] = span
+                    print(posts["track"]
+                    )
+                    return {
+                        "status":200,
+                        "message":json.dumps(result)
+                    }
+                return somePosts(token=token,user=username)
+
 
             except BaseException as e:
                 print('my custom error\n')
@@ -277,16 +354,19 @@ class my_ibm_language_client():
 
         elif(env =="someListings"):
             try:
-                current = listings.get("track")
-                span = current+times
-                result = listings.get("items")[current:span]
-                listings["track"] = span
-                print(listings["track"]
-                )
-                return {
-                    "status":200,
-                    "message":json.dumps(result)
-                }
+                @self.token_required
+                def someListings(token,user):
+                    current = listings.get("track")
+                    span = current+times
+                    result = listings.get("items")[current:span]
+                    listings["track"] = span
+                    print(listings["track"]
+                    )
+                    return {
+                        "status":200,
+                        "message":json.dumps(result)
+                    }
+                return someListings(token=token,user=username)
 
             except BaseException as e:
                 print('my custom error\n')

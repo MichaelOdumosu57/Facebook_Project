@@ -3,7 +3,7 @@ import { Directive, ElementRef, HostListener, Input, Renderer2, ViewChildren } f
 import { RyberService } from '../ryber.service'
 import { fromEvent, from, Subscription, Subscriber, of, combineLatest,timer, Subject,BehaviorSubject } from 'rxjs';
 import { navigationType,ryberUpdateFactory, eventDispatcher, numberParse, objectCopy,flatDeep, componentConsole } from '../customExports'
-import { catchError, delay,first,repeat,map,skip } from 'rxjs/operators'
+import { catchError, delay,first,repeat,map,skip,retry } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { VanillaFrameworkOverrides } from 'ag-grid-community';
 import { HttpClient } from '@angular/common/http';
@@ -60,7 +60,7 @@ export class DeltaNodeDirective {
 						this.templateMyElements = ryber[co].metadata.templateMyElements
 						this.ref =ryber[co].metadata.ref
 
-						
+
 						// restore deltaNode from false destroy like navigation
 						let navAction:any = navigationType({
 							type:["full"],
@@ -122,7 +122,7 @@ export class DeltaNodeDirective {
 												zSymbol:z.eventWrapper.zSymbol,
 												fromEvent,http,env,
 												returnData:z.eventWrapper.returnData,
-												navAction
+												navAction,ryber,retry
 											})
 											let myResult = z.eventWrapper.returnData
 											.pipe(skip(1))
@@ -538,7 +538,7 @@ export class DeltaNodeDirective {
 											fromEvent,http,
 											env,
 											returnData:y.result,
-											navAction
+											navAction,ryber,retry
 										})
 									})
 

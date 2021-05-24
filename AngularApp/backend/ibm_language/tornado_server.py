@@ -56,6 +56,15 @@ def createHandler(client):
                 # print(data.get("tableName"))
             self.set_header("Content-Type", "text/plain")
             result = client.execute(client,data)
+            print(result)
+            try:
+                if(result.get("message") == 'Login Failed'):
+                    result["message"] = json.dumps(
+                        {"message":"There has been an issue please try again"}
+                    )
+                    self.set_header("WWW-Authenticate", 'Basic realm=:"Authentication Failed"')
+            except:
+                None
             self.set_status(result["status"])
             self.write(result["message"])
             self.finish()

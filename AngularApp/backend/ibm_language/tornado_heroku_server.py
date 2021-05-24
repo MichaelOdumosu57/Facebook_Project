@@ -53,9 +53,13 @@ def createHandler(client):
             data = ""
             if self.request.headers['Content-Type'] == 'application/json':
                 data = tornado.escape.json_decode(self.request.body)
-                # print(data.get("tableName"))
             self.set_header("Content-Type", "text/plain")
             result = client.execute(data)
+            if(result.get("message") == 'Login Failed'):
+                result["message"] = json.dumps(
+                    {"message":"There has been an issue please try again"}
+                )
+                self.set_header("WWW-Authenticate", 'Basic realm=:"Authentication Failed"')
             self.set_status(result["status"])
             self.write(result["message"])
             self.finish()

@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, Vie
 import { RyberService } from '../ryber.service'
 import { fromEvent, from, Subscription, Subscriber, of, combineLatest, pipe } from 'rxjs';
 import { deltaNode, eventDispatcher, numberParse, objectCopy,navigationType } from '../customExports'
-import { catchError, delay,first,skip,take } from 'rxjs/operators'
+import { catchError, delay,distinctUntilKeyChanged,first,skip,take } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import {ibmLanguages} from '../ibmLanguageLibrary'
@@ -10,8 +10,8 @@ import {ibmLanguages} from '../ibmLanguageLibrary'
 
 @Directive({
     selector: '[appLanguageTranslator]'
-  })
-  export class LanguageTranslatorDirective {
+})
+export class LanguageTranslatorDirective {
 
 
     @Input() languageTranslator: any;
@@ -143,15 +143,13 @@ import {ibmLanguages} from '../ibmLanguageLibrary'
                 .forEach((x:any,i)=>{
                     let key = x[0]
                     let val = x[1]
-                    let {link,text} = val.types
-                    try{
-                        link = Array.from(link)
-                        text = Array.from(text)
-                    }
-                    catch(e){}
+
+                    let link = Array.from(val.types['link'] || [])
+                    let text = Array.from(val.types['text'] || [])
+                    let label = Array.from(val.types['label'] || [])
 
                     link
-                    ?.forEach((y:any,j)=>{
+                    .forEach((y:any,j)=>{
                         // get the ibmLanguage corresponding object
                         zChildren[y].extras.appLanguageTranslator.ibmLanguage = ibmLanguages.list
                         .filter((z:any,k)=>{
@@ -170,17 +168,18 @@ import {ibmLanguages} from '../ibmLanguageLibrary'
                     })
 
                     text
-                    ?.forEach((y:any,j)=>{
+                    .forEach((y:any,j)=>{
+
                         let changeLanguage = ryber.appCO0.metadata.ibmLanguage.current
-                        .pipe(skip(1))
+                        .pipe(distinctUntilKeyChanged("language"))
                         .subscribe((result:any)=>{
 
 
+
                             http.post(
-                                // "https://facebook-language-translator.herokuapp.com",
-                                "http://localhost:3005",
+                                env.facebook.url,
                                 {
-                                    text:zChildren[y].innerText.item,
+                                    text:["i","ta"].includes(zChildren[y].bool) ? zChildren[y].element.placeholder : zChildren[y].innerText.item,
                                     source:zChildren[y].extras.appLanguageTranslator.ibmLanguage?.language || "en",
                                     target:result.language,
                                     // env:"list"
@@ -196,8 +195,8 @@ import {ibmLanguages} from '../ibmLanguageLibrary'
                                     // modify the value
 
                                     let answer = JSON.parse(result)
-                                    if(["i"].includes(zChildren[y].bool)){
-                                        zChildren[y].element.value = answer.translations[0].translation
+                                    if(["i","ta"].includes(zChildren[y].bool)){
+                                        zChildren[y].element.placeholder = answer.translations[0].translation
                                     }
                                     else {
                                         zChildren[y].innerText.item = answer.translations[0].translation
@@ -215,34 +214,34 @@ import {ibmLanguages} from '../ibmLanguageLibrary'
                         val.subscriptions.push(changeLanguage)
                     })
 
+                    label
+
+                    .forEach((y:any,j)=>{
+
+                        let changeLanguage = ryber.appCO0.metadata.ibmLanguage.current
+                        .pipe(distinctUntilKeyChanged("language"))
+                        .subscribe((result:any)=>{
+
+                            
+
+
+                            let replacement = result.native_language_name + " ("+result.language.toUpperCase()+")"
+                            if(["i","ta"].includes(zChildren[y].bool)){
+                                zChildren[y].element.placeholder = replacement
+                            }
+                            else {
+                                zChildren[y].innerText.item = replacement
+                            }
+                            ref.detectChanges()
+
+                            zChildren[y].extras.appLanguageTranslator.ibmLanguage = result
+                        })
+                        val.subscriptions.push(changeLanguage)
+                    })
+
 
                 })
-                // my work
-                // http.post(
-                //     // "https://facebook-language-translator.herokuapp.com",
-                //     "http://localhost:3005",
-                //     {
-                //         text:"My hand",
-                //         source:"en",
-                //         target:"es",
-                //         // env:"list"
-                //         // env:"translate"
-                //     },
-                //     {
-                //         responseType:"text"
-                //     }
-                // )
-                // .subscribe({
-                //     next:(result:string)=>{
-                //         console.log("sucess")
-                //         console.log(JSON.parse(result))
-                //     },
-                //     error:(err:HttpErrorResponse)=>{
-                //         console.log("Error")
-                //         console.log(err)
-                //     }
-                // })
-                //
+
 
             })
             subscriptions.push(mainSubscription)

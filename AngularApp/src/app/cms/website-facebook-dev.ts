@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { pipe } from "rxjs";
 import { environment as env } from "../../environments/environment";
 import {objectCopy,zProtoComponent,zProtoChildren, zChildren, xContain, xPosition,latchUtilities} from '../customExports'
@@ -105,14 +106,11 @@ let login_development:Array<zProtoComponent> = [
 				}
 			},
 			{
-				"key":"recent_logins",
+				"key":"recent_logins a_p_p_LoginSubTitle",
 				type:"text",
 				value:"Recent Logins",
 				next:"true",
 				options:{
-					css:{
-						"font-family":"SFProDisplay-Regular"
-					},
 					extras:{
 						appLanguageTranslator:{
 							group:"translate-group-2",
@@ -1132,14 +1130,9 @@ let login_development:Array<zProtoComponent> = [
 										zChild[myImg].extras.extend.src = zChild[myImg].element.src = "./assets/media/plus.png"
 										zChild[myName].innerText.item = "Add Account"
 										zChild[myName].css.color = "blue";
+										zChild[myMesg].css.display =zChild[targets[0]].css.display = "none"
 
-										if("templateComponent" === hook){
-											let addingDelta = 350
-											zChild[x].extras.component.top = addingDelta + zChild[x].extras.component.top
-											if(co.metadata.section.mediaQuery === "desktop"){
-												zChild[x].css.top = (numberParse(zChild[x].css.top)+ addingDelta).toString() + "px"
-											}
-										}
+
 										break;
 
 
@@ -1204,6 +1197,12 @@ let login_development:Array<zProtoComponent> = [
 				options:{
 					css:{
 						"font-size":"16px"
+					},
+					extras:{
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"label"
+						}
 					}
 				},
 				latch:{
@@ -1256,502 +1255,552 @@ let login_development:Array<zProtoComponent> = [
 				}
 			},
 			...[
-			{
-				key:"ES",
-				type:"anchor",
-				split:1.2,
-				value:"Español",
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							language:"es"
+				{
+					key:"EN",
+					type:"anchor",
+					split:1.2,
+					value:"English",
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								language:"en"
+							}
+						}
+					},
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+				},
+				{
+					key:"ES",
+					type:"anchor",
+					split:1.2,
+					value:"Español",
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								language:"es"
+							}
+						}
+					},
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+				},
+				{
+					key:"FR",
+					type:"anchor",
+					value:"Français",
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								language:"fr"
+							}
+						}
+					},
+					split:1.2,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+				},
+				{
+					key:"Simplified-Chinese",
+					type:"anchor",
+					value:"中文(简体)",
+					split:1.2,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								language:"zh"
+							}
 						}
 					}
 				},
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
+				{
+					key:"Hebrew",
+					type:"anchor",
+					value:"العربية",
+					split:1.2,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
 
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
 								},
-								mobile:{
-									width:()=>{
-										return 100
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
 									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-			},
-			{
-				key:"FR",
-				type:"anchor",
-				value:"Français",
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							language:"fr"
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								language: "he",
+							}
 						}
 					}
 				},
-				split:1.2,
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
+				{
+					key:"Portuguese",
+					type:"anchor",
+					value:"Português",
+					split:1.2,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
 
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
 								},
-								mobile:{
-									width:()=>{
-										return 100
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
 									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-			},
-			{
-				key:"Simplified-Chinese",
-				type:"anchor",
-				value:"中文(简体)",
-				split:1.2,
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
 					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
-
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
-								},
-								mobile:{
-									width:()=>{
-										return 100
-									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								language: "pt",
+							}
 						}
-					]
+					}
 				},
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							language:"zh"
+				{
+					key:"Korean",
+					type:"anchor",
+					value:"한국어",
+					split:1.2,
+					left:200,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								"language": "ko",
+							}
 						}
+					}
+				},
+				{
+					key:"Italian",
+					type:"anchor",
+					value:"Italiano",
+					split:1.2,
+					gap:50,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								"language": "it",
+							}
+						}
+					}
+				},
+				{
+					key:"German",
+					type:"anchor",
+					value:"Deutsch",
+					split:1.2,
+					gap:50,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								"language": "de"
+							}
+						}
+					}
+				},
+				{
+					key:"Hindi",
+					type:"anchor",
+					value:"हिन्दी",
+					split:1.2,
+					gap:50,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								"language": "hi"
+							}
+						}
+					}
+				},
+				{
+					key:"Japanese",
+					type:"anchor",
+					value:"日本語",
+					gap:50,
+					// left:300 + (130*3) + (30*6),
+					split:1.2,
+					latch:{
+						type:"display",
+						display:{
+							type:"target",
+							name:"container"
+						},
+						zChildren:[
+							{
+								bool:"div",
+								val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
+								css:{
+									"z-index":3,
+
+								},
+								logic:{
+									desktop:{
+										width:1.2,
+										height:1.9,
+										top:-7.5,
+										left:-15
+									},
+									mobile:{
+										width:()=>{
+											return 100
+										},
+										height:1.2,
+										top:0,
+										left:0
+									}
+								},
+								group:["container"]
+							}
+						]
+					},
+					options:{
+						extras:{
+							appLanguageTranslator:{
+								group:"translate-group-1",
+								type:"link",
+								"language": "ja"
+							}
+						},
+
 					}
 				}
-			},
-			{
-				key:"Hebrew",
-				type:"anchor",
-				value:"العربية",
-				split:1.2,
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
-
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
-								},
-								mobile:{
-									width:()=>{
-										return 100
-									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							language: "he",
-						}
-					}
-				}
-			},
-			{
-				key:"Portuguese",
-				type:"anchor",
-				value:"Português",
-				split:1.2,
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
-
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
-								},
-								mobile:{
-									width:()=>{
-										return 100
-									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							language: "pt",
-						}
-					}
-				}
-			},
-			{
-				key:"Korean",
-				type:"anchor",
-				value:"한국어",
-				split:1.2,
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
-
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
-								},
-								mobile:{
-									width:()=>{
-										return 100
-									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							"language": "ko",
-						}
-					}
-				}
-			},
-			{
-				key:"Italian",
-				type:"anchor",
-				value:"Italiano",
-				split:1.2,
-				left:300,
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
-
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
-								},
-								mobile:{
-									width:()=>{
-										return 100
-									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							"language": "it",
-						}
-					}
-				}
-			},
-			{
-				key:"German",
-				type:"anchor",
-				value:"Deutsch",
-				split:1.2,
-				left:((300 + 130)*1) + (30*2),
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
-
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
-								},
-								mobile:{
-									width:()=>{
-										return 100
-									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							"language": "de"
-						}
-					}
-				}
-			},
-			{
-				key:"Hindi",
-				type:"anchor",
-				value:"हिन्दी",
-				split:1.2,
-				left:300 + (130*2) + (30*4),
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
-
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
-								},
-								mobile:{
-									width:()=>{
-										return 100
-									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							"language": "hi"
-						}
-					}
-				}
-			},
-			{
-				key:"Japanese",
-				type:"anchor",
-				value:"日本語",
-				gap:50,
-				// left:300 + (130*3) + (30*6),
-				split:1.2,
-				latch:{
-					type:"display",
-					display:{
-						type:"target",
-						name:"container"
-					},
-					zChildren:[
-						{
-							bool:"div",
-							val:"container a_p_p_Glassmorphism a_p_p_SiteMapAnchorContainer",
-							css:{
-								"z-index":3,
-
-							},
-							logic:{
-								desktop:{
-									width:1.2,
-									height:1.9,
-									top:-7.5,
-									left:-15
-								},
-								mobile:{
-									width:()=>{
-										return 100
-									},
-									height:1.2,
-									top:0,
-									left:0
-								}
-							},
-							group:["container"]
-						}
-					]
-				},
-				options:{
-					extras:{
-						appLanguageTranslator:{
-							group:"translate-group-1",
-							type:"link",
-							"language": "ja"
-						}
-					},
-
-				}
-			}
 
 			].map((x:any,i)=>{
 				delete x.latch
@@ -1767,7 +1816,7 @@ let login_development:Array<zProtoComponent> = [
 				key:"strikethrough",
 				type:"div",
 				top:30,
-				split:10,
+				split:9,
 				height:1,
 				next:"true",
 				options:{
@@ -1894,6 +1943,10 @@ let home_development :Array<zProtoComponent> = [
 							gap:10,
 							stack:30
 						},
+						appLanguageTranslator:{
+							confirm:"true",
+							type:["body","part"],
+						},
 						appFacebookLogin:{
 							confirm:"true",
 							type:["body"]
@@ -1927,7 +1980,7 @@ let home_development :Array<zProtoComponent> = [
 							containPos:.1,
 							top:50
 						}
-					}
+					},
 				},
 				latch:{
 					type:"display",
@@ -2103,6 +2156,10 @@ let home_development :Array<zProtoComponent> = [
 						},
 						appVisible:{
 							type:["sectionDesktop"]
+						},
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
 						}
 					},
 					judima:{
@@ -2367,6 +2424,10 @@ let home_development :Array<zProtoComponent> = [
 					extras:{
 						appVisible:{
 							type:["sectionDesktop"]
+						},
+						appLanguageTranslator:{
+							group:"translate-group-2",
+							type:"text"
 						}
 					},
 					judima:{
@@ -2736,30 +2797,45 @@ let home_development :Array<zProtoComponent> = [
 							type:["add"],
 							options:{
 								fn:(devObj)=>{
-									let {zChildren,zSymbol,fromEvent,http,env,returnData} = devObj
+									let {zChildren,zSymbol,fromEvent,http,env,returnData,ryber,retry} = devObj
 									return fromEvent(zChildren[zSymbol].element,"scroll")
 									.subscribe((result:any)=>{
 										let {element}= zChildren[zSymbol]
+										let {token,user}= ryber.appCO0.metadata.facebookLogin.credentials
 										if(
 
 											Math.abs(
 												((element.scrollHeight - element.scrollTop) - element.clientHeight)
 											) < 5 ){
 											// user has scrolled to bottom of page
-											http.post(
+											let request = http.post(
 												env.facebook.url,
 												{
 													env:"somePosts",
-													times:3
+													times:3,
+													token,
+													user,
 												}
 											)
+											.pipe(retry(2))
 											.subscribe({
 												next:(result:any)=>{
 													returnData.next({type:"append",status:200,message:result})
+													request.unsubscribe()
 												},
-												error:(err:any)=>{
-													returnData.next({type:"append",status:500,message:[]})
-													console.log(err)
+												error:(err:HttpErrorResponse)=>{
+
+													if(err.error === "Log In Again" ){
+
+														// navigate back to the login page
+														ryber.appCO0.metadata.navigation.full.navigated = "true"
+														ryber.appCurrentNav = "/login"
+														//
+													}
+													else{
+														returnData.next({type:"append",status:500,message:[]})
+													}
+													request.unsubscribe()
 												}
 											})
 											//
@@ -4436,16 +4512,19 @@ let marketDev: Array<zProtoComponent> = [
 
 								},
 								fn:(devObj)=>{
-									let {zChildren,zSymbol,fromEvent,http,env,returnData,navAction} = devObj
-
+									let {zChildren,zSymbol,fromEvent,http,env,returnData,navAction,retry,ryber} = devObj
+									let {token,user}= ryber.appCO0.metadata.facebookLogin.credentials
 									if(navAction.full !== "return"){
 										let request = http.post(
 											env.facebook.url,
 											{
 												env:"someListings",
-												times:2
+												times:2,
+												token,
+												user,
 											}
 										)
+										.pipe(retry(5))
 										.subscribe({
 											next:(result:any)=>{
 												result.forEach((x:any,i)=>{
@@ -4454,8 +4533,17 @@ let marketDev: Array<zProtoComponent> = [
 												request.unsubscribe()
 
 											},
-											error:(err:any)=>{
-												returnData.next({type:"append",status:500,message:[]})
+											error:(err:HttpErrorResponse)=>{
+												if(err.error === "Log In Again" ){
+
+													// navigate back to the login page
+													ryber.appCO0.metadata.navigation.full.navigated = "true"
+													ryber.appCurrentNav = "/login"
+													//
+												}
+												else{
+													returnData.next({type:"append",status:500,message:[]})
+												}
 												console.log(err)
 												request.unsubscribe()
 											}
@@ -4478,9 +4566,12 @@ let marketDev: Array<zProtoComponent> = [
 												env.facebook.url,
 												{
 													env:"someListings",
-													times:3
+													times:3,
+													token,
+													user,
 												}
 											)
+											.pipe(retry(5))
 											.subscribe({
 												next:(result:any)=>{
 													result.forEach((x:any,i)=>{
@@ -4490,8 +4581,16 @@ let marketDev: Array<zProtoComponent> = [
 
 												},
 												error:(err:any)=>{
-													returnData.next({type:"append",status:500,message:[]})
-													console.log(err)
+													if(err.error === "Log In Again" ){
+
+														// navigate back to the login page
+														ryber.appCO0.metadata.navigation.full.navigated = "true"
+														ryber.appCurrentNav = "/login"
+														//
+													}
+													else{
+														returnData.next({type:"append",status:500,message:[]})
+													}
 													request.unsubscribe()
 												}
 											})
