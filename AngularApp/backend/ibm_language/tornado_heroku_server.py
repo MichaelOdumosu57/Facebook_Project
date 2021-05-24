@@ -45,8 +45,10 @@ def createHandler(client):
     class MainHandler(tornado.web.RequestHandler):
 
         def set_default_headers(self):
-            self.set_header("Access-Control-Allow-Origin", "*")
+            self.set_header("Access-Control-Allow-Origin", "https://windmillcode.github.io")
             self.set_header("Access-Control-Allow-Headers", "*")
+            self.set_header("Access-Control-Allow-Credentials","true")
+            self.set_header("Allow-Origin-With-Credentials","true")
             self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
         def post(self):
@@ -63,8 +65,8 @@ def createHandler(client):
             try:
                 refresh_token = result.get('refresh_token')
                 if(refresh_token):
-                    self.set_cookie("refresh_token",refresh_token,httponly=True)
-                    self.set_cookie("refresh_user",result.get("refresh_user"),httponly=True)
+                    self.set_secure_cookie("refresh_token",refresh_token,httponly=True,secure=True)
+                    self.set_secure_cookie("refresh_user",result.get("refresh_user"),httponly=True,secure=True)
                     # self.set_secure_cookie
                 if(result.get("message") == 'Login Failed'):
                     result["message"] = json.dumps(
