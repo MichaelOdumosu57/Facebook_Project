@@ -60,7 +60,7 @@ def createHandler(client):
             data["refresh_token"] = self.get_cookie('refresh_token')
             data["refresh_user"] = self.get_cookie('refresh_user')
             self.set_header("Content-Type", "text/plain")
-            result = client.execute(client,data)
+            result = client.execute(data)
 
             try:
                 refresh_token = result.get('refresh_token')
