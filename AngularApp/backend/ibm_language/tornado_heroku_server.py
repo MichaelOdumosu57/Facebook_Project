@@ -66,10 +66,10 @@ def createHandler(client):
                 refresh_token = result.get('refresh_token')
                 print(result)
                 if(refresh_token):
-                    self.set_cookie("refresh_token",refresh_token,httponly=True)
-                    self.set_cookie("refresh_user",result.get("refresh_user"),httponly=True)
-                    # self.set_secure_cookie("refresh_token",refresh_token,httponly=True,secure=True)
-                    # self.set_secure_cookie("refresh_user",result.get("refresh_user"),httponly=True,secure=True)
+                    # self.set_cookie("refresh_token",refresh_token,httponly=True)
+                    # self.set_cookie("refresh_user",result.get("refresh_user"),httponly=True)
+                    self.set_secure_cookie("refresh_token",refresh_token,httponly=True,secure=True,samesite="None")
+                    self.set_secure_cookie("refresh_user",result.get("refresh_user"),httponly=True,secure=True,samesite="None")
 
                 if(result.get("message") == 'Login Failed'):
                     result["message"] = json.dumps(
