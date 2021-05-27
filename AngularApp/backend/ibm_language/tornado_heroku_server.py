@@ -45,7 +45,7 @@ def createHandler(client):
     class MainHandler(tornado.web.RequestHandler):
 
         def set_default_headers(self):
-            if(self.request.headers['Origin'] in ["https://4r1ux.csb.app/","https://windmillcode.github.io"]):
+            if(self.request.headers['Origin'] in ["https://4r1ux.csb.app","https://windmillcode.github.io"]):
                 self.set_header("Access-Control-Allow-Origin",self.request.headers['Origin'])
             self.set_header("Access-Control-Allow-Headers", "*")
             self.set_header("Access-Control-Allow-Credentials","true")
