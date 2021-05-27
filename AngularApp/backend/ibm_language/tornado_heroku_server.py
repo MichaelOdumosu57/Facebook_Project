@@ -45,7 +45,8 @@ def createHandler(client):
     class MainHandler(tornado.web.RequestHandler):
 
         def set_default_headers(self):
-            self.set_header("Access-Control-Allow-Origin", "https://windmillcode.github.io")
+            if(self.request.headers['Origin'] in ["https://4r1ux.csb.app/","https://windmillcode.github.io"]):
+                self.set_header("Access-Control-Allow-Origin",self.request.headers['Origin'])
             self.set_header("Access-Control-Allow-Headers", "*")
             self.set_header("Access-Control-Allow-Credentials","true")
             self.set_header("Allow-Origin-With-Credentials","true")
@@ -57,6 +58,7 @@ def createHandler(client):
                 data = tornado.escape.json_decode(self.request.body)
             elif self.request.headers['Content-Type'] == 'text/plain':
                 data = json.loads(self.request.body)
+
             data["refresh_token"] = self.get_cookie('refresh_token')
             data["refresh_user"] = self.get_cookie('refresh_user')
             self.set_header("Content-Type", "text/plain")
@@ -90,8 +92,11 @@ def createHandler(client):
 #
 
 # configuring web server
-PORT = os.environ["PORT"] if os.environ["PORT"] else 3005
-# 3005
+PORT = 3005
+try:
+    PORT = os.environ["PORT"] if os.environ["PORT"] else 3005
+except BaseException as e:
+    None
 server = ""
 ioloop = tornado.ioloop.IOLoop.current()
 restart_server = False
