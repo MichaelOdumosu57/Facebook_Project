@@ -1,3 +1,9 @@
+# App Tests
+
+## Logout
+* test that when a user logs out they log out sucessfully
+	* test that on refresh page the user is properly logged out
+
 # UNIT TESTS
 
 

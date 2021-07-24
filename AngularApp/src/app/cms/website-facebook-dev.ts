@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { pipe } from "rxjs";
+import { fromEvent, pipe } from "rxjs";
 import { environment as env } from "../../environments/environment";
 import {objectCopy,zProtoComponent,zProtoChildren, zChildren, xContain, xPosition,latchUtilities} from '../customExports'
 
@@ -2419,10 +2419,6 @@ let home_development :Array<zProtoComponent> = [
 				// top:17,
 				height:25,
 				split:2,
-				navigation : {
-					type:"direct_link",
-					group:"login"
-				},
 				options : {
 					extras:{
 						appVisible:{
@@ -2431,6 +2427,9 @@ let home_development :Array<zProtoComponent> = [
 						appLanguageTranslator:{
 							group:"translate-group-2",
 							type:"text"
+						},
+						appFacebookLogin:{
+							type:"logoutButton"
 						}
 					},
 					judima:{
@@ -2474,6 +2473,8 @@ let home_development :Array<zProtoComponent> = [
 									},
 									onChange:(devObj)=>{
 										let{ryber,option} = devObj
+
+										
 										// change the path
 										ryber.appCO0.metadata.navigation.full.navigated = "true"
 										ryber.appCurrentNav = option.navigation

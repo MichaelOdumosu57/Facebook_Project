@@ -3,9 +3,9 @@
 
 import { Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, ViewContainerRef, ViewRef, EmbeddedViewRef, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { RyberService } from '../ryber.service'
-import { fromEvent, from, Subscription, Subscriber, of, combineLatest } from 'rxjs';
+import { fromEvent, from, Subscription, Subscriber, of, combineLatest, pipe } from 'rxjs';
 import { deltaNode, eventDispatcher, numberParse, objectCopy,navigationType, zChildren } from '../customExports'
-import { catchError, delay,first,take,skip } from 'rxjs/operators'
+import { catchError, delay,first,take,skip,exhaustMap, tap } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
@@ -142,8 +142,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 
                 Object.entries(group)
                 .forEach((x:any,i)=>{
-                    let key = x[0]
-                    let val = x[1]
+                    let [key,val] = x
                     let loginImg = Array.from(val.types["login-img"] || [])
                     let loginName = Array.from(val.types["login-name"] || [])
                     let chosen =Array.from(val.types.chosen || [])
@@ -159,7 +158,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     let avatarName = Array.from(val.types['avatarName'] || [])
                     let avatarImg = Array.from(val.types['avatarImg'] || [])
                     let checkLogin = Array.from(val.types['checkLogin'] || [])
-
+                    let logoutButton:Array<string> = Array.from(val.types['logoutButton'] || [])
                     // check to see if the user is logged in
 
                     checkLogin
@@ -321,6 +320,48 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                     })
                     //
 
+
+                    // logout Setup
+
+                    logoutButton
+                    .forEach((y:any,j)=>{
+                        let logout = zChildren[y]
+
+                        let logoutEvent = fromEvent(logout.element,"click")
+                        .pipe(
+                            exhaustMap(()=>{
+                                return http.post(
+                                    env.facebook.url,
+                                    {
+                                        env:"logout",
+                                        user:ryber.appCO0.metadata.facebookLogin.credentials.user
+                                    },
+                                    {
+                                        withCredentials:true,
+                                        headers:{
+                                            "Content-Type":"text/plain"
+                                        }
+
+                                    }
+                                )
+                            }),
+
+                        )
+                        .subscribe({
+                            next:()=>{
+
+                                // change the path
+                                ryber.appCO0.metadata.navigation.full.navigated = "true"
+                                ryber.appCurrentNav = "/login"
+                                //
+                            },
+                            error:(error:HttpErrorResponse)=>{
+                                alert("there was an issue logging out try again later")
+                            }
+                        })
+                        val.subscriptions.push(logoutEvent)
+
+                    })
                     subscriptions.push(...val.subscriptions)
                 })
 

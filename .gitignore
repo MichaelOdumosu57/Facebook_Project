@@ -52,3 +52,5 @@ node_modules
 site-packages
 AngularApp/issues
 ignore
+AngularApp/backend/python/__pycache__/*
+*.pcap

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { iif,of } from 'rxjs';
 import { RyberService } from '../ryber.service';
+import { environment as env } from 'src/environments/environment';
 
 @Component({
     selector: 'app-components',
@@ -52,7 +54,34 @@ export class ComponentsComponent implements OnInit {
             })[0].onChange || options.items.container.onChange
 
             if(childFn){
-                childFn({ryber,option:event.value})
+                if(event.value.name === "Log Out"){
+
+                }
+
+                iif(
+                    ()=> event.value.name === "Log Out",
+                    ryber.http.post(
+                        env.facebook.url,
+                        {
+                            env:"logout",
+                            user:ryber.appCO0.metadata.facebookLogin.credentials.user
+                        },
+                        {
+                            withCredentials:true,
+                            headers:{
+                                "Content-Type":"text/plain"
+                            }
+
+                        }
+                    ),
+                    of({})
+                )
+                .subscribe({
+                    next:()=>{
+                        childFn({ryber,option:event.value})
+                    }
+                })
+
             }
         }
     }

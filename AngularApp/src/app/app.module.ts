@@ -47,6 +47,11 @@ if(env.testingAcct.confirm === "true"){
 
 	providers = [{provide: ErrorHandler, useClass: MyErrorHandler}]
 }
+if(env.production){
+    (console.log as any) = ()=>{}
+    (console.error as any) = ()=>{}
+    (console.warn as any) = ()=>{}
+}
 
 @NgModule({
   declarations: [

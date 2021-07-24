@@ -161,6 +161,7 @@ export class LanguageTranslatorDirective {
                         // click event to change the object
                         let changeLanguage =fromEvent(zChildren[y].element,"click")
                         .subscribe((result:any)=>{
+
                             ryber.appCO0.metadata.ibmLanguage.current.next(zChildren[y].extras.appLanguageTranslator.ibmLanguage)
                         })
                         val.subscriptions.push(changeLanguage)
@@ -173,7 +174,7 @@ export class LanguageTranslatorDirective {
                         let changeLanguage = ryber.appCO0.metadata.ibmLanguage.current
                         .pipe(distinctUntilKeyChanged("language"))
                         .subscribe((result:any)=>{
-
+                            
 
 
                             http.post(
@@ -183,8 +184,8 @@ export class LanguageTranslatorDirective {
                                     source:zChildren[y].extras.appLanguageTranslator.ibmLanguage?.language || "en",
                                     target:result.language,
                                     // env:"list"
-                                    // env:"translate"
-                                    env:"dummy"
+                                    env:"translate"
+                                    // env:"dummy"
                                 },
                                 {
                                     responseType:"text"
@@ -205,8 +206,8 @@ export class LanguageTranslatorDirective {
                                     //
                                 },
                                 error:(err:HttpErrorResponse)=>{
-                                    console.log("Error")
-                                    console.log(err)
+                                    // console.log("Error")
+                                    // console.log(err)
                                 }
                             })
                             zChildren[y].extras.appLanguageTranslator.ibmLanguage = result
@@ -215,14 +216,11 @@ export class LanguageTranslatorDirective {
                     })
 
                     label
-
                     .forEach((y:any,j)=>{
 
                         let changeLanguage = ryber.appCO0.metadata.ibmLanguage.current
                         .pipe(distinctUntilKeyChanged("language"))
                         .subscribe((result:any)=>{
-
-                            
 
 
                             let replacement = result.native_language_name + " ("+result.language.toUpperCase()+")"

@@ -288,6 +288,37 @@ class my_ibm_language_client():
 
                 }
 
+        elif(env == "logout"):
+            try:
+
+                target_dict = my_login_dict.get(username)
+                target_dict["login"] = False
+                target_dict["tries"] = 3
+                target_dict["secret"] = os.urandom(12)
+                return {
+                    'status':200,
+                    "refresh_token":"",
+                    'message':json.dumps(
+                        {
+                            'message':'Logout sucessfully',
+                        }
+                    ),
+                }
+
+                # return  {
+                #         'status':404,
+                #         'message':'Logout Failed'
+                #     }
+
+            except BaseException as e:
+                print('my custom error\n')
+                print(e.__class__.__name__)
+                print('\n')
+                print(e)
+                return {
+                    'status':500,
+                    'message': 'an error occured check the output from the backend'
+                }
 
         elif(env == "login"):
             try:
