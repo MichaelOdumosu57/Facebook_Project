@@ -68,6 +68,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
+        alert(`Login Credentials:
+            Python3:Abc,
+            Angular:Def,
+            Ruby:Ghi
+        `)
         if (env.component.app.lifecycleHooks) {console.log('app ngOnInit fires on mount ')}
         let {ryber,subscriptions,ref} = this
 		ryber.ref = (()=>{
