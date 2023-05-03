@@ -711,11 +711,13 @@ export function objectCopy(obj){
         let bstart = str.indexOf('{'), bend = str.lastIndexOf('}');
         str = str.substring(bstart+1, bend);
 
+
         return Function(params, str);
     }
 
     let revivedObj = JSON.parse(serialized, function(k,v){
         // there is probably a better way to determ if a value is a function string
+        
         if(typeof v === "string" && v.indexOf("function") !== -1)
             return compileFunction(v);
         return v;
@@ -2021,7 +2023,7 @@ let inspectKeep = (devObj)=>{
 let logicKeep = (devObj) =>{
 
 	let {hook,zSymbolsMap,component,finalKeep,zChild} = devObj
-    
+
 	component.keep.groups
 	.forEach((x:any,i)=>{
 
