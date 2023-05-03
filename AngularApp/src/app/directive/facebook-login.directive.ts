@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostListener, Input, Renderer2, TemplateRef, Vie
 import { RyberService } from '../ryber.service'
 import { fromEvent, from, Subscription, Subscriber, of, combineLatest, pipe } from 'rxjs';
 import { deltaNode, eventDispatcher, numberParse, objectCopy,navigationType, zChildren } from '../customExports'
-import { catchError, delay,first,take,skip,exhaustMap, tap } from 'rxjs/operators'
+import { catchError, delay,first,take,skip,exhaustMap, tap, finalize } from 'rxjs/operators'
 import { environment as env } from '../../environments/environment'
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
@@ -396,19 +396,25 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
         let myUser = zChildren[user[0]].innerText.item || zChildren[user[0]].element.value
         let myPass = zChildren[pass[0]].element.value
 
-            http.post(
-                env.facebook.url,
-                JSON.stringify({
-                    user:myUser,
-                    pass:myPass,
-                    env:"login"
-                }),
-                {
-                    withCredentials:true,
-                    headers:{
-                        "Content-Type":"text/plain"
-                    }
-                }
+            of({})
+            .pipe(
+                finalize(()=>{
+                    // change the path
+                    ryber.appCO0.metadata.navigation.full.navigated = "true"
+                    ryber.appCurrentNav = "/home"
+                    //
+
+
+                    // unlock the website
+                    renderer2.removeClass(
+                        document.body,"a_p_p_BodyOverFlowHidden"
+                    )
+                    myChosen
+                    .forEach((z:any,k)=>{
+                        zChildren[z].css.display = "none"
+                    })
+                    //
+                })
             )
             .subscribe({
                 next:(result:any)=>{
@@ -430,21 +436,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
                         }
                         //
 
-                        // change the path
-                        ryber.appCO0.metadata.navigation.full.navigated = "true"
-                        ryber.appCurrentNav = "/home"
-                        //
-
-
-                        // unlock the website
-                        renderer2.removeClass(
-                            document.body,"a_p_p_BodyOverFlowHidden"
-                        )
-                        myChosen
-                        .forEach((z:any,k)=>{
-                            zChildren[z].css.display = "none"
-                        })
-                        //
 
                         // reset the posts and listings as necessary
                         http.post(

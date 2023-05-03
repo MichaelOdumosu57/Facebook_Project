@@ -9,6 +9,7 @@ import { environment as env } from "../environments/environment";
 
 
 
+console.log(env)
 
 @Injectable({
     providedIn: "root"

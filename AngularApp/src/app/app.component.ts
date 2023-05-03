@@ -12,40 +12,40 @@ import website from './website';
 declare global {
     interface Window { Modernizr: any;createMap:any }
     // not let or else local to this file
-    var gapi: any
-    var google:any
-    var Modernizr: any
-    var SignaturePad: any
-    var seeeb: any
-    var faker: any
-    var Pikaday: any
+    let gapi: any
+    let google:any
+    let Modernizr: any
+    let SignaturePad: any
+    let seeeb: any
+    let faker: any
+    let Pikaday: any
 
     // globals for webRTC Lab
-    var localConnection :any
-    var remoteConnection :any
-    var room:any
-    var io:any
-    var stream:any
-    var adapter:any
-    var buf:any
+    let localConnection :any
+    let remoteConnection :any
+    let room:any
+    let io:any
+    let stream:any
+    let adapter:any
+    let buf:any
     //
 
     // globals for web vitals lab
-    var getCLS:any
-    var getFID:any
-    var getLCP:any
+    let getCLS:any
+    let getFID:any
+    let getLCP:any
 	//
 
 	// globals for gsap
-	var gsap:any
+	let gsap:any
 	//
 
 	// globals for randomTextGenerator
-	var RandomTextGenerator
+	let RandomTextGenerator
 	//
 
     //globals for vanillaTilt
-    var  VanillaTilt
+    let  VanillaTilt
     //
 }
 
@@ -68,10 +68,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        alert(`Login Credentials:
-            Python3:Abc,
-            Angular:Def,
-            Ruby:Ghi
+        alert(`Just Click the Login Button
         `)
         if (env.component.app.lifecycleHooks) {console.log('app ngOnInit fires on mount ')}
         let {ryber,subscriptions,ref} = this
@@ -79,25 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
 			return ref
 		})()
 
-        // adding scripts
-        ryber.appCO0.metadata.scripts.push(
-            ...this.ryber.appAddScripts({
-                scripts:[
-					// {
-					// 	src:"https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js",
-					// 	name:"vanillaTilt",
-					// 	// integrity:"sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg==",
-					// 	// defer:"true",
-                    //     placement:{
-                    //         appendChild:document.body
-                    //     }
-					// },
-                ].filter((x:any,i)=>{
-                    return x !== null
-                })
-            })
-        )
-        //
+
 
 
         /* App Setup*/
