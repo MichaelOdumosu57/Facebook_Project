@@ -21,11 +21,10 @@
             "sourceRoot": "src",
             "prefix": "app",
             "architect": {
-                "judima": {
+                "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        // "outputPath": "dist/AngularApp",
-                        "outputPath":"../docs",
+                        "outputPath": "../docs",
                         "fileReplacements": [
                             {
                                 "replace": "src/app/website.ts",
@@ -41,19 +40,14 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "aot": true,
-                        "assets": [
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "src/styles.scss"
-                        ],
+                        "assets": ["src/assets"],
+                        "styles": ["src/styles.scss"],
                         "scripts": [
                             "backend/modernizr/modernizr.js",
                             "backend/polyfills/object.js",
                             "backend/polyfills/signaturePad.js",
                             "src/assets/scripts/pikaday.js",
                             "src/assets/scripts/vanillaTilt.js"
-
                         ],
                         "optimization": false,
                         "sourceMap": true,
@@ -63,8 +57,8 @@
                     },
                     "configurations": {
                         "production": {
-                            "baseHref":"/Facebook_Project/",
-                            "deployUrl":"/Facebook_Project/",
+                            "baseHref": "/Facebook_Project/",
+                            "deployUrl": "/Facebook_Project/",
                             "fileReplacements": [
                                 {
                                     "replace": "src/app/website.ts",
@@ -75,9 +69,7 @@
                                     "with": "src/environments/environment.facebook.prod.ts"
                                 }
                             ],
-                            "assets": [
-                                "src/assets"
-                            ],
+                            "assets": ["src/assets"],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -122,9 +114,6 @@
                                 }
                             ]
                         }
-
-
-
                     }
                 },
                 "serve": {
@@ -133,7 +122,7 @@
                         "browserTarget": "AngularApp:judima:play",
                         "port": 4520,
                         "liveReload": true,
-						"hmr": false
+                        "hmr": false
                     },
                     "configurations": {
                         "production": {
@@ -148,7 +137,6 @@
                             "port": 4521,
                             "browserTarget": "AngularApp:judima:facebook"
                         }
-
                     }
                 },
                 "extract-i18n": {
@@ -160,12 +148,8 @@
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
-                        "tsConfig": [
-                            "tsconfig.app.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
+                        "tsConfig": ["tsconfig.app.json"],
+                        "exclude": ["**/node_modules/**"]
                     }
                 }
             }
